@@ -6,4 +6,4 @@ if (-not (Test-Path $php)) {
 }
 
 Write-Host "Starting local preview at http://localhost:8000"
-& $php -S localhost:8000 router.php
+& $php -S localhost:8000 -t public router.php

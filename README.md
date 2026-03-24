@@ -26,7 +26,7 @@ Point your local web server document root to `public/`.
 Example with PHP built-in server:
 
 ```bash
-php -S localhost:8000 router.php
+php -S localhost:8000 -t public router.php
 ```
 
 On this machine, you can also run:
