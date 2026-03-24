@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" role="img" aria-labelledby="title desc">
+  <title>Lantern glow placeholder</title>
+  <desc>Warm glowing lantern-style placeholder artwork.</desc>
+  <rect width="700" height="700" fill="#20100b"/>
+  <circle cx="350" cy="370" r="170" fill="#ffcf69" opacity=".18"/>
+  <rect x="250" y="160" width="200" height="360" rx="24" fill="#382012" stroke="#d7a156" stroke-width="16"/>
+  <rect x="295" y="225" width="110" height="230" fill="#ffdd90"/>
+  <path d="M300 160c20-55 80-90 150-90" fill="none" stroke="#d7a156" stroke-width="12" stroke-linecap="round"/>
+  <path d="M250 300h200M250 380h200" stroke="#8f5527" stroke-width="10"/>
+</svg>

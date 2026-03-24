@@ -134,12 +134,82 @@ return [
         'about' => [
             'meta' => [
                 'title' => 'About | AnkammaThalli Temple',
-                'description' => 'About page design is queued for the next public-site milestone.',
+                'description' => 'Discover the temple history, mission, values, and heritage milestones on the AnkammaThalli Temple About page.',
             ],
-            'eyebrow' => 'Next Milestone',
-            'title' => 'About page implementation is queued next.',
-            'description' => 'The final About screen from your Figma export will be built in the next step, using the same shared layout and database-ready structure.',
-            'cta' => ['label' => 'Return Home', 'href' => '/'],
+            'hero' => [
+                'eyebrow' => 'Dedicated to the Divine',
+                'title' => 'A Sanctuary of',
+                'highlight' => 'Eternal Grace.',
+                'image' => 'assets/images/placeholders/about-hero-sanctum.svg',
+            ],
+            'history' => [
+                'eyebrow' => 'Circa 1845',
+                'title' => 'Our History',
+                'paragraphs' => [
+                    'Founded on the principles of devotion, community care, and sacred continuity, the temple has stood for generations as a spiritual landmark for local families and visiting devotees.',
+                    'What began as a modest place of worship evolved over time through collective faith, craftsmanship, and service, preserving the atmosphere of reverence that defines the temple today.',
+                    'This sample content is temporary, but the structure is already prepared so the final origin story, milestones, and archival media can later be managed from the admin backend.',
+                ],
+                'quote' => 'The temple is not just a structure of stone, but a living testament to the faith that binds us across generations.',
+                'main_image' => 'assets/images/placeholders/about-stone-gateway.svg',
+                'secondary_image' => 'assets/images/placeholders/about-inner-lamps.svg',
+                'secondary_title' => 'The Legacy Lives On',
+                'secondary_text' => 'Today, the temple remains a place for worship, reflection, and community gatherings, carrying forward the same spirit of devotion that shaped its earliest years.',
+            ],
+            'mission' => [
+                'eyebrow' => 'The Path Ahead',
+                'title' => 'Our Mission',
+                'items' => [
+                    [
+                        'symbol' => '01',
+                        'title' => 'Preservation',
+                        'description' => 'To safeguard sacred architecture, rituals, and oral traditions so the temple heritage remains alive for future generations.',
+                    ],
+                    [
+                        'symbol' => '02',
+                        'title' => 'Service',
+                        'description' => 'To support the community through hospitality, shared meals, educational initiatives, and compassionate outreach.',
+                    ],
+                    [
+                        'symbol' => '03',
+                        'title' => 'Enlightenment',
+                        'description' => 'To create a space for prayer, reflection, and spiritual learning grounded in devotion and mutual respect.',
+                    ],
+                ],
+            ],
+            'values' => [
+                'intro_title' => 'Our Values',
+                'intro_text' => 'The principles that guide the temple community, the service it offers, and the spiritual atmosphere it protects.',
+                'feature_image' => 'assets/images/placeholders/about-lantern-glow.svg',
+                'items' => [
+                    [
+                        'number' => '01',
+                        'title' => 'Dharma',
+                        'description' => 'The righteous path that shapes our spiritual, cultural, and administrative decisions.',
+                    ],
+                    [
+                        'number' => '02',
+                        'title' => 'Seva',
+                        'description' => 'Selfless service to devotees, guests, and the wider community with humility and care.',
+                    ],
+                    [
+                        'number' => '03',
+                        'title' => 'Shanti',
+                        'description' => 'A commitment to peace, reflection, and harmony in both worship and daily life.',
+                    ],
+                    [
+                        'number' => '04',
+                        'title' => 'Prakriti',
+                        'description' => 'Respect for the natural world as part of the sacred environment that surrounds temple life.',
+                    ],
+                ],
+            ],
+            'facts' => [
+                ['value' => '175+', 'label' => 'Years of Heritage'],
+                ['value' => '50k+', 'label' => 'Monthly Devotees'],
+                ['value' => '12', 'label' => 'Annual Festivals'],
+                ['value' => '200+', 'label' => 'Community Volunteers'],
+            ],
         ],
         'gallery' => [
             'meta' => [

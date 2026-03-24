@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1125" role="img" aria-labelledby="title desc">
+  <title>Stone gateway placeholder</title>
+  <desc>Temple gateway inspired placeholder in mossy stone tones.</desc>
+  <rect width="900" height="1125" fill="#8d9276"/>
+  <rect x="85" y="85" width="730" height="955" fill="#6f725e"/>
+  <rect x="190" y="185" width="520" height="760" fill="#9ea488"/>
+  <rect x="320" y="310" width="260" height="500" fill="#252018"/>
+  <rect x="360" y="350" width="180" height="420" fill="#0f0d08"/>
+  <path d="M190 185h520M230 250h440M250 885h400" stroke="#c7caa9" stroke-opacity=".4" stroke-width="10"/>
+  <path d="M320 310c18-80 242-80 260 0" fill="#7e836b"/>
+  <path d="M370 940h160" stroke="#c8b28e" stroke-width="18" stroke-linecap="round"/>
+</svg>

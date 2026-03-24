@@ -26,8 +26,16 @@ Point your local web server document root to `public/`.
 Example with PHP built-in server:
 
 ```bash
-php -S localhost:8000 -t public
+php -S localhost:8000 router.php
 ```
+
+On this machine, you can also run:
+
+```powershell
+.\serve-local.ps1
+```
+
+Then open `http://localhost:8000` in your browser.
 
 ## Deployment Note
 

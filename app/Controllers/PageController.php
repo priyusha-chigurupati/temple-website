@@ -10,34 +10,19 @@ final class PageController
 
     public function home(): void
     {
-        $site = $this->content->site();
-        $page = $this->content->home();
+        $this->renderPage('home', 'pages/home', $this->content->home());
+    }
 
-        View::render('pages/home', [
-            'site' => $site,
-            'navigation' => $this->content->navigation(),
-            'footer' => $this->content->footer(),
-            'page' => $page,
-            'activePage' => 'home',
-            'metaTitle' => $page['meta']['title'],
-            'metaDescription' => $page['meta']['description'],
-        ]);
+    public function about(): void
+    {
+        $this->renderPage('about', 'pages/about', $this->content->page('about'));
     }
 
     public function placeholder(string $slug): void
     {
-        $site = $this->content->site();
         $page = $this->content->page($slug);
 
-        View::render('pages/placeholder', [
-            'site' => $site,
-            'navigation' => $this->content->navigation(),
-            'footer' => $this->content->footer(),
-            'page' => $page,
-            'activePage' => $slug,
-            'metaTitle' => $page['meta']['title'] ?? ($site['name'] . ' | Coming Soon'),
-            'metaDescription' => $page['meta']['description'] ?? 'This page is queued for implementation in a later milestone.',
-        ]);
+        $this->renderPage($slug, 'pages/placeholder', $page);
     }
 
     public function notFound(): void
@@ -60,6 +45,21 @@ final class PageController
             'activePage' => '',
             'metaTitle' => '404 | ' . $site['name'],
             'metaDescription' => 'The requested page could not be found.',
+        ]);
+    }
+
+    private function renderPage(string $activePage, string $view, array $page): void
+    {
+        $site = $this->content->site();
+
+        View::render($view, [
+            'site' => $site,
+            'navigation' => $this->content->navigation(),
+            'footer' => $this->content->footer(),
+            'page' => $page,
+            'activePage' => $activePage,
+            'metaTitle' => $page['meta']['title'] ?? ($site['name'] . ' | Coming Soon'),
+            'metaDescription' => $page['meta']['description'] ?? 'This page is queued for implementation in a later milestone.',
         ]);
     }
 }

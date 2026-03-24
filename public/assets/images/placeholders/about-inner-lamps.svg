@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" role="img" aria-labelledby="title desc">
+  <title>Inner lamps placeholder</title>
+  <desc>Temple interior placeholder with warm central light.</desc>
+  <rect width="700" height="700" fill="#2c180f"/>
+  <rect x="120" y="70" width="460" height="560" fill="#63391f"/>
+  <rect x="190" y="140" width="320" height="420" fill="#3b2012"/>
+  <circle cx="350" cy="320" r="70" fill="#ffe6a2"/>
+  <circle cx="350" cy="320" r="130" fill="#ffe6a2" opacity=".16"/>
+  <path d="M300 430c20 36 80 36 100 0" fill="none" stroke="#d98a3e" stroke-width="12" stroke-linecap="round"/>
+</svg>
