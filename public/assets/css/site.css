@@ -826,9 +826,9 @@ input {
 
 .about-hero {
     position: relative;
-    min-height: 38rem;
+    min-height: 31.5rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     overflow: hidden;
 }
 
@@ -842,6 +842,7 @@ input {
 
 .about-hero__image img {
     object-fit: cover;
+    object-position: center 38%;
 }
 
 .about-hero__image::after {
@@ -854,14 +855,14 @@ input {
 .about-hero__content {
     position: relative;
     z-index: 1;
-    padding: 8rem 0 5rem;
+    padding: 5.8rem 0 3.2rem;
 }
 
 .about-hero__title {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: clamp(3rem, 6vw, 4.75rem);
-    line-height: 1;
+    font-size: clamp(2.75rem, 5vw, 4.35rem);
+    line-height: 0.98;
     letter-spacing: -0.03em;
 }
 
@@ -879,8 +880,8 @@ input {
 
 .about-history__grid {
     display: grid;
-    grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.15fr);
-    gap: 3rem;
+    grid-template-columns: minmax(320px, 0.94fr) minmax(0, 1.02fr);
+    gap: 2.4rem;
     align-items: start;
 }
 
@@ -911,15 +912,17 @@ input {
 
 .about-history__main-image img {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    max-width: 33rem;
+    margin-left: auto;
+    aspect-ratio: 7 / 8;
     object-fit: cover;
 }
 
 .about-history__detail-grid {
     display: grid;
-    grid-template-columns: minmax(180px, 240px) 1fr;
-    gap: 1.5rem;
-    margin-top: 1.75rem;
+    grid-template-columns: minmax(150px, 200px) minmax(0, 1fr);
+    gap: 1.2rem;
+    margin-top: 1.15rem;
     align-items: start;
 }
 
@@ -929,12 +932,12 @@ input {
 
 .about-history__secondary-image img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 0.92;
     object-fit: cover;
 }
 
 .about-history__detail-copy {
-    padding-top: 1.75rem;
+    padding-top: 0.8rem;
 }
 
 .about-history__detail-copy h3,
@@ -1010,11 +1013,13 @@ input {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 1rem;
+    grid-auto-rows: minmax(11rem, auto);
 }
 
 .value-panel {
     background: var(--color-card);
     padding: 2rem;
+    min-height: 100%;
 }
 
 .value-panel--intro {
@@ -1033,13 +1038,19 @@ input {
     grid-column: span 4;
     padding: 0;
     overflow: hidden;
+    min-height: 18rem;
 }
 
 .value-panel--image img {
     width: 100%;
     height: 100%;
-    min-height: 100%;
     object-fit: cover;
+}
+
+.value-panel--image-placeholder {
+    background:
+        radial-gradient(circle at 50% 42%, rgba(255, 226, 150, 0.72), rgba(255, 226, 150, 0) 26%),
+        linear-gradient(160deg, #2f160b, #6f3516 55%, #2a120a);
 }
 
 .value-panel--double {
@@ -1047,6 +1058,11 @@ input {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem;
+    align-items: stretch;
+}
+
+.value-panel--double article {
+    min-height: 100%;
 }
 
 .value-panel--primary {
@@ -1224,7 +1240,7 @@ input {
     }
 
     .about-hero {
-        min-height: 28rem;
+        min-height: 25rem;
     }
 
     .section {

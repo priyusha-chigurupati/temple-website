@@ -1,10 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" role="img" aria-labelledby="title desc">
-  <title>Lantern glow placeholder</title>
-  <desc>Warm glowing lantern-style placeholder artwork.</desc>
-  <rect width="700" height="700" fill="#20100b"/>
-  <circle cx="350" cy="370" r="170" fill="#ffcf69" opacity=".18"/>
-  <rect x="250" y="160" width="200" height="360" rx="24" fill="#382012" stroke="#d7a156" stroke-width="16"/>
-  <rect x="295" y="225" width="110" height="230" fill="#ffdd90"/>
-  <path d="M300 160c20-55 80-90 150-90" fill="none" stroke="#d7a156" stroke-width="12" stroke-linecap="round"/>
-  <path d="M250 300h200M250 380h200" stroke="#8f5527" stroke-width="10"/>
+  <title>Brass diya placeholder</title>
+  <desc>Hindu religious placeholder showing a brass diya and temple arch glow.</desc>
+  <rect width="700" height="700" fill="#1c0f0b"/>
+  <circle cx="350" cy="360" r="178" fill="#ffcf69" opacity=".16"/>
+  <path d="M210 560c24-160 88-242 140-242s116 82 140 242" fill="#5c3017"/>
+  <path d="M230 545c44-32 196-32 240 0" fill="#9a5c29"/>
+  <path d="M300 372c18 22 82 22 100 0" fill="none" stroke="#f0b35c" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="350" cy="330" r="32" fill="#ffe595"/>
+  <circle cx="350" cy="330" r="78" fill="#ffe595" opacity=".18"/>
+  <path d="M260 232c20-86 160-132 180 0" fill="none" stroke="#ad6730" stroke-width="16" stroke-linecap="round"/>
 </svg>

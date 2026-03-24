@@ -1,12 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1125" role="img" aria-labelledby="title desc">
-  <title>Stone gateway placeholder</title>
-  <desc>Temple gateway inspired placeholder in mossy stone tones.</desc>
-  <rect width="900" height="1125" fill="#8d9276"/>
-  <rect x="85" y="85" width="730" height="955" fill="#6f725e"/>
-  <rect x="190" y="185" width="520" height="760" fill="#9ea488"/>
-  <rect x="320" y="310" width="260" height="500" fill="#252018"/>
-  <rect x="360" y="350" width="180" height="420" fill="#0f0d08"/>
-  <path d="M190 185h520M230 250h440M250 885h400" stroke="#c7caa9" stroke-opacity=".4" stroke-width="10"/>
-  <path d="M320 310c18-80 242-80 260 0" fill="#7e836b"/>
-  <path d="M370 940h160" stroke="#c8b28e" stroke-width="18" stroke-linecap="round"/>
+  <title>Hindu temple gateway placeholder</title>
+  <desc>Stone Hindu temple entrance with layered carvings and a sanctum opening.</desc>
+  <rect width="900" height="1125" fill="#7d846b"/>
+  <rect x="70" y="95" width="760" height="935" fill="#646952"/>
+  <rect x="155" y="170" width="590" height="785" fill="#8f957c"/>
+  <rect x="295" y="285" width="310" height="560" fill="#443f2f"/>
+  <rect x="352" y="335" width="196" height="460" fill="#120f0b"/>
+  <path d="M295 285c24-100 286-100 310 0" fill="#747b63"/>
+  <path d="M155 230h590M192 292h516M218 885h464" stroke="#c8d0b2" stroke-opacity=".36" stroke-width="12"/>
+  <path d="M220 510h460M220 610h460M220 710h460" stroke="#5f654d" stroke-opacity=".55" stroke-width="10"/>
+  <path d="M392 930h116" stroke="#ceb792" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="450" cy="560" r="24" fill="#f7d99c" opacity=".28"/>
 </svg>

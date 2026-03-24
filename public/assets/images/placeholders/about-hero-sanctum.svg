@@ -1,19 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
-  <title>About hero placeholder</title>
-  <desc>Warm sanctuary-inspired artwork with a framed central alcove.</desc>
+  <title>Hindu temple sanctum placeholder</title>
+  <desc>Sanctum-inspired placeholder showing temple columns, archways, and a deity niche.</desc>
   <defs>
     <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#f7e8d7"/>
-      <stop offset="50%" stop-color="#d59b63"/>
-      <stop offset="100%" stop-color="#412010"/>
+      <stop offset="0%" stop-color="#f5e5d2"/>
+      <stop offset="48%" stop-color="#c58249"/>
+      <stop offset="100%" stop-color="#2b140b"/>
     </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="44%" r="46%">
+      <stop offset="0%" stop-color="#ffebb4"/>
+      <stop offset="100%" stop-color="#ffebb4" stop-opacity="0"/>
+    </radialGradient>
   </defs>
   <rect width="1600" height="900" fill="url(#bg)"/>
-  <rect x="980" y="0" width="620" height="900" fill="#2a1209" opacity=".55"/>
-  <rect x="640" y="90" width="360" height="620" fill="#8d4d23" opacity=".44"/>
-  <rect x="700" y="150" width="240" height="500" fill="#f0dfc2" opacity=".76"/>
-  <path d="M700 150c30-110 210-110 240 0" fill="#c88a52"/>
-  <circle cx="820" cy="395" r="62" fill="#ffebb0"/>
-  <circle cx="820" cy="395" r="120" fill="#ffebb0" opacity=".2"/>
-  <path d="M780 420c18 70 82 70 100 0" fill="none" stroke="#9d541e" stroke-width="18" stroke-linecap="round"/>
+  <rect x="1100" y="0" width="500" height="900" fill="#281108" opacity=".62"/>
+  <g opacity=".92">
+    <rect x="565" y="40" width="470" height="735" fill="#7d4420"/>
+    <rect x="640" y="120" width="320" height="575" fill="#efd9b6"/>
+    <path d="M640 120c40-165 280-165 320 0" fill="#bf7a44"/>
+    <rect x="710" y="190" width="180" height="430" fill="#8d4d23"/>
+    <path d="M710 190c26-110 154-110 180 0" fill="#a65f2b"/>
+    <circle cx="800" cy="365" r="92" fill="url(#glow)"/>
+    <path d="M800 275c54 50 84 103 84 155 0 64-38 101-84 101s-84-37-84-101c0-52 30-105 84-155Z" fill="#f7d99c"/>
+    <path d="M758 484c18 40 66 40 84 0" fill="none" stroke="#87451c" stroke-width="16" stroke-linecap="round"/>
+  </g>
+  <g opacity=".72">
+    <rect x="515" y="0" width="52" height="900" fill="#7d4c26"/>
+    <rect x="1035" y="0" width="52" height="900" fill="#7d4c26"/>
+    <rect x="470" y="0" width="28" height="900" fill="#5b2e15"/>
+    <rect x="1104" y="0" width="28" height="900" fill="#5b2e15"/>
+  </g>
 </svg>

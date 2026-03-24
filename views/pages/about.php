@@ -78,9 +78,13 @@ declare(strict_types=1);
                 <h3><?= e($values['items'][0]['title']) ?></h3>
                 <p><?= e($values['items'][0]['description']) ?></p>
             </article>
-            <figure class="value-panel value-panel--image">
-                <img src="<?= e(asset($values['feature_image'])) ?>" alt="Warm lantern placeholder artwork for the values section">
-            </figure>
+            <?php if (! empty($values['feature_image'])): ?>
+                <figure class="value-panel value-panel--image">
+                    <img src="<?= e(asset($values['feature_image'])) ?>" alt="Hindu devotional placeholder artwork for the values section">
+                </figure>
+            <?php else: ?>
+                <div class="value-panel value-panel--image value-panel--image-placeholder" aria-hidden="true"></div>
+            <?php endif; ?>
             <div class="value-panel value-panel--double">
                 <?php foreach (array_slice($values['items'], 1, 2) as $item): ?>
                     <article>

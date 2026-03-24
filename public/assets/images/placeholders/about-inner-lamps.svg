@@ -1,10 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" role="img" aria-labelledby="title desc">
-  <title>Inner lamps placeholder</title>
-  <desc>Temple interior placeholder with warm central light.</desc>
-  <rect width="700" height="700" fill="#2c180f"/>
-  <rect x="120" y="70" width="460" height="560" fill="#63391f"/>
-  <rect x="190" y="140" width="320" height="420" fill="#3b2012"/>
-  <circle cx="350" cy="320" r="70" fill="#ffe6a2"/>
-  <circle cx="350" cy="320" r="130" fill="#ffe6a2" opacity=".16"/>
-  <path d="M300 430c20 36 80 36 100 0" fill="none" stroke="#d98a3e" stroke-width="12" stroke-linecap="round"/>
+  <title>Temple diya placeholder</title>
+  <desc>Hindu devotional placeholder with brass diyas and sanctum glow.</desc>
+  <rect width="700" height="700" fill="#23120c"/>
+  <rect x="120" y="84" width="460" height="532" fill="#5f341d"/>
+  <rect x="185" y="142" width="330" height="418" fill="#392014"/>
+  <circle cx="350" cy="302" r="82" fill="#ffe7a5"/>
+  <circle cx="350" cy="302" r="152" fill="#ffe7a5" opacity=".17"/>
+  <path d="M248 450c28-24 70-24 98 0M355 420c28-24 70-24 98 0" fill="none" stroke="#cb7a32" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="298" cy="362" r="18" fill="#ffe38d"/>
+  <circle cx="404" cy="338" r="20" fill="#ffe38d"/>
 </svg>
