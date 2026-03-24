@@ -39,6 +39,11 @@ return [
             'title' => 'Newsletter',
             'description' => 'Receive festival announcements and community updates.',
         ],
+        'social_links' => [
+            ['label' => 'Facebook', 'href' => '#', 'short' => 'f'],
+            ['label' => 'Instagram', 'href' => '#', 'short' => 'ig'],
+            ['label' => 'YouTube', 'href' => '#', 'short' => 'yt'],
+        ],
         'legal' => [
             ['label' => 'Privacy Policy', 'href' => '#'],
             ['label' => 'Terms of Service', 'href' => '#'],

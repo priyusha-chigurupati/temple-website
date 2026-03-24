@@ -6,6 +6,13 @@ declare(strict_types=1);
         <section>
             <h2 class="footer-title"><?= e($site['name']) ?></h2>
             <p class="footer-copy"><?= e($footer['description']) ?></p>
+            <div class="footer-social" aria-label="Temple social links">
+                <?php foreach ($footer['social_links'] as $link): ?>
+                    <a class="footer-social__link" href="<?= e($link['href']) ?>" aria-label="<?= e($link['label']) ?>">
+                        <span><?= e($link['short']) ?></span>
+                    </a>
+                <?php endforeach; ?>
+            </div>
         </section>
         <section>
             <h2 class="footer-heading">Quick Links</h2>
@@ -19,8 +26,8 @@ declare(strict_types=1);
             <h2 class="footer-heading">Address & Timings</h2>
             <p class="footer-copy">
                 <?= e(implode(', ', $footer['address']['lines'])) ?><br>
-                <strong>Morning:</strong> <?= e($footer['address']['morning']) ?><br>
-                <strong>Evening:</strong> <?= e($footer['address']['evening']) ?>
+                <strong class="footer-time-label">Morning:</strong> <?= e($footer['address']['morning']) ?><br>
+                <strong class="footer-time-label">Evening:</strong> <?= e($footer['address']['evening']) ?>
             </p>
         </section>
         <section>

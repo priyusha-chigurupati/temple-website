@@ -15,9 +15,9 @@ declare(strict_types=1);
         <div class="hero__copy">
             <p class="eyebrow"><?= e($hero['eyebrow']) ?></p>
             <h1 class="hero__title">
-                <?= e($hero['title_prefix']) ?>
-                <span><?= e($hero['title_highlight']) ?></span>
-                <?= e($hero['title_suffix']) ?>
+                <span class="hero__title-line"><?= e($hero['title_prefix']) ?></span>
+                <span class="hero__title-highlight"><?= e($hero['title_highlight']) ?></span>
+                <span class="hero__title-line"><?= e($hero['title_suffix']) ?></span>
             </h1>
             <p class="hero__description"><?= e($hero['description']) ?></p>
             <div class="hero__actions">
@@ -49,7 +49,10 @@ declare(strict_types=1);
             <?php foreach ($about['description'] as $paragraph): ?>
                 <p><?= e($paragraph) ?></p>
             <?php endforeach; ?>
-            <a class="text-link" href="<?= e(route_url($about['cta']['href'])) ?>"><?= e($about['cta']['label']) ?></a>
+            <a class="text-link text-link--arrow" href="<?= e(route_url($about['cta']['href'])) ?>">
+                <?= e($about['cta']['label']) ?>
+                <span class="text-link__arrow" aria-hidden="true"></span>
+            </a>
         </div>
     </div>
 </section>
