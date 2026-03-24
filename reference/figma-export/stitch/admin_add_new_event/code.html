@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add New Event - The Sacred Modernist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface-variant": "#554336",
+                        "surface-dim": "#e1d9cb",
+                        "tertiary-container": "#e3a46e",
+                        "inverse-surface": "#343026",
+                        "background": "#fff8ef",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#fbb980",
+                        "secondary-container": "#fed65b",
+                        "on-tertiary-fixed": "#2e1500",
+                        "on-tertiary-container": "#65390b",
+                        "secondary-fixed-dim": "#e9c349",
+                        "secondary": "#735c00",
+                        "primary-fixed": "#ffdbcc",
+                        "surface-tint": "#a04100",
+                        "outline": "#887364",
+                        "secondary-fixed": "#ffe088",
+                        "tertiary": "#855324",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f5edde",
+                        "tertiary-fixed": "#ffdcc1",
+                        "primary-container": "#ff9762",
+                        "surface": "#fff8ef",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e9e2d3",
+                        "surface-container-low": "#fbf3e4",
+                        "primary-fixed-dim": "#ffb693",
+                        "surface-container-highest": "#e9e2d3",
+                        "on-primary-fixed": "#351000",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#693c0e",
+                        "on-secondary-fixed": "#241a00",
+                        "outline-variant": "#dbc2b0",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "on-secondary-container": "#745c00",
+                        "on-background": "#1e1b13",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#762e00",
+                        "primary": "#a04100",
+                        "surface-bright": "#fff8ef",
+                        "inverse-primary": "#ffb693",
+                        "on-surface": "#1e1b13",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "inverse-on-surface": "#f8f0e1",
+                        "surface-container-high": "#efe7d9"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-header {
+            background: rgba(255, 248, 239, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .spiritual-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #ffe088 50%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-orange-100/10 dark:border-stone-800/10 bg-orange-50 dark:bg-stone-950 flex flex-col py-6 px-4 z-50">
+<div class="mb-10 px-4">
+<h1 class="font-noto-serif text-xl font-bold text-orange-900 dark:text-orange-100">Temple Admin</h1>
+<p class="text-[10px] font-manrope uppercase tracking-[0.2em] text-orange-800/60 dark:text-orange-500/60 mt-1">Sacred Sanctuary CMS</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200 font-manrope text-sm font-medium tracking-wide" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200 font-manrope text-sm font-medium tracking-wide" href="#">
+<span class="material-symbols-outlined">description</span>
+                Pages
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-stone-800 text-orange-800 dark:text-orange-400 rounded-sm shadow-sm font-bold font-manrope text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined">event</span>
+                Events
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200 font-manrope text-sm font-medium tracking-wide" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+                Media
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200 font-manrope text-sm font-medium tracking-wide" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto px-4 pt-6 border-t border-orange-100/20">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-orange-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a focused temple administrator in traditional yet modern professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsy8AsgEXH_dDVp8qn2IFFi_VKxlYYP7eJ85kOF30Mwr0zNhBf3Ayf3I86R9dJnKTW41jP7sHsZqW5-bMvGcp_xFObytvBe3Z2dHqSCuKNPUKRLBwcqQFCF8995p3I6dIwHsd1v2jCkk39k8lSHySHtf3yZNVKhCFVc7L0DdGVX0w_O1G2J4u5yncV6zpAqLAQPdQFiwKeDs2zsmOKGcxZnalohrtVw4W2byfwSf0Cb9J8QCl9JxzT5xcsKKVdyZ5ZQF-YxLL1lpw"/>
+</div>
+<div>
+<p class="text-xs font-bold text-orange-900">Admin User</p>
+<p class="text-[10px] text-orange-800/70">Chief Curator</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Component -->
+<header class="fixed top-0 right-0 left-64 z-40 glass-header border-b border-orange-100/20 shadow-sm shadow-orange-900/5">
+<div class="flex justify-between items-center h-16 px-8">
+<div class="flex items-center gap-8">
+<span class="font-noto-serif text-lg font-semibold text-stone-900">The Sacred Modernist</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-manrope text-sm uppercase tracking-widest text-stone-500 hover:text-orange-800 transition-all cursor-pointer active:scale-95" href="#">Analytics</a>
+<a class="font-manrope text-sm uppercase tracking-widest text-stone-500 hover:text-orange-800 transition-all cursor-pointer active:scale-95" href="#">Log</a>
+<a class="font-manrope text-sm uppercase tracking-widest text-stone-500 hover:text-orange-800 transition-all cursor-pointer active:scale-95" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-stone-500 hover:text-orange-800 p-2 transition-all active:scale-95">notifications</button>
+<button class="material-symbols-outlined text-stone-500 hover:text-orange-800 p-2 transition-all active:scale-95">help_outline</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 pb-20 px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-12">
+<div class="max-w-2xl">
+<h2 class="font-headline text-4xl font-bold text-on-surface tracking-tight mb-2">Manifest New Event</h2>
+<p class="font-body text-on-surface-variant text-lg">Curate a spiritual experience for the sanctuary community. Details define the sanctity of the occasion.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 border border-outline-variant text-on-surface-variant font-label text-sm uppercase tracking-widest hover:bg-surface-container-low transition-colors">Save as Draft</button>
+<button class="px-8 py-2 bg-primary text-on-primary font-label text-sm uppercase tracking-widest shadow-lg shadow-primary/20 hover:bg-on-primary-container transition-all active:scale-95">Publish Event</button>
+</div>
+</div>
+<div class="spiritual-divider mb-12"></div>
+<!-- Form Layout: Asymmetric Bento Style -->
+<form class="grid grid-cols-12 gap-8">
+<!-- Left Column: Primary Details -->
+<div class="col-span-8 space-y-8">
+<!-- Title & Category Section -->
+<section class="bg-surface-container-lowest p-8 shadow-sm">
+<div class="space-y-6">
+<div class="group">
+<label class="block font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mb-2 transition-colors group-focus-within:text-secondary">Event Title</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary transition-all text-2xl font-headline font-semibold px-0 py-2 placeholder:text-surface-dim" placeholder="e.g., The Golden Harvest Moon Festival" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="group">
+<label class="block font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mb-2 transition-colors group-focus-within:text-secondary">Category</label>
+<select class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary transition-all font-body text-sm px-0 py-2 appearance-none">
+<option>Festival</option>
+<option>Puja</option>
+<option>Cultural</option>
+<option>Social</option>
+</select>
+</div>
+<div class="group">
+<label class="block font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mb-2 transition-colors group-focus-within:text-secondary">Location</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary transition-all font-body text-sm px-0 py-2" placeholder="Central Sanctum Courtyard" type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Description Section -->
+<section class="bg-surface-container-lowest p-8 shadow-sm">
+<div class="space-y-8">
+<div>
+<label class="block font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mb-3">Short Description</label>
+<textarea class="w-full bg-surface-container-low border-0 focus:ring-1 focus:ring-secondary/20 p-4 font-body text-base italic leading-relaxed" placeholder="A brief evocative summary for listings..." rows="2"></textarea>
+</div>
+<div>
+<label class="block font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mb-3">Full Description (Rich Text Editor)</label>
+<div class="border border-outline-variant">
+<!-- Mock Editor Toolbar -->
+<div class="flex gap-2 p-2 border-b border-outline-variant bg-surface-container-low">
+<button class="p-1 hover:bg-surface-container-high rounded transition-colors" type="button"><span class="material-symbols-outlined text-lg">format_bold</span></button>
+<button class="p-1 hover:bg-surface-container-high rounded transition-colors" type="button"><span class="material-symbols-outlined text-lg">format_italic</span></button>
+<button class="p-1 hover:bg-surface-container-high rounded transition-colors" type="button"><span class="material-symbols-outlined text-lg">format_list_bulleted</span></button>
+<span class="w-px h-6 bg-outline-variant mx-1"></span>
+<button class="p-1 hover:bg-surface-container-high rounded transition-colors" type="button"><span class="material-symbols-outlined text-lg">link</span></button>
+<button class="p-1 hover:bg-surface-container-high rounded transition-colors" type="button"><span class="material-symbols-outlined text-lg">image</span></button>
+</div>
+<textarea class="w-full bg-transparent border-0 focus:ring-0 p-6 font-body text-base leading-loose" placeholder="Chronicle the event details, ritual significance, and schedule..." rows="10"></textarea>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Metadata & Assets -->
+<div class="col-span-4 space-y-8">
+<!-- Time & Date Card -->
+<section class="bg-white p-8 shadow-sm">
+<h3 class="font-label text-xs font-extrabold uppercase tracking-widest text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">calendar_today</span>
+                        Temporal Alignment
+                    </h3>
+<div class="space-y-6">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block font-label text-[10px] uppercase text-on-surface-variant mb-1">Start Date</label>
+<input class="w-full bg-surface-container-low border-0 p-2 text-sm focus:ring-1 focus:ring-secondary" type="date"/>
+</div>
+<div>
+<label class="block font-label text-[10px] uppercase text-on-surface-variant mb-1">End Date</label>
+<input class="w-full bg-surface-container-low border-0 p-2 text-sm focus:ring-1 focus:ring-secondary" type="date"/>
+</div>
+</div>
+<div>
+<label class="block font-label text-[10px] uppercase text-on-surface-variant mb-1">Event Time</label>
+<input class="w-full bg-surface-container-low border-0 p-2 text-sm focus:ring-1 focus:ring-secondary" type="time"/>
+</div>
+</div>
+</section>
+<!-- Featured Image Card -->
+<section class="bg-white p-8 shadow-sm">
+<h3 class="font-label text-xs font-extrabold uppercase tracking-widest text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">photo_library</span>
+                        Sacred Visuals
+                    </h3>
+<div class="relative aspect-video bg-surface-container w-full group overflow-hidden border-2 border-dashed border-outline-variant hover:border-secondary transition-all cursor-pointer flex flex-col items-center justify-center gap-3">
+<img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-500" data-alt="vibrant detail of a hand-woven silk tapestry with intricate patterns of marigolds and geometric shapes in warm oranges and golds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAitXk6Xb3fr1iaL737W6rD9HXPEE-S2DDC8OC4Bf2TJrvN6upvYqF2wn9p287-CtOzpFQ5rDmU_fcw3QZ7ty2r7Gj3f13TPVLFqJhkdjTCx1wF7A0v_N65KklE_jRyeEZeGGz3o3Z7E_Y3DmlJE2wL-goQ1ePYuu0KHyXS7fM6gfTdDWGZ4uGlaflwYkLCUG2HDa-cNZbGxNXgR3ztKYAWnmTS7T4_kERw8RSvQ6pJAxGdGIrC4EfonWhWkU5PniFJDb-VinC8MOA"/>
+<div class="relative z-10 flex flex-col items-center">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl mb-2">upload_file</span>
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant group-hover:text-primary">Click to Upload Hero Image</span>
+<span class="text-[9px] text-outline mt-1 italic">Recommended 1920x1080px</span>
+</div>
+</div>
+</section>
+<!-- Status & Metadata Card -->
+<section class="bg-surface-container p-8">
+<div class="space-y-4">
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant font-label uppercase">Last Saved</span>
+<span class="text-on-surface font-medium italic">Never</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant font-label uppercase">Visibility</span>
+<span class="text-primary font-bold">Public</span>
+</div>
+<div class="pt-4 border-t border-outline-variant/30">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 text-primary border-outline-variant rounded-sm focus:ring-offset-0 focus:ring-secondary" type="checkbox"/>
+<span class="text-xs font-body text-on-surface-variant group-hover:text-on-surface">Feature on Homepage Hero</span>
+</label>
+</div>
+</div>
+</section>
+</div>
+</form>
+</main>
+<!-- Global Floating Action (Mobile Only - Suppressed per rules but structure remains) -->
+<div class="md:hidden fixed bottom-6 right-6 z-50">
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</body></html>

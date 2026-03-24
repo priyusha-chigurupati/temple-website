@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1125" role="img" aria-labelledby="title desc">
+  <title>Temple tower placeholder</title>
+  <desc>Stylized temple architecture artwork with a saffron-toned sky.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f6ead8"/>
+      <stop offset="100%" stop-color="#fff8ef"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1125" fill="url(#sky)"/>
+  <rect x="0" y="860" width="900" height="265" fill="#edd9bf"/>
+  <path d="M450 140 590 840H310Z" fill="#efe7d9" stroke="#bfa486" stroke-width="10"/>
+  <path d="M450 220 540 720H360Z" fill="#fff" stroke="#c9b196" stroke-width="8"/>
+  <path d="M450 300 500 580H400Z" fill="#f6efe4" stroke="#c3aa8d" stroke-width="7"/>
+  <path d="M350 840h200v120H350Z" fill="#b98f5d"/>
+  <path d="M395 780h110v60H395Z" fill="#ceb18d"/>
+  <path d="M430 185h40v55h-40Z" fill="#a04100"/>
+  <circle cx="450" cy="170" r="20" fill="#a04100"/>
+  <path d="M250 965h400" stroke="#c5a177" stroke-width="16" stroke-linecap="round"/>
+</svg>

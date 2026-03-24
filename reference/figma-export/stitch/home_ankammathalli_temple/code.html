@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AnkammaThalli Temple | The Digital Sanctum</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-on-surface": "#f8f0e1",
+              "on-tertiary": "#ffffff",
+              "background": "#fff8ef",
+              "tertiary-container": "#e3a46e",
+              "surface-bright": "#fff8ef",
+              "outline": "#887364",
+              "primary": "#a04100",
+              "surface-container": "#f5edde",
+              "on-secondary-fixed": "#241a00",
+              "surface": "#fff8ef",
+              "inverse-primary": "#ffb693",
+              "on-primary-container": "#762e00",
+              "secondary-fixed": "#ffe088",
+              "inverse-surface": "#343026",
+              "surface-container-low": "#fbf3e4",
+              "surface-container-highest": "#e9e2d3",
+              "secondary": "#735c00",
+              "on-tertiary-container": "#65390b",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#efe7d9",
+              "on-background": "#1e1b13",
+              "tertiary-fixed": "#ffdcc1",
+              "on-primary-fixed": "#351000",
+              "on-surface-variant": "#554336",
+              "secondary-fixed-dim": "#e9c349",
+              "on-surface": "#1e1b13",
+              "surface-tint": "#a04100",
+              "tertiary-fixed-dim": "#fbb980",
+              "on-tertiary-fixed": "#2e1500",
+              "on-primary": "#ffffff",
+              "secondary-container": "#fed65b",
+              "on-secondary-container": "#745c00",
+              "error": "#ba1a1a",
+              "on-secondary": "#ffffff",
+              "primary-container": "#ff9762",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed-variant": "#574500",
+              "primary-fixed": "#ffdbcc",
+              "on-tertiary-fixed-variant": "#693c0e",
+              "surface-dim": "#e1d9cb",
+              "outline-variant": "#dbc2b0",
+              "on-error-container": "#93000a",
+              "tertiary": "#855324",
+              "primary-fixed-dim": "#ffb693",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#7a3000",
+              "surface-variant": "#e9e2d3"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      .frosted-veil {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .spiritual-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #ffe088, transparent);
+      }
+      .shadow-brand {
+        box-shadow: 0 12px 40px rgba(160, 65, 0, 0.08);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fff8ef]/80 backdrop-blur-md dark:bg-stone-900/80 shadow-sm shadow-orange-900/5">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<a class="text-xl font-bold text-[#1e1b13] dark:text-stone-100 font-['Noto_Serif']" href="#">AnkammaThalli Temple</a>
+<div class="hidden md:flex items-center space-gap-8 gap-8">
+<div class="flex space-x-8">
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#a04100] relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-[#a04100] after:rounded-full" href="#">Home</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] dark:text-stone-300 hover:text-[#a04100] transition-colors duration-300" href="#">About</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] dark:text-stone-300 hover:text-[#a04100] transition-colors duration-300" href="#">Gallery</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] dark:text-stone-300 hover:text-[#a04100] transition-colors duration-300" href="#">Events</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] dark:text-stone-300 hover:text-[#a04100] transition-colors duration-300" href="#">Donations</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] dark:text-stone-300 hover:text-[#a04100] transition-colors duration-300" href="#">Contact</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] dark:text-stone-300 hover:text-[#a04100] transition-colors duration-300" href="#">Blog</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-sm font-['Noto_Serif'] font-medium uppercase tracking-wider text-[0.75rem] scale-95 active:scale-90 transition-transform">Donate Now</button>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Temple Background" class="w-full h-full object-cover opacity-30 mix-blend-multiply" data-alt="majestic south indian temple gopuram with intricate carvings against a dramatic sunset sky with warm orange and purple tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmvB2hY3-Qr8y6Lg8mVc2EFgJfTH9DPZOjIYKmsFENSfOc47Wf8wYZJM-PUzqbm9AT20PvHTgr6eiTedI0HQwHdqLIoD3k4m0gaGcyucr5G1QHdOsDSzNIct44KQnwp3ooV4nfuX0wfSDZCrkCs6oLB1Ipl0QTMhynHJq-eQZMYWlwEs3zkPYU6QCBUGRFThFkraOJW2wx36y7bNG6xpvrnLbQyJJnSaw9DxG-TkTtzM-GnhRIgy5WJIXcYW8fvRZnZ_xBKC5yRE4"/>
+<div class="absolute inset-0 bg-gradient-to-b from-background/0 via-background/40 to-background"></div>
+</div>
+<div class="max-w-7xl mx-auto px-8 w-full relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-8 lg:col-span-7">
+<span class="font-label text-primary tracking-[0.2em] uppercase text-xs mb-6 block">Centuries of Devotion</span>
+<h1 class="font-headline text-5xl md:text-7xl lg:text-8xl text-on-surface leading-[1.1] mb-8 -tracking-[0.02em]">
+                    Welcome to <span class="text-primary italic">AnkammaThalli</span> Temple
+                </h1>
+<p class="font-body text-lg md:text-xl text-on-surface-variant max-w-xl mb-10 leading-relaxed">
+                    Step into a sanctuary of ancient spiritual resonance, where every stone tells a story of faith and the divine grace of the Mother Goddess.
+                </p>
+<div class="flex flex-wrap gap-6">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-10 py-4 rounded-sm font-label uppercase tracking-widest text-sm shadow-brand hover:scale-105 transition-transform">
+                        Support the Temple
+                    </button>
+<button class="border border-outline-variant/30 text-on-surface px-10 py-4 rounded-sm font-label uppercase tracking-widest text-sm hover:bg-surface-container transition-colors">
+                        View Timings
+                    </button>
+</div>
+</div>
+<div class="hidden md:block md:col-span-4 lg:col-span-5 relative">
+<div class="aspect-[4/5] bg-surface-container-highest overflow-hidden rounded-sm shadow-2xl relative z-10">
+<img alt="Sanctuary Detail" class="w-full h-full object-cover grayscale-[0.3] hover:grayscale-0 transition-all duration-700" data-alt="close up of a traditional indian oil lamp or diya with soft golden flame light and dark spiritual background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAfUbEiZkAWwVkmp7Ty5lA-x1DE3NnT-_NutUNmFqCo5YA15nA2l3qCEsPFq7vClLutOwmqk9fHwAOZkkQ4_g5QaVn18Ol1o5_4pY_Kik9NM9fg95gubrDMH_3WH1ujwEcNXUV3qw-qlggqec1lPPqTmXldGXQ9lVWqbitWdEWnLNFsRBXFD4R5aczg6pI7xLfheWCXmftYn1u7jh5KIt2cl-Mhv1iqvHc2vuFiDG4zHfaWHpNyBwwSU3vCzTP3VKaqNt8OAY7DDI"/>
+</div>
+<div class="absolute -bottom-8 -left-8 w-48 h-48 bg-secondary-container/20 -z-10 blur-3xl"></div>
+</div>
+</div>
+</header>
+<div class="max-w-7xl mx-auto px-8">
+<div class="spiritual-divider"></div>
+</div>
+<!-- About Section -->
+<section class="py-28 md:py-40 overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+<div class="relative group">
+<div class="bg-surface-container-low p-12 relative z-10">
+<img alt="Temple Architecture" class="w-full h-[600px] object-cover rounded-sm shadow-brand transition-transform duration-700 group-hover:scale-[1.02]" data-alt="interior architecture of an ancient south indian temple with stone pillars and sunlight streaming through openings" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8A6JaqYgXD5ENvqFz4wmIDZOglwWLHVsuZd-l-Q675JyTAPUqKOZaze72UUDVHo0ptPmcs4UDm7ucHI-LVAH47GKysZsmJw3FTHpcrDrSiLz3NuhCcge7BMbD3iLHHoxq-e1W1fvn3txWx7eqG2HVpc9lsRi6vtPTo17PjIEUgZKHx_Bk9VXneknMp58kJTysSbB6sG3DRwh1LgsxEhiqQLtxKyoVie2Rnfd2u88EeNnX3N434Xvb5jP5_UzFtR9t-zDOGfqjMKk"/>
+</div>
+<div class="absolute -top-10 -right-10 w-64 h-64 border border-outline-variant/10 -z-0"></div>
+</div>
+<div class="md:pl-12">
+<h2 class="font-headline text-4xl md:text-5xl text-on-surface mb-8">Sacred History &amp; Architecture</h2>
+<div class="space-y-6 text-on-surface-variant text-lg leading-relaxed">
+<p>
+                        Founded during the height of the regional dynasties, AnkammaThalli Temple stands as a testament to the intricate Dravidian architectural style and the enduring spirit of local traditions.
+                    </p>
+<p>
+                        The temple is dedicated to Goddess Ankamma, the fierce yet benevolent protector of the village. For generations, devotees have sought solace within these walls, finding a rare blend of historical majesty and intimate spiritual peace.
+                    </p>
+</div>
+<a class="inline-flex items-center mt-10 text-primary font-bold tracking-widest uppercase text-xs hover:gap-4 transition-all" href="#">
+                    Read our full story 
+                    <span class="material-symbols-outlined ml-2 scale-75">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Upcoming Events Grid -->
+<section class="py-28 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex justify-between items-end mb-16">
+<div>
+<span class="font-label text-primary tracking-[0.2em] uppercase text-xs mb-3 block">Community &amp; Worship</span>
+<h2 class="font-headline text-4xl text-on-surface">Upcoming Events</h2>
+</div>
+<a class="hidden md:block border-b border-primary text-primary font-label text-xs uppercase tracking-widest pb-1 hover:text-on-primary-container hover:border-on-primary-container transition-colors" href="#">
+                    View All Calendar
+                </a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Event Card 1 -->
+<div class="bg-surface-container-lowest overflow-hidden group">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Festival" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="colorful indian festival celebration with flower garlands and ritual items during daytime" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqB7r0NCW_JM1tiwjpI1pvYI5wrVcrzoNex2NDTbdJPCvG7MGhsP7NHci-QrmGeBc4SzWtGx6nWlekIetQwghimyqQiUliQgG15_rDDnsuklTzYZQ_yFsi2gjnY6RFUdK1dIhXKP7zW10e2GIUfkMb1j9p00PPZ83MOF4KQFXyR2MaPuVFmgcPebkhdHYiF2DscIxuGjkUcoYF44texvoYW8w1th424HYt63aX9Gjz8u3TMFVVOeqPpxdRm2nvDMHdbwIudD2c9uE"/>
+</div>
+<div class="p-8">
+<span class="text-xs font-label text-secondary uppercase tracking-widest mb-2 block">Nov 12, 2024</span>
+<h3 class="font-headline text-xl text-on-surface mb-4">Annual Maha Utsav</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Join us for a 3-day grand celebration featuring traditional music, dance, and special pujas.</p>
+<a class="text-primary text-xs font-bold uppercase tracking-widest hover:underline decoration-2 underline-offset-4" href="#">Event Details</a>
+</div>
+</div>
+<!-- Event Card 2 -->
+<div class="bg-surface-container-lowest overflow-hidden group">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Poornima Ritual" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="evening view of a illuminated hindu temple during a night ceremony with soft glowing lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUjOcQ2j89JvfLdou8VghT5AEV19z8Ka5kK8ehzrJNq5GO8d8vGdpOfDEzFO9hNZhTUF1vGFx2EjW9YvWXCZP8Gf0ZPABWB6qrug3pup2uwzzclr8wfEaNMLNztdonLS9w4s3LRLwfwRPBU-M9thw4dWLNPLSNvqnfyZrMpO1cksM_JFUKalFgAWNdeoGiIBzesdUnr9JmIVpbaACLhXBh3j3XaCUIQLQJ90RhU3BndkPcvWN2Ok7NcE8U6dAowp5EXr1cEOrap0"/>
+</div>
+<div class="p-8">
+<span class="text-xs font-label text-secondary uppercase tracking-widest mb-2 block">Nov 15, 2024</span>
+<h3 class="font-headline text-xl text-on-surface mb-4">Maha Poornima Ritual</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Special evening prayers and lamp lighting ceremony to mark the auspicious full moon night.</p>
+<a class="text-primary text-xs font-bold uppercase tracking-widest hover:underline decoration-2 underline-offset-4" href="#">Event Details</a>
+</div>
+</div>
+<!-- Event Card 3 -->
+<div class="bg-surface-container-lowest overflow-hidden group">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Spiritual Discourse" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="traditional indian classical dancers performing in front of a temple sanctuary at dawn" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu2wuVZaMOOxCb-jB4-yxpgL-t0Lx8L04hD4p2kVj-pK-6S3g7Ubggv4NS7iUmSnLKHK8ofyt_-6ZHmToA2aTagHbb-usBzvwXY-aAgttj93rm9Hy3hwGhjEBKIvuHEhkM4VwbFYtghR9o1JucSIqFFif2Ixb1Uqc0yjziOvXH7uUbPFb28VvrpWuQw9qiJ1yG0b9LCCeA1u0fp2UfjuQ5_99fL5bBmJbkxRxfoC44YpgO-aiJIAxhsEshdBVOAKMmJFBhoX3Kgp0"/>
+</div>
+<div class="p-8">
+<span class="text-xs font-label text-secondary uppercase tracking-widest mb-2 block">Nov 20, 2024</span>
+<h3 class="font-headline text-xl text-on-surface mb-4">Spiritual Discourse</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">A guided session on the significance of Goddess Ankamma in regional folklore and spirituality.</p>
+<a class="text-primary text-xs font-bold uppercase tracking-widest hover:underline decoration-2 underline-offset-4" href="#">Event Details</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Highlights Masonry Gallery -->
+<section class="py-28">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="font-headline text-4xl text-on-surface mb-4">Temple Highlights</h2>
+<div class="w-12 h-1 bg-primary mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[250px]">
+<div class="md:col-span-2 md:row-span-2 relative overflow-hidden group">
+<img alt="Main Sanctuary" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" data-alt="stunning wide angle of a golden south indian temple roof detail shimmering under sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJpUTAtdqyOQNkTI5qP8HwQCkysRg4_5wdwZFVNkLwMfbyWaYDc44ZXlnThxflAd4QfpUjJdxFTtScbTEfTcbcACh_eGAaj_iKtcJmT_idN69NLAAUQETThKShkJSrMwenZOZdcSi-WckhIO3E-HHf9zeNucr5wLWXa35eUIqsWpYhx5BU4Bb63qhxaGljCbvZGqpJMZB3vY70kB6EqASBuP0-_8gCwReLY7K14sHpuZamYzzglruDwhUlbJF_3-MU3J6HOCHnqGA"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="font-label text-white tracking-widest text-xs uppercase border border-white/40 px-6 py-2">The Golden Gopuram</span>
+</div>
+</div>
+<div class="md:col-span-1 md:row-span-1 relative overflow-hidden group">
+<img alt="Ritual Items" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" data-alt="colorful silk fabric and fresh jasmine flowers arranged for a temple offering" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCatCG2htjH8l2vQdhNZ7xD58R2Md2pPP-OGTJAyeeusY73oxMFB-jDop8X5j6jSybzg65UJwGHKs4qjMo8OAKV8RF1ou3u_hQlEGI-LQsTY23vLJWjARmGcktRQkNrLXI-H5BRr8U74a4EvJqRXxCq797x9iVqmTZYZARA-7vNPPDIzsx7T00f3GDR1XofO2eHR9BBcLXU4Px_c8-FRlEYFc6QWkfzlyjhS_yMYKDKurVpYFoDbzJ_juCH69epKeIV26EbcY82Rrk"/>
+</div>
+<div class="md:col-span-1 md:row-span-2 relative overflow-hidden group">
+<img alt="Carving" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" data-alt="detailed stone sculpture of a deity on a temple wall with dramatic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5btVDdSntBrK1E8NPifL5fCPXDixVc15BQyzLLk_nAAtW0dZU1lcd9NYv8pjvvE0Su8cjx3SGE2kTstBeUi-zdbF7iWC0B0YI9Vd5lZWJvU-Q82O3XQGt_u7zfa9FgXopfKhZgLmhLTAB_sdQCY2bIpEbp-lJJLxhL_OzjEnrvbe7Fvga-Kn8UBKU5kps6NlJzUFmpxOB5b4uNmUXwVrPwzZDYI-qo_FDrfz3YWQoLNdpo8tpCS62HvXd7pPV4wCsDrzmtUeaGJ8"/>
+</div>
+<div class="md:col-span-1 md:row-span-1 relative overflow-hidden group">
+<img alt="Temple Garden" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" data-alt="serene morning view of the temple complex gardens with soft mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD51_AmhJw_EwkrjxIkOdyBpHY7cQDeWkl-FvK8ic7mxaEE_29dRlGq_RbXut3hUCq2EkKtIdlyH9V5BPRuu7YVCo-vEUCjykGna3U7o3q87PbSyB5gvYjjjj6bjtNOfBH6NipnJV-_7SiTHCXypF7H7pqu8a9AhIpQU4Y_VHSAyFVzqLxMfHBEx3JVDtI8ba7pfIQ_2-fRQI17LxrmeuamywFf8mlwavineQ6uQo9OBIXYlufwulF2HuMBtkXrNJvTuqhEgODmb3M"/>
+</div>
+</div>
+<div class="text-center mt-12">
+<a class="bg-surface-container-high px-12 py-4 rounded-sm font-label uppercase text-xs tracking-[0.2em] inline-block hover:bg-surface-container-highest transition-colors" href="#">Explore Gallery</a>
+</div>
+</div>
+</section>
+<!-- Donation Section -->
+<section class="py-28 relative bg-primary-fixed">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+<div class="md:col-span-7">
+<h2 class="font-headline text-4xl md:text-5xl text-on-primary-fixed leading-tight mb-6">Support the Sacred Sanctuary</h2>
+<p class="text-on-primary-fixed-variant text-lg max-w-xl mb-8 leading-relaxed">
+                    Your contributions help us maintain the ancient architecture, support regular rituals, and fund community welfare programs. Every donation is a step towards preserving our shared heritage.
+                </p>
+<div class="flex flex-wrap gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-sm shadow-brand flex-1 min-w-[200px]">
+<h4 class="font-headline text-primary text-lg mb-2">Temple Maintenance</h4>
+<p class="text-on-surface-variant text-xs mb-4">Preserving stone carvings and sanctum cleanliness.</p>
+<button class="w-full border border-primary text-primary text-xs font-bold uppercase tracking-widest py-3 hover:bg-primary hover:text-white transition-all">Support Now</button>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-sm shadow-brand flex-1 min-w-[200px]">
+<h4 class="font-headline text-primary text-lg mb-2">Anna Danam</h4>
+<p class="text-on-surface-variant text-xs mb-4">Feeding the hungry and the pilgrims daily.</p>
+<button class="w-full border border-primary text-primary text-xs font-bold uppercase tracking-widest py-3 hover:bg-primary hover:text-white transition-all">Support Now</button>
+</div>
+</div>
+</div>
+<div class="md:col-span-5">
+<div class="bg-surface-container-lowest/40 backdrop-blur-xl p-10 rounded-sm border border-white/20">
+<h3 class="font-headline text-2xl text-on-surface mb-6">Quick Contribution</h3>
+<div class="space-y-4">
+<div class="flex justify-between p-4 bg-white/60 border border-outline-variant/20 cursor-pointer hover:border-primary transition-all">
+<span class="font-body text-on-surface">Annadanam Contribution</span>
+<span class="font-bold text-primary">₹1,000</span>
+</div>
+<div class="flex justify-between p-4 bg-white/60 border border-outline-variant/20 cursor-pointer hover:border-primary transition-all">
+<span class="font-body text-on-surface">Pooja Sponsorship</span>
+<span class="font-bold text-primary">₹2,500</span>
+</div>
+<div class="flex justify-between p-4 bg-white/60 border border-outline-variant/20 cursor-pointer hover:border-primary transition-all">
+<span class="font-body text-on-surface">General Donation</span>
+<input class="bg-transparent border-none p-0 text-right font-bold text-primary placeholder:text-primary/50 focus:ring-0 w-24" placeholder="Enter amount" type="text"/>
+</div>
+<button class="w-full bg-primary text-on-primary font-label uppercase tracking-widest py-4 mt-4 shadow-xl active:scale-95 transition-all">Complete Donation</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-[#fbf3e4] dark:bg-stone-950 w-full border-t border-[#dbc2b0]/15">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="text-lg font-bold text-[#1e1b13] dark:text-stone-100 font-['Noto_Serif'] mb-4 block">AnkammaThalli Temple</span>
+<p class="font-['Manrope'] text-sm leading-relaxed text-[#1e1b13]/70 dark:text-stone-400">
+                    A timeless sanctuary of grace and tradition, inviting you to connect with the divine mother.
+                </p>
+<div class="mt-6 flex space-x-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">social_leaderboard</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">share</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">video_library</span>
+</div>
+</div>
+<div>
+<h4 class="font-headline text-sm font-bold text-on-surface mb-6 uppercase tracking-wider">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="font-['Manrope'] text-sm text-[#1e1b13]/70 dark:text-stone-400 hover:translate-x-1 hover:text-[#a04100] transition-all block" href="#">Pooja Timings</a></li>
+<li><a class="font-['Manrope'] text-sm text-[#1e1b13]/70 dark:text-stone-400 hover:translate-x-1 hover:text-[#a04100] transition-all block" href="#">Devotee Guidelines</a></li>
+<li><a class="font-['Manrope'] text-sm text-[#1e1b13]/70 dark:text-stone-400 hover:translate-x-1 hover:text-[#a04100] transition-all block" href="#">Temple History</a></li>
+<li><a class="font-['Manrope'] text-sm text-[#1e1b13]/70 dark:text-stone-400 hover:translate-x-1 hover:text-[#a04100] transition-all block" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline text-sm font-bold text-on-surface mb-6 uppercase tracking-wider">Address &amp; Timings</h4>
+<div class="font-['Manrope'] text-sm text-[#1e1b13]/70 dark:text-stone-400 space-y-4">
+<p>Main Temple Street, Sacred Hills<br/>South Province, India</p>
+<p class="mt-4">
+<strong class="text-primary">Morning:</strong> 6:00 AM - 12:30 PM<br/>
+<strong class="text-primary">Evening:</strong> 4:00 PM - 8:30 PM
+                    </p>
+</div>
+</div>
+<div>
+<h4 class="font-headline text-sm font-bold text-on-surface mb-6 uppercase tracking-wider">Newsletter</h4>
+<p class="font-['Manrope'] text-sm text-[#1e1b13]/70 dark:text-stone-400 mb-4">Stay updated with festival announcements.</p>
+<div class="flex gap-2">
+<input class="bg-surface border-outline-variant/30 text-xs w-full focus:ring-primary focus:border-primary" placeholder="Email" type="email"/>
+<button class="bg-primary text-white p-2">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 py-8 border-t border-[#dbc2b0]/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-['Manrope'] text-xs text-[#1e1b13]/50">© 2024 AnkammaThalli Temple. All Rights Reserved.</span>
+<div class="flex gap-6">
+<a class="font-['Manrope'] text-xs text-[#1e1b13]/50 hover:text-primary" href="#">Privacy Policy</a>
+<a class="font-['Manrope'] text-xs text-[#1e1b13]/50 hover:text-primary" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title>Stone figure placeholder</title>
+  <desc>Monochrome sculptural placeholder artwork.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#5e5a56"/>
+      <stop offset="100%" stop-color="#24211f"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="600" fill="url(#bg)"/>
+  <circle cx="480" cy="180" r="82" fill="#8b8884"/>
+  <path d="M350 325c20-80 64-120 130-120s110 40 130 120l35 155H315Z" fill="#7a7671"/>
+  <path d="M435 196c18 22 52 22 70 0" fill="none" stroke="#4f4c49" stroke-width="8" stroke-linecap="round"/>
+  <path d="M370 515h220" stroke="#9d9a96" stroke-width="18" stroke-linecap="round" opacity=".55"/>
+</svg>

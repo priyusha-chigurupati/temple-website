@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" role="img" aria-labelledby="title desc">
+  <title>Sacred texture placeholder</title>
+  <desc>Layered stone-like texture placeholder in warm neutral tones.</desc>
+  <rect width="500" height="500" fill="#f0d9ba"/>
+  <path d="M-20 110c95 20 150 8 245-22s162-28 295 6" fill="none" stroke="#d7ae72" stroke-width="34" stroke-linecap="round"/>
+  <path d="M-20 215c95 20 150 8 245-22s162-28 295 6" fill="none" stroke="#c89a5c" stroke-width="32" stroke-linecap="round"/>
+  <path d="M-20 320c95 20 150 8 245-22s162-28 295 6" fill="none" stroke="#d7ae72" stroke-width="34" stroke-linecap="round"/>
+  <path d="M-20 425c95 20 150 8 245-22s162-28 295 6" fill="none" stroke="#c89a5c" stroke-width="32" stroke-linecap="round"/>
+</svg>

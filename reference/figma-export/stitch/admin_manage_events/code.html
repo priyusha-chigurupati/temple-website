@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#ffdbcc",
+              "on-tertiary-fixed-variant": "#693c0e",
+              "on-secondary-fixed-variant": "#574500",
+              "outline-variant": "#dbc2b0",
+              "on-error-container": "#93000a",
+              "surface-dim": "#e1d9cb",
+              "tertiary": "#855324",
+              "primary-fixed-dim": "#ffb693",
+              "on-error": "#ffffff",
+              "surface-variant": "#e9e2d3",
+              "on-primary-fixed-variant": "#7a3000",
+              "tertiary-fixed-dim": "#fbb980",
+              "on-tertiary-fixed": "#2e1500",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#745c00",
+              "secondary-container": "#fed65b",
+              "error": "#ba1a1a",
+              "primary-container": "#ff9762",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-container-low": "#fbf3e4",
+              "surface-container-highest": "#e9e2d3",
+              "inverse-surface": "#343026",
+              "surface-container-high": "#efe7d9",
+              "secondary": "#735c00",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#65390b",
+              "tertiary-fixed": "#ffdcc1",
+              "on-primary-fixed": "#351000",
+              "on-background": "#1e1b13",
+              "on-surface-variant": "#554336",
+              "surface-tint": "#a04100",
+              "secondary-fixed-dim": "#e9c349",
+              "on-surface": "#1e1b13",
+              "tertiary-container": "#e3a46e",
+              "surface-bright": "#fff8ef",
+              "inverse-on-surface": "#f8f0e1",
+              "on-tertiary": "#ffffff",
+              "background": "#fff8ef",
+              "surface-container": "#f5edde",
+              "surface": "#fff8ef",
+              "primary": "#a04100",
+              "on-secondary-fixed": "#241a00",
+              "outline": "#887364",
+              "secondary-fixed": "#ffe088",
+              "inverse-primary": "#ffb693",
+              "on-primary-container": "#762e00"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      .sidebar-blur {
+        backdrop-filter: blur(12px);
+      }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface flex min-h-screen">
+<!-- Admin Sidebar Navigation -->
+<aside class="w-72 bg-surface-container-low border-r border-outline-variant/15 flex flex-col fixed h-full z-50">
+<div class="px-8 py-10">
+<h1 class="font-headline text-xl font-bold text-on-surface tracking-tight">AnkammaThalli Temple</h1>
+<p class="text-[0.65rem] font-label uppercase tracking-[0.15em] text-outline mt-1">Management Portal</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface/70 hover:bg-surface-container-high transition-all rounded-sm group" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="font-label text-sm font-medium">Dashboard</span>
+</a>
+<!-- Active State for Events Management -->
+<a class="flex items-center gap-4 px-4 py-3 bg-surface-container-highest text-primary font-semibold rounded-sm relative after:content-[''] after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-6 after:bg-primary" href="#">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-label text-sm">Events</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface/70 hover:bg-surface-container-high transition-all rounded-sm group" href="#">
+<span class="material-symbols-outlined text-lg">gallery_thumbnail</span>
+<span class="font-label text-sm font-medium">Gallery</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface/70 hover:bg-surface-container-high transition-all rounded-sm group" href="#">
+<span class="material-symbols-outlined text-lg">volunteer_activism</span>
+<span class="font-label text-sm font-medium">Donations</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface/70 hover:bg-surface-container-high transition-all rounded-sm group" href="#">
+<span class="material-symbols-outlined text-lg">article</span>
+<span class="font-label text-sm font-medium">Blog</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface/70 hover:bg-surface-container-high transition-all rounded-sm group" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span class="font-label text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-8 border-t border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center text-on-primary font-bold text-xs">A</div>
+<div>
+<p class="text-xs font-semibold">Admin User</p>
+<p class="text-[0.6rem] text-outline uppercase tracking-wider">Temple Office</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-72 p-12">
+<!-- Header Section -->
+<header class="flex justify-between items-end mb-12">
+<div>
+<nav class="flex gap-2 text-[0.7rem] font-label uppercase tracking-widest text-outline mb-4">
+<span>Admin</span>
+<span>/</span>
+<span class="text-primary">Events Management</span>
+</nav>
+<h2 class="font-headline text-4xl font-bold text-on-surface">Manage Traditions</h2>
+<p class="text-on-surface-variant mt-2 max-w-md">Schedule, edit, and organize temple festivities, puja timings, and community gatherings.</p>
+</div>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-sm flex items-center gap-3 hover:bg-on-primary-container transition-all shadow-lg shadow-primary/10 group">
+<span class="material-symbols-outlined text-sm">add</span>
+<span class="font-label text-xs font-bold uppercase tracking-widest">Add New Event</span>
+</button>
+</header>
+<!-- Stats Overview (Asymmetric Layout) -->
+<div class="grid grid-cols-12 gap-6 mb-12">
+<div class="col-span-12 md:col-span-8 bg-surface-container-low p-8 flex justify-between items-center rounded-sm">
+<div class="flex gap-12">
+<div>
+<p class="text-[0.65rem] font-label uppercase tracking-widest text-outline mb-1">Upcoming Events</p>
+<p class="font-headline text-3xl font-bold text-on-surface">12</p>
+</div>
+<div>
+<p class="text-[0.65rem] font-label uppercase tracking-widest text-outline mb-1">Active Drafts</p>
+<p class="font-headline text-3xl font-bold text-on-surface">04</p>
+</div>
+<div>
+<p class="text-[0.65rem] font-label uppercase tracking-widest text-outline mb-1">Total Attendance</p>
+<p class="font-headline text-3xl font-bold text-on-surface">2.4k</p>
+</div>
+</div>
+<div class="h-12 w-12 rounded-full border border-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">analytics</span>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 bg-secondary-container/20 p-8 flex flex-col justify-center rounded-sm border border-secondary/10">
+<p class="text-[0.65rem] font-label uppercase tracking-widest text-secondary font-bold mb-1">Next Major Festival</p>
+<p class="font-headline text-xl text-on-secondary-container font-bold">Maha Shivaratri</p>
+<p class="text-xs text-on-secondary-container/70 mt-1">In 14 days</p>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="flex items-center justify-between mb-8 pb-6 border-b border-outline-variant/15">
+<div class="flex gap-8">
+<button class="text-xs font-label font-bold uppercase tracking-widest text-primary border-b-2 border-primary pb-2">All Events</button>
+<button class="text-xs font-label font-bold uppercase tracking-widest text-on-surface/50 hover:text-on-surface transition-colors pb-2">Upcoming</button>
+<button class="text-xs font-label font-bold uppercase tracking-widest text-on-surface/50 hover:text-on-surface transition-colors pb-2">Past</button>
+<button class="text-xs font-label font-bold uppercase tracking-widest text-on-surface/50 hover:text-on-surface transition-colors pb-2">Drafts</button>
+</div>
+<div class="flex items-center bg-surface-container-high px-4 py-2 rounded-sm group focus-within:ring-1 focus-within:ring-secondary/50">
+<span class="material-symbols-outlined text-outline text-lg">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-label placeholder:text-outline/60 w-64" placeholder="Search events..." type="text"/>
+</div>
+</div>
+<!-- Events List (Editorial Layout) -->
+<div class="space-y-4">
+<!-- Event Item 1 -->
+<div class="group bg-surface-container-lowest flex items-center p-4 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 border border-transparent hover:border-outline-variant/20">
+<div class="w-32 h-20 overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close up of glowing oil lamps and marigold flowers at a traditional Hindu temple festival at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1php04SQ3LLypz8RFmRxAVtNgBmVASgLvdEsVyIYrZeKNpzHnEa_GoUcffe9nnpCO0Tfgulpro0Qbm67-Wa2HFXsatnOOVvOTbpxSGOIBLjzJR8WD7SUCbxgRiCDGhd-Bc0AltEX02bvMhvjJJtLI_5c_hwM-14X4aMGUg3-lttmRgsSSi7-T-mMNqdXtZEOa-1rg6Ui5vzPYaEZQv_u0RaolrRjSXmYooMHXvxVQS-AfSiKutjaIYy6pTXyx93a7Snv4ZR9z1pg"/>
+</div>
+<div class="ml-8 flex-1 grid grid-cols-12 items-center gap-4">
+<div class="col-span-5">
+<h4 class="font-headline text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Annual Brahmotsavam</h4>
+<p class="text-xs text-outline font-label uppercase tracking-wider mt-1 italic">Grand Temple Celebration</p>
+</div>
+<div class="col-span-3">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">event</span>
+<span class="text-xs font-label font-medium">Oct 24 - Oct 28, 2024</span>
+</div>
+</div>
+<div class="col-span-2">
+<span class="px-3 py-1 bg-primary/10 text-primary text-[0.65rem] font-bold uppercase tracking-widest rounded-full">Active</span>
+</div>
+<div class="col-span-2 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-outline hover:text-primary transition-colors" title="Edit">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+<button class="p-2 text-outline hover:text-on-surface transition-colors" title="More">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Event Item 2 -->
+<div class="group bg-surface-container-lowest flex items-center p-4 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 border border-transparent hover:border-outline-variant/20">
+<div class="w-32 h-20 overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Aerial view of a colorful flower rangoli in a temple courtyard with devotees in traditional saffron clothing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4o5Ue1ZSvtwYeKBg7iQCH6nKGhjbY4HwizAUlaUtjpa5nng16P66KUgCLT86V2y97p0wQuapjQnCmlJL-cmII0bmcJNy8_eQJuWiZ5Fan6_YvjvvYpqnR6ABEN9ZNsUkqVMcwfgW7kuo-tDnlZWk4vpTRydAG8e8bjGK0dZic7SjFFSTFnIQP5NM-PEO7GQfg9DQphv2tR8_Ijs0Wi4FpnoRuT6BnTLkSE5_PJ0XWj7U3qNapyqXsVCDVXKnppfoLiSVTSAxV9ac"/>
+</div>
+<div class="ml-8 flex-1 grid grid-cols-12 items-center gap-4">
+<div class="col-span-5">
+<h4 class="font-headline text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Deepavali Deepotsavam</h4>
+<p class="text-xs text-outline font-label uppercase tracking-wider mt-1 italic">Festival of Lights</p>
+</div>
+<div class="col-span-3">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">event</span>
+<span class="text-xs font-label font-medium">Nov 01, 2024</span>
+</div>
+</div>
+<div class="col-span-2">
+<span class="px-3 py-1 bg-secondary/10 text-secondary text-[0.65rem] font-bold uppercase tracking-widest rounded-full">Draft</span>
+</div>
+<div class="col-span-2 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-outline hover:text-primary transition-colors" title="Edit">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+<button class="p-2 text-outline hover:text-on-surface transition-colors" title="More">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Event Item 3 -->
+<div class="group bg-surface-container-lowest flex items-center p-4 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 border border-transparent hover:border-outline-variant/20">
+<div class="w-32 h-20 overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Details of intricate temple stone carvings illuminated by golden evening sun rays with shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcsQ0OtNDBPUSFmJ-0zb2euoqfPspGlEg7nZ1OTOEmx37SEC_yGywa9rDFVgSiMB3SsvOmL7TsJLr86d4wlFjjbT5P9rF2FtbI_lM_2ic9O3wZsBkdhISESR2qzVN45WtGiz1w3QodkOxy6JwoooOWsQKrgEfBE-n_tZxdUH4nyULN1grxNIJNYgh3KzZjb01aubNsFBatMbzdkNPY2kkqfQpAe6-O0G-IjMEvVscdGWZ2AeNsVmk-3hbjVitC6PXZ7qPtyENtzRU"/>
+</div>
+<div class="ml-8 flex-1 grid grid-cols-12 items-center gap-4">
+<div class="col-span-5">
+<h4 class="font-headline text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Vaikuntha Ekadashi</h4>
+<p class="text-xs text-outline font-label uppercase tracking-wider mt-1 italic">Auspicious Gate Opening</p>
+</div>
+<div class="col-span-3">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">event</span>
+<span class="text-xs font-label font-medium">Dec 12, 2024</span>
+</div>
+</div>
+<div class="col-span-2">
+<span class="px-3 py-1 bg-primary/10 text-primary text-[0.65rem] font-bold uppercase tracking-widest rounded-full">Active</span>
+</div>
+<div class="col-span-2 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-outline hover:text-primary transition-colors" title="Edit">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+<button class="p-2 text-outline hover:text-on-surface transition-colors" title="More">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Event Item 4 (Past) -->
+<div class="group bg-surface-container-lowest/60 flex items-center p-4 transition-all duration-300 border border-transparent">
+<div class="w-32 h-20 overflow-hidden bg-surface-container-highest flex-shrink-0 grayscale opacity-50">
+<img class="w-full h-full object-cover" data-alt="Traditional Indian temple priest performing a fire ritual with dramatic sparks and orange glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgxtXskOcB1QeGhQ_GQVuKgY2gA1tTWPfosf9Lk67nkUnsfmQPtxDcc4f42fcE1dThcF-2_CpIxYzE88XxCt8RqJz3V7FSDynI04b_at7nN8wQyf7X0zN-DpOdi8b8BQUYxd4PqVegsPxbyct2se0AiY3gkjlAfyQhA-odQyce8Mvf9qcPEKe9xo8zc0pU2OFoiaziBevMvdJHyjrNeyS7b9J08rONwTyXgjNTezT5QQCDPSHDWlv67qJIcMeRX5s6vVfLUKbSiCI"/>
+</div>
+<div class="ml-8 flex-1 grid grid-cols-12 items-center gap-4">
+<div class="col-span-5">
+<h4 class="font-headline text-lg font-bold text-on-surface/50">Ganesh Chaturthi Pooja</h4>
+<p class="text-xs text-outline/40 font-label uppercase tracking-wider mt-1">Concluded Celebration</p>
+</div>
+<div class="col-span-3">
+<div class="flex items-center gap-2 text-outline/40">
+<span class="material-symbols-outlined text-sm">event</span>
+<span class="text-xs font-label font-medium">Sep 07, 2024</span>
+</div>
+</div>
+<div class="col-span-2">
+<span class="px-3 py-1 bg-outline-variant/20 text-outline text-[0.65rem] font-bold uppercase tracking-widest rounded-full">Completed</span>
+</div>
+<div class="col-span-2 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-outline hover:text-primary transition-colors" title="View Details">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+<button class="p-2 text-outline hover:text-on-surface transition-colors" title="Duplicate">
+<span class="material-symbols-outlined text-xl">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<footer class="mt-12 flex justify-between items-center py-6 border-t border-outline-variant/15">
+<p class="text-xs font-label text-outline uppercase tracking-widest">Showing 1-10 of 42 Events</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 border border-outline-variant/30 flex items-center justify-center hover:bg-surface-container-low transition-colors text-outline">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 bg-primary text-on-primary font-bold text-xs">1</button>
+<button class="w-10 h-10 border border-outline-variant/30 flex items-center justify-center hover:bg-surface-container-low transition-colors text-outline font-bold text-xs">2</button>
+<button class="w-10 h-10 border border-outline-variant/30 flex items-center justify-center hover:bg-surface-container-low transition-colors text-outline font-bold text-xs">3</button>
+<button class="w-10 h-10 border border-outline-variant/30 flex items-center justify-center hover:bg-surface-container-low transition-colors text-outline">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</footer>
+</main>
+<!-- Spiritual Decorative Background Elements -->
+<div class="fixed top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+<div class="fixed bottom-0 left-0 w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
+</body></html>

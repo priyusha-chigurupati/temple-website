@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Page Content | The Sacred Modernist CMS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#554336",
+              "surface-dim": "#e1d9cb",
+              "tertiary-container": "#e3a46e",
+              "inverse-surface": "#343026",
+              "background": "#fff8ef",
+              "on-error-container": "#93000a",
+              "tertiary-fixed-dim": "#fbb980",
+              "secondary-container": "#fed65b",
+              "on-tertiary-fixed": "#2e1500",
+              "on-tertiary-container": "#65390b",
+              "secondary-fixed-dim": "#e9c349",
+              "secondary": "#735c00",
+              "primary-fixed": "#ffdbcc",
+              "surface-tint": "#a04100",
+              "outline": "#887364",
+              "secondary-fixed": "#ffe088",
+              "tertiary": "#855324",
+              "surface-container-lowest": "#ffffff",
+              "surface-container": "#f5edde",
+              "tertiary-fixed": "#ffdcc1",
+              "primary-container": "#ff9762",
+              "surface": "#fff8ef",
+              "on-tertiary": "#ffffff",
+              "error": "#ba1a1a",
+              "surface-variant": "#e9e2d3",
+              "surface-container-low": "#fbf3e4",
+              "primary-fixed-dim": "#ffb693",
+              "surface-container-highest": "#e9e2d3",
+              "on-primary-fixed": "#351000",
+              "on-primary": "#ffffff",
+              "on-error": "#ffffff",
+              "on-tertiary-fixed-variant": "#693c0e",
+              "on-secondary-fixed": "#241a00",
+              "outline-variant": "#dbc2b0",
+              "on-primary-fixed-variant": "#7a3000",
+              "on-secondary-container": "#745c00",
+              "on-background": "#1e1b13",
+              "error-container": "#ffdad6",
+              "on-primary-container": "#762e00",
+              "primary": "#a04100",
+              "surface-bright": "#fff8ef",
+              "inverse-primary": "#ffb693",
+              "on-surface": "#1e1b13",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed-variant": "#574500",
+              "inverse-on-surface": "#f8f0e1",
+              "surface-container-high": "#efe7d9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            shadow: 0 12px 40px -12px rgba(160, 65, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-orange-100/10 dark:border-stone-800/10 bg-orange-50 dark:bg-stone-950 flex flex-col py-6 px-4 z-50">
+<div class="mb-10 px-2">
+<h1 class="font-noto-serif text-xl font-bold text-orange-900 dark:text-orange-100">Temple Admin</h1>
+<p class="font-manrope text-xs font-medium tracking-wide text-stone-500 uppercase mt-1">Sacred Sanctuary CMS</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-manrope text-sm font-medium tracking-wide">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-stone-800 text-orange-800 dark:text-orange-400 rounded-sm shadow-sm font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-manrope text-sm font-medium tracking-wide">Pages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-manrope text-sm font-medium tracking-wide">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-manrope text-sm font-medium tracking-wide">Media</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-manrope text-sm font-medium tracking-wide">Settings</span>
+</a>
+</nav>
+<button class="mt-auto bg-primary text-white py-3 rounded-sm font-manrope text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+            New Entry
+        </button>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 w-full z-40 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md border-b border-orange-100/20 dark:border-stone-800/20 shadow-sm shadow-orange-900/5">
+<div class="flex justify-between items-center h-16 px-8 ml-64">
+<div class="flex items-center gap-6">
+<span class="font-noto-serif text-lg font-semibold text-stone-900 dark:text-stone-100">The Sacred Modernist</span>
+<nav class="hidden md:flex gap-8 ml-8">
+<a class="font-manrope text-xs uppercase tracking-widest text-stone-500 hover:text-orange-800 transition-all" href="#">Analytics</a>
+<a class="font-manrope text-xs uppercase tracking-widest text-orange-700 relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-orange-600 after:rounded-full" href="#">Log</a>
+<a class="font-manrope text-xs uppercase tracking-widest text-stone-500 hover:text-orange-800 transition-all" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="search">search</span>
+<input class="bg-surface-container-low border-none rounded-sm pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-secondary w-64" placeholder="Search entries..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors" data-icon="help_outline">help_outline</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a creative director in a minimal studio setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVKhw_u_-cSVJfoz5n6U9Kt2GPuq8Y9VQf22k2GGSamSnsEABTJxa803Um7wmL_HdRq9eaGPeGAR5sd34e3nogs8WnHPtiE83LLjWVVjMkPut3RI2i6CiAwkL98B0zHFn4KVJFtcNJrOS-oOxzxmVeSylzNYS2Ii-fTmV8A_Y_Lc9VSZ9xsA34e5YHsR3RYydE3kIBbUtmlT1UVVUekDJGQOdIZ-P68YwIwN4x7CjK2B7t4ObJTw3_be2SGoXUmU8A7ATKJU6wjbU"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 p-12 max-w-7xl mx-auto">
+<!-- Header Actions -->
+<div class="flex justify-between items-end mb-12">
+<div>
+<nav class="flex items-center gap-2 text-xs font-manrope uppercase tracking-widest text-outline mb-3">
+<a class="hover:text-primary transition-colors" href="#">Pages</a>
+<span class="material-symbols-outlined text-[10px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-bold italic">Edit: About Us</span>
+</nav>
+<h2 class="font-headline text-4xl text-on-surface font-bold tracking-tight">Modify Page Content</h2>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 border border-outline-variant/30 text-on-surface-variant font-manrope text-xs uppercase tracking-widest hover:bg-surface-container-low transition-colors font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+                    Preview
+                </button>
+<button class="px-8 py-2 bg-primary text-white font-manrope text-xs uppercase tracking-widest hover:opacity-90 transition-all shadow-md shadow-primary/10 font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="save">save</span>
+                    Update Page
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-10">
+<!-- Left Column: Primary Editing Canvas -->
+<div class="col-span-12 lg:col-span-8 space-y-12">
+<!-- Hero Image Upload Section -->
+<section class="bg-surface-container-low p-8 rounded-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline text-xl text-on-surface font-semibold">Hero Atmosphere</h3>
+<span class="text-xs font-manrope uppercase tracking-tighter text-outline">Aspect Ratio 21:9 Recommended</span>
+</div>
+<div class="relative group cursor-pointer overflow-hidden aspect-[21/9] bg-surface-container-highest flex items-center justify-center border-2 border-dashed border-outline-variant/20 hover:border-primary/40 transition-all">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="grand architectural detail of a modern temple with dramatic shadows and golden sunlight hitting stone textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqaxvIivieZY9tOwzNqIqSbTrMS8174L6GVqe_3md4mS9hkHdY2J74RapqC4r4Ssl8GQvnhpELErcan8cIeTZy7t0PjbCmXO_2B-MtiTsrAxxtJAy0Dj1bNpt0blNIrOu3EM-YzyDJzhPwgvmWQy5y3CnJLEwn5tWt0xqA_dMU8WApKg2xJ0ZlBwjm0v74hwp_aJGGMxH-pXZZPPgWEzAWVcEXXG6VobMXAVIah32hpe2w_E2YBcawKF7MsZN58Ku-Fit5bqtcKy8"/>
+<div class="relative z-10 flex flex-col items-center gap-3 bg-white/90 backdrop-blur px-8 py-4 shadow-xl">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="cloud_upload">cloud_upload</span>
+<span class="font-manrope text-xs font-bold uppercase tracking-widest text-on-surface">Replace Background Image</span>
+</div>
+</div>
+</section>
+<!-- Page Meta Section -->
+<section class="space-y-6">
+<div class="group">
+<label class="block font-manrope text-[10px] uppercase tracking-[0.2em] text-outline font-bold mb-2 ml-1">Page Headline</label>
+<input class="w-full bg-transparent border-none border-b border-outline-variant/30 px-1 py-4 font-headline text-3xl focus:ring-0 focus:border-secondary transition-all text-on-surface" type="text" value="About The Sacred Modernist"/>
+</div>
+<div class="group">
+<label class="block font-manrope text-[10px] uppercase tracking-[0.2em] text-outline font-bold mb-2 ml-1">Meta Description (SEO)</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant/15 p-4 font-body text-sm text-on-surface-variant focus:ring-1 focus:ring-secondary focus:border-secondary resize-none leading-relaxed" rows="3">Discover the philosophy behind our digital sanctuary. We merge ancestral temple traditions with the precision of modern minimalist design to create spiritual tranquility in the digital age.</textarea>
+</div>
+</section>
+<!-- Dynamic Content Blocks -->
+<div class="space-y-6">
+<div class="flex items-center gap-4 mb-4">
+<div class="h-px flex-1 bg-gradient-to-r from-transparent via-secondary-fixed/50 to-transparent"></div>
+<h3 class="font-manrope text-[10px] uppercase tracking-[0.3em] text-outline font-bold">Content Structure</h3>
+<div class="h-px flex-1 bg-gradient-to-r from-transparent via-secondary-fixed/50 to-transparent"></div>
+</div>
+<!-- Content Block 1 (Text) -->
+<div class="bg-surface-container-lowest border border-outline-variant/10 p-6 flex gap-6 group hover:shadow-lg transition-shadow">
+<div class="flex flex-col gap-2 text-outline-variant/50">
+<span class="material-symbols-outlined cursor-grab active:cursor-grabbing hover:text-primary" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<div class="flex-1 space-y-4">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-manrope font-extrabold uppercase tracking-widest bg-surface-container px-2 py-1 text-on-surface-variant">Text Block</span>
+<button class="text-outline-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="delete">delete</span>
+</button>
+</div>
+<input class="w-full font-headline text-xl bg-transparent border-none p-0 focus:ring-0 text-on-surface font-bold" type="text" value="Our Ancestral Roots"/>
+<textarea class="w-full bg-transparent border-none p-0 font-body text-base text-on-surface-variant focus:ring-0 leading-relaxed italic" rows="4">"Tradition is not the worship of ashes, but the preservation of fire." We began as a small collection of historical archives and evolved into a movement of spiritual aesthetics.</textarea>
+</div>
+</div>
+<!-- Content Block 2 (Image Gallery) -->
+<div class="bg-surface-container-lowest border border-outline-variant/10 p-6 flex gap-6 group hover:shadow-lg transition-shadow">
+<div class="flex flex-col gap-2 text-outline-variant/50">
+<span class="material-symbols-outlined cursor-grab active:cursor-grabbing hover:text-primary" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<div class="flex-1 space-y-6">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-manrope font-extrabold uppercase tracking-widest bg-surface-container px-2 py-1 text-on-surface-variant">Media Layout</span>
+<button class="text-outline-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="delete">delete</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-square bg-surface-container-highest relative group overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close up of ancient carved stone details with soft shadows and warm highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa6aiA0Bsmyn1Z6YhfpObeUSBzZrqIzEwMtRQqpzgXbWBrYHAAPFnHliA_s2ROGFS31WK9V5uDnaXv_LkrLJSOi2i4KCxPoEkPXp1m2aXhFlpcsZxdl-h67B6Gm9LSJ5WdrIytLhNeAI-4wfc2CXTIG_ksNzaN0_PH-5AZRpp7BLw6mVHZfI36PVdoQLhi3IAh4WfqVAwThG-i8ZM0wKnJBhXH0Us5dDhojACcVr-_6vnScUCKemdOhdkO3xAgPEYeSivSu1VaYUs"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="edit">edit</span>
+</div>
+</div>
+<div class="aspect-square bg-surface-container-highest border border-dashed border-outline-variant/40 flex flex-col items-center justify-center gap-2 hover:bg-surface-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-outline" data-icon="add_a_photo">add_a_photo</span>
+<span class="text-[10px] font-manrope uppercase tracking-widest font-bold text-outline">Add Image</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Block Button -->
+<div class="pt-4 flex justify-center">
+<button class="group flex flex-col items-center gap-2 text-outline hover:text-primary transition-all">
+<div class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/5">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</div>
+<span class="text-[10px] font-manrope uppercase tracking-[0.2em] font-bold">Add New Block</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Sidebar Settings -->
+<aside class="col-span-12 lg:col-span-4 space-y-8">
+<!-- Status Card -->
+<div class="bg-white p-6 shadow-sm border border-outline-variant/10">
+<h4 class="font-manrope text-[10px] uppercase tracking-[0.2em] text-outline font-bold mb-6">Publishing Status</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Visibility</span>
+<span class="font-bold text-secondary">Public</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Last Edited</span>
+<span class="text-on-surface font-medium">Oct 12, 2023</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Author</span>
+<span class="text-on-surface font-medium underline underline-offset-4 decoration-primary/30">Admin S.</span>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/10">
+<div class="flex items-center gap-3">
+<input checked="" class="w-4 h-4 text-primary bg-surface border-outline-variant/50 focus:ring-secondary rounded-sm" type="checkbox"/>
+<label class="text-xs font-manrope text-on-surface-variant">Show in main navigation</label>
+</div>
+</div>
+</div>
+<!-- Page Attributes -->
+<div class="bg-surface-container-low p-6 rounded-sm">
+<h4 class="font-manrope text-[10px] uppercase tracking-[0.2em] text-outline font-bold mb-6">Structure Settings</h4>
+<div class="space-y-6">
+<div>
+<label class="block text-xs font-bold text-on-surface-variant mb-2">Parent Page</label>
+<select class="w-full bg-white border-none text-sm p-3 focus:ring-1 focus:ring-secondary">
+<option>(No Parent)</option>
+<option>The Sanctuary</option>
+<option>Exhibitions</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant mb-2">Template Layout</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="p-2 border border-secondary bg-white text-secondary text-[10px] font-bold uppercase tracking-widest">Editorial</button>
+<button class="p-2 border border-outline-variant/20 bg-transparent text-outline text-[10px] font-bold uppercase tracking-widest hover:bg-white transition-all">Classic</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Revisions History -->
+<div class="p-2">
+<h4 class="font-manrope text-[10px] uppercase tracking-[0.2em] text-outline font-bold mb-6 ml-4">Recent Revisions</h4>
+<div class="space-y-1">
+<div class="flex items-center gap-4 p-3 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center text-[10px] font-bold">14</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Updated Hero Image</p>
+<p class="text-[10px] text-outline">Oct 11, 2023 • 09:42 AM</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline-variant group-hover:text-primary transition-colors" data-icon="history">history</span>
+</div>
+<div class="flex items-center gap-4 p-3 hover:bg-surface-container transition-colors cursor-pointer group opacity-60">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-outline flex items-center justify-center text-[10px] font-bold">13</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Modified Meta Title</p>
+<p class="text-[10px] text-outline">Oct 10, 2023 • 04:15 PM</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline-variant group-hover:text-primary transition-colors" data-icon="history">history</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Spiritual Divider Decorative Element -->
+<div class="mt-20 py-12 flex justify-center">
+<div class="w-full max-w-xl h-px bg-gradient-to-r from-transparent via-secondary-fixed/50 to-transparent"></div>
+</div>
+</body></html>

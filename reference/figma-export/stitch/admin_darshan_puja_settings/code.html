@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard | AnkammaThalli Temple</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#ffdbcc",
+              "on-tertiary-fixed-variant": "#693c0e",
+              "on-secondary-fixed-variant": "#574500",
+              "outline-variant": "#dbc2b0",
+              "on-error-container": "#93000a",
+              "surface-dim": "#e1d9cb",
+              "tertiary": "#855324",
+              "primary-fixed-dim": "#ffb693",
+              "on-error": "#ffffff",
+              "surface-variant": "#e9e2d3",
+              "on-primary-fixed-variant": "#7a3000",
+              "tertiary-fixed-dim": "#fbb980",
+              "on-tertiary-fixed": "#2e1500",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#745c00",
+              "secondary-container": "#fed65b",
+              "error": "#ba1a1a",
+              "primary-container": "#ff9762",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-container-low": "#fbf3e4",
+              "surface-container-highest": "#e9e2d3",
+              "inverse-surface": "#343026",
+              "surface-container-high": "#efe7d9",
+              "secondary": "#735c00",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#65390b",
+              "tertiary-fixed": "#ffdcc1",
+              "on-primary-fixed": "#351000",
+              "on-background": "#1e1b13",
+              "on-surface-variant": "#554336",
+              "surface-tint": "#a04100",
+              "secondary-fixed-dim": "#e9c349",
+              "on-surface": "#1e1b13",
+              "tertiary-container": "#e3a46e",
+              "surface-bright": "#fff8ef",
+              "inverse-on-surface": "#f8f0e1",
+              "on-tertiary": "#ffffff",
+              "background": "#fff8ef",
+              "surface-container": "#f5edde",
+              "surface": "#fff8ef",
+              "primary": "#a04100",
+              "on-secondary-fixed": "#241a00",
+              "outline": "#887364",
+              "secondary-fixed": "#ffe088",
+              "inverse-primary": "#ffb693",
+              "on-primary-container": "#762e00"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="hidden md:flex flex-col w-72 bg-surface-container-low border-r border-outline-variant/15 sticky top-0 h-screen">
+<div class="p-8">
+<span class="text-lg font-bold text-on-surface font-headline mb-8 block">AnkammaThalli Temple</span>
+<nav class="space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-outline">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded bg-primary-fixed text-on-primary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="text-sm font-semibold">Darshan &amp; Pujas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-outline">campaign</span>
+<span class="text-sm font-medium">Announcements</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-outline">photo_library</span>
+<span class="text-sm font-medium">Gallery</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-outline">volunteer_activism</span>
+<span class="text-sm font-medium">Donations</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-8 border-t border-outline-variant/15">
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 pb-20 md:pb-0">
+<!-- Mobile Header -->
+<header class="md:hidden bg-surface/80 backdrop-blur-md sticky top-0 z-40 px-6 py-4 flex justify-between items-center shadow-sm shadow-orange-900/5">
+<span class="font-headline font-bold text-on-surface">AnkammaThalli</span>
+<button class="p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<div class="max-w-6xl mx-auto p-6 md:p-12">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div class="space-y-1">
+<p class="text-[0.7rem] uppercase tracking-[0.1em] text-primary font-bold">Admin Portal</p>
+<h1 class="text-3xl md:text-4xl text-on-surface font-headline">Darshan &amp; Puja Details</h1>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2.5 bg-surface-container-highest text-on-surface-variant font-semibold text-sm rounded shadow-sm hover:bg-outline-variant/20 transition-all active:scale-95">Discard Changes</button>
+<button class="px-6 py-2.5 bg-primary text-on-primary font-semibold text-sm rounded shadow-md hover:shadow-orange-900/20 transition-all active:scale-95">Save All Updates</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Section: Daily Darshan Hours -->
+<section class="md:col-span-8 bg-surface-container-lowest p-8 shadow-sm shadow-orange-900/5">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-headline text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">schedule</span>
+                                Daily Darshan Hours
+                            </h2>
+<span class="text-[0.65rem] font-label uppercase tracking-widest text-outline">Live on Website</span>
+</div>
+<div class="space-y-8">
+<!-- Morning Slots -->
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wider text-outline mb-4">Morning Session</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-medium text-on-surface-variant">Opening Time</label>
+<input class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-secondary rounded p-3 text-sm" type="time" value="05:30"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-medium text-on-surface-variant">Closing Time</label>
+<input class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-secondary rounded p-3 text-sm" type="time" value="12:00"/>
+</div>
+</div>
+</div>
+<!-- Evening Slots -->
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wider text-outline mb-4">Evening Session</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-medium text-on-surface-variant">Opening Time</label>
+<input class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-secondary rounded p-3 text-sm" type="time" value="16:00"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-medium text-on-surface-variant">Closing Time</label>
+<input class="w-full bg-surface-container-low border-0 focus:ring-2 focus:ring-secondary rounded p-3 text-sm" type="time" value="21:00"/>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-high flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5">info</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                                    Note: These timings apply to standard days. For festivals or eclipse events, please use the Special Puja Schedule section.
+                                </p>
+</div>
+</div>
+</section>
+<!-- Section: Temple Announcements -->
+<section class="md:col-span-4 bg-surface-container-low p-8">
+<h2 class="text-xl font-headline text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">campaign</span>
+                            Critical Notices
+                        </h2>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-xs font-medium text-on-surface-variant">Active Announcement</label>
+<textarea class="w-full bg-surface-container-lowest border-0 focus:ring-2 focus:ring-secondary rounded p-4 text-sm resize-none" placeholder="Enter important notice for visitors..." rows="4">Temple will be closed on June 21st for solar eclipse purification from 8:00 AM to 4:00 PM.</textarea>
+</div>
+<div class="flex items-center gap-2">
+<input checked="" class="rounded text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-xs text-on-surface-variant">Display as scrolling banner</span>
+</div>
+<button class="w-full py-3 border border-outline text-on-surface-variant text-sm font-semibold hover:bg-surface-container-high transition-colors">
+                                Update Announcement
+                            </button>
+</div>
+</section>
+<!-- Section: Special Puja Schedules -->
+<section class="md:col-span-12 bg-surface-container-lowest p-8 shadow-sm shadow-orange-900/5 mt-4">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-headline text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">workspace_premium</span>
+                                Weekly &amp; Special Puja Schedule
+                            </h2>
+<button class="flex items-center gap-2 text-primary text-sm font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                                Add New Puja
+                            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant/30 text-[0.65rem] font-bold uppercase tracking-widest text-outline">
+<th class="pb-4 font-bold">Puja Name</th>
+<th class="pb-4 font-bold">Frequency</th>
+<th class="pb-4 font-bold">Time Slot</th>
+<th class="pb-4 font-bold">Seva Fee</th>
+<th class="pb-4 font-bold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="group hover:bg-surface-container-low/50 transition-colors">
+<td class="py-5 font-semibold text-on-surface">Abhishekam</td>
+<td class="py-5 text-on-surface-variant">Daily</td>
+<td class="py-5 text-on-surface-variant">06:00 AM - 07:00 AM</td>
+<td class="py-5 text-on-surface-variant">₹501.00</td>
+<td class="py-5 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low/50 transition-colors border-t border-outline-variant/10">
+<td class="py-5 font-semibold text-on-surface">Kumkumarchana</td>
+<td class="py-5 text-on-surface-variant">Friday Only</td>
+<td class="py-5 text-on-surface-variant">10:30 AM - 11:30 AM</td>
+<td class="py-5 text-on-surface-variant">₹251.00</td>
+<td class="py-5 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low/50 transition-colors border-t border-outline-variant/10">
+<td class="py-5 font-semibold text-on-surface">Sahasranama Archana</td>
+<td class="py-5 text-on-surface-variant">Daily</td>
+<td class="py-5 text-on-surface-variant">05:30 PM - 06:15 PM</td>
+<td class="py-5 text-on-surface-variant">₹101.00</td>
+<td class="py-5 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low/50 transition-colors border-t border-outline-variant/10">
+<td class="py-5 font-semibold text-on-surface">Chandi Homam</td>
+<td class="py-5 text-on-surface-variant">Monthly (Purnima)</td>
+<td class="py-5 text-on-surface-variant">08:00 AM - 12:00 PM</td>
+<td class="py-5 text-on-surface-variant">₹1,116.00</td>
+<td class="py-5 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Section: Decorative Stats/Visual -->
+<section class="md:col-span-12 relative overflow-hidden h-48 mt-4 rounded-lg bg-surface-dim">
+<img alt="Temple architecture" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-30" data-alt="macro close-up of intricate stone carvings on a traditional south indian temple wall with warm golden light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuMMbyN69FjRHeraq1iWQ4iFNzHQXqMWcD4YcxzmILIwW1XX_l6r_qUFonRD3uY7pgPXxfQDlAIggtWiGtq4Xu6RbnLAjMu773vkpZZvwG8obhMNrxiz5qLrlJrADW1w3_sC2nx78jL7PAlxz0x8SEK74SDkqoihLI12vV_486U9-oYGHJxBEYSV2sK6xEev95R6hhvX7mvAHjB57_k0H9jIczV56VyxnOD9lC3jXcyleAy-6x1t3vKlUsbMvaYIOlDK-Jh9hmedA"/>
+<div class="absolute inset-0 bg-gradient-to-r from-on-surface/80 to-transparent flex items-center px-12">
+<div class="text-on-primary">
+<h4 class="font-headline text-2xl mb-1">Maintaining the Sacred Order</h4>
+<p class="text-sm opacity-80 max-w-md font-body">Updating these details ensures thousands of devotees can plan their pilgrimage with peace of mind.</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Footer for Admin Portal -->
+<footer class="bg-surface-container-low border-t border-outline-variant/15 mt-12">
+<div class="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[0.65rem] font-label uppercase tracking-widest text-on-surface-variant">© 2024 AnkammaThalli Temple Administration</p>
+<div class="flex gap-8">
+<a class="text-[0.65rem] font-label uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Technical Support</a>
+<a class="text-[0.65rem] font-label uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Admin Policy</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<!-- Mobile Bottom Navigation (Simulated Shell) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface/90 backdrop-blur-lg border-t border-outline-variant/10 flex justify-around items-center px-4 py-3 z-50">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-[0.6rem] font-bold uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="text-[0.6rem] font-bold uppercase">Timings</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-xl">campaign</span>
+<span class="text-[0.6rem] font-bold uppercase">Notices</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-xl">account_circle</span>
+<span class="text-[0.6rem] font-bold uppercase">Profile</span>
+</a>
+</nav>
+</body></html>

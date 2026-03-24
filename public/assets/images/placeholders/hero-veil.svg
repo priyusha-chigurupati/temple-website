@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title>Temple inspired hero placeholder</title>
+  <desc>Warm abstract artwork with layered arches and saffron highlights.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f7e9d6"/>
+      <stop offset="50%" stop-color="#fff8ef"/>
+      <stop offset="100%" stop-color="#f2dbc3"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#d56d2f" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="#8d3200" stop-opacity=".18"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <circle cx="1350" cy="160" r="220" fill="#ffe088" opacity=".22"/>
+  <circle cx="220" cy="210" r="160" fill="#ffb693" opacity=".18"/>
+  <path d="M760 80 1080 410 1045 445 800 204 555 445 520 410Z" fill="#c45517" opacity=".24"/>
+  <path d="M800 200 1028 425 1000 453 800 258 600 453 572 425Z" fill="#e98e58" opacity=".35"/>
+  <path d="M800 330 920 448 900 468 800 372 700 468 680 448Z" fill="#fff8ef" opacity=".92"/>
+  <path d="M800 200V930" stroke="url(#shine)" stroke-width="36" stroke-linecap="round"/>
+  <path d="M640 975H960" stroke="#a04100" stroke-opacity=".16" stroke-width="22" stroke-linecap="round"/>
+</svg>

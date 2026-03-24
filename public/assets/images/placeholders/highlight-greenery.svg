@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" role="img" aria-labelledby="title desc">
+  <title>Courtyard greenery placeholder</title>
+  <desc>Garden-like placeholder with temple walkway geometry.</desc>
+  <rect width="500" height="500" fill="#a8c289"/>
+  <rect x="210" y="0" width="80" height="500" fill="#ceb48f"/>
+  <rect x="0" y="212" width="500" height="76" fill="#ceb48f"/>
+  <circle cx="110" cy="120" r="85" fill="#5e8d4e"/>
+  <circle cx="392" cy="120" r="85" fill="#5e8d4e"/>
+  <circle cx="110" cy="388" r="85" fill="#5e8d4e"/>
+  <circle cx="392" cy="388" r="85" fill="#5e8d4e"/>
+</svg>

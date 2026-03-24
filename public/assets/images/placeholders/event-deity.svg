@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title>Festival idol placeholder</title>
+  <desc>Mandala-style placeholder with bright devotional tones.</desc>
+  <defs>
+    <radialGradient id="a" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#ffe38d"/>
+      <stop offset="45%" stop-color="#df8d2c"/>
+      <stop offset="100%" stop-color="#862d00"/>
+    </radialGradient>
+  </defs>
+  <rect width="960" height="600" fill="#4f1200"/>
+  <circle cx="480" cy="300" r="215" fill="url(#a)"/>
+  <circle cx="480" cy="300" r="172" fill="none" stroke="#ffe7a1" stroke-width="10" stroke-opacity=".6"/>
+  <path d="M480 185c58 60 86 112 86 156 0 55-38 100-86 100s-86-45-86-100c0-44 28-96 86-156Z" fill="#ffe9ba"/>
+  <path d="M370 450c72-24 196-24 220 0" fill="none" stroke="#6d1f00" stroke-width="30" stroke-linecap="round"/>
+  <circle cx="420" cy="250" r="12" fill="#862d00"/>
+  <circle cx="540" cy="250" r="12" fill="#862d00"/>
+</svg>

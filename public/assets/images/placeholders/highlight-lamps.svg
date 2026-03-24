@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" role="img" aria-labelledby="title desc">
+  <title>Ritual lamps placeholder</title>
+  <desc>Close-up placeholder with three glowing lamps.</desc>
+  <rect width="500" height="500" fill="#2c160d"/>
+  <circle cx="125" cy="160" r="30" fill="#ffe38d"/>
+  <circle cx="250" cy="135" r="34" fill="#ffe38d"/>
+  <circle cx="375" cy="165" r="30" fill="#ffe38d"/>
+  <circle cx="125" cy="160" r="68" fill="#ffe38d" opacity=".18"/>
+  <circle cx="250" cy="135" r="74" fill="#ffe38d" opacity=".18"/>
+  <circle cx="375" cy="165" r="68" fill="#ffe38d" opacity=".18"/>
+  <path d="M80 260c28-22 62-22 90 0M205 235c28-22 62-22 90 0M330 265c28-22 62-22 90 0" fill="none" stroke="#c8742b" stroke-width="20" stroke-linecap="round"/>
+</svg>

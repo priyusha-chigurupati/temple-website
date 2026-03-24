@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Media Library | AnkammaThalli Temple</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#ffdbcc",
+              "on-tertiary-fixed-variant": "#693c0e",
+              "on-secondary-fixed-variant": "#574500",
+              "outline-variant": "#dbc2b0",
+              "on-error-container": "#93000a",
+              "surface-dim": "#e1d9cb",
+              "tertiary": "#855324",
+              "primary-fixed-dim": "#ffb693",
+              "on-error": "#ffffff",
+              "surface-variant": "#e9e2d3",
+              "on-primary-fixed-variant": "#7a3000",
+              "tertiary-fixed-dim": "#fbb980",
+              "on-tertiary-fixed": "#2e1500",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#745c00",
+              "secondary-container": "#fed65b",
+              "error": "#ba1a1a",
+              "primary-container": "#ff9762",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-container-low": "#fbf3e4",
+              "surface-container-highest": "#e9e2d3",
+              "inverse-surface": "#343026",
+              "surface-container-high": "#efe7d9",
+              "secondary": "#735c00",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#65390b",
+              "tertiary-fixed": "#ffdcc1",
+              "on-primary-fixed": "#351000",
+              "on-background": "#1e1b13",
+              "on-surface-variant": "#554336",
+              "surface-tint": "#a04100",
+              "secondary-fixed-dim": "#e9c349",
+              "on-surface": "#1e1b13",
+              "tertiary-container": "#e3a46e",
+              "surface-bright": "#fff8ef",
+              "inverse-on-surface": "#f8f0e1",
+              "on-tertiary": "#ffffff",
+              "background": "#fff8ef",
+              "surface-container": "#f5edde",
+              "surface": "#fff8ef",
+              "primary": "#a04100",
+              "on-secondary-fixed": "#241a00",
+              "outline": "#887364",
+              "secondary-fixed": "#ffe088",
+              "inverse-primary": "#ffb693",
+              "on-primary-container": "#762e00"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-72 bg-surface-container-low flex-col hidden md:flex h-screen sticky top-0 overflow-y-auto">
+<div class="px-8 py-10">
+<h1 class="text-lg font-bold text-on-surface font-headline mb-10 block">AnkammaThalli Temple</h1>
+<nav class="space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/20 text-primary border-r-4 border-primary transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+<span class="font-bold">Media Library</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-medium">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined">volunteer_activism</span>
+<span class="font-medium">Donations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="font-medium">Blog Posts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-8">
+<div class="bg-surface-container-highest p-4 rounded-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a temple administrator with a kind expression in soft office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcx-R41rI5KBvT_MKiuhx0fNrKbvApw-B_L2hYrq3JB-hvHFmCHsVPG0BaUZPiaNV9DsjVqYVI_9vUcLa1uz3thQJQshHQW1is0ujR2o9xakQ6CHehaeE9x_GLFDljUHkNtG1bNETVtsLqE0MDLq-BD8DqcR4qb7qaj9xPphb8NCREvDa8YiEdPP90z6PKDd3KTDVzp6UgdV4NDETZODR60JwzByevw49rtHQJCXgZUV1uVILVPoG4ogFDzGOxunIQ4vtdBFX18zc"/>
+</div>
+<div>
+<p class="text-sm font-bold truncate">Admin User</p>
+<p class="text-xs text-on-surface-variant">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 min-h-screen flex flex-col">
+<!-- Header Section -->
+<header class="bg-surface/80 backdrop-blur-md sticky top-0 z-40 px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div>
+<h2 class="font-headline text-2xl font-bold tracking-tight text-on-surface">Media Library</h2>
+<p class="text-sm text-on-surface-variant mt-1">Manage and curate temple visual archives</p>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<div class="relative flex-1 md:w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container border-none focus:ring-2 focus:ring-secondary/50 rounded-lg pl-10 pr-4 py-2.5 text-sm transition-all" placeholder="Search architecture, deities..." type="text"/>
+</div>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded shadow-sm hover:brightness-110 active:scale-95 transition-all text-sm font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+                    Upload New
+                </button>
+</div>
+</header>
+<!-- Filters & Bulk Actions -->
+<section class="px-8 py-4 bg-surface-container-low/50 flex flex-wrap items-center justify-between gap-4 border-b border-outline-variant/10">
+<div class="flex items-center gap-6 overflow-x-auto hide-scrollbar">
+<button class="text-primary font-bold border-b-2 border-primary pb-1 text-sm whitespace-nowrap">All Media (124)</button>
+<button class="text-on-surface-variant hover:text-on-surface pb-1 text-sm whitespace-nowrap transition-colors">Architecture</button>
+<button class="text-on-surface-variant hover:text-on-surface pb-1 text-sm whitespace-nowrap transition-colors">Deities</button>
+<button class="text-on-surface-variant hover:text-on-surface pb-1 text-sm whitespace-nowrap transition-colors">Festivals</button>
+<button class="text-on-surface-variant hover:text-on-surface pb-1 text-sm whitespace-nowrap transition-colors">Archives</button>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-label uppercase tracking-widest text-outline">3 items selected</span>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-2 rounded-full hover:bg-error-container/20">
+<span class="material-symbols-outlined">delete</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-primary-container/20">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-primary-container/20">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</section>
+<!-- Media Bento Grid -->
+<section class="p-8 flex-1">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+<!-- Media Card 1 (Large Architecture) -->
+<div class="col-span-2 row-span-2 group relative overflow-hidden rounded-lg bg-surface-container-highest aspect-[4/3] cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Intricate stone carvings of a grand temple entrance at dawn with golden warm light highlighting the textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfR9naoSSZNVqeIi9iVjhzocjqLS8bIFT7xgI0Lqzx-5rIiu4EgbDCFHvJslQ8GNqRwr8l-2ynFA_cDWaHY7-U4xwh4pwj9S8bMnrOdjvBG7zIpF9HvoqhkVQMWC0VGCcWT8yF9aWxO4niev60SDtafRZ_ZXeClgWVyMDwcOanTg7HfrweLrxBuNbT0w2WmLxo19Ql-kzSssG3o9TIiVTSISpK8bEtCxOKNsX-Yd86tDbSop68Z023Ag3KwV8VySLq7Y9jafEiq3E"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<p class="text-surface-bright font-bold">Main Gopuram Entrance</p>
+<p class="text-surface-variant text-xs mt-1">Architecture • 4.2 MB • JPG</p>
+</div>
+<div class="absolute top-4 left-4">
+<div class="w-6 h-6 rounded bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+</div>
+<!-- Media Card 2 (Deity) -->
+<div class="group relative overflow-hidden rounded-lg bg-surface-container-highest aspect-square cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Macro shot of a bronze deity statue adorned with fresh marigold flowers and sandalwood paste in soft temple lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4uGsR7G13Aq7M1lYx1jqH4aiSkMejAOkxtNa74Rj4nGQqPZgkLYTFmaye_z2HFwUzAI0SOTQooEspEo9pNF38E_nhQVRx7uaxC5k-2FVOM6rfXEAkeLrb0TIHNaV30ij76MGGOz6rdkrWv7dst4fqDSkh_g4p-nr8AtEzXhtVq1tXNy8J-hl_INOaSXOkOoGrSm74NhRRJZSMlr2OC74bT2olZtPsTtyU5V9V7-cVVVo-5e3MfLOwq8qYBz1DwSqJac-zi9yRTck"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+<p class="text-surface-bright text-sm font-bold truncate">AnkammaThalli Idol</p>
+</div>
+<div class="absolute top-4 left-4">
+<div class="w-6 h-6 rounded bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center"></div>
+</div>
+</div>
+<!-- Media Card 3 (Festival) -->
+<div class="group relative overflow-hidden rounded-lg bg-surface-container-highest aspect-square cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Vibrant festival scene with traditional dancers in colorful silk sarees performing under oil lamps at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDzgRK6OT9DS3tmjuDcjJNQuYsaaulMHKpWfebXds57s6ko2Uau_2bHOaJ2uY4VlfcYX4uJNlCYdrF87qG5vSUnHRyhldT7Kw3-NpqqvpGnJM-iAhyAqR3gWEf7JeWW1C7S-5AmaOumSlY274j5Wa9RmDzK6MbP91BTVfUojLIygmjjjo8D54aJEZPV4fjpmA7RxW5v6z3aiPqWLTrsy1QVctx4Z68JXa2xy0J1xuVKtC6elb_lWxOrn76EA589vaDEKmzK3qmyC0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+<p class="text-surface-bright text-sm font-bold truncate">Navratri Celebrations</p>
+</div>
+<div class="absolute top-4 left-4">
+<div class="w-6 h-6 rounded bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+</div>
+<!-- Media Card 4 -->
+<div class="group relative overflow-hidden rounded-lg bg-surface-container-highest aspect-square cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close-up of temple bells hanging from the ceiling reflecting warm sunlight from the courtyard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4cQhSys8-PADlcKZUgDvOGfW8y16sUszAxujPwq6UppBwkhoXC8r_12J35nrECUAUVjXHbphD45_mWiUSI40GMrYQDNsNeW_EqZQ5jgvGdQXQMzclMfiudcAcRPYmh1Aoa0whEr7YZSsWeKUfapKFW0pJTuGTDgHgWfwmEWpChrH9UeReDW0DY73p_azMENht1KL70ntmEy28PB1RET6OW3HDMYzBSkVdox5D_jj32Xp264WanVaT9LHHK7KAKiAvqaDkN8-aSxs"/>
+<div class="absolute top-4 left-4">
+<div class="w-6 h-6 rounded bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center"></div>
+</div>
+</div>
+<!-- Media Card 5 -->
+<div class="group relative overflow-hidden rounded-lg bg-surface-container-highest aspect-square cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Rows of small clay oil lamps lit along the stone steps of the temple at twilight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr0qL-kcMAnPlDA-yFi0v80CfXIk-mAywhu36noBw_bcp48BH8jZ7KvY5XI7GjLk79oNIj1RAWFtFFzaFnzI5765y17flXFYZaNR3OF6s0Bh5boH5mCkHiRVzwsQA-zuO1hWNYrOjURdgP0wtCw43uudcnerfDqk6KbZ8flnZe_IydQT0Yp-xsgfw5tf-krb9fX2TM4bqIYmPDArJZCabNuzTGjs3OWXtNhoyIp5PynD4CjueMbeojhaiv89J5adz-28Iy6dff-vI"/>
+<div class="absolute top-4 left-4">
+<div class="w-6 h-6 rounded bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+</div>
+<!-- Media Card 6 -->
+<div class="group relative overflow-hidden rounded-lg bg-surface-container-highest aspect-square cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="High angle view of geometric Rangoli pattern made with colored powders on the temple floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6GXtGkiqrQZBMVUXBhUksd6ilBP9jMg_tqdrHTYZIG5jTa3ZuLBWsEYkvjzmidEEp9OmFisWauOqxLQif59pI0uYIXe2cZBHzLdIMcXPd6mCy51YXVYahnWY8o_kKOLochxELP4aranrrYwjkVGiXt8Jwa7SUosHieW8tu1XF_iN07Xnvcpz_1UzN1MkYPhxroajQbq-j4oI9v3a5rZ-sJVnrLSe23stfoVTnGhdjiwM7-nYQBrF3P_Vu3znRoij3sAo6HAtIVyQ"/>
+<div class="absolute top-4 left-4">
+<div class="w-6 h-6 rounded bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center"></div>
+</div>
+</div>
+<!-- Media Card 7 -->
+<div class="group relative overflow-hidden rounded-lg bg-surface-container-highest aspect-square cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A priest performing aarti with a large multi-layered brass lamp in a dimly lit inner sanctum" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtkw1XAM9uWS1CFCWtIi6e9oDlSwbhYAawi4UFibR9nEgSw77YQ6xXiIXPeS5KnYi7TUfeJ0cef95r3gpbms-tKcrddwi4_3s7WE5OyB8-GfVoJd9UzHbFTQ6Mr3hRue--1gubX9snxxp8UtX1ctITukVGIvrRSe-wZLS7snTguFYoVhAg_wF9E1lA52y6fUt6FB7BkjkYkZofPwEsp7S8wB1ofUsQsKAJXeGDyXOEikR9Hm32m3bPQVuiM7wBKx1UkuxtjzXfMNQ"/>
+<div class="absolute top-4 left-4">
+<div class="w-6 h-6 rounded bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center"></div>
+</div>
+</div>
+<!-- Media Card 8 -->
+<div class="group relative overflow-hidden rounded-lg bg-surface-container-highest aspect-square cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Lush green coconut palm trees surrounding the temple complex under a clear blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyxy0GSfXIQBnk6yOjA8PkuAOktlBT1oQ6xHLz2f2KIfmbYFkOH5UrzXf1TRTKfL0XsLopWkrqhM5A6wZTMskgmtuKAUOL4nTZMJSqJZIJcmSNpXTpm9gyFFrMvy_3SpCzySkI0_aCG6Na1rgrfAxX7rgrn9paq7zot2QJbsjGvQ-8T0eEIxV_Uo7H4Z4Zwu_OsDlG9cEA2lCqotJbaN7-D4tG0BJMuFEbiSlasL7UjgOXs9S3q3GtZLM6JFrILgSI_y5jRSwpIEY"/>
+<div class="absolute top-4 left-4">
+<div class="w-6 h-6 rounded bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center"></div>
+</div>
+</div>
+<!-- Media Card 9 -->
+<div class="group relative overflow-hidden rounded-lg bg-surface-container-highest aspect-square cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Traditional Indian musical instruments like Veena and Mridangam resting on a silk carpet in the music hall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXIFfwVoAWOJZqjyRghAg-fsLqL6_FSjXfo_2IqC4ORyp3jsT2CF9x3RXR-SvtRYM0nXpVb4Sc1hvpJZTl8Kdus_NwsUkLfwxl4agH6HUDWlZls4-GfHzZ_g4w8LoADGIR-A0YUWoGf7_bzknQAmG4_0OgYp1acwp7CiNZVOjEJLdjZUNADpZQ1N7J1FTH0h1X9PRdZIZu1q33Vi_iM4KvvzmKe7CHbp9aNphl1XQ7cagqVD08yeYBqgV3EWXrMr13zjH4T_DyYSg"/>
+<div class="absolute top-4 left-4">
+<div class="w-6 h-6 rounded bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center"></div>
+</div>
+</div>
+<!-- Media Card 10 -->
+<div class="group relative overflow-hidden rounded-lg bg-surface-container-highest aspect-square cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Silhouettes of devotees walking towards the temple at sunrise with a misty atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE7Hssiv-mAn0sWDTauu75kGiye1IDrsa44TI02iW1vRfFvYnkfbasUSzJLJF2jpvAzo2VKXAYWVNKt1ymrG1PEpQFUWqTUrAbfemvX1tdsl34rv1cmK4tEB1gFO16mlpRRJnpZ15G-W319tjhfwjg_xgTd89DM5TALukje-7jTDhJtLlIadlGMmBJeAreK6IrLA74zysRm_pB7_AyVujsn4cxHwL5PbZD-WnQ7lv-wJh8Z3COg7fqttdMn2VSnvEj700Fe1FR4No"/>
+<div class="absolute top-4 left-4">
+<div class="w-6 h-6 rounded bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Pagination -->
+<footer class="px-8 py-6 border-t border-outline-variant/15 flex items-center justify-between bg-surface-container-low">
+<span class="text-xs font-label uppercase tracking-widest text-outline">Showing 10 of 124 assets</span>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded flex items-center justify-center text-on-surface hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded flex items-center justify-center bg-primary text-on-primary font-bold text-sm">1</button>
+<button class="w-10 h-10 rounded flex items-center justify-center text-on-surface hover:bg-surface-container-highest transition-colors font-medium text-sm">2</button>
+<button class="w-10 h-10 rounded flex items-center justify-center text-on-surface hover:bg-surface-container-highest transition-colors font-medium text-sm">3</button>
+<span class="px-2 text-outline">...</span>
+<button class="w-10 h-10 rounded flex items-center justify-center text-on-surface hover:bg-surface-container-highest transition-colors font-medium text-sm">12</button>
+<button class="w-10 h-10 rounded flex items-center justify-center text-on-surface hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</footer>
+</main>
+<!-- Contextual FAB (Only visible when no items selected in real scenario, but kept for UI completeness) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-secondary text-on-primary rounded shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform md:hidden">
+<span class="material-symbols-outlined">add</span>
+</button>
+</body></html>

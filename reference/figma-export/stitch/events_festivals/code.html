@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Events - AnkammaThalli Temple</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-on-surface": "#f8f0e1",
+              "on-tertiary": "#ffffff",
+              "background": "#fff8ef",
+              "tertiary-container": "#e3a46e",
+              "surface-bright": "#fff8ef",
+              "outline": "#887364",
+              "primary": "#a04100",
+              "surface-container": "#f5edde",
+              "on-secondary-fixed": "#241a00",
+              "surface": "#fff8ef",
+              "inverse-primary": "#ffb693",
+              "on-primary-container": "#762e00",
+              "secondary-fixed": "#ffe088",
+              "inverse-surface": "#343026",
+              "surface-container-low": "#fbf3e4",
+              "surface-container-highest": "#e9e2d3",
+              "secondary": "#735c00",
+              "on-tertiary-container": "#65390b",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#efe7d9",
+              "on-background": "#1e1b13",
+              "tertiary-fixed": "#ffdcc1",
+              "on-primary-fixed": "#351000",
+              "on-surface-variant": "#554336",
+              "secondary-fixed-dim": "#e9c349",
+              "on-surface": "#1e1b13",
+              "surface-tint": "#a04100",
+              "tertiary-fixed-dim": "#fbb980",
+              "on-tertiary-fixed": "#2e1500",
+              "on-primary": "#ffffff",
+              "secondary-container": "#fed65b",
+              "on-secondary-container": "#745c00",
+              "error": "#ba1a1a",
+              "on-secondary": "#ffffff",
+              "primary-container": "#ff9762",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed-variant": "#574500",
+              "primary-fixed": "#ffdbcc",
+              "on-tertiary-fixed-variant": "#693c0e",
+              "surface-dim": "#e1d9cb",
+              "outline-variant": "#dbc2b0",
+              "on-error-container": "#93000a",
+              "tertiary": "#855324",
+              "primary-fixed-dim": "#ffb693",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#7a3000",
+              "surface-variant": "#e9e2d3"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .frosted-veil {
+        backdrop-filter: blur(20px);
+      }
+      .spiritual-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #ffe088, transparent);
+      }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fff8ef]/80 backdrop-blur-md shadow-sm shadow-orange-900/5 transition-all duration-300">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<a class="text-xl font-bold text-[#1e1b13] font-['Noto_Serif']" href="#">AnkammaThalli Temple</a>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] hover:text-[#a04100] transition-colors duration-300" href="#">Home</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] hover:text-[#a04100] transition-colors duration-300" href="#">About</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] hover:text-[#a04100] transition-colors duration-300" href="#">Gallery</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#a04100] relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-[#a04100] after:rounded-full" href="#">Events</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] hover:text-[#a04100] transition-colors duration-300" href="#">Donations</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] hover:text-[#a04100] transition-colors duration-300" href="#">Contact</a>
+<a class="font-['Noto_Serif'] font-medium uppercase tracking-[0.05em] text-[0.75rem] text-[#1e1b13] hover:text-[#a04100] transition-colors duration-300" href="#">Blog</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 text-[0.75rem] uppercase tracking-widest font-semibold rounded-[0.125rem] scale-95 active:scale-90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
+                Donate Now
+            </button>
+</div>
+</nav>
+<!-- Hero Header -->
+<header class="pt-32 pb-16 px-8 max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div class="max-w-2xl">
+<p class="font-label text-xs uppercase tracking-[0.2em] text-primary font-bold mb-4">Temple Calendar</p>
+<h1 class="font-headline text-5xl md:text-6xl text-on-surface leading-tight -tracking-[0.02em]">Festivals &amp; Sacred Gatherings</h1>
+</div>
+<div class="md:text-right">
+<p class="text-on-surface-variant max-w-sm ml-auto">Join us in celebrating our rich heritage through spiritual rituals, community feasts, and traditional music.</p>
+</div>
+</div>
+<div class="spiritual-divider mt-12 opacity-30"></div>
+</header>
+<!-- Ongoing Events (Vertical Layout) -->
+<section class="px-8 pb-20 max-w-7xl mx-auto">
+<div class="flex items-center gap-4 mb-12">
+<h2 class="font-headline text-2xl text-on-surface">Ongoing Events</h2>
+<span class="flex-grow h-[1px] bg-outline-variant/15"></span>
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="font-label text-[0.65rem] uppercase tracking-wider text-on-surface-variant">Live Now</span>
+</div>
+<div class="space-y-12">
+<!-- Ongoing Card 1 -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-surface-container-low group overflow-hidden">
+<div class="lg:col-span-7 relative h-[400px] overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close up of traditional Hindu rituals with burning camphor, incense, and marigold flowers in a dimly lit temple setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf1_PukkjCihfCsjzG7HgGNbxS-Z5GIWn2akz-Yu5-jZXWgTz0Wky0jIX4NNj4euE6eika7-GJsMhIOkqA3SMzrq8GgNdR5aieBsiRZBJJQY5ZeEmxS76SRpLThTESwFLbdbulv2321wsLPgouMHLdfTNOfRgWkQVE5LMb9vW_UpSqMcWxP5I9s40ufNhdsC32o8Zk6Zs1mNQ-jvfEGR5J-sZ07sUMLNS1bO9yUeYnISuPk71N6_HKPrlGEEf6KlyAW0bfPU7tQac"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/40 to-transparent"></div>
+</div>
+<div class="lg:col-span-5 p-8 md:p-12 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-6">
+<span class="bg-primary px-3 py-1 text-[0.65rem] font-bold text-on-primary tracking-widest uppercase">Ongoing</span>
+<span class="text-on-surface-variant font-label text-xs">Mar 15 - Mar 25</span>
+</div>
+<h3 class="font-headline text-3xl mb-4 group-hover:text-primary transition-colors">Annual Brahmotsavam Celebrations</h3>
+<p class="text-on-surface-variant leading-relaxed mb-8">Experience the divine aura as we celebrate the 10-day grand festival with daily chariot processions, special pujas, and spiritual discourses led by Vedic scholars.</p>
+<div class="mt-auto">
+<button class="inline-flex items-center gap-2 font-label text-xs uppercase tracking-widest font-bold text-primary group-hover:translate-x-2 transition-transform">
+                            View Daily Schedule
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Ongoing Card 2 -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-surface-container-low group overflow-hidden">
+<div class="lg:col-span-7 lg:order-2 relative h-[400px] overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Interior of a stone temple with golden oil lamps illuminating carved pillars and devotees sitting in quiet meditation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBch2Cg7lDDCAd9jsebakUpcgbzTzQAmBym0kTgSoPZe1lbduFGFkoJZbe3Y5blbI7oH4vcB-tBinM2gZtatg7ZEdsi1d7O7_I_fjo9UIYdurn4wyd6r7R2O_175PBSPNB9WPItX79gCjfb_TM6AAxV6_SgEsrQhKkSJxpZQHP3hi-lWbdhpE4_r57aC4MSS7tX0niZAoCLU3TRUP-UYQ7UOKO7lA8HJVFkx_PQRUBxfjzLhlEXDRiG30hkHb-VCuLzdLG8lqRklKw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/40 to-transparent"></div>
+</div>
+<div class="lg:col-span-5 lg:order-1 p-8 md:p-12 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-6">
+<span class="bg-primary px-3 py-1 text-[0.65rem] font-bold text-on-primary tracking-widest uppercase">Ongoing</span>
+<span class="text-on-surface-variant font-label text-xs">Daily 6:00 PM</span>
+</div>
+<h3 class="font-headline text-3xl mb-4 group-hover:text-primary transition-colors">Sandhya Arathi &amp; Bhajan Mandali</h3>
+<p class="text-on-surface-variant leading-relaxed mb-8">Join the evening congregation for the sacred Arathi followed by soul-stirring devotional singing. Open to all devotees seeking peace and collective prayer.</p>
+<div class="mt-auto">
+<button class="inline-flex items-center gap-2 font-label text-xs uppercase tracking-widest font-bold text-primary group-hover:translate-x-2 transition-transform">
+                            Join Online Stream
+                            <span class="material-symbols-outlined text-sm">live_tv</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Upcoming Events (3-Column Grid) -->
+<section class="bg-surface-container-low py-24 px-8">
+<div class="max-w-7xl mx-auto">
+<div class="flex items-center justify-between mb-16">
+<div>
+<h2 class="font-headline text-3xl text-on-surface mb-2">Upcoming Festivals</h2>
+<p class="text-on-surface-variant text-sm italic">Mark your calendar for these auspicious dates</p>
+</div>
+<a class="hidden md:block font-label text-[0.75rem] uppercase tracking-widest border-b border-primary text-primary pb-1 font-bold" href="#">View Full Calendar</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest group">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Outdoor festival scene with colorful powder in the air and people celebrating in traditional clothing under sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3_rJQ2CGfs_erIWvTBnBSao41oKx9p4MLaYKycyU0ZifWA0JyglC6O3Wzopbxnx_UDkh7h9RP9G6GL9u-RRYPltMEskdRifFLDdiQidi7P9xyePEV3Q_Q6ExNLFXbk-KbE4bBlm0xggThHarsqs6uTyDFVUwhQpoy9LD1v5X9MmS_Ps2f3h0Lb-ueUZrMIAXzFEdpvlQvrtLhKfLnc4nfXs8g9zNAXiEwxkNCC_UW74O65LkTqxfKfca5EawUmc26-_eIiQo6a2c"/>
+<div class="absolute top-4 left-4 bg-surface px-3 py-2 text-center shadow-lg">
+<span class="block font-headline text-xl text-primary font-bold">14</span>
+<span class="block font-label text-[0.6rem] uppercase tracking-tighter text-on-surface-variant">April</span>
+</div>
+</div>
+<div class="p-8">
+<h4 class="font-headline text-xl mb-3 group-hover:text-primary transition-colors">Vishu &amp; Spring Festival</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">A celebration of new beginnings. Join us for the Vishukkani darshan at dawn followed by a traditional feast.</p>
+<button class="w-full border border-outline-variant/30 py-3 text-[0.7rem] uppercase tracking-[0.15em] font-bold hover:bg-primary hover:text-on-primary hover:border-primary transition-all duration-300">
+                            Pre-register
+                        </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest group">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Beautifully decorated deity idol with silk fabrics and intricate jewelry, illuminated by warm golden lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkpRdUMsIlzBs-Tl6a1NPdB4wtIw4DTyhofYWr3ZbePPfMlCFvaaSN9qK1wu2E77IzrDbxvj_dYApbIFzcRAErq4-4AXsHU2HLwdreyl1SCoK2VlLqQpPAo4Zz03cs6JT4UuLUKp6EHvlkdWi5tLG6-onKHUo2k98HNt8JXwnDpLVJSHrwuVVbTTiXWTxL7KkbcpYivpnqEZLNdxwD0RCZ94eKR9LKKRBRSMvS1KdxtxbivrZrKwDJ44SCGTHbwtzK0NuAbnR62C4"/>
+<div class="absolute top-4 left-4 bg-surface px-3 py-2 text-center shadow-lg">
+<span class="block font-headline text-xl text-primary font-bold">01</span>
+<span class="block font-label text-[0.6rem] uppercase tracking-tighter text-on-surface-variant">May</span>
+</div>
+</div>
+<div class="p-8">
+<h4 class="font-headline text-xl mb-3 group-hover:text-primary transition-colors">Navaratri Mahotsavam</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Nine nights of sacred devotion honoring the divine feminine through chanting, music, and elaborate rituals.</p>
+<button class="w-full border border-outline-variant/30 py-3 text-[0.7rem] uppercase tracking-[0.15em] font-bold hover:bg-primary hover:text-on-primary hover:border-primary transition-all duration-300">
+                            Event Details
+                        </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest group">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Rows of terracotta oil lamps lit at dusk along the steps of a temple pond, reflecting in the water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXo2i491DdJHUbp8BZoT96ep-J19FnKGnTFR1jUKkzXEThcLlAQPhDB_oMVG_KgRUgQmGItwsb_4sBKmvNDAcT3BSKpZcvIzBxaBEWTpZ1JvQxr2Ra5y_EQaUms9zqdY-L45tcuCs3-D8NRCE-1Llcl5QofpILIYjUqJH--2OHt4pJRz-crfwpbPNd5V71-APIOiuGh3ytPvSXHez1D4itTr38O-aZ7LVul0jtJk-RHIvqDzzW_WBaHr1ZVKMGWdvc6eevh5lnHqE"/>
+<div class="absolute top-4 left-4 bg-surface px-3 py-2 text-center shadow-lg">
+<span class="block font-headline text-xl text-primary font-bold">22</span>
+<span class="block font-label text-[0.6rem] uppercase tracking-tighter text-on-surface-variant">May</span>
+</div>
+</div>
+<div class="p-8">
+<h4 class="font-headline text-xl mb-3 group-hover:text-primary transition-colors">Kartika Deepotsavam</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">The festival of lights. Witness the temple illuminated by thousands of traditional oil lamps after sunset.</p>
+<button class="w-full border border-outline-variant/30 py-3 text-[0.7rem] uppercase tracking-[0.15em] font-bold hover:bg-primary hover:text-on-primary hover:border-primary transition-all duration-300">
+                            Donate Lamps
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Donation CTA Section -->
+<section class="py-24 px-8 max-w-7xl mx-auto text-center">
+<div class="max-w-3xl mx-auto">
+<h2 class="font-headline text-4xl mb-6">Sponsor a Sacred Event</h2>
+<p class="text-on-surface-variant mb-10 leading-relaxed">Contribute to the conduct of these divine festivals and receive the blessings of Annadanam and Archana performed in your name.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-primary text-on-primary px-10 py-4 font-bold uppercase tracking-widest text-xs hover:shadow-xl hover:shadow-primary/30 transition-all">Sponsor Now</button>
+<button class="border border-primary text-primary px-10 py-4 font-bold uppercase tracking-widest text-xs hover:bg-primary/5 transition-all">Volunteer Registration</button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-[#fbf3e4] border-t border-[#dbc2b0]/15">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<span class="text-lg font-bold text-[#1e1b13] font-['Noto_Serif'] mb-4 block">AnkammaThalli Temple</span>
+<p class="font-['Manrope'] text-sm leading-relaxed text-[#1e1b13]/70">Preserving spiritual heritage and fostering community through sacred traditions and service since generations.</p>
+</div>
+<div>
+<h5 class="font-headline text-sm font-bold mb-6">Quick Links</h5>
+<ul class="space-y-4">
+<li><a class="font-['Manrope'] text-sm text-[#1e1b13]/70 hover:translate-x-1 hover:text-[#a04100] transition-all block" href="#">Annual Rituals</a></li>
+<li><a class="font-['Manrope'] text-sm text-[#1e1b13]/70 hover:translate-x-1 hover:text-[#a04100] transition-all block" href="#">Seva Booking</a></li>
+<li><a class="font-['Manrope'] text-sm text-[#1e1b13]/70 hover:translate-x-1 hover:text-[#a04100] transition-all block" href="#">Virtual Darshan</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-headline text-sm font-bold mb-6">Address &amp; Timings</h5>
+<ul class="space-y-4 font-['Manrope'] text-sm text-[#1e1b13]/70">
+<li>Temple Main Road, Srikalahasti<br/>Andhra Pradesh - 517644</li>
+<li>Morning: 6:00 AM - 12:30 PM</li>
+<li>Evening: 4:30 PM - 8:30 PM</li>
+</ul>
+</div>
+<div>
+<h5 class="font-headline text-sm font-bold mb-6">Connect</h5>
+<div class="flex gap-4 mb-6">
+<a class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">social_leaderboard</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">mail</span>
+</a>
+</div>
+<p class="text-[0.7rem] uppercase tracking-widest text-on-surface-variant font-bold">Sign up for Newsletter</p>
+</div>
+</div>
+<div class="px-8 py-8 max-w-7xl mx-auto border-t border-outline-variant/10 text-center">
+<p class="font-['Manrope'] text-xs text-[#1e1b13]/50">© 2024 AnkammaThalli Temple. All Rights Reserved. Built with Devotion.</p>
+</div>
+</footer>
+</body></html>

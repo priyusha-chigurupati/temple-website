@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Login | AnkammaThalli Temple</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary": "#735c00",
+              "on-primary-fixed": "#351000",
+              "on-tertiary-container": "#65390b",
+              "surface": "#fff8ef",
+              "on-surface-variant": "#554336",
+              "surface-container-high": "#efe7d9",
+              "inverse-on-surface": "#f8f0e1",
+              "on-secondary-fixed": "#241a00",
+              "surface-variant": "#e9e2d3",
+              "primary": "#a04100",
+              "on-background": "#1e1b13",
+              "on-secondary-fixed-variant": "#574500",
+              "tertiary": "#855324",
+              "error": "#ba1a1a",
+              "secondary-container": "#fed65b",
+              "on-error": "#ffffff",
+              "tertiary-container": "#e3a46e",
+              "surface-container": "#f5edde",
+              "surface-container-low": "#fbf3e4",
+              "on-surface": "#1e1b13",
+              "error-container": "#ffdad6",
+              "primary-container": "#ff9762",
+              "surface-container-highest": "#e9e2d3",
+              "on-tertiary-fixed": "#2e1500",
+              "inverse-surface": "#343026",
+              "inverse-primary": "#ffb693",
+              "tertiary-fixed": "#ffdcc1",
+              "on-primary-container": "#762e00",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#7a3000",
+              "surface-bright": "#fff8ef",
+              "surface-dim": "#e1d9cb",
+              "secondary-fixed-dim": "#e9c349",
+              "on-secondary-container": "#745c00",
+              "on-tertiary-fixed-variant": "#693c0e",
+              "surface-tint": "#a04100",
+              "outline-variant": "#dbc2b0",
+              "background": "#fff8ef",
+              "on-secondary": "#ffffff",
+              "primary-fixed": "#ffdbcc",
+              "on-tertiary": "#ffffff",
+              "on-error-container": "#93000a",
+              "primary-fixed-dim": "#ffb693",
+              "outline": "#887364",
+              "tertiary-fixed-dim": "#fbb980",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed": "#ffe088"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .sacred-gradient {
+            background: linear-gradient(135deg, #a04100 0%, #ff9762 100%);
+        }
+        body {
+            background-color: #fff8ef;
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container">
+<main class="flex-grow flex items-center justify-center px-6 py-12 relative overflow-hidden">
+<div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-secondary-fixed filter blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary-container filter blur-[120px]"></div>
+</div>
+<div class="w-full max-w-md z-10">
+<div class="text-center mb-10">
+<h1 class="font-headline text-3xl font-bold text-on-surface tracking-tight mb-2">AnkammaThalli Temple</h1>
+<p class="font-body text-on-surface-variant tracking-wide uppercase text-[0.7rem] font-semibold">Administrative Gateway</p>
+<div class="mt-4 flex justify-center">
+<div class="h-px w-12 bg-gradient-to-r from-transparent via-secondary-fixed to-transparent"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-10 shadow-sm border border-outline-variant/15 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 sacred-gradient"></div>
+<div class="mb-8">
+<h2 class="font-headline text-xl text-on-surface font-semibold mb-1">Secure Login</h2>
+<p class="text-on-surface-variant text-sm">Please enter your credentials to access the temple management system.</p>
+</div>
+<form action="#" class="space-y-6" method="POST">
+<div>
+<label class="block text-[0.75rem] font-bold uppercase tracking-wider text-on-surface-variant mb-2" for="username">Email or Username</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">person</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/30 px-10 py-3 text-on-surface focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all placeholder:text-outline/50" id="username" name="username" placeholder="e.g. admin_ankamma" required="" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-[0.75rem] font-bold uppercase tracking-wider text-on-surface-variant mb-2" for="password">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">lock</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/30 px-10 py-3 text-on-surface focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all placeholder:text-outline/50" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<div class="flex items-center justify-between text-sm">
+<label class="flex items-center space-x-2 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-on-surface transition-colors">Remember me</span>
+</label>
+<a class="text-primary font-medium hover:text-on-primary-fixed-variant transition-colors decoration-primary/30 underline-offset-4 hover:underline" href="#">Forgot Password?</a>
+</div>
+<button class="w-full sacred-gradient text-white font-bold py-4 uppercase tracking-[0.1em] text-sm shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/20 active:scale-[0.98] transition-all flex items-center justify-center space-x-2" type="submit">
+<span>Sign In to Dashboard</span>
+</button>
+</form>
+<div class="mt-10 pt-6 border-t border-outline-variant/10 flex items-center justify-center space-x-4 opacity-60">
+<span class="material-symbols-outlined text-[18px]">security</span>
+<span class="text-[0.65rem] uppercase tracking-widest font-bold text-on-surface-variant">Encrypted Session</span>
+</div>
+</div>
+<div class="mt-8 text-center">
+<a class="inline-flex items-center text-on-surface-variant hover:text-primary transition-colors text-sm group" href="#">
+<span class="material-symbols-outlined text-[18px] mr-2 transition-transform group-hover:-translate-x-1">arrow_back</span>
+                    Return to Main Website
+                </a>
+</div>
+</div>
+</main>
+<footer class="w-full border-t border-[#dbc2b0]/15 bg-[#fbf3e4] dark:bg-stone-950">
+<div class="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+<div class="text-center md:text-left">
+<span class="font-headline text-lg font-bold text-[#1e1b13] dark:text-stone-100">AnkammaThalli Temple</span>
+<p class="font-body text-sm text-[#1e1b13]/70 dark:text-stone-400 mt-1">© 2024 AnkammaThalli Temple. All Rights Reserved.</p>
+</div>
+<div class="flex space-x-6 text-[0.7rem] uppercase tracking-widest font-bold text-[#1e1b13]/70">
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Security</a>
+</div>
+</div>
+</footer>
+<div class="fixed inset-0 pointer-events-none z-[-1]">
+<img alt="Sacred geometric patterns and intricate carvings in temple stone" class="w-full h-full object-cover opacity-[0.03] grayscale" data-alt="Intricate traditional temple architecture carvings and stone textures in soft warm monochromatic lighting with high contrast details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBMrqhmhZtM3BBbwC4Ll-ezc56SD3HUeRyKOSThcc-sWYLb71pU2DPv2S3moBAemj-DwUlU4Huc3Pcm4DkJwO876HQAzRPQxUHfKDHkaHHGrP8N5Pjll4bE1cQMpEcm6upf6oKsGMSfWhCdnmXk1bfYklSTzVcaEu4k3KsCVEZboLOMec43oZW7Mka053DyuMqqJT-OOI5JdGBpEu647cquH2nyATcdhNXQ63PhK8HelbFX6xpIrmBBiMxegjNenI6c9BOx7687WI"/>
+</div>
+</body></html>

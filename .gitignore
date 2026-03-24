@@ -1,0 +1,7 @@
+/vendor/
+/storage/uploads/*
+!/storage/uploads/.gitignore
+/.idea/
+/.vscode/
+Thumbs.db
+Desktop.ini

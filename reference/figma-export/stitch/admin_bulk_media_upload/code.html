@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bulk Media Upload - The Sacred Modernist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface-variant": "#554336",
+                        "surface-dim": "#e1d9cb",
+                        "tertiary-container": "#e3a46e",
+                        "inverse-surface": "#343026",
+                        "background": "#fff8ef",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#fbb980",
+                        "secondary-container": "#fed65b",
+                        "on-tertiary-fixed": "#2e1500",
+                        "on-tertiary-container": "#65390b",
+                        "secondary-fixed-dim": "#e9c349",
+                        "secondary": "#735c00",
+                        "primary-fixed": "#ffdbcc",
+                        "surface-tint": "#a04100",
+                        "outline": "#887364",
+                        "secondary-fixed": "#ffe088",
+                        "tertiary": "#855324",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f5edde",
+                        "tertiary-fixed": "#ffdcc1",
+                        "primary-container": "#ff9762",
+                        "surface": "#fff8ef",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e9e2d3",
+                        "surface-container-low": "#fbf3e4",
+                        "primary-fixed-dim": "#ffb693",
+                        "surface-container-highest": "#e9e2d3",
+                        "on-primary-fixed": "#351000",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#693c0e",
+                        "on-secondary-fixed": "#241a00",
+                        "outline-variant": "#dbc2b0",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "on-secondary-container": "#745c00",
+                        "on-background": "#1e1b13",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#762e00",
+                        "primary": "#a04100",
+                        "surface-bright": "#fff8ef",
+                        "inverse-primary": "#ffb693",
+                        "on-surface": "#1e1b13",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "inverse-on-surface": "#f8f0e1",
+                        "surface-container-high": "#efe7d9"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(255, 248, 239, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .spiritual-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ffe088, transparent);
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface antialiased">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-orange-100/10 dark:border-stone-800/10 bg-orange-50 dark:bg-stone-950 flex flex-col py-6 px-4 z-50">
+<div class="mb-10 px-2">
+<h1 class="font-noto-serif text-xl font-bold text-orange-900 dark:text-orange-100">Temple Admin</h1>
+<p class="font-manrope text-[10px] uppercase tracking-widest text-orange-800/60 dark:text-orange-500/60">Sacred Sanctuary CMS</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-manrope text-sm font-medium tracking-wide">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-manrope text-sm font-medium tracking-wide">Pages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-manrope text-sm font-medium tracking-wide">Events</span>
+</a>
+<!-- Active Tab: Media -->
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-stone-800 text-orange-800 dark:text-orange-400 rounded-sm shadow-sm font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-manrope text-sm font-medium tracking-wide">Media</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-100/50 dark:hover:bg-stone-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-manrope text-sm font-medium tracking-wide">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-orange-100/20">
+<button class="w-full bg-primary text-white py-3 rounded-sm font-bold text-sm tracking-wide active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Entry
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 w-full z-40 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md border-b border-orange-100/20 dark:border-stone-800/20 shadow-sm shadow-orange-900/5">
+<div class="flex justify-between items-center h-16 px-8">
+<div class="flex items-center gap-6">
+<span class="font-noto-serif text-lg font-semibold text-stone-900 dark:text-stone-100">The Sacred Modernist</span>
+<div class="hidden lg:flex items-center bg-surface-container-low px-4 py-1.5 rounded-full border border-outline-variant/15">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-body w-48 placeholder:text-outline/60" placeholder="Search gallery..." type="text"/>
+</div>
+</div>
+<nav class="flex items-center gap-8">
+<a class="font-manrope text-xs uppercase tracking-widest text-stone-500 hover:text-orange-800 transition-all" href="#">Analytics</a>
+<a class="font-manrope text-xs uppercase tracking-widest text-stone-500 hover:text-orange-800 transition-all" href="#">Log</a>
+<a class="font-manrope text-xs uppercase tracking-widest text-stone-500 hover:text-orange-800 transition-all" href="#">Support</a>
+<div class="flex items-center gap-4 ml-4 border-l border-orange-100/30 pl-6">
+<button class="material-symbols-outlined text-orange-800" data-icon="notifications">notifications</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="Admin Profile" data-alt="professional portrait of temple administrator in formal attire with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcnhOidq7d7dRvyEQAJofZtLaGFvggD5de_Y2LcySK0B_k4ElzXJYKvN_84PiO4TxgdXfwHfwwr3pCLRxHjNkLPD5u6QnlxhWUC7-huen9sCsudbHac2Jb36gXB63KWeElaH88bKdJjUn9geo8LWQ5CAXQZ0a2b-7IocNT0JyXuv2hpdsDvCaaCe4Nc9bezwNPz634-sObin0KBOpyij3cCDxb1PVjuZzGh8_T24w-LI3qV8IFWqyp4xoKqqSLTguu3A5NT5y4P0Q"/>
+</div>
+</div>
+</nav>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-12 max-w-7xl mx-auto">
+<header class="mb-12">
+<h2 class="font-headline text-3xl font-bold text-on-surface mb-2 tracking-tight">Bulk Media Upload</h2>
+<p class="font-body text-on-surface-variant max-w-2xl">Expand the Digital Sanctum gallery. Ensure each visual relic is properly categorized and described to preserve its spiritual context.</p>
+<div class="spiritual-divider mt-8"></div>
+</header>
+<!-- Upload Zone -->
+<section class="mb-16">
+<div class="group relative flex flex-col items-center justify-center p-16 border-2 border-dashed border-outline-variant/30 bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer">
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-6xl text-primary mb-4" data-icon="cloud_upload">cloud_upload</span>
+<h3 class="font-headline text-xl font-semibold mb-2">Drag and drop images here</h3>
+<p class="font-body text-on-surface-variant text-sm mb-6">High-resolution PNG or JPG. Max 50MB per file.</p>
+<button class="bg-on-surface text-surface py-2 px-8 font-label text-xs uppercase tracking-widest font-bold active:scale-95 transition-transform">
+                        Select Files From Device
+                    </button>
+</div>
+</section>
+<!-- Files List & Metadata -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline text-2xl">Queue (4)</h3>
+<div class="flex gap-4">
+<button class="text-error font-label text-xs uppercase tracking-widest font-bold hover:underline">Clear All</button>
+<button class="bg-primary text-white py-2 px-10 font-label text-xs uppercase tracking-widest font-bold shadow-sm shadow-primary/20">Finalize Upload</button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-8">
+<!-- Media Entry 1 -->
+<div class="bg-surface-container-lowest p-6 flex flex-col lg:flex-row gap-8 items-start relative overflow-hidden group">
+<div class="w-full lg:w-72 h-48 flex-shrink-0 bg-surface-container-highest overflow-hidden">
+<img alt="Temple Carving" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="close-up of intricate stone carvings on a traditional Indian temple wall during golden hour" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD02C5E7EETxhksP2uera_J-nNxu3N3WDplwkKF8y4DF0GvD5xEzUgXeL62T7OACQ3JvI4ljgANMmdLXlnEih2sw_uHG8sjrIjH6gGOLqrnm_Z4p4cBqRc6FoijJ9XqpAe1kuJ7UQhfEtYoRZseM0-dqSNUlED7ZZs9X3xnTvRXngKLlhDRf1NzSe7TC9Ut3LG0DjQHbW5S9Oinwa6K2_JwNgOdd0OSNYXVTBtl7zcVO00gXLfUhoRo64AQ9q92Kuavx3btw6Vtzqs"/>
+</div>
+<div class="flex-1 w-full space-y-6">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-body font-bold text-lg mb-1">Morning_Aarti_Sanctum_01.jpg</h4>
+<p class="font-label text-[10px] uppercase text-outline tracking-widest">4.2 MB • Processing...</p>
+</div>
+<button class="material-symbols-outlined text-outline hover:text-error" data-icon="close">close</button>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container rounded-full h-1 overflow-hidden">
+<div class="bg-primary h-full w-[85%] transition-all duration-500"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1.5">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Alt Text</label>
+<input class="w-full bg-transparent border border-outline-variant/15 p-2 text-sm focus:ring-secondary focus:border-secondary" type="text" value="Priest performing morning ritual with oil lamps"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Category</label>
+<select class="w-full bg-transparent border border-outline-variant/15 p-2 text-sm focus:ring-secondary focus:border-secondary">
+<option>Festivals</option>
+<option selected="">Deities</option>
+<option>Architecture</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<!-- Media Entry 2 -->
+<div class="bg-surface-container-lowest p-6 flex flex-col lg:flex-row gap-8 items-start relative overflow-hidden group opacity-80">
+<div class="w-full lg:w-72 h-48 flex-shrink-0 bg-surface-container-highest overflow-hidden">
+<img alt="Temple Tower" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="architectural low angle shot of a majestic temple tower gopuram against a clear blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPMFaDj2flDnYUDUAIxCslyXCkKyjIvcG8y-1ragMkPR-hkI0DGWGrUh2PilLMVq6BoLSu3FReiBy0_GUM1NGV679pkzF8qM3LPYvIPGQfqjHV_542pBlBWAN5miucH9t-kXAaIMzBjVuH9DszkVEEkVVvnli_C_5f_42MvH4GPn8QhNmYq8wYyomUzWYILgg1IuVGyw_53gTK2_02u80TKi-A6hg-Tc5jiZhv1-OOWVXRZEs3IHcbvrasRmI2GawYWDkTeDtdAGk"/>
+</div>
+<div class="flex-1 w-full space-y-6">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-body font-bold text-lg mb-1">Tower_Gopuram_Sunset.jpg</h4>
+<p class="font-label text-[10px] uppercase text-outline tracking-widest">8.7 MB • Pending</p>
+</div>
+<button class="material-symbols-outlined text-outline hover:text-error" data-icon="close">close</button>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1 overflow-hidden">
+<div class="bg-primary h-full w-0 transition-all"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1.5">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Alt Text</label>
+<input class="w-full bg-transparent border border-outline-variant/15 p-2 text-sm focus:ring-secondary focus:border-secondary" placeholder="Describe the image..." type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Category</label>
+<select class="w-full bg-transparent border border-outline-variant/15 p-2 text-sm focus:ring-secondary focus:border-secondary">
+<option>Festivals</option>
+<option>Deities</option>
+<option selected="">Architecture</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<!-- Media Entry 3 -->
+<div class="bg-surface-container-lowest p-6 flex flex-col lg:flex-row gap-8 items-start relative overflow-hidden group">
+<div class="w-full lg:w-72 h-48 flex-shrink-0 bg-surface-container-highest overflow-hidden">
+<img alt="Festival" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="vibrant street festival with colorful traditional flags and people celebrating in the evening light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvbzmk9T9VYtt7r3M-RcbGryCS9uEfXZDfds4JdwRgrAmrjfl-1rCCztDMSZEWnvxq2X590UfprjV_sYB0y8eI1reqJu3wre3m05I8YvuqsQLyBPMnPIZO4ROdrA3uKSYVXmNLgS_LBz6WUJAOIn68uFKrVuGiaeNQcbics-N7UsV3flrDMAIwyXV4vRqjKmMXYLXrEjkPaSh-J87oel8i_CXHM92Y0lc2mgdw8z9ToNs-9nq9KlPMup0bCvhXysUmXp4-f8NSIcg"/>
+</div>
+<div class="flex-1 w-full space-y-6">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-body font-bold text-lg mb-1">Diwali_Celebration_Square.jpg</h4>
+<p class="font-label text-[10px] uppercase text-primary tracking-widest font-bold">Upload Complete</p>
+</div>
+<button class="material-symbols-outlined text-outline hover:text-error" data-icon="close">close</button>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1 overflow-hidden">
+<div class="bg-secondary h-full w-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1.5">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Alt Text</label>
+<input class="w-full bg-transparent border border-outline-variant/15 p-2 text-sm focus:ring-secondary focus:border-secondary" type="text" value="Crowds gathering under lights for evening festival"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Category</label>
+<select class="w-full bg-transparent border border-outline-variant/15 p-2 text-sm focus:ring-secondary focus:border-secondary">
+<option selected="">Festivals</option>
+<option>Deities</option>
+<option>Architecture</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Decoration -->
+<footer class="mt-20 py-12 px-12 border-t border-orange-100/10 text-center">
+<div class="spiritual-divider mb-8"></div>
+<p class="font-label text-[10px] uppercase tracking-widest text-outline">The Sacred Modernist Admin Ecosystem © 2024</p>
+</footer>
+</main>
+</body></html>

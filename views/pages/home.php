@@ -1,0 +1,135 @@
+<?php
+declare(strict_types=1);
+?>
+<?php $hero = $page['hero']; ?>
+<?php $about = $page['about_section']; ?>
+<?php $events = $page['events_section']; ?>
+<?php $gallery = $page['gallery_section']; ?>
+<?php $donation = $page['donation_section']; ?>
+
+<section class="hero">
+    <div class="hero__backdrop">
+        <img src="<?= e(asset($hero['background_image'])) ?>" alt="" role="presentation">
+    </div>
+    <div class="container hero__grid">
+        <div class="hero__copy">
+            <p class="eyebrow"><?= e($hero['eyebrow']) ?></p>
+            <h1 class="hero__title">
+                <?= e($hero['title_prefix']) ?>
+                <span><?= e($hero['title_highlight']) ?></span>
+                <?= e($hero['title_suffix']) ?>
+            </h1>
+            <p class="hero__description"><?= e($hero['description']) ?></p>
+            <div class="hero__actions">
+                <a class="button button--gradient" href="<?= e(route_url($hero['primary_cta']['href'])) ?>"><?= e($hero['primary_cta']['label']) ?></a>
+                <a class="button button--ghost" href="<?= e(route_url($hero['secondary_cta']['href'])) ?>"><?= e($hero['secondary_cta']['label']) ?></a>
+            </div>
+        </div>
+        <div class="hero__visual">
+            <div class="hero__frame">
+                <img src="<?= e(asset($hero['feature_image'])) ?>" alt="Decorative temple-themed placeholder artwork for the featured Home page panel">
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="spiritual-divider"></div>
+</div>
+
+<section class="section section--about">
+    <div class="container section-grid">
+        <div class="about-media">
+            <div class="about-media__panel">
+                <img src="<?= e(asset($about['image'])) ?>" alt="Temple architecture placeholder artwork used while final media is pending">
+            </div>
+        </div>
+        <div class="about-copy">
+            <h2 class="section-title"><?= e($about['title']) ?></h2>
+            <?php foreach ($about['description'] as $paragraph): ?>
+                <p><?= e($paragraph) ?></p>
+            <?php endforeach; ?>
+            <a class="text-link" href="<?= e(route_url($about['cta']['href'])) ?>"><?= e($about['cta']['label']) ?></a>
+        </div>
+    </div>
+</section>
+
+<section class="section section--events">
+    <div class="container">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow"><?= e($events['eyebrow']) ?></p>
+                <h2 class="section-title"><?= e($events['title']) ?></h2>
+            </div>
+            <a class="section-link" href="<?= e(route_url($events['cta']['href'])) ?>"><?= e($events['cta']['label']) ?></a>
+        </div>
+        <div class="card-grid card-grid--events">
+            <?php foreach ($events['items'] as $item): ?>
+                <article class="card card--event">
+                    <div class="card__media">
+                        <img src="<?= e(asset($item['image'])) ?>" alt="<?= e($item['title']) ?> placeholder artwork">
+                    </div>
+                    <div class="card__body">
+                        <p class="card__meta"><?= e($item['date']) ?></p>
+                        <h3 class="card__title"><?= e($item['title']) ?></h3>
+                        <p class="card__text"><?= e($item['description']) ?></p>
+                        <a class="text-link" href="<?= e(route_url($item['href'])) ?>">Event Details</a>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<section class="section section--gallery">
+    <div class="container">
+        <div class="section-heading section-heading--center">
+            <div>
+                <h2 class="section-title"><?= e($gallery['title']) ?></h2>
+            </div>
+        </div>
+        <div class="masonry-grid">
+            <?php foreach ($gallery['items'] as $index => $item): ?>
+                <figure class="masonry-tile<?= $index === 0 ? ' masonry-tile--featured' : '' ?>">
+                    <img src="<?= e(asset($item['image'])) ?>" alt="<?= e($item['label']) ?> placeholder artwork">
+                    <?php if ($index === 0): ?>
+                        <figcaption><?= e($item['label']) ?></figcaption>
+                    <?php endif; ?>
+                </figure>
+            <?php endforeach; ?>
+        </div>
+        <div class="section-action">
+            <a class="button button--surface" href="<?= e(route_url($gallery['cta']['href'])) ?>"><?= e($gallery['cta']['label']) ?></a>
+        </div>
+    </div>
+</section>
+
+<section class="section section--donation">
+    <div class="container donation-grid">
+        <div class="donation-copy">
+            <h2 class="section-title section-title--light"><?= e($donation['title']) ?></h2>
+            <p class="donation-copy__text"><?= e($donation['description']) ?></p>
+            <div class="donation-card-row">
+                <?php foreach ($donation['cards'] as $item): ?>
+                    <article class="donation-card">
+                        <h3><?= e($item['title']) ?></h3>
+                        <p><?= e($item['description']) ?></p>
+                        <a class="button button--outline" href="<?= e(route_url('/donations')) ?>"><?= e($item['button']) ?></a>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <aside class="quick-panel" aria-label="Quick contribution">
+            <h2>Quick Contribution</h2>
+            <div class="quick-panel__items">
+                <?php foreach ($donation['quick_options'] as $item): ?>
+                    <div class="quick-option">
+                        <span><?= e($item['label']) ?></span>
+                        <strong><?= e($item['amount']) ?></strong>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <a class="button button--primary button--full" href="<?= e(route_url($donation['cta']['href'])) ?>"><?= e($donation['cta']['label']) ?></a>
+        </aside>
+    </div>
+</section>

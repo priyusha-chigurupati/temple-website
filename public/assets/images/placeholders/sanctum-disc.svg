@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1125" role="img" aria-labelledby="title desc">
+  <title>Sanctum placeholder</title>
+  <desc>Circular warm mandala placeholder artwork.</desc>
+  <defs>
+    <radialGradient id="disc" cx="50%" cy="38%" r="60%">
+      <stop offset="0%" stop-color="#ffe9bb"/>
+      <stop offset="35%" stop-color="#d08f3f"/>
+      <stop offset="70%" stop-color="#704116"/>
+      <stop offset="100%" stop-color="#111"/>
+    </radialGradient>
+  </defs>
+  <rect width="900" height="1125" fill="#0f0d0b"/>
+  <circle cx="450" cy="520" r="270" fill="url(#disc)"/>
+  <circle cx="450" cy="520" r="215" fill="none" stroke="#f0c67f" stroke-opacity=".55" stroke-width="8"/>
+  <circle cx="450" cy="520" r="170" fill="none" stroke="#f5d8a3" stroke-opacity=".5" stroke-width="7"/>
+  <circle cx="450" cy="520" r="105" fill="none" stroke="#fff8ef" stroke-opacity=".65" stroke-width="7"/>
+  <path d="M450 360c35 40 51 75 51 111 0 42-23 73-51 73s-51-31-51-73c0-36 16-71 51-111Z" fill="#f7e5b2"/>
+  <path d="M450 544v190" stroke="#f7e5b2" stroke-width="8" stroke-linecap="round"/>
+  <path d="M390 434v300M420 398v336M480 398v336M510 434v300" stroke="#d6c08a" stroke-opacity=".85" stroke-width="6" stroke-linecap="round"/>
+</svg>

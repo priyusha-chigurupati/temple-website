@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Settings | AnkammaThalli Temple</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#ffdbcc",
+              "on-tertiary-fixed-variant": "#693c0e",
+              "on-secondary-fixed-variant": "#574500",
+              "outline-variant": "#dbc2b0",
+              "on-error-container": "#93000a",
+              "surface-dim": "#e1d9cb",
+              "tertiary": "#855324",
+              "primary-fixed-dim": "#ffb693",
+              "on-error": "#ffffff",
+              "surface-variant": "#e9e2d3",
+              "on-primary-fixed-variant": "#7a3000",
+              "tertiary-fixed-dim": "#fbb980",
+              "on-tertiary-fixed": "#2e1500",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#745c00",
+              "secondary-container": "#fed65b",
+              "error": "#ba1a1a",
+              "primary-container": "#ff9762",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-container-low": "#fbf3e4",
+              "surface-container-highest": "#e9e2d3",
+              "inverse-surface": "#343026",
+              "surface-container-high": "#efe7d9",
+              "secondary": "#735c00",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#65390b",
+              "tertiary-fixed": "#ffdcc1",
+              "on-primary-fixed": "#351000",
+              "on-background": "#1e1b13",
+              "on-surface-variant": "#554336",
+              "surface-tint": "#a04100",
+              "secondary-fixed-dim": "#e9c349",
+              "on-surface": "#1e1b13",
+              "tertiary-container": "#e3a46e",
+              "surface-bright": "#fff8ef",
+              "inverse-on-surface": "#f8f0e1",
+              "on-tertiary": "#ffffff",
+              "background": "#fff8ef",
+              "surface-container": "#f5edde",
+              "surface": "#fff8ef",
+              "primary": "#a04100",
+              "on-secondary-fixed": "#241a00",
+              "outline": "#887364",
+              "secondary-fixed": "#ffe088",
+              "inverse-primary": "#ffb693",
+              "on-primary-container": "#762e00"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex">
+<!-- Sidebar Navigation -->
+<aside class="w-72 bg-surface-container-low min-h-screen sticky top-0 flex flex-col p-8 border-r border-outline-variant/15">
+<div class="mb-12">
+<span class="text-xl font-bold text-on-background font-headline block tracking-tight">AnkammaThalli</span>
+<span class="text-[0.65rem] uppercase tracking-[0.2em] text-primary font-bold">Admin Portal</span>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-outline" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-outline" data-icon="event">event</span>
+<span class="font-medium text-sm">Events</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-outline" data-icon="payments">payments</span>
+<span class="font-medium text-sm">Donations</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-outline" data-icon="photo_library">photo_library</span>
+<span class="font-medium text-sm">Gallery</span>
+</a>
+<div class="pt-6 pb-2 px-4">
+<span class="text-[0.65rem] uppercase tracking-widest text-outline font-bold">System</span>
+</div>
+<a class="flex items-center gap-4 px-4 py-3 bg-primary-fixed text-on-primary-fixed-variant rounded-sm transition-all shadow-sm shadow-primary/10" href="#">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-semibold text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-outline" data-icon="group">group</span>
+<span class="font-medium text-sm">User Management</span>
+</a>
+</nav>
+<div class="mt-auto pt-8 border-t border-outline-variant/15">
+<div class="flex items-center gap-3 px-4">
+<div class="w-10 h-10 rounded-sm bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of a professional male administrator in a clean office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbdphIScrKcIY77nwyM9UWji1OWnnSmaBzgVz55E982lXhhylYK8p-JTuSVN2HaVocKg8cRsqDmnb0QV4l6Jozlmbn06LHqUM9VHjkL3GbGDgp1tg2LAgfjUKOxMKrDVRylIRManOUaatmV03nsMRcfZtGyyTjBN35kUct3GeApi__dUR3_DQMDJJMT65XHmYZaBgqsaLGdWXcSV4QVJGEmYaafyv49JQSJziT8CHTN7ZUXLoaVIW4mPuFiJu-uqhSCuHXXyt_jT0"/>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface leading-none">Temple Admin</p>
+<p class="text-[0.7rem] text-on-surface-variant mt-1">Super User</p>
+</div>
+</div>
+<button class="w-full mt-6 flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-widest text-error hover:bg-error-container/20 transition-colors rounded-sm">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+                Logout
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 max-w-5xl mx-auto px-12 py-16">
+<header class="mb-16">
+<h1 class="text-4xl font-bold text-on-surface mb-2 tracking-tight">Settings</h1>
+<p class="text-on-surface-variant font-body">Manage your temple's digital sanctuary and administrative preferences.</p>
+</header>
+<div class="grid grid-cols-1 gap-20">
+<!-- Account Settings Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<div class="lg:col-span-1">
+<h2 class="text-xl font-bold text-on-surface mb-3">Account Security</h2>
+<p class="text-sm text-on-surface-variant leading-relaxed">Update your login credentials and maintain your personal administrative profile.</p>
+</div>
+<div class="lg:col-span-2 space-y-8 bg-surface-container-lowest p-8 shadow-sm shadow-primary/5 rounded-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-outline">Administrator Email</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-secondary/30 rounded-sm py-3 px-4 text-sm font-medium" type="email" value="admin@ankammathalli.org"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-outline">Current Password</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-secondary/30 rounded-sm py-3 px-4 text-sm" placeholder="••••••••••••" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-outline">New Password</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-secondary/30 rounded-sm py-3 px-4 text-sm" placeholder="Min. 12 characters" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-outline">Confirm New Password</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-secondary/30 rounded-sm py-3 px-4 text-sm" placeholder="Confirm selection" type="password"/>
+</div>
+</div>
+<div class="pt-4 flex justify-end">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg shadow-primary/20">Update Security</button>
+</div>
+</div>
+</section>
+<!-- General Site Settings Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<div class="lg:col-span-1">
+<h2 class="text-xl font-bold text-on-surface mb-3">Temple Identity</h2>
+<p class="text-sm text-on-surface-variant leading-relaxed">Configure the public-facing details of the temple including physical location and SEO metadata.</p>
+</div>
+<div class="lg:col-span-2 space-y-8 bg-surface-container-lowest p-8 shadow-sm shadow-primary/5 rounded-sm">
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-outline">Temple Official Name</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-secondary/30 rounded-sm py-3 px-4 text-sm font-medium" type="text" value="AnkammaThalli Temple"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-outline">Physical Address</label>
+<textarea class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-secondary/30 rounded-sm py-3 px-4 text-sm font-medium resize-none" rows="3">Main Street, Sacred Square, Coastal Andhra, 524001, India</textarea>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-outline">SEO Meta Title</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-secondary/30 rounded-sm py-3 px-4 text-sm" type="text" value="AnkammaThalli Temple - Spiritual Sanctuary &amp; Heritage"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-outline">Search Keywords</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-secondary/30 rounded-sm py-3 px-4 text-sm" type="text" value="spirituality, temple, Andhra heritage, AnkammaThalli"/>
+</div>
+</div>
+</div>
+<div class="pt-4 flex justify-end">
+<button class="bg-on-surface text-surface px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-on-surface/90 transition-all">Save Global Settings</button>
+</div>
+</div>
+</section>
+<!-- Social Media Configuration Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<div class="lg:col-span-1">
+<h2 class="text-xl font-bold text-on-surface mb-3">Social Connectivity</h2>
+<p class="text-sm text-on-surface-variant leading-relaxed">Connect the temple's official social media profiles to synchronize with the public website's footer and links.</p>
+</div>
+<div class="lg:col-span-2 space-y-8 bg-surface-container-lowest p-8 shadow-sm shadow-primary/5 rounded-sm">
+<div class="space-y-6">
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container-low text-primary group-focus-within:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="facebook">social_leaderboard</span>
+</div>
+<div class="flex-1 space-y-1">
+<label class="block text-[0.6rem] font-bold uppercase tracking-widest text-outline">Facebook Profile URL</label>
+<input class="w-full border-b border-outline-variant/30 border-x-0 border-t-0 bg-transparent focus:ring-0 focus:border-secondary py-1 text-sm" placeholder="https://facebook.com/ankammathalli" type="url"/>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container-low text-primary group-focus-within:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+</div>
+<div class="flex-1 space-y-1">
+<label class="block text-[0.6rem] font-bold uppercase tracking-widest text-outline">Instagram Handle</label>
+<input class="w-full border-b border-outline-variant/30 border-x-0 border-t-0 bg-transparent focus:ring-0 focus:border-secondary py-1 text-sm" placeholder="@AnkammaThalliOfficial" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container-low text-primary group-focus-within:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="videocam">videocam</span>
+</div>
+<div class="flex-1 space-y-1">
+<label class="block text-[0.6rem] font-bold uppercase tracking-widest text-outline">YouTube Channel ID</label>
+<input class="w-full border-b border-outline-variant/30 border-x-0 border-t-0 bg-transparent focus:ring-0 focus:border-secondary py-1 text-sm" placeholder="UC-ankammathalli-live" type="text"/>
+</div>
+</div>
+</div>
+<div class="pt-4 flex justify-end">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg shadow-primary/20">Sync Social Channels</button>
+</div>
+</div>
+</section>
+</div>
+<!-- System Status Footer -->
+<footer class="mt-24 pt-12 border-t border-outline-variant/15 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-xs text-on-surface-variant font-medium flex items-center gap-4">
+<span class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+                    System Live: v2.4.1
+                </span>
+<span>•</span>
+<span>Last backup: 2 hours ago</span>
+</div>
+<div class="flex gap-8">
+<a class="text-xs font-bold uppercase tracking-widest text-outline hover:text-primary transition-colors" href="#">System Logs</a>
+<a class="text-xs font-bold uppercase tracking-widest text-outline hover:text-primary transition-colors" href="#">Support Ticket</a>
+</div>
+</footer>
+</main>
+</body></html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pages Management - AnkammaThalli Temple</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#ffdbcc",
+              "on-tertiary-fixed-variant": "#693c0e",
+              "on-secondary-fixed-variant": "#574500",
+              "outline-variant": "#dbc2b0",
+              "on-error-container": "#93000a",
+              "surface-dim": "#e1d9cb",
+              "tertiary": "#855324",
+              "primary-fixed-dim": "#ffb693",
+              "on-error": "#ffffff",
+              "surface-variant": "#e9e2d3",
+              "on-primary-fixed-variant": "#7a3000",
+              "tertiary-fixed-dim": "#fbb980",
+              "on-tertiary-fixed": "#2e1500",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#745c00",
+              "secondary-container": "#fed65b",
+              "error": "#ba1a1a",
+              "primary-container": "#ff9762",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-container-low": "#fbf3e4",
+              "surface-container-highest": "#e9e2d3",
+              "inverse-surface": "#343026",
+              "surface-container-high": "#efe7d9",
+              "secondary": "#735c00",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#65390b",
+              "tertiary-fixed": "#ffdcc1",
+              "on-primary-fixed": "#351000",
+              "on-background": "#1e1b13",
+              "on-surface-variant": "#554336",
+              "surface-tint": "#a04100",
+              "secondary-fixed-dim": "#e9c349",
+              "on-surface": "#1e1b13",
+              "tertiary-container": "#e3a46e",
+              "surface-bright": "#fff8ef",
+              "inverse-on-surface": "#f8f0e1",
+              "on-tertiary": "#ffffff",
+              "background": "#fff8ef",
+              "surface-container": "#f5edde",
+              "surface": "#fff8ef",
+              "primary": "#a04100",
+              "on-secondary-fixed": "#241a00",
+              "outline": "#887364",
+              "secondary-fixed": "#ffe088",
+              "inverse-primary": "#ffb693",
+              "on-primary-container": "#762e00"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-surface-container-low border-r border-outline-variant/15 flex flex-col fixed h-full z-40">
+<div class="px-8 py-10">
+<span class="text-xl font-bold text-on-surface font-headline">AnkammaThalli</span>
+<span class="block text-[0.65rem] uppercase tracking-widest text-primary font-label mt-1">Admin Portal</span>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-label text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 bg-primary-container/20 text-on-primary-container transition-colors group border-r-4 border-primary" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="font-label text-sm font-semibold">Pages</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+<span class="font-label text-sm font-medium">Events</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">photo_library</span>
+<span class="font-label text-sm font-medium">Media</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">temple_hindu</span>
+<span class="font-label text-sm font-medium">Darshan</span>
+</a>
+<div class="pt-8 pb-4 px-4">
+<div class="h-[1px] bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent"></div>
+</div>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-label text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-6 mt-auto">
+<div class="flex items-center gap-3 p-3 bg-surface-container-lowest shadow-sm shadow-primary/5">
+<div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center text-on-primary font-bold text-xs">A</div>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate">Admin User</p>
+<p class="text-[10px] text-on-surface-variant truncate">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 min-h-screen relative">
+<!-- Header Section -->
+<header class="sticky top-0 bg-surface/80 backdrop-blur-md z-30 px-12 py-8 flex justify-between items-end">
+<div>
+<nav class="flex items-center gap-2 text-[0.65rem] uppercase tracking-wider text-on-surface-variant mb-2">
+<span>Admin</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-primary">Pages Management</span>
+</nav>
+<h1 class="text-4xl font-headline font-bold text-on-surface">Website Pages</h1>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 font-label text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-on-primary-container transition-all shadow-lg shadow-primary/10 active:scale-95">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                Create New Page
+            </button>
+</header>
+<!-- Content Area -->
+<section class="px-12 py-8 max-w-7xl">
+<!-- Filter & Search Bar -->
+<div class="flex gap-4 mb-8">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-none focus:ring-1 focus:ring-secondary text-sm font-body outline-none placeholder:text-on-surface-variant/50" placeholder="Search page titles, paths or authors..." type="text"/>
+</div>
+<button class="px-6 bg-surface-container-low text-on-surface-variant flex items-center gap-2 text-sm font-medium hover:bg-surface-container-high">
+<span class="material-symbols-outlined">filter_list</span>
+                    Filter
+                </button>
+</div>
+<!-- Pages Bento-Style List/Table -->
+<div class="bg-surface-container-low overflow-hidden">
+<div class="grid grid-cols-12 gap-0 border-b border-outline-variant/10 text-[0.65rem] uppercase tracking-widest font-bold text-on-surface-variant px-8 py-4">
+<div class="col-span-5">Page Name &amp; URL</div>
+<div class="col-span-2 text-center">Status</div>
+<div class="col-span-2 text-center">Last Modified</div>
+<div class="col-span-3 text-right">Actions</div>
+</div>
+<!-- Page Row: Home -->
+<div class="grid grid-cols-12 gap-0 items-center px-8 py-6 border-b border-outline-variant/5 bg-surface-container-lowest hover:bg-surface-bright transition-colors group">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500" data-alt="architectural close-up of an ornate temple entrance with intricate stone carvings and warm sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxp8sosF863J0tdzSWyIlZjkwhWxWsp7-gMgVkuHKz8jhd7eUYd0Jihn_XK63eUxXXihRIJUa9Cm6SFzjfFS7Fb8TwnRFhGDw1PlCmAmZIQWyv935h8TrmyVfMHdjHg_b8oLxyD7_SMzi7PWwLR1LPqg68tFfjAecRbq6KOg-oZCtiVI-budp-jATASZoB9T20y1od_KIh0UywQ28J6ingmg0oD5nPEk8vxMa_xPY5zKFG-IG71Qd-FPpX-ds7xMYO649KKCvNYp8"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface font-body text-base">Home</h3>
+<p class="text-xs text-on-surface-variant font-mono">/index</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-green-100 text-green-800 text-[10px] font-bold uppercase rounded-full tracking-tighter">Published</span>
+</div>
+<div class="col-span-2 text-center">
+<p class="text-xs text-on-surface-variant">Oct 24, 2024</p>
+<p class="text-[10px] text-on-surface-variant/60">by Admin</p>
+</div>
+<div class="col-span-3 flex justify-end items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors" title="View Page">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors" title="Edit Page">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors" title="Delete Page">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Page Row: About -->
+<div class="grid grid-cols-12 gap-0 items-center px-8 py-6 border-b border-outline-variant/5 bg-surface-container-lowest hover:bg-surface-bright transition-colors group">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500" data-alt="close up of ancient manuscripts or scrolls in a temple library with soft atmospheric dust motes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXa76PEz67uiN33EIOUHV73-mE2gBznpNG5w8RKadQbzpl-Bqi_NmGtkmmzRCe_RT9K8KjFzF8Asl9Vi-L-_lUdiddWoMzr3Tmjdx_Xz5I_5EbPBMWip9oaDo63w7RVonfEK7Re8u7iOZlg5N50Kx_hvFk14POF48VxhwTM7nw2bcu9B0-dPB81NGOupXpfPLqgCAyrf8eP59RzzFUVejN2xEFtGUabjTBY4iBA_zM3mYvhd5U599qlz69v4KEqFDiA71yfE2pdHQ"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface font-body text-base">About The Temple</h3>
+<p class="text-xs text-on-surface-variant font-mono">/about-us</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-green-100 text-green-800 text-[10px] font-bold uppercase rounded-full tracking-tighter">Published</span>
+</div>
+<div class="col-span-2 text-center">
+<p class="text-xs text-on-surface-variant">Oct 20, 2024</p>
+<p class="text-[10px] text-on-surface-variant/60">by Editor</p>
+</div>
+<div class="col-span-3 flex justify-end items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Page Row: Gallery -->
+<div class="grid grid-cols-12 gap-0 items-center px-8 py-6 border-b border-outline-variant/5 bg-surface-container-lowest hover:bg-surface-bright transition-colors group">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500" data-alt="vibrant colors of traditional ritual offerings with marigold flowers and glowing oil lamps" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVV2Aj4uRafYCZGwxlZnpFFV8j-mpZvm8aIoflpfcHR0QpGGAynNqDjZCt7D5wrG0ICZEqcnjcDJbUk4_a3Xuwypk2g5Os00lgd147mnwRn6gzLVmqEWIMZyxowoRThZpqGBN2cdyDkw7dumNZzE7L9q3jey03Hh83AerTmV5iitYvMkj5JYW3z1gn8b10ieHYL8z8vs_wOhg20L_gTeU5hZusrEzbHd4ioXJrCZmA8oklwbkTf4rJ462W0arVSa2rH1M-G6DqnHE"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface font-body text-base">Gallery</h3>
+<p class="text-xs text-on-surface-variant font-mono">/gallery</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-green-100 text-green-800 text-[10px] font-bold uppercase rounded-full tracking-tighter">Published</span>
+</div>
+<div class="col-span-2 text-center">
+<p class="text-xs text-on-surface-variant">Sep 28, 2024</p>
+<p class="text-[10px] text-on-surface-variant/60">by Admin</p>
+</div>
+<div class="col-span-3 flex justify-end items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Page Row: Events (Draft) -->
+<div class="grid grid-cols-12 gap-0 items-center px-8 py-6 border-b border-outline-variant/5 bg-surface-container-lowest hover:bg-surface-bright transition-colors group">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500" data-alt="crowd of pilgrims during a temple festival with colorful flags and smoke from ritual fires" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw0K4mSlTxH3IVRrmR8dJRwk4CANi2d65Y_OnKFD0ff2HM71R4Cbbtdk59QWofXYlOE5PmmoJMBG8Ni5KnX0zWs-02pFm6PtzsHCxILD0plXUcpAP9hMuc2a8INKURN_GKckVuYryXkaLhd1g5apyfjl2QaGftnjgFFO-D4cPeNixDK6SStBDAwnQKqahvIQPB_D1mlzFVXlJ67qvJRVmQ-ZMG4zqN7rU0Q9CIYCLuREuww5Dud91jxzZGMxbLK9cRKzKdsjIsP9g"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface font-body text-base">Upcoming Events</h3>
+<p class="text-xs text-on-surface-variant font-mono">/events</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase rounded-full tracking-tighter">Draft</span>
+</div>
+<div class="col-span-2 text-center">
+<p class="text-xs text-on-surface-variant">Nov 02, 2024</p>
+<p class="text-[10px] text-on-surface-variant/60">by Editor</p>
+</div>
+<div class="col-span-3 flex justify-end items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Page Row: Contact -->
+<div class="grid grid-cols-12 gap-0 items-center px-8 py-6 bg-surface-container-lowest hover:bg-surface-bright transition-colors group">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500" data-alt="soft focus close-up of a bronze temple bell with intricate engravings against a warm stone wall background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpGXlTFR2NfeQ0i3VLv99br-Wp3N2UrzPZWJT3I1_mwLN9es5MHqQ7xrKxc67UJyrd91Bg2y9dBvtFQ3PVOyEYYjG5kqfU2MI036hX1zQlKK31b0VVTAMnwhvyWRktVWjBk5cKmBTNnhI3ZUv5BfnGNzOaL9G0rX9F1ALi145H1u3n-eTg8HkNorv-Dzo35fbdH8C4U6LgPwpA2Q98FMSCCKJZb94_UG6NDvcK_KhjMVXm20P3BBxCaFJ9ySU8QN3HPu4O0YX-PSo"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface font-body text-base">Contact Us</h3>
+<p class="text-xs text-on-surface-variant font-mono">/contact</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-green-100 text-green-800 text-[10px] font-bold uppercase rounded-full tracking-tighter">Published</span>
+</div>
+<div class="col-span-2 text-center">
+<p class="text-xs text-on-surface-variant">Oct 15, 2024</p>
+<p class="text-[10px] text-on-surface-variant/60">by Admin</p>
+</div>
+<div class="col-span-3 flex justify-end items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-between items-center mt-10">
+<p class="text-xs text-on-surface-variant font-label">Showing 5 of 12 pages</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary font-bold text-xs">1</button>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors text-xs">2</button>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors text-xs">3</button>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Footer Decoration -->
+<footer class="mt-20 px-12 pb-12 opacity-30 pointer-events-none">
+<div class="h-[1px] w-full bg-gradient-to-r from-transparent via-secondary/40 to-transparent mb-8"></div>
+<div class="flex justify-between items-center text-[10px] uppercase tracking-[0.2em] font-label text-on-surface-variant">
+<span>AnkammaThalli Temple Admin Console</span>
+<span>Version 2.4.1</span>
+<span>© 2024 AnkammaThalli Dev Team</span>
+</div>
+</footer>
+</main>
+<!-- Spiritual Divider Element (Floating Gradient Line) -->
+<div class="fixed left-64 right-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-secondary/20 to-transparent z-50"></div>
+</body></html>

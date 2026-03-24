@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title>Festival lamp placeholder</title>
+  <desc>Warm close-up placeholder with lamps and flowers.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#22160f"/>
+      <stop offset="100%" stop-color="#7b3607"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="600" fill="url(#bg)"/>
+  <circle cx="270" cy="255" r="26" fill="#ffd96b"/>
+  <circle cx="270" cy="255" r="64" fill="#ffd96b" opacity=".18"/>
+  <circle cx="470" cy="205" r="36" fill="#ffe9a5"/>
+  <circle cx="470" cy="205" r="82" fill="#ffe9a5" opacity=".2"/>
+  <path d="M200 370c70-55 140-55 210 0" fill="none" stroke="#cc7d26" stroke-width="30" stroke-linecap="round"/>
+  <path d="M385 320 450 430" stroke="#4d2309" stroke-width="10" stroke-linecap="round"/>
+  <path d="M425 310 495 435" stroke="#4d2309" stroke-width="10" stroke-linecap="round"/>
+  <path d="M465 295 540 435" stroke="#4d2309" stroke-width="10" stroke-linecap="round"/>
+  <path d="M540 430c70 0 125 20 180 70" fill="none" stroke="#aa4d13" stroke-width="42" stroke-linecap="round" opacity=".7"/>
+</svg>

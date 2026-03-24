@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard | AnkammaThalli Temple</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary": "#735c00",
+              "on-primary-fixed": "#351000",
+              "on-tertiary-container": "#65390b",
+              "surface": "#fff8ef",
+              "on-surface-variant": "#554336",
+              "surface-container-high": "#efe7d9",
+              "inverse-on-surface": "#f8f0e1",
+              "on-secondary-fixed": "#241a00",
+              "surface-variant": "#e9e2d3",
+              "primary": "#a04100",
+              "on-background": "#1e1b13",
+              "on-secondary-fixed-variant": "#574500",
+              "tertiary": "#855324",
+              "error": "#ba1a1a",
+              "secondary-container": "#fed65b",
+              "on-error": "#ffffff",
+              "tertiary-container": "#e3a46e",
+              "surface-container": "#f5edde",
+              "surface-container-low": "#fbf3e4",
+              "on-surface": "#1e1b13",
+              "error-container": "#ffdad6",
+              "primary-container": "#ff9762",
+              "surface-container-highest": "#e9e2d3",
+              "on-tertiary-fixed": "#2e1500",
+              "inverse-surface": "#343026",
+              "inverse-primary": "#ffb693",
+              "tertiary-fixed": "#ffdcc1",
+              "on-primary-container": "#762e00",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#7a3000",
+              "surface-bright": "#fff8ef",
+              "surface-dim": "#e1d9cb",
+              "secondary-fixed-dim": "#e9c349",
+              "on-secondary-container": "#745c00",
+              "on-tertiary-fixed-variant": "#693c0e",
+              "surface-tint": "#a04100",
+              "outline-variant": "#dbc2b0",
+              "background": "#fff8ef",
+              "on-secondary": "#ffffff",
+              "primary-fixed": "#ffdbcc",
+              "on-tertiary": "#ffffff",
+              "on-error-container": "#93000a",
+              "primary-fixed-dim": "#ffb693",
+              "outline": "#887364",
+              "tertiary-fixed-dim": "#fbb980",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed": "#ffe088"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-surface-container-low border-r border-outline-variant/15 flex flex-col fixed h-full z-50 transition-all duration-300 md:translate-x-0 -translate-x-full" id="sidebar">
+<div class="px-8 py-8">
+<span class="text-xl font-bold text-on-surface font-headline tracking-tight block">AnkammaThalli</span>
+<span class="text-[0.65rem] font-label uppercase tracking-widest text-primary font-bold">Admin Portal</span>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<!-- Active State: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 rounded text-primary bg-primary-container/10 font-semibold group transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">description</span>
+<span class="text-sm">Pages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">calendar_month</span>
+<span class="text-sm">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">photo_library</span>
+<span class="text-sm">Media</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">schedule</span>
+<span class="text-sm">Darshan Timings</span>
+</a>
+<div class="pt-8 pb-4 px-4 text-[0.65rem] font-label uppercase tracking-[0.1em] text-outline">System</div>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-error hover:bg-error-container/10 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-error transition-colors">logout</span>
+<span class="text-sm">Logout</span>
+</a>
+</nav>
+<div class="p-6">
+<div class="bg-surface-container p-4 rounded-lg flex items-center gap-3 border border-outline-variant/10">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs">A</div>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate">Admin User</p>
+<p class="text-[10px] text-outline truncate">admin@temple.org</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-4 md:p-8 bg-surface">
+<!-- Header -->
+<header class="flex justify-between items-center mb-10">
+<div>
+<h1 class="text-3xl font-bold text-on-surface">Dashboard Overview</h1>
+<p class="text-on-surface-variant text-sm mt-1">Welcome back, here is what's happening today.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="bg-primary text-on-primary px-6 py-2.5 text-sm font-semibold rounded shadow-sm hover:shadow-md transition-all active:scale-95">
+                    + Quick Action
+                </button>
+</div>
+</header>
+<!-- Stats Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<!-- Total Pages -->
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/15 flex flex-col justify-between group hover:border-primary/20 transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-high rounded text-primary">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<span class="text-xs font-label uppercase tracking-widest text-outline">Total Content</span>
+</div>
+<div>
+<span class="text-4xl font-bold tracking-tight">24</span>
+<p class="text-xs text-secondary mt-1 font-medium">+2 published this week</p>
+</div>
+</div>
+<!-- Recent Donations (Visual Focus) -->
+<div class="md:col-span-1 bg-primary text-on-primary p-6 rounded-lg shadow-xl shadow-primary/10 relative overflow-hidden">
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary-container">volunteer_activism</span>
+<span class="text-[0.65rem] font-label uppercase tracking-widest opacity-80">Live Donations</span>
+</div>
+<h2 class="text-4xl font-bold mt-4">₹ 84,250</h2>
+<p class="text-xs opacity-80 mt-1">Total collected in the last 30 days</p>
+</div>
+<div class="mt-6 flex gap-2">
+<div class="h-1 flex-1 bg-white/20 rounded-full overflow-hidden">
+<div class="h-full bg-white w-2/3"></div>
+</div>
+<span class="text-[10px] font-bold">65% of target</span>
+</div>
+</div>
+<!-- Abstract background pattern -->
+<div class="absolute -right-4 -bottom-4 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
+</div>
+<!-- Active Darshan -->
+<div class="bg-surface-container-low p-6 rounded-lg border border-outline-variant/15 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-container/20 rounded text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">timer</span>
+</div>
+<span class="text-xs font-label uppercase tracking-widest text-outline">Active Status</span>
+</div>
+<div>
+<span class="text-xl font-headline font-semibold text-on-surface">Darshan Closing</span>
+<p class="text-2xl font-bold text-on-surface-variant mt-1">1:45 <span class="text-sm font-normal">Remaining</span></p>
+</div>
+</div>
+</div>
+<!-- Two Column Detailed Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Upcoming Events Table-less List -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold">Upcoming Events</h3>
+<a class="text-sm font-semibold text-primary hover:underline" href="#">View All</a>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-4 rounded border border-outline-variant/10 flex items-center gap-4 hover:shadow-lg hover:shadow-primary/5 transition-all group">
+<div class="w-16 h-16 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="colorful indian festival with orange marigold flowers and traditional oil lamps in soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxAZJZfgN_qQiA9wUpA4jWSjBC0lQCP_YmgxbIIUPdHlqfDE-u6jBswxf_eIkLrZq58fgs2AzMFSdA-2NgmOOnw4caMOX67QrdrIzgzklMCTCSSAHxErOKT94gwdJZUl0qmrwkz7tRE6NP7YOCikWFsiiGlS4qwkqfqSSgdb7F9DjS2Lg8BennDd21gx_L1TOVfAn1tWa0ReJpeWzsWKIJHqcmnZhu8v_sJpQsgIGuAvPtg4j_Jo4l0VAF5hs8kqnO3BHHxGRswE4"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface">Annual Brahmotsavam</h4>
+<p class="text-xs text-outline font-label uppercase tracking-wide mt-1">Oct 24, 2024 • 06:00 AM</p>
+</div>
+<div class="text-right">
+<span class="inline-block px-3 py-1 bg-surface-container-high rounded-full text-[10px] font-bold text-primary">FEATURED</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded border border-outline-variant/10 flex items-center gap-4 hover:shadow-lg hover:shadow-primary/5 transition-all group">
+<div class="w-16 h-16 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="intricate stone carvings on a traditional indian temple pillar with golden sunlight hitting the textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuC8GiEldIm59C4sIHNT33AuS0HtGj7IEEjZZhy8Gv0nwx7UxpcuiX16iAIC5E6dPek4CFi3HNDui7w8rgNtHKn6dMg4LPWaSz0AyG5-XDQSg1-BDS4jSquktOaxu8AHwLdaGbz0c8yHdxhus-ODQLvuQLxzZuSrxasryp5N0NYz__7KyT1y-a8TORWtr0NQsRfghVV481IkLaADclGW4S7frM78-TXlRwTOuU0oWtTrSTGJmQBjEAVihZ9AhltF4L23bcVUFrPKM"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface">Navaratri Puja Series</h4>
+<p class="text-xs text-outline font-label uppercase tracking-wide mt-1">Oct 15, 2024 • 07:30 PM</p>
+</div>
+<div class="text-right">
+<span class="inline-block px-3 py-1 bg-secondary-container/30 rounded-full text-[10px] font-bold text-secondary">ACTIVE</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Activity / Audit Log -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold">Recent Donations</h3>
+<a class="text-sm font-semibold text-primary hover:underline" href="#">Export CSV</a>
+</div>
+<div class="bg-surface-container-low rounded-lg overflow-hidden border border-outline-variant/15">
+<div class="divide-y divide-outline-variant/10">
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-lg">person</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Rajesh Kumar</p>
+<p class="text-[11px] text-outline">Annadanam Fund • 2m ago</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">₹ 5,000</p>
+<p class="text-[10px] text-on-surface-variant/70">Verified</p>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-lg">person</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Lakshmi Devi</p>
+<p class="text-[11px] text-outline">General Donation • 1h ago</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">₹ 1,001</p>
+<p class="text-[10px] text-on-surface-variant/70">Verified</p>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-lg">person</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Srinivas Rao</p>
+<p class="text-[11px] text-outline">Development Fund • 3h ago</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">₹ 10,000</p>
+<p class="text-[10px] text-on-surface-variant/70">Pending</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- System Status Footer Component-like -->
+<footer class="mt-20 pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center text-outline text-[11px] font-label uppercase tracking-widest gap-4">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Server Status: Optimal</span>
+<span>API Version 2.4.0</span>
+</div>
+<div>
+                © 2024 AnkammaThalli Temple. All Rights Reserved.
+            </div>
+</footer>
+</main>
+<!-- Contextual FAB (Mobile Only) -->
+<button class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center z-[60] active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</body></html>

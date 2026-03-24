@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+  <title>Temple hall placeholder</title>
+  <desc>Symmetrical hall-like placeholder with saffron light.</desc>
+  <rect width="1000" height="1000" fill="#c89b69"/>
+  <rect x="80" y="0" width="120" height="1000" fill="#8f633c"/>
+  <rect x="800" y="0" width="120" height="1000" fill="#8f633c"/>
+  <rect x="220" y="0" width="110" height="1000" fill="#a97846"/>
+  <rect x="670" y="0" width="110" height="1000" fill="#a97846"/>
+  <rect x="360" y="90" width="280" height="820" fill="#f4e5cd"/>
+  <rect x="420" y="260" width="160" height="470" fill="#b16b2b"/>
+  <circle cx="500" cy="510" r="88" fill="#ffe7a0"/>
+  <circle cx="500" cy="510" r="165" fill="#ffe7a0" opacity=".18"/>
+</svg>
