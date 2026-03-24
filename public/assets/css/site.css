@@ -895,6 +895,11 @@ input {
     max-width: 28rem;
 }
 
+.about-history__media {
+    max-width: 33rem;
+    margin-left: auto;
+}
+
 .about-history__year {
     margin: 0 0 1rem;
     color: var(--color-secondary);
@@ -918,8 +923,6 @@ input {
 
 .about-history__main-image img {
     width: 100%;
-    max-width: 33rem;
-    margin-left: auto;
     aspect-ratio: 7 / 8;
     object-fit: cover;
 }
@@ -929,7 +932,7 @@ input {
     grid-template-columns: minmax(150px, 200px) minmax(0, 1fr);
     gap: 1.2rem;
     margin-top: 1rem;
-    align-items: center;
+    align-items: start;
 }
 
 .about-history__secondary-image {
