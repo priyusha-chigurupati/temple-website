@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 1000" role="img" aria-labelledby="title desc">
+  <title>Brahmotsavam poster placeholder</title>
+  <desc>Festival poster style placeholder with saffron deity motif.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ff9d24"/>
+      <stop offset="100%" stop-color="#6e2200"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="1000" fill="url(#bg)"/>
+  <path d="M350 160c70 45 120 120 120 205 0 96-54 166-120 166s-120-70-120-166c0-85 50-160 120-205Z" fill="#f6b749"/>
+  <path d="M290 525c42-38 118-38 160 0" fill="none" stroke="#8e3507" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="300" cy="310" r="18" fill="#7a2600"/>
+  <circle cx="400" cy="310" r="18" fill="#7a2600"/>
+  <text x="350" y="760" fill="#5f1800" font-family="Georgia, serif" font-size="60" font-weight="700" text-anchor="middle">BRAHMOTSAVAM</text>
+  <text x="350" y="825" fill="#f8df9d" font-family="Georgia, serif" font-size="42" text-anchor="middle">Safe Work</text>
+</svg>

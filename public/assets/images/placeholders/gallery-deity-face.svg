@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" role="img" aria-labelledby="title desc">
+  <title>Deity face placeholder</title>
+  <desc>Stylized Hindu deity face with gold halo.</desc>
+  <rect width="700" height="700" fill="#24140d"/>
+  <circle cx="350" cy="310" r="170" fill="#8c5b2d"/>
+  <circle cx="350" cy="310" r="132" fill="#c39143"/>
+  <path d="M350 185c78 42 120 103 120 173 0 84-53 144-120 144s-120-60-120-144c0-70 42-131 120-173Z" fill="#f1cf92"/>
+  <path d="M302 375c18 28 78 28 96 0" fill="none" stroke="#8f4d21" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="306" cy="312" r="12" fill="#4a2817"/>
+  <circle cx="394" cy="312" r="12" fill="#4a2817"/>
+</svg>

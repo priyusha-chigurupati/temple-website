@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title>Temple gopuram placeholder</title>
+  <desc>Hindu temple tower inspired placeholder artwork.</desc>
+  <rect width="1200" height="800" fill="#a6d0f3"/>
+  <rect y="640" width="1200" height="160" fill="#e7d8bf"/>
+  <path d="M600 90 860 640H340Z" fill="#efe6d5" stroke="#bbab90" stroke-width="10"/>
+  <path d="M600 170 800 610H400Z" fill="#f9f5ec" stroke="#c8b89e" stroke-width="8"/>
+  <path d="M600 250 740 575H460Z" fill="#ece3d1" stroke="#baa88a" stroke-width="7"/>
+  <rect x="530" y="455" width="140" height="185" fill="#221912"/>
+  <path d="M470 350h260M445 420h310M420 490h360" stroke="#d9ceb8" stroke-width="10"/>
+  <circle cx="600" cy="120" r="26" fill="#a04100"/>
+</svg>

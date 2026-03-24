@@ -16,7 +16,7 @@ $path = request_path();
 $routes = [
     '/' => static fn () => $controller->home(),
     '/about' => static fn () => $controller->about(),
-    '/gallery' => static fn () => $controller->placeholder('gallery'),
+    '/gallery' => static fn () => $controller->gallery(),
     '/events' => static fn () => $controller->placeholder('events'),
     '/donations' => static fn () => $controller->placeholder('donations'),
     '/contact' => static fn () => $controller->placeholder('contact'),

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" role="img" aria-labelledby="title desc">
+  <title>Navaratri placeholder</title>
+  <desc>Devotional Navaratri style placeholder artwork.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ff7f2a"/>
+      <stop offset="100%" stop-color="#7d1905"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="700" fill="url(#bg)"/>
+  <path d="M350 170c66 44 112 116 112 198 0 96-49 160-112 160s-112-64-112-160c0-82 46-154 112-198Z" fill="#f8b05f"/>
+  <circle cx="302" cy="318" r="13" fill="#7e2400"/>
+  <circle cx="398" cy="318" r="13" fill="#7e2400"/>
+  <path d="M312 390c20 24 56 24 76 0" fill="none" stroke="#8b2a06" stroke-width="10" stroke-linecap="round"/>
+  <path d="M175 520c36-28 80-28 116 0M409 520c36-28 80-28 116 0" fill="none" stroke="#ffdb8e" stroke-width="22" stroke-linecap="round"/>
+</svg>

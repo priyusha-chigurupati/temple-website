@@ -219,12 +219,61 @@ return [
         'gallery' => [
             'meta' => [
                 'title' => 'Gallery | AnkammaThalli Temple',
-                'description' => 'Gallery page design is queued for a later public-site milestone.',
+                'description' => 'Explore temple architecture, sacred rituals, devotional moments, and festival imagery in the AnkammaThalli Temple gallery.',
             ],
-            'eyebrow' => 'Planned Page',
-            'title' => 'Gallery will be implemented from the approved design.',
-            'description' => 'This route is active now so navigation is wired, but the full gallery layout will be built in a dedicated milestone.',
-            'cta' => ['label' => 'Return Home', 'href' => '/'],
+            'title' => 'Visual Chronicles of Devotion',
+            'highlight' => 'Devotion',
+            'description' => 'Explore the sacred beauty of AnkammaThalli Temple through a curated collection of architectural marvels, vibrant festivities, and daily spiritual rituals.',
+            'filters' => [
+                ['label' => 'All Collections', 'active' => true],
+                ['label' => 'Festivals', 'active' => false],
+                ['label' => 'Architecture', 'active' => false],
+                ['label' => 'Daily Rituals', 'active' => false],
+                ['label' => 'Pilgrims', 'active' => false],
+            ],
+            'items' => [
+                [
+                    'title' => 'The Golden Gopuram',
+                    'category' => 'Architecture',
+                    'image' => 'assets/images/placeholders/gallery-gopuram.svg',
+                    'size' => 'feature-wide',
+                ],
+                [
+                    'title' => 'Brahmotsavam Splendor',
+                    'category' => 'Festivals',
+                    'image' => 'assets/images/placeholders/gallery-brahmotsavam.svg',
+                    'size' => 'feature-tall',
+                ],
+                [
+                    'title' => 'Devi Ankamma Thalli',
+                    'category' => 'Deity',
+                    'image' => 'assets/images/placeholders/gallery-deity-face.svg',
+                    'size' => 'square',
+                ],
+                [
+                    'title' => 'Whispering Stones',
+                    'category' => 'Architecture',
+                    'image' => 'assets/images/placeholders/gallery-stone-medallion.svg',
+                    'size' => 'square',
+                ],
+                [
+                    'title' => 'Navaratri Devotion',
+                    'category' => 'Rituals',
+                    'image' => 'assets/images/placeholders/gallery-navaratri.svg',
+                    'size' => 'square',
+                ],
+                [
+                    'title' => 'Deepotsavam Night',
+                    'category' => 'Festivals',
+                    'image' => 'assets/images/placeholders/gallery-deepam-wide.svg',
+                    'size' => 'wide-banner',
+                ],
+            ],
+            'cta' => [
+                'title' => 'Capturing the Divine?',
+                'description' => 'We invite devotees to share their photographs of the temple. Your perspective could be featured in our official gallery.',
+                'button' => 'Submit Your Photos',
+            ],
         ],
         'events' => [
             'meta' => [

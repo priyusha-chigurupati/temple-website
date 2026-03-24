@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" role="img" aria-labelledby="title desc">
+  <title>Stone carving placeholder</title>
+  <desc>Temple medallion inspired carved stone placeholder.</desc>
+  <rect width="700" height="700" fill="#d4c7b4"/>
+  <circle cx="350" cy="350" r="220" fill="#c9bda8"/>
+  <circle cx="350" cy="350" r="175" fill="#ddd3c2" stroke="#bcae96" stroke-width="12"/>
+  <path d="M350 235c38 45 70 78 70 130 0 62-31 105-70 105s-70-43-70-105c0-52 32-85 70-130Z" fill="#aaa08f"/>
+  <path d="M300 498h100" stroke="#aaa08f" stroke-width="14" stroke-linecap="round"/>
+</svg>

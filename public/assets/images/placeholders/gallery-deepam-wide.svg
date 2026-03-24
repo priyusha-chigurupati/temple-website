@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" role="img" aria-labelledby="title desc">
+  <title>Deepam banner placeholder</title>
+  <desc>Wide glowing deepam placeholder with temple columns.</desc>
+  <rect width="1400" height="700" fill="#25140d"/>
+  <rect x="130" y="0" width="70" height="700" fill="#593017"/>
+  <rect x="260" y="0" width="60" height="700" fill="#3b2012"/>
+  <rect x="1080" y="0" width="60" height="700" fill="#3b2012"/>
+  <rect x="1200" y="0" width="70" height="700" fill="#593017"/>
+  <rect x="620" y="110" width="160" height="470" fill="#ffdf8c"/>
+  <circle cx="700" cy="352" r="120" fill="#ffe39d" opacity=".35"/>
+  <circle cx="700" cy="352" r="200" fill="#ffe39d" opacity=".12"/>
+</svg>
