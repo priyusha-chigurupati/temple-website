@@ -69,3 +69,18 @@ When we implement multilingual display, the public site will read content by loc
 - Telugu -> `te`
 
 The same event, blog post, or page section can then have multiple translations without creating duplicate records.
+
+## Current Local Test Command For Events
+
+After the local DB is created and `.env` is filled in, the current sample Events can be inserted into MySQL with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_events.php
+```
+
+That command seeds the current English sample Events into:
+
+- `events`
+- `event_translations`
+- `media`
+- `media_translations`

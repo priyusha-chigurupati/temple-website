@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 final class ContentRepository
 {
-    public function __construct(private readonly array $content)
+    public function __construct(
+        private readonly array $content,
+        private readonly ?EventRepository $eventRepository = null
+    )
     {
     }
 
@@ -85,8 +88,13 @@ final class ContentRepository
 
         $page['upcoming_section_id'] = 'upcoming-events';
         $page['full_calendar_href'] = route_url('/events') . '#upcoming-events';
-        $page['ongoing'] = $this->normalizeEvents($page['ongoing'] ?? [], 'ongoing');
-        $page['upcoming'] = $this->normalizeEvents($page['upcoming'] ?? [], 'upcoming');
+        if ($this->eventRepository instanceof EventRepository && $this->eventRepository->hasPublishedEvents()) {
+            $page['ongoing'] = $this->eventRepository->ongoing();
+            $page['upcoming'] = $this->eventRepository->upcoming();
+        } else {
+            $page['ongoing'] = $this->normalizeEvents($page['ongoing'] ?? [], 'ongoing');
+            $page['upcoming'] = $this->normalizeEvents($page['upcoming'] ?? [], 'upcoming');
+        }
         $page['sponsor_cta']['primary_href'] = route_url('/donations');
         $page['sponsor_cta']['secondary_href'] = route_url('/contact');
 
@@ -95,6 +103,10 @@ final class ContentRepository
 
     public function eventDetail(string $slug): ?array
     {
+        if ($this->eventRepository instanceof EventRepository && $this->eventRepository->hasPublishedEvents()) {
+            return $this->eventRepository->findBySlug($slug);
+        }
+
         foreach (['ongoing', 'upcoming'] as $group) {
             foreach ($this->events()[$group] ?? [] as $event) {
                 if (($event['slug'] ?? '') !== $slug) {
