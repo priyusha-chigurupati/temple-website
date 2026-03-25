@@ -35,7 +35,7 @@ declare(strict_types=1);
                             </div>
                             <h3><?= e($item['title']) ?></h3>
                             <p><?= e($item['description']) ?></p>
-                            <a class="text-link text-link--arrow" href="#">
+                            <a class="text-link text-link--arrow" href="<?= e($item['href']) ?>">
                                 <?= e($item['cta']) ?>
                                 <span class="text-link__arrow" aria-hidden="true"></span>
                             </a>
@@ -46,14 +46,14 @@ declare(strict_types=1);
         </section>
     </div>
 
-    <section class="events-upcoming">
+    <section class="events-upcoming" id="<?= e($page['upcoming_section_id']) ?>">
         <div class="container">
             <div class="events-upcoming__head">
                 <div>
                     <h2>Upcoming Festivals</h2>
                     <p>Mark your calendar for these auspicious dates</p>
                 </div>
-                <a class="section-link" href="#">View Full Calendar</a>
+                <a class="section-link" href="<?= e($page['full_calendar_href']) ?>">View Full Calendar</a>
             </div>
 
             <div class="events-upcoming__grid">
@@ -69,7 +69,7 @@ declare(strict_types=1);
                         <div class="events-upcoming-card__body">
                             <h3><?= e($item['title']) ?></h3>
                             <p><?= e($item['description']) ?></p>
-                            <a class="button button--outline button--full" href="#"><?= e($item['cta']) ?></a>
+                            <a class="button button--outline button--full" href="<?= e($item['href']) ?>"><?= e($item['cta']) ?></a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -82,8 +82,8 @@ declare(strict_types=1);
             <h2><?= e($page['sponsor_cta']['title']) ?></h2>
             <p><?= e($page['sponsor_cta']['description']) ?></p>
             <div class="events-sponsor__actions">
-                <a class="button button--primary" href="#"><?= e($page['sponsor_cta']['primary']) ?></a>
-                <a class="button button--outline" href="#"><?= e($page['sponsor_cta']['secondary']) ?></a>
+                <a class="button button--primary" href="<?= e($page['sponsor_cta']['primary_href']) ?>"><?= e($page['sponsor_cta']['primary']) ?></a>
+                <a class="button button--outline" href="<?= e($page['sponsor_cta']['secondary_href']) ?>"><?= e($page['sponsor_cta']['secondary']) ?></a>
             </div>
         </div>
     </section>

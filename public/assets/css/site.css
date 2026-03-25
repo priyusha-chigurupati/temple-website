@@ -1868,6 +1868,132 @@ input {
     gap: 0.85rem;
 }
 
+.event-detail-page {
+    padding: 2rem 0 5.5rem;
+}
+
+.event-detail-page__back {
+    margin-bottom: 1.5rem;
+}
+
+.event-detail-page__back .text-link__arrow {
+    transform: rotate(180deg);
+}
+
+.event-detail-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 0.88fr);
+    gap: 3rem;
+    align-items: center;
+    padding: 1rem 0 3rem;
+}
+
+.event-detail-hero__copy h1,
+.event-detail-body__copy h2,
+.event-detail-facts h2 {
+    margin: 0;
+    font-family: var(--font-heading);
+}
+
+.event-detail-hero__copy h1 {
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    line-height: 1.02;
+}
+
+.event-detail-hero__description {
+    max-width: 34rem;
+    margin: 1rem 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.event-detail-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.event-detail-hero__schedule {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.event-detail-hero__schedule span,
+.event-detail-facts dt {
+    color: var(--color-text-muted);
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.event-detail-hero__schedule strong,
+.event-detail-facts dd {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.92rem;
+}
+
+.event-detail-hero__image {
+    overflow: hidden;
+    background: var(--color-surface-low);
+}
+
+.event-detail-hero__image img {
+    width: 100%;
+    aspect-ratio: 1.08 / 1;
+    object-fit: cover;
+}
+
+.event-detail-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, 18rem);
+    gap: 2rem;
+    align-items: start;
+}
+
+.event-detail-body__copy {
+    padding: 2rem;
+    background: var(--color-surface-low);
+}
+
+.event-detail-body__copy h2,
+.event-detail-facts h2 {
+    font-size: 1.7rem;
+}
+
+.event-detail-body__copy p {
+    margin: 1rem 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.84rem;
+    line-height: 1.78;
+}
+
+.event-detail-facts {
+    padding: 1.8rem 1.6rem;
+    background: #fff;
+    box-shadow: 0 14px 34px rgba(160, 65, 0, 0.08);
+}
+
+.event-detail-facts dl {
+    display: grid;
+    gap: 1rem;
+    margin: 1.2rem 0 0;
+}
+
+.event-detail-facts__item {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(219, 194, 176, 0.28);
+}
+
+.event-detail-facts__item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
 .donations-page {
     padding: 2rem 0 5.8rem;
 }
@@ -3029,7 +3155,9 @@ input {
     .events-page__header,
     .events-upcoming__head,
     .events-ongoing-card,
-    .events-ongoing-card--image-right {
+    .events-ongoing-card--image-right,
+    .event-detail-hero,
+    .event-detail-body {
         grid-template-columns: 1fr;
     }
 

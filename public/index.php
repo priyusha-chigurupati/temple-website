@@ -38,5 +38,14 @@ if (isset($routes[$path])) {
     exit;
 }
 
+if (str_starts_with($path, '/events/')) {
+    $slug = trim(substr($path, strlen('/events/')), '/');
+
+    if ($slug !== '') {
+        $controller->eventDetail($slug);
+        exit;
+    }
+}
+
 http_response_code(404);
 $controller->notFound();

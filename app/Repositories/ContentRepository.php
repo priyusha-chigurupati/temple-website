@@ -27,7 +27,7 @@ final class ContentRepository
     {
         $home = $this->content['pages']['home'];
         $about = $this->page('about');
-        $events = $this->page('events');
+        $events = $this->events();
         $gallery = $this->page('gallery');
 
         $home['about_section']['description'] = array_slice($about['history']['paragraphs'] ?? [], 0, 2);
@@ -79,6 +79,35 @@ final class ContentRepository
         return $page;
     }
 
+    public function events(): array
+    {
+        $page = $this->page('events');
+
+        $page['upcoming_section_id'] = 'upcoming-events';
+        $page['full_calendar_href'] = route_url('/events') . '#upcoming-events';
+        $page['ongoing'] = $this->normalizeEvents($page['ongoing'] ?? [], 'ongoing');
+        $page['upcoming'] = $this->normalizeEvents($page['upcoming'] ?? [], 'upcoming');
+        $page['sponsor_cta']['primary_href'] = route_url('/donations');
+        $page['sponsor_cta']['secondary_href'] = route_url('/contact');
+
+        return $page;
+    }
+
+    public function eventDetail(string $slug): ?array
+    {
+        foreach (['ongoing', 'upcoming'] as $group) {
+            foreach ($this->events()[$group] ?? [] as $event) {
+                if (($event['slug'] ?? '') !== $slug) {
+                    continue;
+                }
+
+                return $this->buildEventDetailPage($event);
+            }
+        }
+
+        return null;
+    }
+
     private function homeEventPreview(array $eventsPage): array
     {
         $items = array_map(static function (array $item): array {
@@ -86,7 +115,7 @@ final class ContentRepository
                 'date' => $item['date'] ?? '',
                 'title' => $item['title'] ?? '',
                 'description' => $item['description'] ?? '',
-                'href' => '/events',
+                'href' => $item['href'] ?? '/events',
                 'image' => $item['image'] ?? '',
             ];
         }, array_slice($eventsPage['ongoing'] ?? [], 0, 3));
@@ -108,7 +137,7 @@ final class ContentRepository
                 'date' => trim(($item['day'] ?? '') . ' ' . ($item['month'] ?? '')),
                 'title' => $item['title'] ?? '',
                 'description' => $item['description'] ?? '',
-                'href' => '/events',
+                'href' => $item['href'] ?? '/events',
                 'image' => $item['image'] ?? '',
             ];
         }
@@ -148,5 +177,59 @@ final class ContentRepository
         $dayValue = (int) ($item['day'] ?? 0);
 
         return ($monthValue * 100) + $dayValue;
+    }
+
+    private function normalizeEvents(array $items, string $status): array
+    {
+        return array_map(function (array $item) use ($status): array {
+            $slug = self::slugify((string) ($item['title'] ?? 'event'));
+
+            $item['status'] = $status;
+            $item['slug'] = $slug;
+            $item['href'] = route_url('/events/' . $slug);
+            $item['cta'] = 'Event Details';
+
+            return $item;
+        }, $items);
+    }
+
+    private function buildEventDetailPage(array $event): array
+    {
+        $statusLabel = ($event['status'] ?? 'upcoming') === 'ongoing' ? 'Ongoing Event' : 'Upcoming Event';
+        $schedule = $event['date'] ?? trim(($event['day'] ?? '') . ' ' . ($event['month'] ?? ''));
+
+        return [
+            'meta' => [
+                'title' => ($event['title'] ?? 'Event Details') . ' | ' . $this->site()['name'],
+                'description' => $event['description'] ?? 'Learn more about this temple event.',
+            ],
+            'eyebrow' => $statusLabel,
+            'title' => $event['title'] ?? 'Temple Event',
+            'description' => $event['description'] ?? '',
+            'image' => $event['image'] ?? '',
+            'schedule_label' => ($event['status'] ?? 'upcoming') === 'ongoing' ? 'Currently observed' : 'Scheduled for',
+            'schedule' => $schedule,
+            'status_badge' => strtoupper($statusLabel),
+            'back_href' => route_url('/events'),
+            'back_label' => 'Back to Events',
+            'body' => [
+                $event['description'] ?? '',
+                'This event detail page is prepared so fuller schedules, registration guidance, and festival-specific instructions can later be managed from the backend without changing the public design.',
+            ],
+            'quick_facts' => [
+                ['label' => 'Status', 'value' => $statusLabel],
+                ['label' => 'Calendar', 'value' => $schedule],
+                ['label' => 'Temple Page', 'value' => 'AnkammaThalli Events'],
+            ],
+        ];
+    }
+
+    private static function slugify(string $value): string
+    {
+        $value = strtolower(trim($value));
+        $value = preg_replace('/[^a-z0-9]+/', '-', $value);
+        $value = trim((string) $value, '-');
+
+        return $value === '' ? 'event' : $value;
     }
 }

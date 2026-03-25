@@ -42,7 +42,20 @@ final class PageController
 
     public function events(): void
     {
-        $this->renderPage('events', 'pages/events', $this->content->page('events'));
+        $this->renderPage('events', 'pages/events', $this->content->events());
+    }
+
+    public function eventDetail(string $slug): void
+    {
+        $page = $this->content->eventDetail($slug);
+
+        if ($page === null) {
+            http_response_code(404);
+            $this->notFound();
+            return;
+        }
+
+        $this->renderPage('events', 'pages/event-detail', $page);
     }
 
     public function donations(): void
