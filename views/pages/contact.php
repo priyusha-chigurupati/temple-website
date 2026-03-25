@@ -89,7 +89,10 @@ declare(strict_types=1);
                     <p class="eyebrow"><?= e($map['eyebrow']) ?></p>
                     <h2><?= e($map['title']) ?></h2>
                 </div>
-                <a class="section-link" href="#"><?= e($map['cta']) ?></a>
+                <a class="section-link" href="#">
+                    <?= e($map['cta']) ?>
+                    <span class="text-link__arrow" aria-hidden="true"></span>
+                </a>
             </div>
 
             <div class="contact-map__frame">

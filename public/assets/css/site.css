@@ -2019,8 +2019,9 @@ input {
 
 .contact-hero__content h1 {
     color: #fff;
-    font-size: clamp(2.8rem, 5vw, 4rem);
-    line-height: 1.05;
+    font-size: clamp(2.35rem, 3.95vw, 3.35rem);
+    line-height: 1.06;
+    white-space: nowrap;
 }
 
 .contact-hero__content p {
@@ -2239,7 +2240,7 @@ input {
 .contact-map__frame {
     position: relative;
     overflow: hidden;
-    min-height: 25rem;
+    min-height: 18.75rem;
     background: var(--color-surface-highest);
 }
 
@@ -2535,6 +2536,10 @@ input {
     .contact-form-card h2,
     .contact-map__head h2 {
         font-size: 2.35rem;
+    }
+
+    .contact-hero__content h1 {
+        white-space: normal;
     }
 
     .contact-panel {
