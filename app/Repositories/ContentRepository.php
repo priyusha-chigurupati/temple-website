@@ -6,7 +6,8 @@ final class ContentRepository
 {
     public function __construct(
         private readonly array $content,
-        private readonly ?EventRepository $eventRepository = null
+        private readonly ?EventRepository $eventRepository = null,
+        private readonly ?BlogRepository $blogRepository = null
     )
     {
     }
@@ -122,6 +123,27 @@ final class ContentRepository
 
     public function blog(array $filters = []): array
     {
+        if ($this->blogRepository instanceof BlogRepository && $this->blogRepository->hasPublishedPosts()) {
+            $page = $this->page('blog');
+            $listing = $this->blogRepository->listing($filters);
+
+            if ($listing['featured'] !== null) {
+                $page['featured'] = $listing['featured'];
+            }
+
+            $page['posts'] = $listing['posts'];
+            $page['search_term'] = $listing['search_term'];
+            $page['selected_category'] = $listing['selected_category'];
+            $page['current_page'] = $listing['current_page'];
+            $page['empty_message'] = 'No blog articles match the current filter yet.';
+            $page['chronicles_sort'] = 'Sorted by: Newest';
+            $page['pagination'] = $listing['pagination'];
+            $page['sidebar']['recent_posts'] = $listing['sidebar_recent_posts'];
+            $page['sidebar']['categories'] = $listing['sidebar_categories'];
+
+            return $page;
+        }
+
         $page = $this->page('blog');
         $posts = $this->allBlogPosts($page);
         $featured = array_values(array_filter($posts, static fn (array $post): bool => ($post['is_featured'] ?? false) === true))[0] ?? null;
@@ -181,6 +203,10 @@ final class ContentRepository
 
     public function blogDetail(string $slug): ?array
     {
+        if ($this->blogRepository instanceof BlogRepository && $this->blogRepository->hasPublishedPosts()) {
+            return $this->blogRepository->findBySlug($slug);
+        }
+
         foreach ($this->allBlogPosts($this->page('blog')) as $post) {
             if (($post['slug'] ?? '') !== $slug) {
                 continue;

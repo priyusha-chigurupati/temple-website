@@ -84,3 +84,19 @@ That command seeds the current English sample Events into:
 - `event_translations`
 - `media`
 - `media_translations`
+
+The current sample Blog content can be inserted into MySQL with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_blog.php
+```
+
+That command seeds the current English sample Blog content into:
+
+- `blog_posts`
+- `blog_post_translations`
+- `blog_categories`
+- `blog_category_translations`
+- `blog_post_categories`
+- `media`
+- `media_translations`
