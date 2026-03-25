@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 500" role="img" aria-labelledby="title desc">
+  <title>Vishu placeholder</title>
+  <desc>Festival placeholder with color and celebration mood.</desc>
+  <rect width="700" height="500" fill="#7db7dd"/>
+  <rect y="300" width="700" height="200" fill="#f1d85f"/>
+  <circle cx="130" cy="130" r="70" fill="#ff8d53"/>
+  <circle cx="260" cy="110" r="60" fill="#f85eb5"/>
+  <circle cx="400" cy="140" r="74" fill="#7ce96c"/>
+  <circle cx="545" cy="120" r="66" fill="#ffd65b"/>
+</svg>

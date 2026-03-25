@@ -23,6 +23,11 @@ final class PageController
         $this->renderPage('gallery', 'pages/gallery', $this->content->page('gallery'));
     }
 
+    public function events(): void
+    {
+        $this->renderPage('events', 'pages/events', $this->content->page('events'));
+    }
+
     public function placeholder(string $slug): void
     {
         $page = $this->content->page($slug);

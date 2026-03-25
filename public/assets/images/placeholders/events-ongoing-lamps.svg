@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title>Ongoing lamps placeholder</title>
+  <desc>Temple ritual placeholder with diya lamps and incense.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#27140d"/>
+      <stop offset="100%" stop-color="#844119"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <circle cx="260" cy="215" r="26" fill="#ffe08f"/>
+  <circle cx="260" cy="215" r="70" fill="#ffe08f" opacity=".16"/>
+  <circle cx="450" cy="180" r="36" fill="#ffefba"/>
+  <circle cx="450" cy="180" r="92" fill="#ffefba" opacity=".16"/>
+  <path d="M195 350c64-46 130-46 198 0" fill="none" stroke="#b36328" stroke-width="34" stroke-linecap="round"/>
+  <path d="M385 300 446 428M430 284 500 435M470 268 548 436" stroke="#4c240d" stroke-width="11" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title>Sanctum placeholder</title>
+  <desc>Temple sanctum corridor placeholder with centered glow.</desc>
+  <rect width="1200" height="700" fill="#2b170f"/>
+  <rect x="130" y="0" width="120" height="700" fill="#6e4323"/>
+  <rect x="950" y="0" width="120" height="700" fill="#6e4323"/>
+  <rect x="320" y="70" width="560" height="560" fill="#704121"/>
+  <rect x="400" y="150" width="400" height="400" fill="#392014"/>
+  <rect x="510" y="250" width="180" height="200" fill="#ffdda0"/>
+  <circle cx="600" cy="350" r="110" fill="#ffdda0" opacity=".18"/>
+</svg>

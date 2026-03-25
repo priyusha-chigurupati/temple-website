@@ -278,12 +278,63 @@ return [
         'events' => [
             'meta' => [
                 'title' => 'Events | AnkammaThalli Temple',
-                'description' => 'Events page design is queued for a later public-site milestone.',
+                'description' => 'View ongoing rituals, upcoming festivals, and temple celebrations on the AnkammaThalli Temple events page.',
             ],
-            'eyebrow' => 'Planned Page',
-            'title' => 'Events page will follow after the shared foundation.',
-            'description' => 'The Events design has been mapped from your export and will reuse the same card system and typography established on the Home page.',
-            'cta' => ['label' => 'Return Home', 'href' => '/'],
+            'eyebrow' => 'Temple Calendar',
+            'title' => 'Festivals & Sacred Gatherings',
+            'description' => 'Join us in celebrating our rich heritage through spiritual rituals, community feasts, and traditional music.',
+            'ongoing' => [
+                [
+                    'label' => 'Ongoing',
+                    'date' => 'Mar 15 - Mar 25',
+                    'title' => 'Annual Brahmotsavam Celebrations',
+                    'description' => 'Experience the festival atmosphere through daily processions, floral offerings, devotional music, and special puja rituals across the temple grounds.',
+                    'cta' => 'View Daily Schedule',
+                    'image' => 'assets/images/placeholders/events-ongoing-lamps.svg',
+                    'layout' => 'image-left',
+                ],
+                [
+                    'label' => 'Ongoing',
+                    'date' => 'Daily 6:00 PM',
+                    'title' => 'Sandhya Arathi & Bhajan Mandali',
+                    'description' => 'Join the evening congregation for sacred arathi followed by devotional singing in a calm temple atmosphere open to all visitors and devotees.',
+                    'cta' => 'Join Online Stream',
+                    'image' => 'assets/images/placeholders/events-ongoing-sanctum.svg',
+                    'layout' => 'image-right',
+                ],
+            ],
+            'upcoming' => [
+                [
+                    'day' => '14',
+                    'month' => 'April',
+                    'title' => 'Vishu & Spring Festival',
+                    'description' => 'A celebration of new beginnings with dawn darshan, festive colors, and a traditional community meal.',
+                    'cta' => 'Pre-register',
+                    'image' => 'assets/images/placeholders/events-upcoming-vishu.svg',
+                ],
+                [
+                    'day' => '01',
+                    'month' => 'May',
+                    'title' => 'Navaratri Mahotsavam',
+                    'description' => 'Nine nights of devotion honoring the divine feminine through music, chanting, and decorated sanctum rituals.',
+                    'cta' => 'Event Details',
+                    'image' => 'assets/images/placeholders/events-upcoming-navaratri.svg',
+                ],
+                [
+                    'day' => '22',
+                    'month' => 'May',
+                    'title' => 'Kartika Deepotsavam',
+                    'description' => 'Witness the temple illuminated by rows of traditional lamps during this auspicious evening celebration.',
+                    'cta' => 'Donate Lamps',
+                    'image' => 'assets/images/placeholders/events-upcoming-deepam.svg',
+                ],
+            ],
+            'sponsor_cta' => [
+                'title' => 'Sponsor a Sacred Event',
+                'description' => 'Contribute to the conduct of divine festivals and receive the blessings of Annadanam and Archana performed in your name.',
+                'primary' => 'Sponsor Now',
+                'secondary' => 'Volunteer Registration',
+            ],
         ],
         'donations' => [
             'meta' => [
