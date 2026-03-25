@@ -1308,15 +1308,19 @@ input {
 }
 
 .events-page__heading {
-    max-width: 34rem;
+    max-width: 38rem;
 }
 
 .events-page__title {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: clamp(2.65rem, 5vw, 4.2rem);
+    font-size: clamp(2.1rem, 3.75vw, 3.2rem);
     line-height: 0.98;
     letter-spacing: -0.03em;
+}
+
+.events-section {
+    margin-bottom: 3.6rem;
 }
 
 .events-page__description {
