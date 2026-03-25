@@ -1577,21 +1577,30 @@ input {
 }
 
 .donations-hero__title {
-    max-width: 31rem;
+    max-width: 33rem;
     margin: 0;
     font-family: var(--font-heading);
-    font-size: clamp(2.8rem, 5vw, 4.35rem);
-    line-height: 1.03;
+    font-size: clamp(2.4rem, 4.35vw, 3.8rem);
+    line-height: 1.04;
     letter-spacing: -0.04em;
 }
 
-.donations-hero__title span {
+.donations-hero__title-line,
+.donations-hero__title-highlight {
+    display: block;
+}
+
+.donations-hero__title-line {
+    white-space: nowrap;
+}
+
+.donations-hero__title-highlight {
     font-style: italic;
 }
 
 .donations-hero__description {
     max-width: 29rem;
-    margin: 1.5rem 0 0;
+    margin: 1.35rem 0 0;
     color: var(--color-text-muted);
     font-size: 0.92rem;
     line-height: 1.78;

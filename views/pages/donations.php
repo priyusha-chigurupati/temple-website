@@ -11,8 +11,8 @@ declare(strict_types=1);
             <div class="donations-hero__copy">
                 <p class="eyebrow"><?= e($page['eyebrow']) ?></p>
                 <h1 class="donations-hero__title">
-                    <?= e($page['title_prefix']) ?>
-                    <span><?= e($page['title_highlight']) ?></span>
+                    <span class="donations-hero__title-line"><?= e($page['title_prefix']) ?></span>
+                    <span class="donations-hero__title-highlight"><?= e($page['title_highlight']) ?></span>
                 </h1>
                 <p class="donations-hero__description"><?= e($page['description']) ?></p>
 
