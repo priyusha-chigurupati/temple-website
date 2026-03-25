@@ -6,7 +6,8 @@ final class PageController
 {
     public function __construct(
         private readonly ContentRepository $content,
-        private readonly GallerySubmissionService $gallerySubmissions
+        private readonly GallerySubmissionService $gallerySubmissions,
+        private readonly DonationNotificationService $donationNotifications
     )
     {
     }
@@ -61,7 +62,23 @@ final class PageController
     public function donations(): void
     {
         $page = $this->content->page('donations');
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleDonationNotification($page);
+        }
+
         $page['prefill'] = $this->donationPrefill();
+        $page['notification_state'] = flash_pull('donation_notification_state', []);
+        $page['notification_form'] = flash_pull('donation_notification_form', [
+            'full_name' => '',
+            'payment_method' => '',
+            'amount' => '',
+            'reference_id' => '',
+            'phone' => '',
+            'email' => '',
+            'address' => '',
+            'message' => '',
+        ]);
 
         $this->renderPage('donations', 'pages/donations', $page);
     }
@@ -152,6 +169,53 @@ final class PageController
         ]);
 
         redirect_to($redirectUrl);
+    }
+
+    private function handleDonationNotification(array $page): never
+    {
+        $allowedMethods = [];
+
+        foreach (($page['form']['fields'] ?? []) as $field) {
+            if (($field['name'] ?? '') !== 'payment_method') {
+                continue;
+            }
+
+            foreach (($field['options'] ?? []) as $option) {
+                if (! isset($option['value'], $option['label'])) {
+                    continue;
+                }
+
+                $allowedMethods[(string) $option['value']] = (string) $option['label'];
+            }
+        }
+
+        $result = $this->donationNotifications->submit($_POST, $allowedMethods);
+
+        if ($result['ok']) {
+            flash_set('donation_notification_state', [
+                'type' => 'success',
+                'message' => $result['message'],
+            ]);
+            flash_set('donation_notification_form', [
+                'full_name' => '',
+                'payment_method' => '',
+                'amount' => '',
+                'reference_id' => '',
+                'phone' => '',
+                'email' => '',
+                'address' => '',
+                'message' => '',
+            ]);
+            redirect_to(route_url('/donations'));
+        }
+
+        flash_set('donation_notification_state', [
+            'type' => 'error',
+            'message' => implode(' ', $result['errors'] ?? ['The donation notice could not be submitted.']),
+        ]);
+        flash_set('donation_notification_form', $result['old'] ?? []);
+
+        redirect_to(route_url('/donations'));
     }
 
     private function donationPrefill(): array

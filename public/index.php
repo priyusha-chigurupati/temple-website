@@ -6,6 +6,7 @@ require __DIR__ . '/../app/Support/helpers.php';
 require __DIR__ . '/../app/Support/View.php';
 require __DIR__ . '/../app/Repositories/ContentRepository.php';
 require __DIR__ . '/../app/Services/GallerySubmissionService.php';
+require __DIR__ . '/../app/Services/DonationNotificationService.php';
 require __DIR__ . '/../app/Controllers/PageController.php';
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -18,7 +19,10 @@ $gallerySubmissions = new GallerySubmissionService(
     dirname(__DIR__) . '/storage/data/gallery_submissions.json',
     dirname(__DIR__) . '/storage/uploads/gallery-submissions'
 );
-$controller = new PageController($repository, $gallerySubmissions);
+$donationNotifications = new DonationNotificationService(
+    dirname(__DIR__) . '/storage/data/donation_notifications.json'
+);
+$controller = new PageController($repository, $gallerySubmissions, $donationNotifications);
 
 $path = request_path();
 

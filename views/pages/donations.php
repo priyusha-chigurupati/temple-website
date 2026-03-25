@@ -5,6 +5,8 @@ declare(strict_types=1);
 <?php $transparency = $page['transparency']; ?>
 <?php $form = $page['form']; ?>
 <?php $prefill = $page['prefill'] ?? []; ?>
+<?php $notificationState = $page['notification_state'] ?? []; ?>
+<?php $notificationForm = $page['notification_form'] ?? []; ?>
 
 <section class="donations-page">
     <div class="container">
@@ -52,18 +54,17 @@ declare(strict_types=1);
                             <p><?= e($method['description']) ?></p>
                         </div>
 
-                        <?php if ($method['type'] === 'price'): ?>
+                        <?php if ($method['type'] === 'accepted_forms'): ?>
                             <div class="donation-method-card__footer">
-                                <div class="donation-method-card__price">
-                                    <span><?= e($method['meta_label']) ?></span>
-                                    <strong><?= e($method['meta_value']) ?></strong>
-                                </div>
-                                <a class="button button--<?= e($method['button_style']) ?> button--full" href="#"><?= e($method['button']) ?></a>
+                                <ul class="donation-method-card__accepted">
+                                    <?php foreach ($method['accepted_forms'] as $accepted): ?>
+                                        <li><?= e($accepted) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
                             </div>
                         <?php elseif ($method['type'] === 'code'): ?>
                             <div class="donation-method-card__footer">
                                 <div class="donation-method-card__code"><?= e($method['code']) ?></div>
-                                <a class="button button--<?= e($method['button_style']) ?> button--full" href="#"><?= e($method['button']) ?></a>
                             </div>
                         <?php elseif ($method['type'] === 'details'): ?>
                             <dl class="donation-method-card__details">
@@ -104,21 +105,24 @@ declare(strict_types=1);
             <div class="donations-form-card">
                 <h2><?= e($form['title']) ?></h2>
                 <p><?= e($form['description']) ?></p>
-                <form class="donations-form" action="#" method="post">
+                <?php if (! empty($notificationState['message'])): ?>
+                    <p class="donations-form__status donations-form__status--<?= e($notificationState['type'] ?? 'info') ?>">
+                        <?= e($notificationState['message']) ?>
+                    </p>
+                <?php endif; ?>
+                <form class="donations-form" action="<?= e(route_url('/donations')) ?>" method="post">
                     <?php if (! empty($prefill['purpose'])): ?>
                         <input type="hidden" name="purpose" value="<?= e($prefill['purpose']) ?>">
                     <?php endif; ?>
                     <div class="donations-form__grid">
-                        <?php foreach ($form['fields'] as $index => $field): ?>
-                            <?php $wide = $index >= 2 ? ' donations-form__field--wide' : ''; ?>
+                        <?php foreach ($form['fields'] as $field): ?>
+                            <?php $wide = ($field['width'] ?? 'half') === 'full' ? ' donations-form__field--wide' : ''; ?>
                             <?php
-                            $value = '';
-
-                            if ($field['name'] === 'amount') {
+                            $value = $notificationForm[$field['name']] ?? '';
+                            if ($value === '' && $field['name'] === 'amount') {
                                 $value = $prefill['amount'] ?? '';
                             }
-
-                            if ($field['name'] === 'message') {
+                            if ($value === '' && $field['name'] === 'message') {
                                 $value = $prefill['message'] ?? '';
                             }
                             ?>
@@ -126,13 +130,22 @@ declare(strict_types=1);
                                 <span><?= e($field['label']) ?></span>
                                 <?php if ($field['type'] === 'textarea'): ?>
                                     <textarea name="<?= e($field['name']) ?>" rows="5" placeholder="<?= e($field['placeholder']) ?>"><?= e($value) ?></textarea>
+                                <?php elseif ($field['type'] === 'select'): ?>
+                                    <select name="<?= e($field['name']) ?>">
+                                        <option value="">Select a method</option>
+                                        <?php foreach ($field['options'] as $option): ?>
+                                            <option value="<?= e($option['value']) ?>"<?= $value === $option['value'] ? ' selected' : '' ?>>
+                                                <?= e($option['label']) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 <?php else: ?>
                                     <input type="<?= e($field['type']) ?>" name="<?= e($field['name']) ?>" placeholder="<?= e($field['placeholder']) ?>" value="<?= e($value) ?>">
                                 <?php endif; ?>
                             </label>
                         <?php endforeach; ?>
                     </div>
-
+                    <p class="donations-form__note"><?= e($form['reference_note']) ?></p>
                     <button class="button button--gradient button--full" type="submit"><?= e($form['button']) ?></button>
                 </form>
             </div>
