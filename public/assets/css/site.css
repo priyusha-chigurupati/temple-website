@@ -2239,10 +2239,9 @@ input {
 
 .contact-map__frame {
     position: relative;
+    width: 100%;
     overflow: hidden;
-    aspect-ratio: 2.45 / 1;
-    min-height: 0;
-    max-height: min(22rem, calc(100vh - 16rem));
+    height: clamp(11rem, 22vw, 16rem);
     background: var(--color-surface-highest);
 }
 
@@ -2561,7 +2560,6 @@ input {
     }
 
     .contact-map__frame {
-        aspect-ratio: 1.9 / 1;
-        max-height: none;
+        height: clamp(9rem, 34vw, 12rem);
     }
 }
