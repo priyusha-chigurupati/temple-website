@@ -541,12 +541,86 @@ return [
         'blog' => [
             'meta' => [
                 'title' => 'Blog | AnkammaThalli Temple',
-                'description' => 'Blog page design is queued for a later public-site milestone.',
+                'description' => 'Read temple stories, spiritual reflections, and community updates from AnkammaThalli Temple.',
             ],
-            'eyebrow' => 'Planned Page',
-            'title' => 'Blog page will be added with the same editorial styling.',
-            'description' => 'The route is already reserved so we can add the exported blog design without restructuring the project later.',
-            'cta' => ['label' => 'Return Home', 'href' => '/'],
+            'featured' => [
+                'eyebrow' => 'Featured Journal',
+                'title' => 'The Sacred Echoes: Understanding Temple Architecture',
+                'description' => 'Journey through the metaphysical foundations of our sacred spaces. Discover how every pillar and sculpture in AnkammaThalli serves as a conduit for divine energy and celestial alignment.',
+                'date' => 'October 24, 2024',
+                'read_time' => '12 Min Read',
+                'cta' => 'Read Full Article',
+                'image' => 'assets/images/placeholders/blog-feature-temple.svg',
+            ],
+            'chronicles_title' => 'The Chronicles',
+            'chronicles_sort' => 'Sorted by: Newest',
+            'posts' => [
+                [
+                    'category' => 'Spiritual Practices',
+                    'title' => 'The Ritual of Deepam: Light as Devotion',
+                    'description' => 'Exploring the significance of lighting lamps during the evening arathi and the symbolism of inner awakening.',
+                    'cta' => 'Continue Reading',
+                    'image' => 'assets/images/placeholders/blog-post-deepam.svg',
+                ],
+                [
+                    'category' => 'Community Wisdom',
+                    'title' => 'Silence within the Sanctum',
+                    'description' => 'Finding quiet strength inside temple spaces and carrying that stillness into everyday life.',
+                    'cta' => 'Continue Reading',
+                    'image' => 'assets/images/placeholders/blog-post-meditation.svg',
+                ],
+                [
+                    'category' => 'History & Lore',
+                    'title' => 'Preserving the Palm Leaf Manuscripts',
+                    'description' => 'The ongoing effort to protect old scriptures and preserve ritual knowledge for future generations.',
+                    'cta' => 'Continue Reading',
+                    'image' => 'assets/images/placeholders/blog-post-manuscripts.svg',
+                ],
+                [
+                    'category' => 'Donations',
+                    'title' => 'Annadanam: The Gift of Nourishment',
+                    'description' => 'Understanding the spiritual merit of feeding the hungry and how temple seva supports the wider community.',
+                    'cta' => 'Continue Reading',
+                    'image' => 'assets/images/placeholders/blog-post-annadanam.svg',
+                ],
+            ],
+            'pagination' => ['1', '2', '3'],
+            'sidebar' => [
+                'search_title' => 'Search Archives',
+                'search_placeholder' => 'Keywords...',
+                'recent_title' => 'Recent Whispers',
+                'recent_posts' => [
+                    [
+                        'title' => 'The Sound of the Temple Bell',
+                        'date' => 'Oct 12, 2024',
+                        'image' => 'assets/images/placeholders/blog-thumb-bell.svg',
+                    ],
+                    [
+                        'title' => 'Upcoming Navratri Celebrations',
+                        'date' => 'Oct 05, 2024',
+                        'image' => 'assets/images/placeholders/blog-thumb-navratri.svg',
+                    ],
+                    [
+                        'title' => 'The Significance of Floral Offerings',
+                        'date' => 'Sep 28, 2024',
+                        'image' => 'assets/images/placeholders/blog-thumb-flowers.svg',
+                    ],
+                ],
+                'categories_title' => 'Paths of Knowledge',
+                'categories' => [
+                    ['label' => 'Spiritual Practices', 'count' => '12'],
+                    ['label' => 'Temple History', 'count' => '08'],
+                    ['label' => 'Community Stories', 'count' => '15'],
+                    ['label' => 'Festivals', 'count' => '24'],
+                    ['label' => 'Philosophy', 'count' => '06'],
+                ],
+                'newsletter' => [
+                    'title' => 'Temple Gazette',
+                    'description' => 'Receive monthly insights, spiritual teachings, and temple updates directly in your inbox.',
+                    'placeholder' => 'Email Address',
+                    'button' => 'Join the Circle',
+                ],
+            ],
         ],
         'admin' => [
             'meta' => [

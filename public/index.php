@@ -20,7 +20,7 @@ $routes = [
     '/events' => static fn () => $controller->events(),
     '/donations' => static fn () => $controller->donations(),
     '/contact' => static fn () => $controller->contact(),
-    '/blog' => static fn () => $controller->placeholder('blog'),
+    '/blog' => static fn () => $controller->blog(),
     '/admin' => static fn () => $controller->placeholder('admin'),
 ];
 

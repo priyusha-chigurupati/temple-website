@@ -38,6 +38,11 @@ final class PageController
         $this->renderPage('contact', 'pages/contact', $this->content->page('contact'));
     }
 
+    public function blog(): void
+    {
+        $this->renderPage('blog', 'pages/blog', $this->content->page('blog'));
+    }
+
     public function placeholder(string $slug): void
     {
         $page = $this->content->page($slug);
