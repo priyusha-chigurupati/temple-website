@@ -2314,7 +2314,8 @@ input {
 }
 
 .donations-info__copy {
-    padding-top: 1.1rem;
+    align-self: center;
+    padding-top: 0;
 }
 
 .donations-steps {
@@ -3437,6 +3438,7 @@ input {
     }
 
     .donations-info__copy {
+        align-self: auto;
         padding-top: 0;
     }
 
