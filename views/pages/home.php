@@ -124,15 +124,40 @@ declare(strict_types=1);
         </div>
         <aside class="quick-panel" aria-label="Quick contribution">
             <h2>Quick Contribution</h2>
-            <div class="quick-panel__items">
-                <?php foreach ($donation['quick_options'] as $item): ?>
-                    <div class="quick-option">
-                        <span><?= e($item['label']) ?></span>
-                        <strong><?= e($item['amount']) ?></strong>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-            <a class="button button--primary button--full" href="<?= e(route_url($donation['cta']['href'])) ?>"><?= e($donation['cta']['label']) ?></a>
+            <form class="quick-panel__form" action="<?= e(route_url($donation['cta']['href'])) ?>" method="get">
+                <div class="quick-panel__items">
+                    <?php foreach ($donation['quick_options'] as $index => $item): ?>
+                        <?php $optionId = 'quick-option-' . $index; ?>
+                        <label class="quick-option<?= $item['type'] === 'custom' ? ' quick-option--custom' : '' ?>" for="<?= e($optionId) ?>">
+                            <input
+                                id="<?= e($optionId) ?>"
+                                class="quick-option__input"
+                                type="radio"
+                                name="purpose"
+                                value="<?= e($item['purpose']) ?>"
+                                <?= $index === 0 ? 'checked' : '' ?>
+                            >
+                            <span class="quick-option__content">
+                                <span><?= e($item['label']) ?></span>
+                                <?php if ($item['type'] !== 'custom'): ?>
+                                    <strong><?= e($item['amount']) ?></strong>
+                                <?php endif; ?>
+                            </span>
+                            <?php if ($item['type'] === 'custom'): ?>
+                                <input
+                                    class="quick-option__amount"
+                                    type="text"
+                                    name="custom_amount"
+                                    inputmode="decimal"
+                                    placeholder="<?= e($item['amount']) ?>"
+                                    aria-label="<?= e($item['label']) ?> amount"
+                                >
+                            <?php endif; ?>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
+                <button class="button button--primary button--full" type="submit"><?= e($donation['cta']['label']) ?></button>
+            </form>
         </aside>
     </div>
 </section>

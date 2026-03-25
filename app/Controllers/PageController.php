@@ -30,7 +30,10 @@ final class PageController
 
     public function donations(): void
     {
-        $this->renderPage('donations', 'pages/donations', $this->content->page('donations'));
+        $page = $this->content->page('donations');
+        $page['prefill'] = $this->donationPrefill();
+
+        $this->renderPage('donations', 'pages/donations', $page);
     }
 
     public function contact(): void
@@ -86,5 +89,71 @@ final class PageController
             'metaTitle' => $page['meta']['title'] ?? ($site['name'] . ' | Coming Soon'),
             'metaDescription' => $page['meta']['description'] ?? 'This page is queued for implementation in a later milestone.',
         ]);
+    }
+
+    private function donationPrefill(): array
+    {
+        $customAmount = $this->sanitizeAmount(query_value('custom_amount'));
+
+        if ($customAmount !== null) {
+            return [
+                'purpose' => 'General Donation',
+                'amount' => $customAmount,
+                'message' => 'Purpose: General Donation',
+            ];
+        }
+
+        $selectedPurpose = query_value('purpose');
+
+        if ($selectedPurpose === null) {
+            return [];
+        }
+
+        $quickOptions = $this->content->home()['donation_section']['quick_options'] ?? [];
+
+        foreach ($quickOptions as $option) {
+            if (($option['purpose'] ?? '') !== $selectedPurpose) {
+                continue;
+            }
+
+            $presetAmount = $this->sanitizeAmount((string) ($option['amount_value'] ?? ''));
+
+            if ($presetAmount === null) {
+                break;
+            }
+
+            return [
+                'purpose' => $selectedPurpose,
+                'amount' => $presetAmount,
+                'message' => 'Purpose: ' . $selectedPurpose,
+            ];
+        }
+
+        return [];
+    }
+
+    private function sanitizeAmount(?string $amount): ?string
+    {
+        if ($amount === null) {
+            return null;
+        }
+
+        $normalized = preg_replace('/[^0-9.]/', '', $amount);
+
+        if (! is_string($normalized) || $normalized === '' || ! is_numeric($normalized)) {
+            return null;
+        }
+
+        $floatValue = (float) $normalized;
+
+        if ($floatValue <= 0) {
+            return null;
+        }
+
+        if (floor($floatValue) === $floatValue) {
+            return (string) (int) $floatValue;
+        }
+
+        return rtrim(rtrim(number_format($floatValue, 2, '.', ''), '0'), '.');
     }
 }

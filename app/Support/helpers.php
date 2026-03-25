@@ -36,6 +36,34 @@ function route_url(string $path = '/'): string
     return $cleanPath === '/' ? base_url() . '/' : base_url() . $cleanPath;
 }
 
+function route_url_with_query(string $path, array $query = []): string
+{
+    $url = route_url($path);
+    $filtered = array_filter(
+        $query,
+        static fn ($value): bool => $value !== null && $value !== ''
+    );
+
+    if ($filtered === []) {
+        return $url;
+    }
+
+    return $url . '?' . http_build_query($filtered);
+}
+
+function query_value(string $key): ?string
+{
+    $value = $_GET[$key] ?? null;
+
+    if (! is_scalar($value)) {
+        return null;
+    }
+
+    $trimmed = trim((string) $value);
+
+    return $trimmed === '' ? null : $trimmed;
+}
+
 function e(?string $value): string
 {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');

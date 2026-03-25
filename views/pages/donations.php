@@ -4,6 +4,7 @@ declare(strict_types=1);
 <?php $impact = $page['impact']; ?>
 <?php $transparency = $page['transparency']; ?>
 <?php $form = $page['form']; ?>
+<?php $prefill = $page['prefill'] ?? []; ?>
 
 <section class="donations-page">
     <div class="container">
@@ -104,15 +105,29 @@ declare(strict_types=1);
                 <h2><?= e($form['title']) ?></h2>
                 <p><?= e($form['description']) ?></p>
                 <form class="donations-form" action="#" method="post">
+                    <?php if (! empty($prefill['purpose'])): ?>
+                        <input type="hidden" name="purpose" value="<?= e($prefill['purpose']) ?>">
+                    <?php endif; ?>
                     <div class="donations-form__grid">
                         <?php foreach ($form['fields'] as $index => $field): ?>
                             <?php $wide = $index >= 2 ? ' donations-form__field--wide' : ''; ?>
+                            <?php
+                            $value = '';
+
+                            if ($field['name'] === 'amount') {
+                                $value = $prefill['amount'] ?? '';
+                            }
+
+                            if ($field['name'] === 'message') {
+                                $value = $prefill['message'] ?? '';
+                            }
+                            ?>
                             <label class="donations-form__field<?= $wide ?>">
                                 <span><?= e($field['label']) ?></span>
                                 <?php if ($field['type'] === 'textarea'): ?>
-                                    <textarea name="<?= e($field['name']) ?>" rows="5" placeholder="<?= e($field['placeholder']) ?>"></textarea>
+                                    <textarea name="<?= e($field['name']) ?>" rows="5" placeholder="<?= e($field['placeholder']) ?>"><?= e($value) ?></textarea>
                                 <?php else: ?>
-                                    <input type="<?= e($field['type']) ?>" name="<?= e($field['name']) ?>" placeholder="<?= e($field['placeholder']) ?>">
+                                    <input type="<?= e($field['type']) ?>" name="<?= e($field['name']) ?>" placeholder="<?= e($field['placeholder']) ?>" value="<?= e($value) ?>">
                                 <?php endif; ?>
                             </label>
                         <?php endforeach; ?>

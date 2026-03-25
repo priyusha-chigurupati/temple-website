@@ -669,6 +669,10 @@ input {
     box-shadow: 0 14px 34px rgba(160, 65, 0, 0.1);
 }
 
+.quick-panel__form {
+    display: grid;
+}
+
 .quick-panel__items {
     display: grid;
     gap: 0.6rem;
@@ -684,11 +688,69 @@ input {
     background: rgba(255, 255, 255, 0.78);
     border: 1px solid rgba(219, 194, 176, 0.3);
     font-size: 0.74rem;
+    cursor: pointer;
+}
+
+.quick-option__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.quick-option__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
 }
 
 .quick-option strong {
     color: var(--color-primary);
     font-size: 0.74rem;
+}
+
+.quick-option--custom {
+    align-items: center;
+}
+
+.quick-option__amount {
+    width: 7.4rem;
+    padding: 0;
+    color: var(--color-primary);
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-align: right;
+    background: transparent;
+    border: 0;
+}
+
+.quick-option__amount::placeholder {
+    color: var(--color-primary);
+    opacity: 1;
+}
+
+.quick-option__amount:focus {
+    outline: none;
+}
+
+.quick-option__input:checked + .quick-option__content {
+    color: var(--color-text);
+}
+
+.quick-option__input:checked + .quick-option__content strong {
+    color: var(--color-primary);
+}
+
+.quick-option:focus-within,
+.quick-option:hover {
+    border-color: rgba(160, 65, 0, 0.28);
 }
 
 .site-footer {
