@@ -2216,12 +2216,12 @@ input {
 }
 
 .contact-map {
-    padding: 0 0 5.5rem;
+    padding: 0 0 3.6rem;
     background: var(--color-surface-low);
 }
 
 .contact-map .container {
-    padding-top: 4.3rem;
+    padding-top: 2.6rem;
     padding-bottom: 0.2rem;
 }
 
@@ -2240,7 +2240,7 @@ input {
 .contact-map__frame {
     position: relative;
     overflow: hidden;
-    min-height: 14.5rem;
+    min-height: 10.5rem;
     background: var(--color-surface-highest);
 }
 
@@ -2547,7 +2547,7 @@ input {
     }
 
     .contact-map {
-        padding-bottom: 4.2rem;
+        padding-bottom: 3rem;
     }
 
     .contact-map__head {
@@ -2556,6 +2556,6 @@ input {
     }
 
     .contact-map__frame {
-        min-height: 13rem;
+        min-height: 9rem;
     }
 }
