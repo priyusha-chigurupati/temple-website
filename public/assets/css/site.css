@@ -2250,7 +2250,10 @@ input {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     opacity: 0.8;
+    transform: scale(1.12);
+    transform-origin: center;
 }
 
 .contact-map__marker {
