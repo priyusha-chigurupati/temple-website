@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 final class PageController
 {
-    public function __construct(private readonly ContentRepository $content)
+    public function __construct(
+        private readonly ContentRepository $content,
+        private readonly GallerySubmissionService $gallerySubmissions
+    )
     {
     }
 
@@ -20,7 +23,21 @@ final class PageController
 
     public function gallery(): void
     {
-        $this->renderPage('gallery', 'pages/gallery', $this->content->page('gallery'));
+        $selectedCategory = query_value('category') ?? 'all';
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleGallerySubmission($selectedCategory);
+        }
+
+        $page = $this->content->gallery($selectedCategory);
+        $page['submission_state'] = flash_pull('gallery_submission_state', []);
+        $page['submission_form'] = flash_pull('gallery_submission_form', [
+            'name' => '',
+            'email' => '',
+            'description' => '',
+        ]);
+
+        $this->renderPage('gallery', 'pages/gallery', $page);
     }
 
     public function events(): void
@@ -89,6 +106,41 @@ final class PageController
             'metaTitle' => $page['meta']['title'] ?? ($site['name'] . ' | Coming Soon'),
             'metaDescription' => $page['meta']['description'] ?? 'This page is queued for implementation in a later milestone.',
         ]);
+    }
+
+    private function handleGallerySubmission(string $selectedCategory): never
+    {
+        $result = $this->gallerySubmissions->submit($_POST, $_FILES);
+        $redirectUrl = route_url_with_query('/gallery', [
+            'category' => $selectedCategory === 'all' ? null : $selectedCategory,
+            'modal' => $result['ok'] ? null : 'submit',
+        ]);
+
+        if ($result['ok']) {
+            flash_set('gallery_submission_state', [
+                'type' => 'success',
+                'message' => $result['message'],
+            ]);
+            flash_set('gallery_submission_form', [
+                'name' => '',
+                'email' => '',
+                'description' => '',
+            ]);
+            redirect_to($redirectUrl);
+        }
+
+        flash_set('gallery_submission_state', [
+            'type' => 'error',
+            'message' => implode(' ', $result['errors'] ?? ['The gallery submission could not be processed.']),
+            'auto_open' => true,
+        ]);
+        flash_set('gallery_submission_form', $result['old'] ?? [
+            'name' => '',
+            'email' => '',
+            'description' => '',
+        ]);
+
+        redirect_to($redirectUrl);
     }
 
     private function donationPrefill(): array

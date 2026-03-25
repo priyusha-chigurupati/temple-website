@@ -42,6 +42,43 @@ final class ContentRepository
         return $this->content['pages'][$slug] ?? [];
     }
 
+    public function gallery(string $selectedCategory = 'all'): array
+    {
+        $page = $this->page('gallery');
+        $categories = [];
+
+        foreach ($page['filters'] ?? [] as $filter) {
+            $categories[] = [
+                'label' => $filter['label'],
+                'slug' => $filter['slug'],
+                'active' => $filter['slug'] === $selectedCategory,
+            ];
+        }
+
+        $validSlugs = array_column($categories, 'slug');
+
+        if (! in_array($selectedCategory, $validSlugs, true)) {
+            $selectedCategory = 'all';
+            $categories = array_map(static function (array $filter): array {
+                $filter['active'] = $filter['slug'] === 'all';
+
+                return $filter;
+            }, $categories);
+        }
+
+        $items = $page['items'] ?? [];
+
+        if ($selectedCategory !== 'all') {
+            $items = array_values(array_filter($items, static fn (array $item): bool => ($item['category_slug'] ?? '') === $selectedCategory));
+        }
+
+        $page['selected_category'] = $selectedCategory;
+        $page['filters'] = $categories;
+        $page['items'] = $items;
+
+        return $page;
+    }
+
     private function homeEventPreview(array $eventsPage): array
     {
         $items = array_map(static function (array $item): array {

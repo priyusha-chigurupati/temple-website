@@ -39,6 +39,10 @@ body {
     line-height: 1.6;
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
 img {
     display: block;
     max-width: 100%;
@@ -1263,6 +1267,18 @@ input {
     background: var(--color-surface-highest);
 }
 
+.gallery-card__trigger {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    color: inherit;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
 .gallery-card img {
     width: 100%;
     height: 100%;
@@ -1322,6 +1338,15 @@ input {
     min-height: 16rem;
 }
 
+.gallery-empty {
+    grid-column: 1 / -1;
+    padding: 2rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    text-align: center;
+    background: var(--color-surface-low);
+}
+
 .gallery-divider {
     height: 1px;
     margin: 4rem 0;
@@ -1347,6 +1372,211 @@ input {
     color: var(--color-text-muted);
     font-size: 0.86rem;
     line-height: 1.6;
+}
+
+.gallery-cta__status {
+    max-width: 34rem;
+    margin: 0 auto 1rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
+}
+
+.gallery-cta__status--success {
+    color: #24663f;
+}
+
+.gallery-cta__status--error {
+    color: #a51d1d;
+}
+
+.gallery-lightbox,
+.gallery-submit-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+}
+
+.gallery-lightbox__backdrop,
+.gallery-submit-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 27, 19, 0.72);
+}
+
+.gallery-lightbox__dialog,
+.gallery-submit-modal__dialog {
+    position: relative;
+    z-index: 1;
+}
+
+.gallery-lightbox__dialog {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    width: min(100%, 70rem);
+}
+
+.gallery-lightbox__close,
+.gallery-submit-modal__close,
+.gallery-lightbox__nav,
+.gallery-lightbox__zoom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+.gallery-lightbox__close,
+.gallery-submit-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.35rem;
+}
+
+.gallery-lightbox__nav {
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1.7rem;
+}
+
+.gallery-lightbox__frame {
+    position: relative;
+    overflow: hidden;
+    background: rgba(17, 13, 10, 0.92);
+    box-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
+}
+
+.gallery-lightbox__frame img {
+    width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    transition: transform 240ms ease;
+}
+
+.gallery-lightbox__frame.is-zoomed img {
+    transform: scale(1.45);
+    cursor: zoom-out;
+}
+
+.gallery-lightbox__zoom {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    min-width: 4rem;
+    min-height: 2rem;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.gallery-lightbox__meta {
+    grid-column: 2;
+    padding: 1rem 0 0;
+    color: #fff;
+}
+
+.gallery-lightbox__meta span {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.gallery-lightbox__meta h2 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+}
+
+.gallery-submit-modal__dialog {
+    width: min(100%, 38rem);
+    padding: 2rem;
+    background: var(--color-surface-low);
+    box-shadow: 0 28px 64px rgba(30, 27, 19, 0.2);
+}
+
+.gallery-submit-modal__dialog h2 {
+    margin: 0 0 0.6rem;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+}
+
+.gallery-submit-modal__dialog > p {
+    max-width: 30rem;
+    margin: 0 0 1.4rem;
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+    line-height: 1.65;
+}
+
+.gallery-submit-form {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.gallery-submit-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.gallery-submit-form__field span {
+    color: var(--color-text-muted);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.gallery-submit-form__field input,
+.gallery-submit-form__field textarea {
+    width: 100%;
+    padding: 0.95rem 1rem;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    background: #fff;
+    border: 1px solid rgba(219, 194, 176, 0.34);
+    border-radius: var(--radius-sm);
+}
+
+.gallery-submit-form__field input[type="file"] {
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.gallery-submit-form__field textarea {
+    min-height: 7rem;
+    resize: vertical;
+}
+
+.gallery-submit-form__field input:focus,
+.gallery-submit-form__field textarea:focus {
+    outline: none;
+    border-color: rgba(160, 65, 0, 0.28);
+    box-shadow: 0 0 0 3px rgba(255, 151, 98, 0.12);
+}
+
+.gallery-submit-form__note {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.73rem;
+    line-height: 1.55;
 }
 
 .events-page {
@@ -2835,6 +3065,10 @@ input {
         gap: 2.5rem;
     }
 
+    .gallery-lightbox__dialog {
+        width: min(100%, 52rem);
+    }
+
     .value-panel--intro,
     .value-panel--highlight,
     .value-panel--image,
@@ -2913,6 +3147,35 @@ input {
     .gallery-card--square,
     .gallery-card--wide-banner {
         grid-column: span 1;
+    }
+
+    .gallery-lightbox__dialog {
+        grid-template-columns: 1fr;
+        width: min(100%, 32rem);
+    }
+
+    .gallery-lightbox__nav {
+        position: absolute;
+        top: 50%;
+        z-index: 2;
+        transform: translateY(-50%);
+    }
+
+    .gallery-lightbox__nav--prev {
+        left: 0.75rem;
+    }
+
+    .gallery-lightbox__nav--next {
+        right: 0.75rem;
+    }
+
+    .gallery-lightbox__meta {
+        grid-column: auto;
+        padding-top: 0.15rem;
+    }
+
+    .gallery-submit-modal__dialog {
+        padding: 1.7rem 1.25rem;
     }
 
     .events-section__head,

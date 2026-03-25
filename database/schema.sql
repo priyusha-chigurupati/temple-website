@@ -58,16 +58,56 @@ CREATE TABLE events (
     CONSTRAINT fk_events_media FOREIGN KEY (image_id) REFERENCES media(id) ON DELETE SET NULL
 );
 
+CREATE TABLE gallery_categories (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    slug VARCHAR(120) NOT NULL UNIQUE,
+    sort_order INT UNSIGNED NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 CREATE TABLE gallery_items (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(190) NOT NULL,
     caption TEXT NULL,
     image_id BIGINT UNSIGNED NOT NULL,
+    category_id BIGINT UNSIGNED NOT NULL,
+    status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
+    source_type ENUM('admin', 'approved_submission') NOT NULL DEFAULT 'admin',
     is_featured TINYINT(1) NOT NULL DEFAULT 0,
+    is_featured_home TINYINT(1) NOT NULL DEFAULT 0,
     sort_order INT UNSIGNED NOT NULL DEFAULT 0,
+    published_at DATETIME NULL,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CONSTRAINT fk_gallery_media FOREIGN KEY (image_id) REFERENCES media(id) ON DELETE CASCADE
+    CONSTRAINT fk_gallery_media FOREIGN KEY (image_id) REFERENCES media(id) ON DELETE CASCADE,
+    CONSTRAINT fk_gallery_category FOREIGN KEY (category_id) REFERENCES gallery_categories(id) ON DELETE RESTRICT
+);
+
+CREATE TABLE gallery_submissions (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    submitter_name VARCHAR(120) NOT NULL,
+    submitter_email VARCHAR(190) NOT NULL,
+    description TEXT NULL,
+    status ENUM('pending', 'approved', 'rejected') NOT NULL DEFAULT 'pending',
+    reviewed_by BIGINT UNSIGNED NULL,
+    reviewed_at DATETIME NULL,
+    review_notes TEXT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_gallery_submissions_reviewer FOREIGN KEY (reviewed_by) REFERENCES users(id) ON DELETE SET NULL
+);
+
+CREATE TABLE gallery_submission_files (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    submission_id BIGINT UNSIGNED NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
+    original_name VARCHAR(255) NOT NULL,
+    mime_type VARCHAR(120) NOT NULL,
+    size_bytes BIGINT UNSIGNED NOT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_gallery_submission_files_submission FOREIGN KEY (submission_id) REFERENCES gallery_submissions(id) ON DELETE CASCADE
 );
 
 CREATE TABLE blog_posts (

@@ -64,6 +64,29 @@ function query_value(string $key): ?string
     return $trimmed === '' ? null : $trimmed;
 }
 
+function flash_set(string $key, mixed $value): void
+{
+    $_SESSION['_flash'][$key] = $value;
+}
+
+function flash_pull(string $key, mixed $default = null): mixed
+{
+    if (! isset($_SESSION['_flash'][$key])) {
+        return $default;
+    }
+
+    $value = $_SESSION['_flash'][$key];
+    unset($_SESSION['_flash'][$key]);
+
+    return $value;
+}
+
+function redirect_to(string $url): never
+{
+    header('Location: ' . $url);
+    exit;
+}
+
 function e(?string $value): string
 {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');

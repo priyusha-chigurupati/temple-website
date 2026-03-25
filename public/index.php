@@ -5,11 +5,20 @@ declare(strict_types=1);
 require __DIR__ . '/../app/Support/helpers.php';
 require __DIR__ . '/../app/Support/View.php';
 require __DIR__ . '/../app/Repositories/ContentRepository.php';
+require __DIR__ . '/../app/Services/GallerySubmissionService.php';
 require __DIR__ . '/../app/Controllers/PageController.php';
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
 $content = require __DIR__ . '/../data/site.php';
 $repository = new ContentRepository($content);
-$controller = new PageController($repository);
+$gallerySubmissions = new GallerySubmissionService(
+    dirname(__DIR__) . '/storage/data/gallery_submissions.json',
+    dirname(__DIR__) . '/storage/uploads/gallery-submissions'
+);
+$controller = new PageController($repository, $gallerySubmissions);
 
 $path = request_path();
 

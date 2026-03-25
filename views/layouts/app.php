@@ -21,5 +21,6 @@ declare(strict_types=1);
         <?php require $contentView; ?>
     </main>
     <?php require __DIR__ . '/../partials/footer.php'; ?>
+    <script src="<?= e(asset('assets/js/site.js')) ?>" defer></script>
 </body>
 </html>
