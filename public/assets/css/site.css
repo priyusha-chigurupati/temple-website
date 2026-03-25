@@ -2240,7 +2240,7 @@ input {
 .contact-map__frame {
     position: relative;
     overflow: hidden;
-    min-height: 18.75rem;
+    min-height: 14.5rem;
     background: var(--color-surface-highest);
 }
 
@@ -2556,6 +2556,6 @@ input {
     }
 
     .contact-map__frame {
-        min-height: 18rem;
+        min-height: 13rem;
     }
 }
