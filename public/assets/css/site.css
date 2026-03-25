@@ -2216,12 +2216,12 @@ input {
 }
 
 .contact-map {
-    padding: 0 0 3.6rem;
+    padding: 0 0 3.8rem;
     background: var(--color-surface-low);
 }
 
 .contact-map .container {
-    padding-top: 2.6rem;
+    padding-top: 2.4rem;
     padding-bottom: 0.2rem;
 }
 
@@ -2230,7 +2230,7 @@ input {
     justify-content: space-between;
     align-items: flex-end;
     gap: 1.4rem;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.2rem;
 }
 
 .contact-map__head h2 {
@@ -2240,7 +2240,9 @@ input {
 .contact-map__frame {
     position: relative;
     overflow: hidden;
-    min-height: 10.5rem;
+    aspect-ratio: 2.45 / 1;
+    min-height: 0;
+    max-height: min(22rem, calc(100vh - 16rem));
     background: var(--color-surface-highest);
 }
 
@@ -2547,7 +2549,7 @@ input {
     }
 
     .contact-map {
-        padding-bottom: 3rem;
+        padding-bottom: 3.1rem;
     }
 
     .contact-map__head {
@@ -2556,6 +2558,7 @@ input {
     }
 
     .contact-map__frame {
-        min-height: 9rem;
+        aspect-ratio: 1.9 / 1;
+        max-height: none;
     }
 }
