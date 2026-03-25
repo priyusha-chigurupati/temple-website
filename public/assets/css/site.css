@@ -1399,6 +1399,10 @@ input {
     padding: 1.5rem;
 }
 
+.gallery-submit-modal {
+    overflow-y: auto;
+}
+
 .gallery-lightbox[hidden],
 .gallery-submit-modal[hidden] {
     display: none;
@@ -1510,7 +1514,10 @@ input {
 
 .gallery-submit-modal__dialog {
     width: min(100%, 38rem);
+    max-height: calc(100vh - 3rem);
     padding: 2rem;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
     background: var(--color-surface-low);
     box-shadow: 0 28px 64px rgba(30, 27, 19, 0.2);
 }
