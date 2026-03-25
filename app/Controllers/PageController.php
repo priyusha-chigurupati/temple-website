@@ -8,7 +8,8 @@ final class PageController
         private readonly ContentRepository $content,
         private readonly GallerySubmissionService $gallerySubmissions,
         private readonly DonationNotificationService $donationNotifications,
-        private readonly ContactInquiryService $contactInquiries
+        private readonly ContactInquiryService $contactInquiries,
+        private readonly NewsletterSubscriptionService $newsletterSubscriptions
     )
     {
     }
@@ -105,7 +106,32 @@ final class PageController
 
     public function blog(): void
     {
-        $this->renderPage('blog', 'pages/blog', $this->content->page('blog'));
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleBlogNewsletterSubscription();
+        }
+
+        $page = $this->content->blog([
+            'category' => query_value('category'),
+            'q' => query_value('q'),
+            'page' => query_value('page'),
+        ]);
+        $page['newsletter_state'] = flash_pull('blog_newsletter_state', []);
+        $page['newsletter_form'] = flash_pull('blog_newsletter_form', ['email' => '']);
+
+        $this->renderPage('blog', 'pages/blog', $page);
+    }
+
+    public function blogDetail(string $slug): void
+    {
+        $page = $this->content->blogDetail($slug);
+
+        if ($page === null) {
+            http_response_code(404);
+            $this->notFound();
+            return;
+        }
+
+        $this->renderPage('blog', 'pages/blog-detail', $page);
     }
 
     public function placeholder(string $slug): void
@@ -272,6 +298,36 @@ final class PageController
         flash_set('contact_form_values', $result['old'] ?? []);
 
         redirect_to(route_url('/contact'));
+    }
+
+    private function handleBlogNewsletterSubscription(): never
+    {
+        $result = $this->newsletterSubscriptions->subscribe($_POST, 'blog-sidebar');
+
+        if ($result['ok']) {
+            flash_set('blog_newsletter_state', [
+                'type' => 'success',
+                'message' => $result['message'],
+            ]);
+            flash_set('blog_newsletter_form', ['email' => '']);
+            redirect_to(route_url_with_query('/blog', [
+                'category' => query_value('category'),
+                'q' => query_value('q'),
+                'page' => query_value('page'),
+            ]));
+        }
+
+        flash_set('blog_newsletter_state', [
+            'type' => 'error',
+            'message' => implode(' ', $result['errors'] ?? ['The newsletter subscription could not be completed.']),
+        ]);
+        flash_set('blog_newsletter_form', $result['old'] ?? ['email' => '']);
+
+        redirect_to(route_url_with_query('/blog', [
+            'category' => query_value('category'),
+            'q' => query_value('q'),
+            'page' => query_value('page'),
+        ]));
     }
 
     private function donationPrefill(): array

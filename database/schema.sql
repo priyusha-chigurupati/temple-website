@@ -124,6 +124,22 @@ CREATE TABLE blog_posts (
     CONSTRAINT fk_blog_media FOREIGN KEY (featured_image_id) REFERENCES media(id) ON DELETE SET NULL
 );
 
+CREATE TABLE blog_categories (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    slug VARCHAR(120) NOT NULL UNIQUE,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE blog_post_categories (
+    post_id BIGINT UNSIGNED NOT NULL,
+    category_id BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (post_id, category_id),
+    CONSTRAINT fk_blog_post_categories_post FOREIGN KEY (post_id) REFERENCES blog_posts(id) ON DELETE CASCADE,
+    CONSTRAINT fk_blog_post_categories_category FOREIGN KEY (category_id) REFERENCES blog_categories(id) ON DELETE CASCADE
+);
+
 CREATE TABLE donation_options (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(190) NOT NULL,
@@ -158,6 +174,15 @@ CREATE TABLE contact_inquiries (
     subject VARCHAR(190) NOT NULL,
     message TEXT NOT NULL,
     status ENUM('pending', 'reviewed') NOT NULL DEFAULT 'pending',
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE newsletter_subscriptions (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(190) NOT NULL UNIQUE,
+    source VARCHAR(120) NOT NULL,
+    status ENUM('active', 'unsubscribed') NOT NULL DEFAULT 'active',
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

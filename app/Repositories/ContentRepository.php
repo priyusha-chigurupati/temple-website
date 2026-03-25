@@ -108,6 +108,102 @@ final class ContentRepository
         return null;
     }
 
+    public function blog(array $filters = []): array
+    {
+        $page = $this->page('blog');
+        $posts = $this->allBlogPosts($page);
+        $featured = array_values(array_filter($posts, static fn (array $post): bool => ($post['is_featured'] ?? false) === true))[0] ?? null;
+        $library = array_values(array_filter($posts, static fn (array $post): bool => ($post['is_featured'] ?? false) === false));
+        $selectedCategory = (string) ($filters['category'] ?? 'all');
+        $searchTerm = trim((string) ($filters['q'] ?? ''));
+        $availableCategories = array_map(static fn (array $category): string => $category['slug'], $this->blogCategories($posts, 'all', ''));
+
+        if ($selectedCategory !== 'all' && ! in_array($selectedCategory, $availableCategories, true)) {
+            $selectedCategory = 'all';
+        }
+
+        if ($selectedCategory !== 'all') {
+            $library = array_values(array_filter($library, static fn (array $post): bool => ($post['category_slug'] ?? '') === $selectedCategory));
+        }
+
+        if ($searchTerm !== '') {
+            $needle = strtolower($searchTerm);
+            $library = array_values(array_filter($library, static function (array $post) use ($needle): bool {
+                $haystack = strtolower(
+                    implode(' ', [
+                        $post['title'] ?? '',
+                        $post['excerpt'] ?? '',
+                        $post['category'] ?? '',
+                        implode(' ', $post['body'] ?? []),
+                    ])
+                );
+
+                return str_contains($haystack, $needle);
+            }));
+        }
+
+        usort($library, static fn (array $left, array $right): int => self::blogTimestamp($right) <=> self::blogTimestamp($left));
+
+        $perPage = 4;
+        $requestedPage = max(1, (int) ($filters['page'] ?? 1));
+        $totalPosts = count($library);
+        $totalPages = max(1, (int) ceil($totalPosts / $perPage));
+        $currentPage = min($requestedPage, $totalPages);
+        $offset = ($currentPage - 1) * $perPage;
+
+        $page['featured'] = $featured ?? $page['featured'];
+        $page['posts'] = array_slice($library, $offset, $perPage);
+        $page['search_term'] = $searchTerm;
+        $page['selected_category'] = $selectedCategory;
+        $page['current_page'] = $currentPage;
+        $page['empty_message'] = 'No blog articles match the current filter yet.';
+        $page['chronicles_sort'] = 'Sorted by: Newest';
+        $page['pagination'] = $this->blogPagination($currentPage, $totalPages, $selectedCategory, $searchTerm);
+        $recentLibrary = array_values(array_filter($posts, static fn (array $post): bool => ($post['is_featured'] ?? false) === false));
+        usort($recentLibrary, static fn (array $left, array $right): int => self::blogTimestamp($right) <=> self::blogTimestamp($left));
+        $page['sidebar']['recent_posts'] = array_slice($recentLibrary, 0, 3);
+        $page['sidebar']['categories'] = $this->blogCategories($posts, $selectedCategory, $searchTerm);
+
+        return $page;
+    }
+
+    public function blogDetail(string $slug): ?array
+    {
+        foreach ($this->allBlogPosts($this->page('blog')) as $post) {
+            if (($post['slug'] ?? '') !== $slug) {
+                continue;
+            }
+
+            $related = array_values(array_filter(
+                $this->allBlogPosts($this->page('blog')),
+                static fn (array $candidate): bool => ($candidate['slug'] ?? '') !== $slug && ($candidate['is_featured'] ?? false) === false
+            ));
+
+            usort($related, static fn (array $left, array $right): int => self::blogTimestamp($right) <=> self::blogTimestamp($left));
+
+            return [
+                'meta' => [
+                    'title' => ($post['title'] ?? 'Blog Article') . ' | ' . $this->site()['name'],
+                    'description' => $post['excerpt'] ?? '',
+                ],
+                'eyebrow' => $post['eyebrow'] ?? 'Temple Journal',
+                'title' => $post['title'] ?? '',
+                'excerpt' => $post['excerpt'] ?? '',
+                'category' => $post['category'] ?? '',
+                'date' => $post['date'] ?? '',
+                'read_time' => $post['read_time'] ?? '',
+                'image' => $post['image'] ?? '',
+                'body' => $post['body'] ?? [],
+                'back_href' => route_url('/blog'),
+                'back_label' => 'Back to Blog',
+                'related_title' => 'Recent Articles',
+                'related_posts' => array_slice($related, 0, 3),
+            ];
+        }
+
+        return null;
+    }
+
     private function homeEventPreview(array $eventsPage): array
     {
         $items = array_map(static function (array $item): array {
@@ -193,6 +289,125 @@ final class ContentRepository
         }, $items);
     }
 
+    private function allBlogPosts(array $page): array
+    {
+        $posts = [];
+        $featured = $page['featured'] ?? [];
+
+        if ($featured !== []) {
+            $posts[] = $this->normalizeBlogPost(array_merge($featured, ['is_featured' => true, 'eyebrow' => $featured['eyebrow'] ?? 'Featured Journal']));
+        }
+
+        foreach ($page['posts'] ?? [] as $post) {
+            $posts[] = $this->normalizeBlogPost($post);
+        }
+
+        foreach (($page['sidebar']['recent_posts'] ?? []) as $post) {
+            $posts[] = $this->normalizeBlogPost($post);
+        }
+
+        $unique = [];
+
+        foreach ($posts as $post) {
+            $unique[$post['slug']] = $post;
+        }
+
+        return array_values($unique);
+    }
+
+    private function normalizeBlogPost(array $post): array
+    {
+        $slug = $post['slug'] ?? self::slugify((string) ($post['title'] ?? 'article'));
+        $category = (string) ($post['category'] ?? 'Temple Journal');
+
+        return [
+            'slug' => $slug,
+            'title' => $post['title'] ?? '',
+            'excerpt' => $post['description'] ?? $post['excerpt'] ?? '',
+            'description' => $post['description'] ?? $post['excerpt'] ?? '',
+            'category' => $category,
+            'category_slug' => self::slugify($category),
+            'image' => $post['image'] ?? '',
+            'date' => $post['date'] ?? '',
+            'read_time' => $post['read_time'] ?? '6 Min Read',
+            'body' => $post['body'] ?? [$post['description'] ?? $post['excerpt'] ?? ''],
+            'eyebrow' => $post['eyebrow'] ?? 'Temple Journal',
+            'href' => route_url('/blog/' . $slug),
+            'cta' => $post['cta'] ?? 'Continue Reading',
+            'is_featured' => (bool) ($post['is_featured'] ?? false),
+        ];
+    }
+
+    private function blogPagination(int $currentPage, int $totalPages, string $category, string $searchTerm): array
+    {
+        $pages = [];
+
+        for ($page = 1; $page <= $totalPages; $page++) {
+            $pages[] = [
+                'label' => (string) $page,
+                'href' => route_url_with_query('/blog', [
+                    'category' => $category === 'all' ? null : $category,
+                    'q' => $searchTerm === '' ? null : $searchTerm,
+                    'page' => $page === 1 ? null : (string) $page,
+                ]),
+                'active' => $page === $currentPage,
+            ];
+        }
+
+        return [
+            'previous' => [
+                'href' => $currentPage > 1 ? route_url_with_query('/blog', [
+                    'category' => $category === 'all' ? null : $category,
+                    'q' => $searchTerm === '' ? null : $searchTerm,
+                    'page' => $currentPage - 1 === 1 ? null : (string) ($currentPage - 1),
+                ]) : null,
+            ],
+            'pages' => $pages,
+            'next' => [
+                'href' => $currentPage < $totalPages ? route_url_with_query('/blog', [
+                    'category' => $category === 'all' ? null : $category,
+                    'q' => $searchTerm === '' ? null : $searchTerm,
+                    'page' => (string) ($currentPage + 1),
+                ]) : null,
+            ],
+        ];
+    }
+
+    private function blogCategories(array $posts, string $selectedCategory, string $searchTerm): array
+    {
+        $counts = [];
+
+        foreach ($posts as $post) {
+            if (($post['is_featured'] ?? false) === true) {
+                continue;
+            }
+
+            $slug = $post['category_slug'] ?? 'temple-journal';
+
+            if (! isset($counts[$slug])) {
+                $counts[$slug] = [
+                    'label' => $post['category'] ?? 'Temple Journal',
+                    'count' => 0,
+                    'slug' => $slug,
+                ];
+            }
+
+            $counts[$slug]['count']++;
+        }
+
+        uasort($counts, static fn (array $left, array $right): int => strcmp($left['label'], $right['label']));
+
+        return array_map(function (array $category) use ($selectedCategory, $searchTerm): array {
+            $category['href'] = route_url_with_query('/blog', [
+                'category' => $category['slug'],
+                'q' => $searchTerm === '' ? null : $searchTerm,
+            ]);
+            $category['active'] = $category['slug'] === $selectedCategory;
+
+            return $category;
+        }, array_values($counts));
+    }
+
     private function buildEventDetailPage(array $event): array
     {
         $statusLabel = ($event['status'] ?? 'upcoming') === 'ongoing' ? 'Ongoing Event' : 'Upcoming Event';
@@ -231,5 +446,12 @@ final class ContentRepository
         $value = trim((string) $value, '-');
 
         return $value === '' ? 'event' : $value;
+    }
+
+    private static function blogTimestamp(array $post): int
+    {
+        $timestamp = strtotime((string) ($post['date'] ?? ''));
+
+        return $timestamp === false ? 0 : $timestamp;
     }
 }

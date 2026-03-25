@@ -3,6 +3,8 @@ declare(strict_types=1);
 ?>
 <?php $featured = $page['featured']; ?>
 <?php $sidebar = $page['sidebar']; ?>
+<?php $newsletterState = $page['newsletter_state'] ?? []; ?>
+<?php $newsletterForm = $page['newsletter_form'] ?? []; ?>
 
 <section class="blog-page">
     <div class="container">
@@ -19,7 +21,7 @@ declare(strict_types=1);
                     <span class="blog-feature__dot" aria-hidden="true"></span>
                     <span><?= e($featured['read_time']) ?></span>
                 </div>
-                <a class="blog-feature__cta" href="#"><?= e($featured['cta']) ?></a>
+                <a class="blog-feature__cta" href="<?= e($featured['href']) ?>"><?= e($featured['cta']) ?></a>
             </div>
         </section>
 
@@ -35,6 +37,9 @@ declare(strict_types=1);
                 </div>
 
                 <div class="blog-grid">
+                    <?php if ($page['posts'] === []): ?>
+                        <p class="blog-empty"><?= e($page['empty_message']) ?></p>
+                    <?php endif; ?>
                     <?php foreach ($page['posts'] as $post): ?>
                         <article class="blog-card">
                             <div class="blog-card__image">
@@ -43,34 +48,47 @@ declare(strict_types=1);
                             <span class="blog-card__category"><?= e($post['category']) ?></span>
                             <h3><?= e($post['title']) ?></h3>
                             <p><?= e($post['description']) ?></p>
-                            <a class="blog-card__cta" href="#"><?= e($post['cta']) ?></a>
+                            <a class="blog-card__cta" href="<?= e($post['href']) ?>"><?= e($post['cta']) ?></a>
                         </article>
                     <?php endforeach; ?>
                 </div>
 
                 <div class="blog-pagination" aria-label="Blog pagination">
-                    <button type="button" aria-label="Previous page">&lsaquo;</button>
-                    <?php foreach ($page['pagination'] as $index => $number): ?>
-                        <button class="<?= $index === 0 ? 'is-active' : '' ?>" type="button"><?= e($number) ?></button>
+                    <?php if (! empty($page['pagination']['previous']['href'])): ?>
+                        <a href="<?= e($page['pagination']['previous']['href']) ?>" aria-label="Previous page">&lsaquo;</a>
+                    <?php else: ?>
+                        <span aria-hidden="true">&lsaquo;</span>
+                    <?php endif; ?>
+                    <?php foreach ($page['pagination']['pages'] as $item): ?>
+                        <a class="<?= $item['active'] ? 'is-active' : '' ?>" href="<?= e($item['href']) ?>"><?= e($item['label']) ?></a>
                     <?php endforeach; ?>
-                    <button type="button" aria-label="Next page">&rsaquo;</button>
+                    <?php if (! empty($page['pagination']['next']['href'])): ?>
+                        <a href="<?= e($page['pagination']['next']['href']) ?>" aria-label="Next page">&rsaquo;</a>
+                    <?php else: ?>
+                        <span aria-hidden="true">&rsaquo;</span>
+                    <?php endif; ?>
                 </div>
             </div>
 
             <aside class="blog-sidebar">
                 <section class="blog-sidebar__panel blog-sidebar__panel--search">
                     <h2><?= e($sidebar['search_title']) ?></h2>
-                    <div class="blog-search">
-                        <input type="text" placeholder="<?= e($sidebar['search_placeholder']) ?>">
-                        <span aria-hidden="true">+</span>
-                    </div>
+                    <form class="blog-search" action="<?= e(route_url('/blog')) ?>" method="get">
+                        <?php if (($page['selected_category'] ?? 'all') !== 'all'): ?>
+                            <input type="hidden" name="category" value="<?= e($page['selected_category']) ?>">
+                        <?php endif; ?>
+                        <input type="text" name="q" value="<?= e($page['search_term'] ?? '') ?>" placeholder="<?= e($sidebar['search_placeholder']) ?>">
+                        <button type="submit" aria-label="Search blog">
+                            <span aria-hidden="true">+</span>
+                        </button>
+                    </form>
                 </section>
 
                 <section class="blog-sidebar__section">
                     <h2><?= e($sidebar['recent_title']) ?></h2>
                     <div class="blog-recent">
                         <?php foreach ($sidebar['recent_posts'] as $post): ?>
-                            <a class="blog-recent__item" href="#">
+                            <a class="blog-recent__item" href="<?= e($post['href']) ?>">
                                 <div class="blog-recent__thumb">
                                     <img src="<?= e(asset($post['image'])) ?>" alt="<?= e($post['title']) ?> placeholder artwork">
                                 </div>
@@ -88,9 +106,9 @@ declare(strict_types=1);
                     <ul class="blog-categories">
                         <?php foreach ($sidebar['categories'] as $category): ?>
                             <li>
-                                <a href="#">
+                                <a class="<?= $category['active'] ? 'is-active' : '' ?>" href="<?= e($category['href']) ?>">
                                     <span><?= e($category['label']) ?></span>
-                                    <span>(<?= e($category['count']) ?>)</span>
+                                    <span>(<?= e((string) $category['count']) ?>)</span>
                                 </a>
                             </li>
                         <?php endforeach; ?>
@@ -100,8 +118,17 @@ declare(strict_types=1);
                 <section class="blog-newsletter">
                     <h2><?= e($sidebar['newsletter']['title']) ?></h2>
                     <p><?= e($sidebar['newsletter']['description']) ?></p>
-                    <form action="#" method="post">
-                        <input type="email" placeholder="<?= e($sidebar['newsletter']['placeholder']) ?>">
+                    <?php if (! empty($newsletterState['message'])): ?>
+                        <p class="blog-newsletter__status blog-newsletter__status--<?= e($newsletterState['type'] ?? 'info') ?>">
+                            <?= e($newsletterState['message']) ?>
+                        </p>
+                    <?php endif; ?>
+                    <form action="<?= e(route_url_with_query('/blog', [
+                        'category' => ($page['selected_category'] ?? 'all') === 'all' ? null : ($page['selected_category'] ?? null),
+                        'q' => ($page['search_term'] ?? '') === '' ? null : ($page['search_term'] ?? null),
+                        'page' => ($page['current_page'] ?? 1) > 1 ? (string) ($page['current_page'] ?? 1) : null,
+                    ])) ?>" method="post">
+                        <input type="email" name="email" value="<?= e($newsletterForm['email'] ?? '') ?>" placeholder="<?= e($sidebar['newsletter']['placeholder']) ?>">
                         <button type="submit"><?= e($sidebar['newsletter']['button']) ?></button>
                     </form>
                 </section>
