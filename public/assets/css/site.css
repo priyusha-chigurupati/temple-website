@@ -2309,6 +2309,7 @@ input {
     display: grid;
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.18fr);
     gap: 2.4rem;
+    align-items: start;
     padding-top: 5rem;
 }
 
