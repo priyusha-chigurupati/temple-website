@@ -3798,7 +3798,131 @@ input {
     }
 
     .about-hero {
-        min-height: 25rem;
+        min-height: 23.5rem;
+    }
+
+    .about-hero__image::after {
+        background: linear-gradient(180deg, rgba(255, 248, 239, 0.68), rgba(255, 248, 239, 0.92) 62%, rgba(255, 248, 239, 0.98));
+    }
+
+    .about-hero__content {
+        padding: 4.2rem 0 2.4rem;
+    }
+
+    .about-hero__title {
+        max-width: 18rem;
+        font-size: clamp(2.35rem, 9vw, 3.5rem);
+    }
+
+    .about-hero__accent {
+        width: 4.6rem;
+        margin-top: 1.15rem;
+    }
+
+    .about-history.section {
+        padding-top: 4rem;
+    }
+
+    .about-history__copy {
+        max-width: none;
+    }
+
+    .about-history__quote {
+        margin-top: 1.4rem;
+        padding: 1.25rem 1.15rem;
+        font-size: 1.02rem;
+        line-height: 1.55;
+    }
+
+    .about-history__media {
+        max-width: none;
+        width: 100%;
+    }
+
+    .about-history__main-image img {
+        aspect-ratio: 5 / 4;
+    }
+
+    .about-history__detail-grid {
+        grid-template-columns: minmax(6.5rem, 8rem) minmax(0, 1fr);
+        gap: 0.9rem;
+        margin-top: 0.9rem;
+        align-items: center;
+    }
+
+    .about-history__secondary-image img {
+        aspect-ratio: 1 / 1;
+    }
+
+    .about-mission.section {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .about-mission__heading {
+        margin-bottom: 1.9rem;
+        text-align: left;
+    }
+
+    .about-mission__cards {
+        display: grid;
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(16rem, 82%);
+        gap: 0.9rem;
+        overflow-x: auto;
+        padding-bottom: 0.15rem;
+        scroll-snap-type: x proximity;
+    }
+
+    .about-mission__cards::-webkit-scrollbar {
+        height: 0;
+    }
+
+    .mission-card {
+        padding: 1.6rem 1.35rem;
+        border-right: 0;
+        border: 1px solid rgba(219, 194, 176, 0.2);
+        scroll-snap-align: start;
+    }
+
+    .mission-card__icon {
+        margin-bottom: 1rem;
+    }
+
+    .about-values.section {
+        padding-top: 4rem;
+    }
+
+    .about-values__grid {
+        gap: 0.85rem;
+    }
+
+    .value-panel {
+        padding: 1.45rem 1.25rem;
+    }
+
+    .value-panel--intro {
+        justify-content: flex-start;
+    }
+
+    .value-panel--image {
+        min-height: 16rem;
+    }
+
+    .value-panel--secondary,
+    .value-panel--primary,
+    .value-panel--highlight {
+        min-height: auto;
+    }
+
+    .about-facts {
+        padding: 0 0 4.5rem;
+    }
+
+    .about-facts__grid {
+        gap: 1rem;
+        padding: 1.5rem 1rem;
     }
 
     .section {
@@ -3963,6 +4087,85 @@ input {
 
     .section {
         padding: 3.75rem 0;
+    }
+
+    .about-hero {
+        min-height: 20.5rem;
+    }
+
+    .about-hero__content {
+        padding: 3.6rem 0 2rem;
+    }
+
+    .about-hero__title {
+        max-width: 14rem;
+        font-size: clamp(2rem, 10vw, 2.85rem);
+    }
+
+    .about-history.section,
+    .about-mission.section,
+    .about-values.section {
+        padding-top: 3.35rem;
+        padding-bottom: 3.35rem;
+    }
+
+    .about-history__year {
+        margin-bottom: 0.75rem;
+    }
+
+    .about-history__quote {
+        padding: 1.1rem 1rem;
+        font-size: 0.94rem;
+    }
+
+    .about-history__detail-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+        align-items: start;
+    }
+
+    .about-history__secondary-image img {
+        aspect-ratio: 4 / 3;
+    }
+
+    .about-history__detail-copy h3,
+    .mission-card h3,
+    .value-panel h3 {
+        font-size: 1.22rem;
+    }
+
+    .about-mission__cards {
+        grid-auto-columns: minmax(14rem, 88%);
+    }
+
+    .mission-card {
+        padding: 1.4rem 1.1rem;
+    }
+
+    .value-panel {
+        padding: 1.2rem 1rem;
+    }
+
+    .value-panel__number {
+        margin-bottom: 0.8rem;
+        font-size: 0.74rem;
+    }
+
+    .value-panel--image {
+        min-height: 13rem;
+    }
+
+    .about-facts {
+        padding-bottom: 3.8rem;
+    }
+
+    .about-facts__grid {
+        gap: 0.75rem;
+        padding: 1rem 0.75rem;
+    }
+
+    .fact-card {
+        padding: 1rem 0.75rem;
     }
 
     .section-title {
