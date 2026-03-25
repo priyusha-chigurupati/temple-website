@@ -1399,6 +1399,11 @@ input {
     padding: 1.5rem;
 }
 
+.gallery-lightbox[hidden],
+.gallery-submit-modal[hidden] {
+    display: none;
+}
+
 .gallery-lightbox__backdrop,
 .gallery-submit-modal__backdrop {
     position: absolute;
