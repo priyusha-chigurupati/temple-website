@@ -447,12 +447,96 @@ return [
         'contact' => [
             'meta' => [
                 'title' => 'Contact | AnkammaThalli Temple',
-                'description' => 'Contact page design is queued for a later public-site milestone.',
+                'description' => 'Reach AnkammaThalli Temple for seva inquiries, timings, guidance, and visit information.',
             ],
-            'eyebrow' => 'Planned Page',
-            'title' => 'Contact page is wired and reserved.',
-            'description' => 'We will add the final visit, contact form, and map layout from your approved design in a later step.',
-            'cta' => ['label' => 'Return Home', 'href' => '/'],
+            'hero' => [
+                'title' => 'Contact the Sanctuary',
+                'description' => 'Reach out for seva bookings, pooja timings, or spiritual guidance from our priests.',
+                'image' => 'assets/images/placeholders/contact-hero-gopuram.svg',
+            ],
+            'info' => [
+                'eyebrow' => 'Information',
+                'title' => 'Visit AnkammaThalli',
+                'items' => [
+                    [
+                        'icon' => 'L',
+                        'title' => 'Temple Location',
+                        'lines' => [
+                            'Main Temple Road, Sacred Hillside,',
+                            'Andhra Pradesh, India - 522001',
+                        ],
+                    ],
+                    [
+                        'icon' => 'T',
+                        'title' => 'Temple Hours',
+                        'lines' => [
+                            'Morning: 05:00 AM - 12:30 PM',
+                            'Evening: 04:00 PM - 09:00 PM',
+                        ],
+                    ],
+                    [
+                        'icon' => 'C',
+                        'title' => 'Direct Reach',
+                        'lines' => [
+                            'Phone: +91 98765 43210',
+                            'Email: help@ankammathalli.org',
+                        ],
+                    ],
+                ],
+                'social_title' => 'Follow the Divine Journey',
+                'social_links' => [
+                    ['label' => 'Facebook', 'short' => 'f'],
+                    ['label' => 'Instagram', 'short' => 'ig'],
+                    ['label' => 'YouTube', 'short' => 'yt'],
+                ],
+            ],
+            'form' => [
+                'title' => 'Send a Message',
+                'description' => 'Our administrative team will respond within 24 hours.',
+                'fields' => [
+                    [
+                        'label' => 'Full Name',
+                        'name' => 'full_name',
+                        'type' => 'text',
+                        'placeholder' => 'Arjun Reddy',
+                        'width' => 'half',
+                    ],
+                    [
+                        'label' => 'Email Address',
+                        'name' => 'email',
+                        'type' => 'email',
+                        'placeholder' => 'arjun@example.com',
+                        'width' => 'half',
+                    ],
+                    [
+                        'label' => 'Subject',
+                        'name' => 'subject',
+                        'type' => 'select',
+                        'width' => 'full',
+                        'options' => [
+                            'Special Pooja Inquiry',
+                            'Donation Information',
+                            'Volunteering Opportunities',
+                            'Other',
+                        ],
+                    ],
+                    [
+                        'label' => 'Your Message',
+                        'name' => 'message',
+                        'type' => 'textarea',
+                        'placeholder' => 'How can we assist you in your spiritual journey?',
+                        'width' => 'full',
+                    ],
+                ],
+                'button' => 'Submit Message',
+            ],
+            'map' => [
+                'eyebrow' => 'Geography',
+                'title' => 'Find Us on the Map',
+                'cta' => 'Open in Google Maps',
+                'image' => 'assets/images/placeholders/contact-map-mandala.svg',
+                'marker' => 'AnkammaThalli Temple',
+            ],
         ],
         'blog' => [
             'meta' => [
