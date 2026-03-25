@@ -531,32 +531,38 @@ return [
                         'icon' => 'L',
                         'title' => 'Temple Location',
                         'lines' => [
-                            'Main Temple Road, Sacred Hillside,',
-                            'Andhra Pradesh, India - 522001',
+                            [
+                                'text' => 'Main Temple Road, Sacred Hillside,',
+                                'href' => 'https://www.google.com/maps/search/?api=1&query=Main+Temple+Road+Sacred+Hillside+Andhra+Pradesh+India+522001',
+                            ],
+                            [
+                                'text' => 'Andhra Pradesh, India - 522001',
+                                'href' => 'https://www.google.com/maps/search/?api=1&query=Main+Temple+Road+Sacred+Hillside+Andhra+Pradesh+India+522001',
+                            ],
                         ],
                     ],
                     [
                         'icon' => 'T',
                         'title' => 'Temple Hours',
                         'lines' => [
-                            'Morning: 05:00 AM - 12:30 PM',
-                            'Evening: 04:00 PM - 09:00 PM',
+                            ['text' => 'Morning: 05:00 AM - 12:30 PM'],
+                            ['text' => 'Evening: 04:00 PM - 09:00 PM'],
                         ],
                     ],
                     [
                         'icon' => 'C',
                         'title' => 'Direct Reach',
                         'lines' => [
-                            'Phone: +91 98765 43210',
-                            'Email: help@ankammathalli.org',
+                            ['text' => 'Phone: +91 98765 43210', 'href' => 'tel:+919876543210'],
+                            ['text' => 'Email: help@ankammathalli.org', 'href' => 'mailto:help@ankammathalli.org'],
                         ],
                     ],
                 ],
                 'social_title' => 'Follow the Divine Journey',
                 'social_links' => [
-                    ['label' => 'Facebook', 'short' => 'f'],
-                    ['label' => 'Instagram', 'short' => 'ig'],
-                    ['label' => 'YouTube', 'short' => 'yt'],
+                    ['label' => 'Facebook', 'short' => 'f', 'href' => 'https://www.facebook.com/'],
+                    ['label' => 'Instagram', 'short' => 'ig', 'href' => 'https://www.instagram.com/'],
+                    ['label' => 'YouTube', 'short' => 'yt', 'href' => 'https://www.youtube.com/'],
                 ],
             ],
             'form' => [
@@ -603,6 +609,7 @@ return [
                 'eyebrow' => 'Geography',
                 'title' => 'Find Us on the Map',
                 'cta' => 'Open in Google Maps',
+                'href' => 'https://www.google.com/maps/search/?api=1&query=Main+Temple+Road+Sacred+Hillside+Andhra+Pradesh+India+522001',
                 'image' => 'assets/images/placeholders/contact-map-mandala.svg',
                 'marker' => 'AnkammaThalli Temple',
             ],

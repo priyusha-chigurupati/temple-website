@@ -7,7 +7,8 @@ final class PageController
     public function __construct(
         private readonly ContentRepository $content,
         private readonly GallerySubmissionService $gallerySubmissions,
-        private readonly DonationNotificationService $donationNotifications
+        private readonly DonationNotificationService $donationNotifications,
+        private readonly ContactInquiryService $contactInquiries
     )
     {
     }
@@ -85,7 +86,21 @@ final class PageController
 
     public function contact(): void
     {
-        $this->renderPage('contact', 'pages/contact', $this->content->page('contact'));
+        $page = $this->content->page('contact');
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleContactInquiry($page);
+        }
+
+        $page['form_state'] = flash_pull('contact_form_state', []);
+        $page['form_values'] = flash_pull('contact_form_values', [
+            'full_name' => '',
+            'email' => '',
+            'subject' => '',
+            'message' => '',
+        ]);
+
+        $this->renderPage('contact', 'pages/contact', $page);
     }
 
     public function blog(): void
@@ -216,6 +231,47 @@ final class PageController
         flash_set('donation_notification_form', $result['old'] ?? []);
 
         redirect_to(route_url('/donations'));
+    }
+
+    private function handleContactInquiry(array $page): never
+    {
+        $allowedSubjects = [];
+
+        foreach (($page['form']['fields'] ?? []) as $field) {
+            if (($field['name'] ?? '') !== 'subject') {
+                continue;
+            }
+
+            foreach (($field['options'] ?? []) as $option) {
+                if (is_string($option)) {
+                    $allowedSubjects[] = $option;
+                }
+            }
+        }
+
+        $result = $this->contactInquiries->submit($_POST, $allowedSubjects);
+
+        if ($result['ok']) {
+            flash_set('contact_form_state', [
+                'type' => 'success',
+                'message' => $result['message'],
+            ]);
+            flash_set('contact_form_values', [
+                'full_name' => '',
+                'email' => '',
+                'subject' => '',
+                'message' => '',
+            ]);
+            redirect_to(route_url('/contact'));
+        }
+
+        flash_set('contact_form_state', [
+            'type' => 'error',
+            'message' => implode(' ', $result['errors'] ?? ['The contact form could not be submitted.']),
+        ]);
+        flash_set('contact_form_values', $result['old'] ?? []);
+
+        redirect_to(route_url('/contact'));
     }
 
     private function donationPrefill(): array

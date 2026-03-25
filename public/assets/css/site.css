@@ -2589,6 +2589,19 @@ input {
     line-height: 1.65;
 }
 
+.contact-info__link {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+    line-height: 1.65;
+    transition: color var(--transition);
+}
+
+.contact-info__link:hover,
+.contact-info__link:focus-visible {
+    color: var(--color-primary);
+}
+
 .contact-social {
     margin-top: 3rem;
 }
@@ -2656,6 +2669,23 @@ input {
 .contact-form {
     display: grid;
     gap: 1.1rem;
+}
+
+.contact-form__status {
+    margin: 0 0 1rem;
+    padding: 0.9rem 1rem;
+    font-size: 0.78rem;
+    line-height: 1.6;
+}
+
+.contact-form__status--success {
+    color: #146c2e;
+    background: rgba(51, 163, 94, 0.12);
+}
+
+.contact-form__status--error {
+    color: #a51d1d;
+    background: rgba(197, 53, 53, 0.12);
 }
 
 .contact-form__grid {

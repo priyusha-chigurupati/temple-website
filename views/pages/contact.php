@@ -5,6 +5,8 @@ declare(strict_types=1);
 <?php $info = $page['info']; ?>
 <?php $form = $page['form']; ?>
 <?php $map = $page['map']; ?>
+<?php $formState = $page['form_state'] ?? []; ?>
+<?php $formValues = $page['form_values'] ?? []; ?>
 
 <section class="contact-page">
     <section class="contact-hero">
@@ -32,7 +34,11 @@ declare(strict_types=1);
                             <div>
                                 <h3><?= e($item['title']) ?></h3>
                                 <?php foreach ($item['lines'] as $line): ?>
-                                    <p><?= e($line) ?></p>
+                                    <?php if (! empty($line['href'])): ?>
+                                        <a class="contact-info__link" href="<?= e($line['href']) ?>"><?= e($line['text']) ?></a>
+                                    <?php else: ?>
+                                        <p><?= e($line['text']) ?></p>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </div>
                         </article>
@@ -43,7 +49,7 @@ declare(strict_types=1);
                     <h3><?= e($info['social_title']) ?></h3>
                     <div class="contact-social__list">
                         <?php foreach ($info['social_links'] as $link): ?>
-                            <a href="#" aria-label="<?= e($link['label']) ?>">
+                            <a href="<?= e($link['href']) ?>" aria-label="<?= e($link['label']) ?>" target="_blank" rel="noreferrer">
                                 <span><?= e($link['short']) ?></span>
                             </a>
                         <?php endforeach; ?>
@@ -54,23 +60,29 @@ declare(strict_types=1);
             <div class="contact-form-card">
                 <h2><?= e($form['title']) ?></h2>
                 <p><?= e($form['description']) ?></p>
+                <?php if (! empty($formState['message'])): ?>
+                    <p class="contact-form__status contact-form__status--<?= e($formState['type'] ?? 'info') ?>">
+                        <?= e($formState['message']) ?>
+                    </p>
+                <?php endif; ?>
 
-                <form class="contact-form" action="#" method="post">
+                <form class="contact-form" action="<?= e(route_url('/contact')) ?>" method="post">
                     <div class="contact-form__grid">
                         <?php foreach ($form['fields'] as $field): ?>
                             <?php $wide = $field['width'] === 'full' ? ' contact-form__field--full' : ''; ?>
+                            <?php $value = $formValues[$field['name']] ?? ''; ?>
                             <label class="contact-form__field<?= $wide ?>">
                                 <span><?= e($field['label']) ?></span>
                                 <?php if ($field['type'] === 'textarea'): ?>
-                                    <textarea name="<?= e($field['name']) ?>" rows="5" placeholder="<?= e($field['placeholder']) ?>"></textarea>
+                                    <textarea name="<?= e($field['name']) ?>" rows="5" placeholder="<?= e($field['placeholder']) ?>"><?= e($value) ?></textarea>
                                 <?php elseif ($field['type'] === 'select'): ?>
                                     <select name="<?= e($field['name']) ?>">
                                         <?php foreach ($field['options'] as $option): ?>
-                                            <option><?= e($option) ?></option>
+                                            <option<?= $value === $option ? ' selected' : '' ?>><?= e($option) ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 <?php else: ?>
-                                    <input type="<?= e($field['type']) ?>" name="<?= e($field['name']) ?>" placeholder="<?= e($field['placeholder']) ?>">
+                                    <input type="<?= e($field['type']) ?>" name="<?= e($field['name']) ?>" placeholder="<?= e($field['placeholder']) ?>" value="<?= e($value) ?>">
                                 <?php endif; ?>
                             </label>
                         <?php endforeach; ?>
@@ -89,7 +101,7 @@ declare(strict_types=1);
                     <p class="eyebrow"><?= e($map['eyebrow']) ?></p>
                     <h2><?= e($map['title']) ?></h2>
                 </div>
-                <a class="section-link" href="#">
+                <a class="section-link" href="<?= e($map['href']) ?>" target="_blank" rel="noreferrer">
                     <?= e($map['cta']) ?>
                     <span class="text-link__arrow" aria-hidden="true"></span>
                 </a>
