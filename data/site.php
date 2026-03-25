@@ -339,12 +339,110 @@ return [
         'donations' => [
             'meta' => [
                 'title' => 'Donations | AnkammaThalli Temple',
-                'description' => 'Donations page design is queued for a later public-site milestone.',
+                'description' => 'Support temple rituals, annadanam, and preservation work through the AnkammaThalli Temple donations page.',
             ],
-            'eyebrow' => 'Planned Page',
-            'title' => 'Donations page is ready for a focused build pass.',
-            'description' => 'For now the Home page contains sample donation content while the full donation screen waits for its own milestone.',
-            'cta' => ['label' => 'Return Home', 'href' => '/'],
+            'eyebrow' => 'Support Our Sanctum',
+            'title_prefix' => 'Every offering builds a',
+            'title_highlight' => 'legacy of faith.',
+            'description' => 'Your contributions sustain the daily rituals, the preservation of our sacred architecture, and our mission to serve the community through spiritual guidance and nourishment.',
+            'impact' => [
+                'title' => 'Impact of Your Gift',
+                'description' => 'From maintaining temple spaces to supporting annadanam and festival seva, each donation directly strengthens worship and community care.',
+            ],
+            'hero_image' => 'assets/images/placeholders/donations-hero-sanctum.svg',
+            'transparency' => [
+                'stat' => '100%',
+                'label' => 'Transparency in utilization of funds',
+            ],
+            'methods_title' => 'Ways to Contribute',
+            'methods' => [
+                [
+                    'icon' => 'AA',
+                    'tone' => 'gold',
+                    'title' => 'Annadanam Offering',
+                    'description' => 'Sponsor a day\'s meal for devotees. Feeding with compassion remains one of the temple\'s most cherished forms of seva.',
+                    'type' => 'price',
+                    'meta_label' => 'Sponsorship starts at',
+                    'meta_value' => 'Rs. 5,001',
+                    'button' => 'Select Offering',
+                    'button_style' => 'outline',
+                ],
+                [
+                    'icon' => 'UP',
+                    'tone' => 'peach',
+                    'title' => 'Instant UPI Transfer',
+                    'description' => 'Quick and secure payments via PhonePe, Google Pay, or any supported UPI app using the official temple ID below.',
+                    'type' => 'code',
+                    'code' => 'ankammathalli.temple@upi',
+                    'button' => 'Open App',
+                    'button_style' => 'gradient',
+                ],
+                [
+                    'icon' => 'BT',
+                    'tone' => 'amber',
+                    'title' => 'Direct Bank Transfer',
+                    'description' => 'Ideal for international transfers or larger endowments. Please include your name in the note for receipt tracking.',
+                    'type' => 'details',
+                    'details' => [
+                        ['label' => 'Bank', 'value' => 'State Bank of India'],
+                        ['label' => 'Account No.', 'value' => '9876543210'],
+                        ['label' => 'IFSC', 'value' => 'SBIN0001234'],
+                    ],
+                ],
+            ],
+            'instructions_title' => 'Donation Instructions',
+            'instructions' => [
+                [
+                    'number' => '01',
+                    'title' => 'Select Your Seva',
+                    'description' => 'Choose a contribution path that aligns with your intention, whether it is daily worship, annadanam, or general temple care.',
+                ],
+                [
+                    'number' => '02',
+                    'title' => 'Complete Payment',
+                    'description' => 'Use one of the methods listed above and keep your transaction reference or screenshot ready for temple records.',
+                ],
+                [
+                    'number' => '03',
+                    'title' => 'Notify the Temple',
+                    'description' => 'Share your donation details so the team can reconcile the payment and prepare your acknowledgement receipt.',
+                ],
+            ],
+            'benefit' => [
+                'title' => 'Tax Benefits',
+                'description' => 'Sample content: qualifying donations can later be configured to mention receipt and tax-exemption details once the final legal and accounting copy is confirmed.',
+            ],
+            'form' => [
+                'title' => 'Notify Us of Your Donation',
+                'description' => 'Help us track your contribution and send your digital acknowledgement.',
+                'fields' => [
+                    [
+                        'label' => 'Full Name',
+                        'name' => 'full_name',
+                        'type' => 'text',
+                        'placeholder' => 'Aditya Sharma',
+                    ],
+                    [
+                        'label' => 'Amount',
+                        'name' => 'amount',
+                        'type' => 'text',
+                        'placeholder' => '5001',
+                    ],
+                    [
+                        'label' => 'Reference ID / Transaction ID',
+                        'name' => 'reference_id',
+                        'type' => 'text',
+                        'placeholder' => 'TXN98321045',
+                    ],
+                    [
+                        'label' => 'Message / Dedication',
+                        'name' => 'message',
+                        'type' => 'textarea',
+                        'placeholder' => 'In memory of... / Prayers for...',
+                    ],
+                ],
+                'button' => 'Submit Details',
+            ],
         ],
         'contact' => [
             'meta' => [

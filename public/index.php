@@ -18,7 +18,7 @@ $routes = [
     '/about' => static fn () => $controller->about(),
     '/gallery' => static fn () => $controller->gallery(),
     '/events' => static fn () => $controller->events(),
-    '/donations' => static fn () => $controller->placeholder('donations'),
+    '/donations' => static fn () => $controller->donations(),
     '/contact' => static fn () => $controller->placeholder('contact'),
     '/blog' => static fn () => $controller->placeholder('blog'),
     '/admin' => static fn () => $controller->placeholder('admin'),

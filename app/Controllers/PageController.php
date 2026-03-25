@@ -28,6 +28,11 @@ final class PageController
         $this->renderPage('events', 'pages/events', $this->content->page('events'));
     }
 
+    public function donations(): void
+    {
+        $this->renderPage('donations', 'pages/donations', $this->content->page('donations'));
+    }
+
     public function placeholder(string $slug): void
     {
         $page = $this->content->page($slug);
