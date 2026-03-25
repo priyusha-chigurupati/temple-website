@@ -20,7 +20,6 @@ declare(strict_types=1);
         </nav>
         <div class="site-header__actions">
             <a class="button button--primary button--small" href="<?= e(route_url('/donations')) ?>">Donate Now</a>
-            <a class="admin-link" href="<?= e(route_url($site['admin_link'])) ?>">Admin</a>
         </div>
     </div>
 </header>

@@ -168,14 +168,6 @@ input {
     gap: 1rem;
 }
 
-.admin-link {
-    color: var(--color-text-muted);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
 .button {
     display: inline-flex;
     align-items: center;
