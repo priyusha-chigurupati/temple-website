@@ -4195,6 +4195,126 @@ input {
         box-shadow: none;
     }
 
+    .donations-page {
+        padding: 1.8rem 0 4.9rem;
+    }
+
+    .donations-hero {
+        gap: 1.6rem;
+        padding-bottom: 1.9rem;
+    }
+
+    .donations-hero__copy {
+        max-width: none;
+    }
+
+    .donations-hero__title,
+    .donations-form-card h2 {
+        font-size: clamp(2.15rem, 8.7vw, 3rem);
+    }
+
+    .donations-hero__title-line {
+        white-space: normal;
+    }
+
+    .donations-hero__description {
+        max-width: 31rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+    }
+
+    .donations-impact {
+        margin-top: 1.4rem;
+        padding: 1rem 1rem 0;
+        border-top: 1px solid rgba(219, 194, 176, 0.24);
+    }
+
+    .donations-hero__visual {
+        width: min(100%, 15rem);
+        justify-self: center;
+    }
+
+    .donations-hero__image img {
+        aspect-ratio: 4 / 4.6;
+    }
+
+    .donations-transparency {
+        margin-top: 0.8rem;
+        padding: 1rem 1rem 0;
+        background: transparent;
+        border-top: 1px solid rgba(219, 194, 176, 0.24);
+        box-shadow: none;
+    }
+
+    .donations-divider {
+        margin: 2rem 0 2.6rem;
+    }
+
+    .donations-section-title {
+        margin-bottom: 1.45rem;
+        font-size: 1.75rem;
+        text-align: left;
+    }
+
+    .donations-methods__grid {
+        gap: 1rem;
+    }
+
+    .donation-method-card {
+        min-height: auto;
+        padding: 1.2rem 1.1rem;
+    }
+
+    .donation-method-card__details {
+        gap: 0.75rem;
+    }
+
+    .donations-info {
+        gap: 1.35rem;
+        padding-top: 3rem;
+    }
+
+    .donations-form-card {
+        order: 1;
+        padding: 1.55rem 1.3rem;
+        box-shadow: 0 18px 38px rgba(160, 65, 0, 0.05);
+    }
+
+    .donations-form-card > p {
+        margin-bottom: 1.2rem;
+    }
+
+    .donations-info__copy {
+        order: 2;
+        align-self: auto;
+        padding-top: 0;
+    }
+
+    .donations-steps {
+        gap: 1.15rem;
+    }
+
+    .donations-step {
+        gap: 0.95rem;
+    }
+
+    .donations-step__number {
+        font-size: 1.35rem;
+    }
+
+    .donations-benefit {
+        margin-top: 1.6rem;
+        padding: 1.35rem 1.15rem;
+    }
+
+    .donations-form {
+        gap: 1rem;
+    }
+
+    .donations-form__note {
+        margin-top: -0.05rem;
+    }
+
     .section {
         padding: 4.5rem 0;
     }
@@ -4225,44 +4345,6 @@ input {
 
     .newsletter-form button {
         width: 100%;
-    }
-
-    .donations-page {
-        padding-top: 1.4rem;
-    }
-
-    .donations-hero {
-        gap: 2.3rem;
-        padding-bottom: 2.3rem;
-    }
-
-    .donations-hero__title,
-    .donations-form-card h2 {
-        font-size: 2.45rem;
-    }
-
-    .donations-transparency {
-        position: static;
-        width: auto;
-        margin-top: 1rem;
-    }
-
-    .donations-divider {
-        margin: 2.4rem 0 3rem;
-    }
-
-    .donations-info {
-        gap: 1.8rem;
-        padding-top: 3.6rem;
-    }
-
-    .donations-info__copy {
-        align-self: auto;
-        padding-top: 0;
-    }
-
-    .donation-method-card {
-        min-height: auto;
     }
 
     .contact-hero {
@@ -4558,6 +4640,124 @@ input {
     .gallery-submit-form__actions {
         flex-direction: column-reverse;
         gap: 0.65rem;
+    }
+
+    .donations-page {
+        padding: 1.45rem 0 4rem;
+    }
+
+    .donations-hero {
+        gap: 1.3rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .donations-hero__title,
+    .donations-form-card h2 {
+        font-size: clamp(1.95rem, 10vw, 2.65rem);
+    }
+
+    .donations-hero__description {
+        font-size: 0.82rem;
+    }
+
+    .donations-impact {
+        gap: 0.8rem;
+        margin-top: 1.15rem;
+        padding-top: 0.85rem;
+    }
+
+    .donations-impact__icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: 0.68rem;
+    }
+
+    .donations-impact h2 {
+        font-size: 0.9rem;
+    }
+
+    .donations-impact p {
+        font-size: 0.72rem;
+    }
+
+    .donations-hero__visual {
+        width: min(100%, 12.75rem);
+    }
+
+    .donations-transparency {
+        margin-top: 0.7rem;
+        padding-top: 0.85rem;
+    }
+
+    .donations-transparency strong {
+        font-size: 1.65rem;
+    }
+
+    .donations-divider {
+        margin: 1.7rem 0 2.2rem;
+    }
+
+    .donations-section-title {
+        margin-bottom: 1.15rem;
+        font-size: 1.55rem;
+    }
+
+    .donation-method-card {
+        padding: 1rem 0.95rem;
+    }
+
+    .donation-method-card__accepted {
+        gap: 0.45rem;
+    }
+
+    .donation-method-card__accepted li {
+        font-size: 0.68rem;
+    }
+
+    .donation-method-card__code {
+        font-size: 0.84rem;
+        word-break: break-word;
+    }
+
+    .donations-info {
+        gap: 1.15rem;
+        padding-top: 2.4rem;
+    }
+
+    .donations-form-card {
+        padding: 1.3rem 1rem;
+    }
+
+    .donations-form-card > p,
+    .donations-step p,
+    .donations-benefit p {
+        font-size: 0.76rem;
+    }
+
+    .donations-form__field input,
+    .donations-form__field select,
+    .donations-form__field textarea {
+        padding: 0.85rem 0.9rem;
+        font-size: 0.8rem;
+    }
+
+    .donations-step {
+        grid-template-columns: auto 1fr;
+        gap: 0.8rem;
+    }
+
+    .donations-step__number {
+        font-size: 1.15rem;
+    }
+
+    .donations-step h3,
+    .donations-benefit h3 {
+        font-size: 0.95rem;
+    }
+
+    .donations-benefit {
+        margin-top: 1.3rem;
+        padding: 1.15rem 0.95rem;
     }
 
     .events-page {
