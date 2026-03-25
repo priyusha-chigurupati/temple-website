@@ -4315,6 +4315,116 @@ input {
         margin-top: -0.05rem;
     }
 
+    .contact-hero {
+        min-height: 18.5rem;
+    }
+
+    .contact-hero__overlay {
+        background:
+            linear-gradient(180deg, rgba(30, 16, 10, 0.16), rgba(30, 16, 10, 0.4)),
+            rgba(160, 65, 0, 0.16);
+    }
+
+    .contact-hero__content {
+        max-width: 32rem;
+        padding: 1.4rem 1rem;
+    }
+
+    .contact-hero__content h1,
+    .contact-info h2,
+    .contact-form-card h2,
+    .contact-map__head h2 {
+        font-size: clamp(2.1rem, 8.7vw, 3rem);
+    }
+
+    .contact-hero__content p {
+        max-width: 25rem;
+        margin: 0.8rem 0 0;
+        font-size: 0.88rem;
+    }
+
+    .contact-panel {
+        padding: 2.8rem 0 4rem;
+    }
+
+    .contact-panel__grid {
+        gap: 1.6rem;
+    }
+
+    .contact-form-card {
+        order: 1;
+        padding: 1.55rem 1.3rem;
+        box-shadow: 0 18px 38px rgba(160, 65, 0, 0.05);
+    }
+
+    .contact-form-card > p {
+        margin-bottom: 1.3rem;
+    }
+
+    .contact-info {
+        order: 2;
+    }
+
+    .contact-info__line {
+        width: 3.4rem;
+        margin-top: 1rem;
+    }
+
+    .contact-info__list {
+        gap: 1.15rem;
+        margin-top: 1.55rem;
+    }
+
+    .contact-info__item {
+        gap: 0.95rem;
+        grid-template-columns: 2.5rem 1fr;
+    }
+
+    .contact-info__icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 0.8rem;
+    }
+
+    .contact-info__item h3 {
+        font-size: 1rem;
+    }
+
+    .contact-social {
+        margin-top: 2rem;
+    }
+
+    .contact-social__list {
+        gap: 0.55rem;
+    }
+
+    .contact-map {
+        padding-bottom: 2.8rem;
+    }
+
+    .contact-map .container {
+        padding-top: 1.8rem;
+    }
+
+    .contact-map__head {
+        gap: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .contact-map__frame {
+        height: clamp(10rem, 36vw, 13rem);
+    }
+
+    .contact-map__pin {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 0.74rem;
+    }
+
+    .contact-map__label {
+        font-size: 0.66rem;
+    }
+
     .section {
         padding: 4.5rem 0;
     }
@@ -4347,36 +4457,13 @@ input {
         width: 100%;
     }
 
-    .contact-hero {
-        min-height: 21rem;
-    }
-
-    .contact-hero__content h1,
-    .contact-info h2,
-    .contact-form-card h2,
-    .contact-map__head h2 {
-        font-size: 2.35rem;
-    }
-
     .contact-hero__content h1 {
         white-space: normal;
-    }
-
-    .contact-panel {
-        padding-top: 3.2rem;
-    }
-
-    .contact-map {
-        padding-bottom: 3.1rem;
     }
 
     .contact-map__head {
         align-items: flex-start;
         flex-direction: column;
-    }
-
-    .contact-map__frame {
-        height: clamp(9rem, 34vw, 12rem);
     }
 
     .blog-page {
@@ -4758,6 +4845,96 @@ input {
     .donations-benefit {
         margin-top: 1.3rem;
         padding: 1.15rem 0.95rem;
+    }
+
+    .contact-hero {
+        min-height: 16rem;
+    }
+
+    .contact-hero__content {
+        padding: 1.1rem 0.75rem;
+    }
+
+    .contact-hero__content h1,
+    .contact-info h2,
+    .contact-form-card h2,
+    .contact-map__head h2 {
+        font-size: clamp(1.9rem, 10vw, 2.55rem);
+    }
+
+    .contact-hero__content p {
+        font-size: 0.8rem;
+    }
+
+    .contact-panel {
+        padding: 2.3rem 0 3.4rem;
+    }
+
+    .contact-form-card {
+        padding: 1.3rem 1rem;
+    }
+
+    .contact-form-card > p,
+    .contact-info__item p,
+    .contact-info__link {
+        font-size: 0.76rem;
+    }
+
+    .contact-form__field input,
+    .contact-form__field select,
+    .contact-form__field textarea {
+        padding: 0.85rem 0.9rem;
+        font-size: 0.8rem;
+    }
+
+    .contact-info__list {
+        gap: 1rem;
+    }
+
+    .contact-info__item {
+        grid-template-columns: 2.2rem 1fr;
+        gap: 0.8rem;
+    }
+
+    .contact-info__icon {
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 0.72rem;
+    }
+
+    .contact-social {
+        margin-top: 1.6rem;
+    }
+
+    .contact-social h3 {
+        margin-bottom: 0.75rem;
+    }
+
+    .contact-social__list a {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .contact-map {
+        padding-bottom: 2.35rem;
+    }
+
+    .contact-map .container {
+        padding-top: 1.4rem;
+    }
+
+    .contact-map__frame {
+        height: clamp(8.5rem, 40vw, 10.75rem);
+    }
+
+    .contact-map__pin {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
+    .contact-map__label {
+        padding: 0.4rem 0.65rem;
+        font-size: 0.62rem;
     }
 
     .events-page {
