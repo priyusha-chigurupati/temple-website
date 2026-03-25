@@ -4049,6 +4049,152 @@ input {
         flex: 1 1 0;
     }
 
+    .events-page {
+        padding: 1.85rem 0 4.8rem;
+    }
+
+    .events-page__header {
+        gap: 1rem;
+        padding-top: 0.25rem;
+    }
+
+    .events-page__title {
+        max-width: 18rem;
+        font-size: clamp(2.15rem, 9vw, 3.1rem);
+    }
+
+    .events-page__description {
+        max-width: 30rem;
+        font-size: 0.88rem;
+    }
+
+    .events-page__divider {
+        margin-bottom: 2rem;
+    }
+
+    .events-section {
+        margin-bottom: 2.7rem;
+    }
+
+    .events-section__head {
+        gap: 0.55rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .events-section__line {
+        display: none;
+    }
+
+    .events-ongoing-list {
+        gap: 1rem;
+    }
+
+    .events-ongoing-card__image img {
+        min-height: 12.5rem;
+        aspect-ratio: 4 / 3;
+    }
+
+    .events-ongoing-card__body {
+        padding: 1.35rem 1.2rem;
+    }
+
+    .events-ongoing-card h3 {
+        font-size: 1.55rem;
+    }
+
+    .events-upcoming {
+        padding: 4rem 0 4.25rem;
+    }
+
+    .events-upcoming__head {
+        gap: 0.8rem;
+        margin-bottom: 1.35rem;
+    }
+
+    .events-upcoming__grid {
+        display: grid;
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(15rem, 78%);
+        gap: 0.9rem;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+        scroll-snap-type: x proximity;
+    }
+
+    .events-upcoming__grid::-webkit-scrollbar {
+        height: 0;
+    }
+
+    .events-upcoming-card {
+        scroll-snap-align: start;
+    }
+
+    .events-upcoming-card__body p {
+        min-height: auto;
+    }
+
+    .events-sponsor {
+        padding: 3.9rem 0 1.4rem;
+    }
+
+    .events-sponsor__inner {
+        text-align: left;
+    }
+
+    .events-sponsor__inner p {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .events-sponsor__actions {
+        justify-content: stretch;
+    }
+
+    .events-sponsor__actions .button {
+        flex: 1 1 0;
+    }
+
+    .event-detail-page {
+        padding: 1.85rem 0 4.8rem;
+    }
+
+    .event-detail-page__back {
+        margin-bottom: 1.1rem;
+    }
+
+    .event-detail-hero {
+        gap: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
+    .event-detail-hero__copy h1 {
+        font-size: clamp(2.15rem, 8.6vw, 3rem);
+    }
+
+    .event-detail-hero__description {
+        margin-top: 0.9rem;
+        font-size: 0.88rem;
+    }
+
+    .event-detail-hero__image img {
+        aspect-ratio: 4 / 3;
+    }
+
+    .event-detail-body {
+        gap: 1rem;
+    }
+
+    .event-detail-body__copy {
+        padding: 1.45rem 1.2rem;
+    }
+
+    .event-detail-facts {
+        padding: 1.45rem 1.2rem;
+        border: 1px solid rgba(219, 194, 176, 0.22);
+        box-shadow: none;
+    }
+
     .section {
         padding: 4.5rem 0;
     }
@@ -4412,6 +4558,136 @@ input {
     .gallery-submit-form__actions {
         flex-direction: column-reverse;
         gap: 0.65rem;
+    }
+
+    .events-page {
+        padding: 1.45rem 0 4rem;
+    }
+
+    .events-page__title {
+        max-width: 14rem;
+        font-size: clamp(2rem, 10vw, 2.75rem);
+    }
+
+    .events-page__description {
+        font-size: 0.82rem;
+    }
+
+    .events-section__head h2,
+    .events-upcoming__head h2,
+    .events-sponsor h2 {
+        font-size: 1.6rem;
+    }
+
+    .events-section__status {
+        font-size: 0.58rem;
+    }
+
+    .events-ongoing-card__image img {
+        min-height: 10.5rem;
+    }
+
+    .events-ongoing-card__body {
+        padding: 1.15rem 1rem;
+    }
+
+    .events-ongoing-card__meta {
+        gap: 0.55rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .events-ongoing-card h3 {
+        font-size: 1.32rem;
+    }
+
+    .events-ongoing-card p {
+        margin-bottom: 1rem;
+        font-size: 0.78rem;
+    }
+
+    .events-upcoming {
+        padding: 3.45rem 0 3.7rem;
+    }
+
+    .events-upcoming__grid {
+        grid-auto-columns: minmax(14rem, 88%);
+    }
+
+    .events-upcoming-card__body {
+        padding: 1rem 0.95rem 1.1rem;
+    }
+
+    .events-upcoming-card__body h3 {
+        font-size: 1rem;
+    }
+
+    .events-upcoming-card__body p {
+        font-size: 0.74rem;
+    }
+
+    .events-sponsor {
+        padding: 3.3rem 0 1rem;
+    }
+
+    .events-sponsor__inner h2 {
+        font-size: 1.85rem;
+    }
+
+    .events-sponsor__inner p {
+        font-size: 0.8rem;
+    }
+
+    .events-sponsor__actions {
+        flex-direction: column;
+        gap: 0.65rem;
+    }
+
+    .event-detail-page {
+        padding: 1.45rem 0 4rem;
+    }
+
+    .event-detail-hero {
+        gap: 1.2rem;
+        padding-bottom: 1.7rem;
+    }
+
+    .event-detail-hero__copy h1 {
+        font-size: clamp(1.95rem, 10vw, 2.55rem);
+    }
+
+    .event-detail-hero__meta {
+        gap: 0.7rem;
+    }
+
+    .event-detail-hero__schedule span,
+    .event-detail-facts dt {
+        font-size: 0.6rem;
+    }
+
+    .event-detail-hero__schedule strong,
+    .event-detail-facts dd {
+        font-size: 0.84rem;
+    }
+
+    .event-detail-body__copy {
+        padding: 1.2rem 1rem;
+    }
+
+    .event-detail-body__copy h2,
+    .event-detail-facts h2 {
+        font-size: 1.45rem;
+    }
+
+    .event-detail-body__copy p {
+        font-size: 0.8rem;
+    }
+
+    .event-detail-facts {
+        padding: 1.2rem 1rem;
+    }
+
+    .event-detail-facts dl {
+        margin-top: 1rem;
     }
 
     .section-title {
