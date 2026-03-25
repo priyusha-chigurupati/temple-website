@@ -44,31 +44,31 @@ final class ContentRepository
 
     private function homeEventPreview(array $eventsPage): array
     {
+        $items = array_map(static function (array $item): array {
+            return [
+                'date' => $item['date'] ?? '',
+                'title' => $item['title'] ?? '',
+                'description' => $item['description'] ?? '',
+                'href' => '/events',
+                'image' => $item['image'] ?? '',
+            ];
+        }, array_slice($eventsPage['ongoing'] ?? [], 0, 3));
+
+        if (count($items) >= 3) {
+            return $items;
+        }
+
         $upcoming = $eventsPage['upcoming'] ?? [];
 
         usort($upcoming, static function (array $left, array $right): int {
             return self::eventSortKey($left) <=> self::eventSortKey($right);
         });
 
-        $items = array_map(static function (array $item): array {
-            return [
-                'date' => trim(($item['day'] ?? '') . ' ' . ($item['month'] ?? '')),
-                'title' => $item['title'] ?? '',
-                'description' => $item['description'] ?? '',
-                'href' => '/events',
-                'image' => $item['image'] ?? '',
-            ];
-        }, array_slice($upcoming, 0, 3));
+        $remaining = array_slice($upcoming, 0, 3 - count($items));
 
-        if (count($items) >= 3) {
-            return $items;
-        }
-
-        $ongoing = array_slice($eventsPage['ongoing'] ?? [], 0, 3 - count($items));
-
-        foreach ($ongoing as $item) {
+        foreach ($remaining as $item) {
             $items[] = [
-                'date' => $item['date'] ?? '',
+                'date' => trim(($item['day'] ?? '') . ' ' . ($item['month'] ?? '')),
                 'title' => $item['title'] ?? '',
                 'description' => $item['description'] ?? '',
                 'href' => '/events',
