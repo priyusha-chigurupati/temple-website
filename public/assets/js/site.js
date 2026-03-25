@@ -1,5 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
+  const header = document.querySelector('.site-header');
+  const navToggle = document.querySelector('[data-nav-toggle]');
+  const primaryNav = document.querySelector('#primary-navigation');
+
+  if (header && navToggle && primaryNav) {
+    const setNavState = (isOpen) => {
+      header.classList.toggle('is-nav-open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    };
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+      setNavState(!isOpen);
+    });
+
+    primaryNav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setNavState(false));
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 820) {
+        setNavState(false);
+      }
+    });
+  }
 
   const setModalState = (modal, isOpen) => {
     if (!modal) {
