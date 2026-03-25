@@ -113,7 +113,6 @@ final class PageController
         $result = $this->gallerySubmissions->submit($_POST, $_FILES);
         $redirectUrl = route_url_with_query('/gallery', [
             'category' => $selectedCategory === 'all' ? null : $selectedCategory,
-            'modal' => $result['ok'] ? null : 'submit',
         ]);
 
         if ($result['ok']) {
@@ -132,7 +131,6 @@ final class PageController
         flash_set('gallery_submission_state', [
             'type' => 'error',
             'message' => implode(' ', $result['errors'] ?? ['The gallery submission could not be processed.']),
-            'auto_open' => true,
         ]);
         flash_set('gallery_submission_form', $result['old'] ?? [
             'name' => '',

@@ -87,7 +87,6 @@ declare(strict_types=1);
     <div
         class="gallery-submit-modal"
         data-gallery-submit-modal
-        data-auto-open="<?= ! empty($submissionState['auto_open']) ? 'true' : 'false' ?>"
         hidden
     >
         <div class="gallery-submit-modal__backdrop" data-gallery-submit-close></div>
@@ -116,7 +115,10 @@ declare(strict_types=1);
                     <input type="file" name="photos[]" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" multiple>
                 </label>
                 <p class="gallery-submit-form__note"><?= e($page['cta']['note']) ?></p>
-                <button class="button button--primary button--full" type="submit"><?= e($page['cta']['submit_label']) ?></button>
+                <div class="gallery-submit-form__actions">
+                    <button class="button button--ghost" type="button" data-gallery-submit-close>Cancel</button>
+                    <button class="button button--primary" type="submit"><?= e($page['cta']['submit_label']) ?></button>
+                </div>
             </form>
         </div>
     </div>

@@ -110,10 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
       element.addEventListener('click', () => setModalState(submitModal, false));
     });
 
-    if (submitModal.dataset.autoOpen === 'true') {
-      setModalState(submitModal, true);
-    }
-
     document.addEventListener('keydown', (event) => {
       if (submitModal.hidden) {
         return;

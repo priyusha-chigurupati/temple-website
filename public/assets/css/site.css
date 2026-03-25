@@ -1579,6 +1579,12 @@ input {
     line-height: 1.55;
 }
 
+.gallery-submit-form__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.85rem;
+}
+
 .events-page {
     padding: 2rem 0 5.5rem;
 }
