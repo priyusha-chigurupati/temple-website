@@ -1,13 +1,15 @@
-INSERT INTO pages (slug, title, meta_title, meta_description, status) VALUES
-('home', 'Home', 'Home | AnkammaThalli Temple', 'Welcome to AnkammaThalli Temple.', 'published'),
-('about', 'About', 'About | AnkammaThalli Temple', 'Temple story and heritage.', 'draft'),
-('gallery', 'Gallery', 'Gallery | AnkammaThalli Temple', 'Temple imagery and moments.', 'draft'),
-('events', 'Events', 'Events | AnkammaThalli Temple', 'Festivals and sacred gatherings.', 'draft'),
-('donations', 'Donations', 'Donations | AnkammaThalli Temple', 'Ways to support the temple.', 'draft'),
-('contact', 'Contact', 'Contact | AnkammaThalli Temple', 'Visit and contact the temple.', 'draft'),
-('blog', 'Blog', 'Blog | AnkammaThalli Temple', 'Stories and reflections.', 'draft');
+INSERT INTO locales (code, name, native_name, is_default, is_active, sort_order)
+VALUES
+    ('en', 'English', 'English', 1, 1, 1),
+    ('te', 'Telugu', 'తెలుగు', 0, 1, 2);
 
-INSERT INTO donation_options (title, description, amount_label, sort_order, is_active) VALUES
-('Temple Maintenance', 'Preserving architecture and sacred spaces.', 'Rs 1,000', 1, 1),
-('Annadanam', 'Community meal sponsorship for devotees and guests.', 'Rs 2,500', 2, 1),
-('General Donation', 'Flexible contribution amount.', NULL, 3, 1);
+INSERT INTO site_settings (setting_key, setting_value, setting_type, is_translatable)
+VALUES
+    ('site.default_locale', 'en', 'string', 0),
+    ('site.supported_locales', 'en,te', 'string', 0),
+    ('site.name', NULL, 'string', 1),
+    ('site.tagline', NULL, 'string', 1),
+    ('site.contact.phone', NULL, 'string', 0),
+    ('site.contact.email', NULL, 'string', 0),
+    ('site.contact.address', NULL, 'text', 1),
+    ('site.contact.map_url', NULL, 'string', 0);

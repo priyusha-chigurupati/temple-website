@@ -3,5 +3,7 @@
 !/storage/uploads/.gitignore
 /.idea/
 /.vscode/
+.env
+.codex-temp/
 Thumbs.db
 Desktop.ini

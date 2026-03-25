@@ -1,3 +1,17 @@
+SET NAMES utf8mb4;
+
+CREATE TABLE locales (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(10) NOT NULL UNIQUE,
+    name VARCHAR(80) NOT NULL,
+    native_name VARCHAR(80) NOT NULL,
+    is_default TINYINT(1) NOT NULL DEFAULT 0,
+    is_active TINYINT(1) NOT NULL DEFAULT 1,
+    sort_order INT UNSIGNED NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 CREATE TABLE users (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(120) NOT NULL,
@@ -9,68 +23,136 @@ CREATE TABLE users (
 
 CREATE TABLE media (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(190) NOT NULL,
-    alt_text VARCHAR(255) NULL,
     file_path VARCHAR(255) NOT NULL,
+    original_name VARCHAR(255) NULL,
     mime_type VARCHAR(120) NOT NULL,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE media_translations (
+    media_id BIGINT UNSIGNED NOT NULL,
+    locale_id BIGINT UNSIGNED NOT NULL,
+    title VARCHAR(190) NULL,
+    alt_text VARCHAR(255) NULL,
+    PRIMARY KEY (media_id, locale_id),
+    CONSTRAINT fk_media_translations_media FOREIGN KEY (media_id) REFERENCES media(id) ON DELETE CASCADE,
+    CONSTRAINT fk_media_translations_locale FOREIGN KEY (locale_id) REFERENCES locales(id) ON DELETE CASCADE
+);
+
 CREATE TABLE pages (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     slug VARCHAR(120) NOT NULL UNIQUE,
+    template_key VARCHAR(120) NOT NULL,
+    status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
+    published_at DATETIME NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE page_translations (
+    page_id BIGINT UNSIGNED NOT NULL,
+    locale_id BIGINT UNSIGNED NOT NULL,
     title VARCHAR(190) NOT NULL,
     meta_title VARCHAR(190) NULL,
     meta_description VARCHAR(255) NULL,
-    status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
-    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    PRIMARY KEY (page_id, locale_id),
+    CONSTRAINT fk_page_translations_page FOREIGN KEY (page_id) REFERENCES pages(id) ON DELETE CASCADE,
+    CONSTRAINT fk_page_translations_locale FOREIGN KEY (locale_id) REFERENCES locales(id) ON DELETE CASCADE
 );
 
 CREATE TABLE page_sections (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     page_id BIGINT UNSIGNED NOT NULL,
     section_key VARCHAR(120) NOT NULL,
-    heading VARCHAR(190) NULL,
-    subheading VARCHAR(190) NULL,
-    body_long TEXT NULL,
-    body_json JSON NULL,
+    section_type VARCHAR(120) NOT NULL DEFAULT 'content',
+    settings_json JSON NULL,
     image_id BIGINT UNSIGNED NULL,
     sort_order INT UNSIGNED NOT NULL DEFAULT 0,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_page_section (page_id, section_key),
     CONSTRAINT fk_page_sections_page FOREIGN KEY (page_id) REFERENCES pages(id) ON DELETE CASCADE,
     CONSTRAINT fk_page_sections_media FOREIGN KEY (image_id) REFERENCES media(id) ON DELETE SET NULL
 );
 
+CREATE TABLE page_section_translations (
+    section_id BIGINT UNSIGNED NOT NULL,
+    locale_id BIGINT UNSIGNED NOT NULL,
+    eyebrow VARCHAR(190) NULL,
+    heading VARCHAR(190) NULL,
+    subheading VARCHAR(190) NULL,
+    body_long LONGTEXT NULL,
+    body_json JSON NULL,
+    PRIMARY KEY (section_id, locale_id),
+    CONSTRAINT fk_page_section_translations_section FOREIGN KEY (section_id) REFERENCES page_sections(id) ON DELETE CASCADE,
+    CONSTRAINT fk_page_section_translations_locale FOREIGN KEY (locale_id) REFERENCES locales(id) ON DELETE CASCADE
+);
+
+CREATE TABLE site_settings (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    setting_key VARCHAR(190) NOT NULL UNIQUE,
+    setting_value TEXT NULL,
+    setting_type VARCHAR(80) NOT NULL DEFAULT 'string',
+    is_translatable TINYINT(1) NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE site_setting_translations (
+    setting_id BIGINT UNSIGNED NOT NULL,
+    locale_id BIGINT UNSIGNED NOT NULL,
+    setting_value TEXT NULL,
+    PRIMARY KEY (setting_id, locale_id),
+    CONSTRAINT fk_site_setting_translations_setting FOREIGN KEY (setting_id) REFERENCES site_settings(id) ON DELETE CASCADE,
+    CONSTRAINT fk_site_setting_translations_locale FOREIGN KEY (locale_id) REFERENCES locales(id) ON DELETE CASCADE
+);
+
 CREATE TABLE events (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(190) NOT NULL,
     slug VARCHAR(190) NOT NULL UNIQUE,
-    summary TEXT NOT NULL,
     starts_at DATETIME NOT NULL,
     ends_at DATETIME NULL,
-    status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
     image_id BIGINT UNSIGNED NULL,
+    status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
+    is_featured_home TINYINT(1) NOT NULL DEFAULT 0,
+    sort_order INT UNSIGNED NOT NULL DEFAULT 0,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_events_media FOREIGN KEY (image_id) REFERENCES media(id) ON DELETE SET NULL
 );
 
+CREATE TABLE event_translations (
+    event_id BIGINT UNSIGNED NOT NULL,
+    locale_id BIGINT UNSIGNED NOT NULL,
+    title VARCHAR(190) NOT NULL,
+    summary TEXT NOT NULL,
+    body_long LONGTEXT NULL,
+    schedule_label VARCHAR(190) NULL,
+    PRIMARY KEY (event_id, locale_id),
+    CONSTRAINT fk_event_translations_event FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
+    CONSTRAINT fk_event_translations_locale FOREIGN KEY (locale_id) REFERENCES locales(id) ON DELETE CASCADE
+);
+
 CREATE TABLE gallery_categories (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(120) NOT NULL,
     slug VARCHAR(120) NOT NULL UNIQUE,
     sort_order INT UNSIGNED NOT NULL DEFAULT 0,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE gallery_category_translations (
+    category_id BIGINT UNSIGNED NOT NULL,
+    locale_id BIGINT UNSIGNED NOT NULL,
+    name VARCHAR(120) NOT NULL,
+    PRIMARY KEY (category_id, locale_id),
+    CONSTRAINT fk_gallery_category_translations_category FOREIGN KEY (category_id) REFERENCES gallery_categories(id) ON DELETE CASCADE,
+    CONSTRAINT fk_gallery_category_translations_locale FOREIGN KEY (locale_id) REFERENCES locales(id) ON DELETE CASCADE
+);
+
 CREATE TABLE gallery_items (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(190) NOT NULL,
-    caption TEXT NULL,
     image_id BIGINT UNSIGNED NOT NULL,
     category_id BIGINT UNSIGNED NOT NULL,
     status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
@@ -81,8 +163,18 @@ CREATE TABLE gallery_items (
     published_at DATETIME NULL,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CONSTRAINT fk_gallery_media FOREIGN KEY (image_id) REFERENCES media(id) ON DELETE CASCADE,
-    CONSTRAINT fk_gallery_category FOREIGN KEY (category_id) REFERENCES gallery_categories(id) ON DELETE RESTRICT
+    CONSTRAINT fk_gallery_items_media FOREIGN KEY (image_id) REFERENCES media(id) ON DELETE CASCADE,
+    CONSTRAINT fk_gallery_items_category FOREIGN KEY (category_id) REFERENCES gallery_categories(id) ON DELETE RESTRICT
+);
+
+CREATE TABLE gallery_item_translations (
+    gallery_item_id BIGINT UNSIGNED NOT NULL,
+    locale_id BIGINT UNSIGNED NOT NULL,
+    title VARCHAR(190) NOT NULL,
+    caption TEXT NULL,
+    PRIMARY KEY (gallery_item_id, locale_id),
+    CONSTRAINT fk_gallery_item_translations_item FOREIGN KEY (gallery_item_id) REFERENCES gallery_items(id) ON DELETE CASCADE,
+    CONSTRAINT fk_gallery_item_translations_locale FOREIGN KEY (locale_id) REFERENCES locales(id) ON DELETE CASCADE
 );
 
 CREATE TABLE gallery_submissions (
@@ -110,26 +202,46 @@ CREATE TABLE gallery_submission_files (
     CONSTRAINT fk_gallery_submission_files_submission FOREIGN KEY (submission_id) REFERENCES gallery_submissions(id) ON DELETE CASCADE
 );
 
-CREATE TABLE blog_posts (
-    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(190) NOT NULL,
-    slug VARCHAR(190) NOT NULL UNIQUE,
-    excerpt TEXT NOT NULL,
-    body_long LONGTEXT NOT NULL,
-    featured_image_id BIGINT UNSIGNED NULL,
-    status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
-    published_at DATETIME NULL,
-    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CONSTRAINT fk_blog_media FOREIGN KEY (featured_image_id) REFERENCES media(id) ON DELETE SET NULL
-);
-
 CREATE TABLE blog_categories (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(120) NOT NULL,
     slug VARCHAR(120) NOT NULL UNIQUE,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE blog_category_translations (
+    category_id BIGINT UNSIGNED NOT NULL,
+    locale_id BIGINT UNSIGNED NOT NULL,
+    name VARCHAR(120) NOT NULL,
+    PRIMARY KEY (category_id, locale_id),
+    CONSTRAINT fk_blog_category_translations_category FOREIGN KEY (category_id) REFERENCES blog_categories(id) ON DELETE CASCADE,
+    CONSTRAINT fk_blog_category_translations_locale FOREIGN KEY (locale_id) REFERENCES locales(id) ON DELETE CASCADE
+);
+
+CREATE TABLE blog_posts (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    slug VARCHAR(190) NOT NULL UNIQUE,
+    featured_image_id BIGINT UNSIGNED NULL,
+    status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
+    is_featured TINYINT(1) NOT NULL DEFAULT 0,
+    published_at DATETIME NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_blog_posts_media FOREIGN KEY (featured_image_id) REFERENCES media(id) ON DELETE SET NULL
+);
+
+CREATE TABLE blog_post_translations (
+    post_id BIGINT UNSIGNED NOT NULL,
+    locale_id BIGINT UNSIGNED NOT NULL,
+    title VARCHAR(190) NOT NULL,
+    excerpt TEXT NOT NULL,
+    body_long LONGTEXT NOT NULL,
+    meta_title VARCHAR(190) NULL,
+    meta_description VARCHAR(255) NULL,
+    read_time_label VARCHAR(80) NULL,
+    PRIMARY KEY (post_id, locale_id),
+    CONSTRAINT fk_blog_post_translations_post FOREIGN KEY (post_id) REFERENCES blog_posts(id) ON DELETE CASCADE,
+    CONSTRAINT fk_blog_post_translations_locale FOREIGN KEY (locale_id) REFERENCES locales(id) ON DELETE CASCADE
 );
 
 CREATE TABLE blog_post_categories (
@@ -142,13 +254,24 @@ CREATE TABLE blog_post_categories (
 
 CREATE TABLE donation_options (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    option_key VARCHAR(120) NOT NULL UNIQUE,
+    sort_order INT UNSIGNED NOT NULL DEFAULT 0,
+    is_active TINYINT(1) NOT NULL DEFAULT 1,
+    settings_json JSON NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE donation_option_translations (
+    donation_option_id BIGINT UNSIGNED NOT NULL,
+    locale_id BIGINT UNSIGNED NOT NULL,
     title VARCHAR(190) NOT NULL,
     description TEXT NULL,
     amount_label VARCHAR(120) NULL,
-    sort_order INT UNSIGNED NOT NULL DEFAULT 0,
-    is_active TINYINT(1) NOT NULL DEFAULT 1,
-    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    content_json JSON NULL,
+    PRIMARY KEY (donation_option_id, locale_id),
+    CONSTRAINT fk_donation_option_translations_option FOREIGN KEY (donation_option_id) REFERENCES donation_options(id) ON DELETE CASCADE,
+    CONSTRAINT fk_donation_option_translations_locale FOREIGN KEY (locale_id) REFERENCES locales(id) ON DELETE CASCADE
 );
 
 CREATE TABLE donation_notifications (
@@ -183,14 +306,6 @@ CREATE TABLE newsletter_subscriptions (
     email VARCHAR(190) NOT NULL UNIQUE,
     source VARCHAR(120) NOT NULL,
     status ENUM('active', 'unsubscribed') NOT NULL DEFAULT 'active',
-    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE site_settings (
-    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    setting_key VARCHAR(190) NOT NULL UNIQUE,
-    setting_value TEXT NULL,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
