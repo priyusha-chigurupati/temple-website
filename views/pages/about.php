@@ -85,15 +85,13 @@ declare(strict_types=1);
             <?php else: ?>
                 <div class="value-panel value-panel--image value-panel--image-placeholder" aria-hidden="true"></div>
             <?php endif; ?>
-            <div class="value-panel value-panel--double">
-                <?php foreach (array_slice($values['items'], 1, 2) as $item): ?>
-                    <article>
-                        <div class="value-panel__number"><?= e($item['number']) ?></div>
-                        <h3><?= e($item['title']) ?></h3>
-                        <p><?= e($item['description']) ?></p>
-                    </article>
-                <?php endforeach; ?>
-            </div>
+            <?php foreach (array_slice($values['items'], 1, 2) as $item): ?>
+                <article class="value-panel value-panel--secondary">
+                    <div class="value-panel__number"><?= e($item['number']) ?></div>
+                    <h3><?= e($item['title']) ?></h3>
+                    <p><?= e($item['description']) ?></p>
+                </article>
+            <?php endforeach; ?>
             <article class="value-panel value-panel--primary">
                 <div class="value-panel__number"><?= e($values['items'][3]['number']) ?></div>
                 <h3><?= e($values['items'][3]['title']) ?></h3>

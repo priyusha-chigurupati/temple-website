@@ -1131,17 +1131,9 @@ input {
         linear-gradient(160deg, #2f160b, #6f3516 55%, #2a120a);
 }
 
-.value-panel--double {
-    grid-column: span 8;
+.value-panel--secondary {
+    grid-column: span 4;
     grid-row: 2;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2rem;
-    align-items: stretch;
-}
-
-.value-panel--double article {
-    min-height: 100%;
 }
 
 .value-panel--primary {
@@ -2761,8 +2753,7 @@ input {
         padding-top: 0;
     }
 
-    .about-values__grid,
-    .value-panel--double {
+    .about-values__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -2847,7 +2838,7 @@ input {
     .value-panel--intro,
     .value-panel--highlight,
     .value-panel--image,
-    .value-panel--double,
+    .value-panel--secondary,
     .value-panel--primary {
         grid-column: span 2;
     }
@@ -2895,7 +2886,6 @@ input {
     .about-mission__cards,
     .about-facts__grid,
     .about-values__grid,
-    .value-panel--double,
     .gallery-masonry,
     .events-upcoming__grid,
     .donations-methods__grid,
@@ -2912,7 +2902,7 @@ input {
     .value-panel--intro,
     .value-panel--highlight,
     .value-panel--image,
-    .value-panel--double,
+    .value-panel--secondary,
     .value-panel--primary {
         grid-column: span 1;
         grid-row: auto;
