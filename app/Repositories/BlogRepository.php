@@ -135,20 +135,23 @@ final class BlogRepository
             FROM blog_posts bp
             INNER JOIN blog_post_translations bpt
                 ON bpt.post_id = bp.id
-               AND bpt.locale_id = :locale_id
+               AND bpt.locale_id = :post_locale_id
             LEFT JOIN blog_post_categories bpc
                 ON bpc.post_id = bp.id
             LEFT JOIN blog_categories bc
                 ON bc.id = bpc.category_id
             LEFT JOIN blog_category_translations bct
                 ON bct.category_id = bc.id
-               AND bct.locale_id = :locale_id
+               AND bct.locale_id = :category_locale_id
             LEFT JOIN media m
                 ON m.id = bp.featured_image_id
             WHERE bp.status = 'published'
             ORDER BY bp.published_at DESC, bp.id DESC"
         );
-        $statement->execute(['locale_id' => $this->localeId()]);
+        $statement->execute([
+            'post_locale_id' => $this->localeId(),
+            'category_locale_id' => $this->localeId(),
+        ]);
 
         $posts = [];
 
