@@ -9,6 +9,7 @@ require __DIR__ . '/../app/Config/Database.php';
 require __DIR__ . '/../app/Repositories/ContentRepository.php';
 require __DIR__ . '/../app/Repositories/EventRepository.php';
 require __DIR__ . '/../app/Repositories/BlogRepository.php';
+require __DIR__ . '/../app/Repositories/GalleryRepository.php';
 require __DIR__ . '/../app/Services/GallerySubmissionService.php';
 require __DIR__ . '/../app/Services/DonationNotificationService.php';
 require __DIR__ . '/../app/Services/ContactInquiryService.php';
@@ -22,6 +23,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 $content = require __DIR__ . '/../data/site.php';
 $eventRepository = null;
 $blogRepository = null;
+$galleryRepository = null;
 
 try {
     $connection = Database::connection(dirname(__DIR__));
@@ -33,12 +35,17 @@ try {
         $connection,
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
+    $galleryRepository = new GalleryRepository(
+        $connection,
+        Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
+    );
 } catch (Throwable) {
     $eventRepository = null;
     $blogRepository = null;
+    $galleryRepository = null;
 }
 
-$repository = new ContentRepository($content, $eventRepository, $blogRepository);
+$repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository);
 $gallerySubmissions = new GallerySubmissionService(
     dirname(__DIR__) . '/storage/data/gallery_submissions.json',
     dirname(__DIR__) . '/storage/uploads/gallery-submissions'

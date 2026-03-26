@@ -100,3 +100,18 @@ That command seeds the current English sample Blog content into:
 - `blog_post_categories`
 - `media`
 - `media_translations`
+
+The current sample Gallery content can be inserted into MySQL with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_gallery.php
+```
+
+That command seeds the current English sample Gallery content into:
+
+- `gallery_categories`
+- `gallery_category_translations`
+- `gallery_items`
+- `gallery_item_translations`
+- `media`
+- `media_translations`

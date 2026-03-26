@@ -7,7 +7,8 @@ final class ContentRepository
     public function __construct(
         private readonly array $content,
         private readonly ?EventRepository $eventRepository = null,
-        private readonly ?BlogRepository $blogRepository = null
+        private readonly ?BlogRepository $blogRepository = null,
+        private readonly ?GalleryRepository $galleryRepository = null
     )
     {
     }
@@ -32,7 +33,7 @@ final class ContentRepository
         $home = $this->content['pages']['home'];
         $about = $this->page('about');
         $events = $this->events();
-        $gallery = $this->page('gallery');
+        $gallery = $this->gallery('all');
 
         $home['about_section']['description'] = array_slice($about['history']['paragraphs'] ?? [], 0, 2);
         $home['events_section']['items'] = $this->homeEventPreview($events);
@@ -49,6 +50,16 @@ final class ContentRepository
     public function gallery(string $selectedCategory = 'all'): array
     {
         $page = $this->page('gallery');
+
+        if ($this->galleryRepository instanceof GalleryRepository && $this->galleryRepository->hasPublishedItems()) {
+            $listing = $this->galleryRepository->page($selectedCategory);
+            $page['selected_category'] = $listing['selected_category'];
+            $page['filters'] = $listing['filters'];
+            $page['items'] = $listing['items'];
+
+            return $page;
+        }
+
         $categories = [];
 
         foreach ($page['filters'] ?? [] as $filter) {
