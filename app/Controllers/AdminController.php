@@ -9,7 +9,8 @@ final class AdminController
         private readonly AdminDashboardRepository $dashboard,
         private readonly AdminEventRepository $events,
         private readonly AdminGalleryRepository $gallery,
-        private readonly AdminBlogRepository $blog
+        private readonly AdminBlogRepository $blog,
+        private readonly AdminPageRepository $pages
     )
     {
     }
@@ -407,6 +408,51 @@ final class AdminController
         redirect_to(route_url('/admin/blog'));
     }
 
+    public function pagesIndex(): void
+    {
+        $user = $this->requireAuth();
+
+        View::render('pages/admin-pages-index', [
+            'pageTitle' => 'Website Pages',
+            'metaTitle' => 'Website Pages | AnkammaThalli Temple',
+            'metaDescription' => 'Manage page content in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'pages',
+            'adminUser' => $user,
+            'pagesState' => flash_pull('admin_pages_state', []),
+            'pagesList' => $this->pages->pages(),
+        ], 'admin');
+    }
+
+    public function pagesHome(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleHomePageSave();
+        }
+
+        $home = $this->pages->homeEditor();
+
+        if ($home === null) {
+            http_response_code(404);
+            $this->dashboard();
+            return;
+        }
+
+        View::render('pages/admin-page-home-form', [
+            'pageTitle' => 'Edit Home Page',
+            'metaTitle' => 'Edit Home Page | AnkammaThalli Temple',
+            'metaDescription' => 'Edit the Home page content in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'pages',
+            'adminUser' => $user,
+            'pageEditorMode' => 'home',
+            'pageState' => flash_pull('admin_pages_state', []),
+            'homeForm' => flash_pull('admin_home_form', $home),
+        ], 'admin');
+    }
+
     private function handleLogin(): never
     {
         if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
@@ -547,6 +593,36 @@ final class AdminController
         ]);
 
         redirect_to(route_url('/admin/blog'));
+    }
+
+    private function handleHomePageSave(): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_home_form', $this->pages->homeEditor() ?? []);
+            redirect_to(route_url('/admin/pages/home'));
+        }
+
+        $result = $this->pages->saveHome($_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The Home page could not be saved.']),
+            ]);
+            flash_set('admin_home_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/pages/home'));
+        }
+
+        flash_set('admin_pages_state', [
+            'type' => 'success',
+            'message' => 'The Home page was updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/pages/home'));
     }
 
     private function emptyEventForm(): array

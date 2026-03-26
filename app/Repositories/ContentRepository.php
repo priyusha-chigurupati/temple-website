@@ -31,7 +31,7 @@ final class ContentRepository
 
     public function home(): array
     {
-        $home = $this->content['pages']['home'];
+        $home = $this->page('home');
         $about = $this->page('about');
         $events = $this->events();
         $gallery = $this->gallery('all');

@@ -6912,6 +6912,12 @@ input {
     gap: 0.85rem;
 }
 
+.admin-form-panel__three-up {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
 .admin-field {
     display: grid;
     gap: 0.38rem;
@@ -6976,6 +6982,80 @@ input {
     justify-content: flex-end;
     gap: 0.7rem;
     margin-top: 1rem;
+}
+
+.admin-page-editor {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.admin-pages-table {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.9rem;
+}
+
+.admin-pages-row {
+    display: grid;
+    grid-template-columns: minmax(220px, 1.2fr) minmax(140px, 0.5fr) auto minmax(180px, auto);
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.05rem;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(219, 194, 176, 0.18);
+}
+
+.admin-pages-row__main h3 {
+    margin: 0;
+    font-family: "Noto Serif", serif;
+    font-size: 1.08rem;
+    line-height: 1.08;
+}
+
+.admin-pages-row__main p,
+.admin-pages-row__meta small {
+    margin: 0.3rem 0 0;
+    color: rgba(85, 67, 54, 0.72);
+    font-size: 0.72rem;
+}
+
+.admin-pages-row__meta {
+    display: grid;
+    gap: 0.16rem;
+}
+
+.admin-pages-row__meta span {
+    color: rgba(85, 67, 54, 0.82);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.admin-pages-row__status {
+    justify-self: start;
+}
+
+.admin-pages-row__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.85rem;
+}
+
+.admin-pages-row__actions a,
+.admin-pages-row__coming-soon {
+    color: #a04100;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.admin-pages-row__coming-soon {
+    color: rgba(136, 115, 100, 0.88);
 }
 
 @media (max-width: 1100px) {
@@ -7071,13 +7151,22 @@ input {
     }
 
     .admin-events-stat--wide,
-    .admin-form-panel__two-up {
+    .admin-form-panel__two-up,
+    .admin-form-panel__three-up {
         grid-template-columns: 1fr;
     }
 
     .admin-events-toolbar {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .admin-pages-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-pages-row__actions {
+        justify-content: flex-start;
     }
 
     .admin-dashboard__topbar,

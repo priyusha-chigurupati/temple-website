@@ -16,6 +16,7 @@ require __DIR__ . '/../app/Repositories/AdminDashboardRepository.php';
 require __DIR__ . '/../app/Repositories/AdminEventRepository.php';
 require __DIR__ . '/../app/Repositories/AdminGalleryRepository.php';
 require __DIR__ . '/../app/Repositories/AdminBlogRepository.php';
+require __DIR__ . '/../app/Repositories/AdminPageRepository.php';
 require __DIR__ . '/../app/Services/GallerySubmissionService.php';
 require __DIR__ . '/../app/Services/DonationNotificationService.php';
 require __DIR__ . '/../app/Services/ContactInquiryService.php';
@@ -38,6 +39,7 @@ $adminDashboardRepository = null;
 $adminEventRepository = null;
 $adminGalleryRepository = null;
 $adminBlogRepository = null;
+$adminPageRepository = null;
 $connection = null;
 
 try {
@@ -75,6 +77,10 @@ try {
         $connection,
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
+    $adminPageRepository = new AdminPageRepository(
+        $connection,
+        Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
+    );
 } catch (Throwable) {
     $connection = null;
     $eventRepository = null;
@@ -86,6 +92,7 @@ try {
     $adminEventRepository = null;
     $adminGalleryRepository = null;
     $adminBlogRepository = null;
+    $adminPageRepository = null;
 }
 
 $repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository, $pageRepository);
@@ -119,13 +126,15 @@ if (
     && $adminEventRepository instanceof AdminEventRepository
     && $adminGalleryRepository instanceof AdminGalleryRepository
     && $adminBlogRepository instanceof AdminBlogRepository
+    && $adminPageRepository instanceof AdminPageRepository
 ) {
     $adminController = new AdminController(
         new AdminAuthService($userRepository),
         $adminDashboardRepository,
         $adminEventRepository,
         $adminGalleryRepository,
-        $adminBlogRepository
+        $adminBlogRepository,
+        $adminPageRepository
     );
 }
 
@@ -144,6 +153,8 @@ $routes = [
     '/admin/logout' => static fn () => $adminController instanceof AdminController ? $adminController->logout() : $controller->placeholder('admin'),
     '/admin/events' => static fn () => $adminController instanceof AdminController ? $adminController->eventsIndex() : $controller->placeholder('admin'),
     '/admin/events/new' => static fn () => $adminController instanceof AdminController ? $adminController->eventsCreate() : $controller->placeholder('admin'),
+    '/admin/pages' => static fn () => $adminController instanceof AdminController ? $adminController->pagesIndex() : $controller->placeholder('admin'),
+    '/admin/pages/home' => static fn () => $adminController instanceof AdminController ? $adminController->pagesHome() : $controller->placeholder('admin'),
     '/admin/media' => static fn () => $adminController instanceof AdminController ? $adminController->galleryIndex() : $controller->placeholder('admin'),
     '/admin/media/new' => static fn () => $adminController instanceof AdminController ? $adminController->galleryCreate() : $controller->placeholder('admin'),
     '/admin/blog' => static fn () => $adminController instanceof AdminController ? $adminController->blogIndex() : $controller->placeholder('admin'),
