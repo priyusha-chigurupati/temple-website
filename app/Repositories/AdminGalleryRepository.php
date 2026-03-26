@@ -62,7 +62,7 @@ final class AdminGalleryRepository
             }));
         }
 
-        $perPage = 5;
+        $perPage = 6;
         $totalItems = count($items);
         $totalPages = max(1, (int) ceil($totalItems / $perPage));
         $currentPage = min($requestedPage, $totalPages);

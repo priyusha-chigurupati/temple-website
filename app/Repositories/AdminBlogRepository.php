@@ -63,7 +63,7 @@ final class AdminBlogRepository
             }));
         }
 
-        $perPage = 5;
+        $perPage = 6;
         $totalItems = count($posts);
         $totalPages = max(1, (int) ceil($totalItems / $perPage));
         $currentPage = min($requestedPage, $totalPages);
