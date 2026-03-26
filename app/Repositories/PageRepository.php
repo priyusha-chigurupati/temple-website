@@ -61,6 +61,7 @@ final class PageRepository
         return match ($slug) {
             'about' => $this->aboutPage($page, $sections),
             'contact' => $this->contactPage($page, $sections),
+            'donations' => $this->donationsPage($page, $sections),
             'home' => $this->homePage($page, $sections),
             default => null,
         };
@@ -263,6 +264,55 @@ final class PageRepository
                 'href' => (string) ($mapSettings['href'] ?? ''),
                 'image' => (string) ($map['image_path'] ?? ''),
                 'marker' => (string) ($mapSettings['marker'] ?? ''),
+            ],
+        ];
+    }
+
+    private function donationsPage(array $page, array $sections): array
+    {
+        $hero = $sections['hero'] ?? [];
+        $methods = $sections['methods'] ?? [];
+        $instructions = $sections['instructions'] ?? [];
+        $form = $sections['form'] ?? [];
+
+        $heroBody = is_array($hero['body_json'] ?? null) ? $hero['body_json'] : [];
+        $heroSettings = is_array($hero['settings'] ?? null) ? $hero['settings'] : [];
+        $methodsBody = is_array($methods['body_json'] ?? null) ? $methods['body_json'] : [];
+        $instructionsBody = is_array($instructions['body_json'] ?? null) ? $instructions['body_json'] : [];
+        $formBody = is_array($form['body_json'] ?? null) ? $form['body_json'] : [];
+
+        return [
+            'meta' => [
+                'title' => $page['meta_title'] ?? (($page['title'] ?? 'Donations') . ' | AnkammaThalli Temple'),
+                'description' => $page['meta_description'] ?? '',
+            ],
+            'eyebrow' => (string) ($hero['eyebrow'] ?? ''),
+            'title_prefix' => (string) ($hero['heading'] ?? ''),
+            'title_highlight' => (string) ($hero['subheading'] ?? ''),
+            'description' => (string) ($hero['body_long'] ?? ''),
+            'impact' => [
+                'title' => (string) ($heroBody['impact']['title'] ?? ''),
+                'description' => (string) ($heroBody['impact']['description'] ?? ''),
+            ],
+            'hero_image' => (string) ($hero['image_path'] ?? ''),
+            'transparency' => [
+                'stat' => (string) ($heroSettings['transparency']['stat'] ?? ''),
+                'label' => (string) ($heroSettings['transparency']['label'] ?? ''),
+            ],
+            'methods_title' => (string) ($methods['heading'] ?? ''),
+            'methods' => array_values($methodsBody['items'] ?? []),
+            'instructions_title' => (string) ($instructions['heading'] ?? ''),
+            'instructions' => array_values($instructionsBody['items'] ?? []),
+            'benefit' => [
+                'title' => (string) ($instructionsBody['benefit']['title'] ?? ''),
+                'description' => (string) ($instructionsBody['benefit']['description'] ?? ''),
+            ],
+            'form' => [
+                'title' => (string) ($form['heading'] ?? ''),
+                'description' => (string) ($form['body_long'] ?? ''),
+                'fields' => array_values($formBody['fields'] ?? []),
+                'reference_note' => (string) ($formBody['reference_note'] ?? ''),
+                'button' => (string) ($formBody['button'] ?? 'Submit Donation Notice'),
             ],
         ];
     }

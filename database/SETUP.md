@@ -160,3 +160,18 @@ That command seeds the current English sample Contact content into:
 - `page_section_translations`
 - `media`
 - `media_translations`
+
+The current sample Donations page content can be inserted into MySQL with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_donations.php
+```
+
+That command seeds the current English sample Donations content into:
+
+- `pages`
+- `page_translations`
+- `page_sections`
+- `page_section_translations`
+- `media`
+- `media_translations`
