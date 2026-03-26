@@ -175,3 +175,22 @@ That command seeds the current English sample Donations content into:
 - `page_section_translations`
 - `media`
 - `media_translations`
+
+The initial admin login can be created locally with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_admin_user.php
+```
+
+By default, that script creates:
+
+- Email: `admin@ankammathalli.local`
+- Password: `TempleAdmin123!`
+
+If you want different local credentials, update these values in `.env` first:
+
+- `ADMIN_NAME`
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
+
+For production on Hostinger, run the same script after the database is imported and use strong real credentials in `.env`.

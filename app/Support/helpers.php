@@ -87,6 +87,50 @@ function redirect_to(string $url): never
     exit;
 }
 
+function session_put(string $key, mixed $value): void
+{
+    $_SESSION[$key] = $value;
+}
+
+function session_value(string $key, mixed $default = null): mixed
+{
+    return $_SESSION[$key] ?? $default;
+}
+
+function session_forget(string $key): void
+{
+    unset($_SESSION[$key]);
+}
+
+function csrf_token(): string
+{
+    $token = session_value('_csrf_token');
+
+    if (is_string($token) && $token !== '') {
+        return $token;
+    }
+
+    $token = bin2hex(random_bytes(32));
+    session_put('_csrf_token', $token);
+
+    return $token;
+}
+
+function csrf_input(): string
+{
+    return '<input type="hidden" name="_csrf" value="' . e(csrf_token()) . '">';
+}
+
+function csrf_is_valid(?string $token): bool
+{
+    $sessionToken = session_value('_csrf_token');
+
+    return is_string($token)
+        && is_string($sessionToken)
+        && $sessionToken !== ''
+        && hash_equals($sessionToken, $token);
+}
+
 function e(?string $value): string
 {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');

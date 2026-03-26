@@ -5514,8 +5514,247 @@ input {
         padding-top: 3.6rem;
     }
 
-    .footer-legal {
+.footer-legal {
         flex-wrap: wrap;
         gap: 0.85rem 1rem;
+    }
+}
+
+.admin-body {
+    min-height: 100vh;
+    margin: 0;
+    background:
+        radial-gradient(circle at top left, rgba(198, 104, 10, 0.14), transparent 34%),
+        linear-gradient(180deg, #fffaf1 0%, #f8efe0 100%);
+    color: #241b13;
+    font-family: "Manrope", sans-serif;
+}
+
+.admin-shell {
+    min-height: 100vh;
+    padding: 2.5rem 1.5rem;
+}
+
+.admin-login {
+    display: grid;
+    place-items: center;
+    min-height: calc(100vh - 5rem);
+}
+
+.admin-login__panel,
+.admin-dashboard {
+    width: min(100%, 1120px);
+}
+
+.admin-login__panel {
+    padding: 2.5rem;
+    border: 1px solid rgba(185, 104, 29, 0.18);
+    background: rgba(255, 248, 239, 0.92);
+    box-shadow: 0 24px 60px rgba(43, 28, 17, 0.12);
+}
+
+.admin-login__eyebrow,
+.admin-topbar__eyebrow {
+    margin: 0 0 0.75rem;
+    color: #b05b11;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+}
+
+.admin-login__panel h1,
+.admin-topbar h1 {
+    margin: 0;
+    font-family: "Noto Serif", serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 0.95;
+}
+
+.admin-login__copy,
+.admin-topbar__welcome,
+.admin-panel__header p,
+.admin-panel__empty {
+    color: rgba(50, 36, 23, 0.78);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.admin-status {
+    margin: 1.25rem 0 0;
+    padding: 0.95rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.admin-status--error {
+    background: rgba(139, 44, 0, 0.1);
+    color: #7c2d12;
+}
+
+.admin-status--success {
+    background: rgba(22, 101, 52, 0.1);
+    color: #166534;
+}
+
+.admin-form {
+    margin-top: 1.6rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.admin-form__field {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.admin-form__field span {
+    color: rgba(73, 53, 35, 0.88);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.admin-form__field input {
+    width: 100%;
+    border: 1px solid rgba(185, 104, 29, 0.14);
+    background: rgba(255, 255, 255, 0.86);
+    padding: 1rem 1.05rem;
+    font: inherit;
+}
+
+.admin-topbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.admin-topbar__logout {
+    border: 1px solid rgba(185, 104, 29, 0.18);
+    background: rgba(255, 248, 239, 0.92);
+    padding: 0.9rem 1.1rem;
+    color: #8d4b11;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.admin-metrics {
+    margin-top: 1.8rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.admin-metric-card,
+.admin-panel {
+    border: 1px solid rgba(185, 104, 29, 0.16);
+    background: rgba(255, 248, 239, 0.92);
+    box-shadow: 0 18px 44px rgba(43, 28, 17, 0.08);
+}
+
+.admin-metric-card {
+    padding: 1.2rem 1.3rem;
+}
+
+.admin-metric-card span {
+    display: block;
+    color: rgba(73, 53, 35, 0.72);
+    font-size: 0.83rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.admin-metric-card strong {
+    display: block;
+    margin-top: 0.45rem;
+    font-family: "Noto Serif", serif;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.admin-metric-card--alert strong {
+    color: #b45309;
+}
+
+.admin-panels {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.admin-panel {
+    padding: 1.35rem;
+}
+
+.admin-panel__header h2 {
+    margin: 0;
+    font-family: "Noto Serif", serif;
+    font-size: 1.45rem;
+}
+
+.admin-panel__header p {
+    margin: 0.35rem 0 0;
+}
+
+.admin-table-wrap {
+    margin-top: 1rem;
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 520px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.85rem 0.2rem;
+    border-top: 1px solid rgba(185, 104, 29, 0.1);
+    text-align: left;
+    font-size: 0.92rem;
+}
+
+.admin-table th {
+    color: rgba(73, 53, 35, 0.72);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 960px) {
+    .admin-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-panels {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .admin-shell {
+        padding: 1.25rem 0.9rem;
+    }
+
+    .admin-login__panel,
+    .admin-panel {
+        padding: 1.15rem;
+    }
+
+    .admin-topbar {
+        flex-direction: column;
+    }
+
+    .admin-metrics {
+        grid-template-columns: 1fr;
     }
 }

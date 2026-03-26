@@ -11,11 +11,15 @@ require __DIR__ . '/../app/Repositories/EventRepository.php';
 require __DIR__ . '/../app/Repositories/BlogRepository.php';
 require __DIR__ . '/../app/Repositories/GalleryRepository.php';
 require __DIR__ . '/../app/Repositories/PageRepository.php';
+require __DIR__ . '/../app/Repositories/UserRepository.php';
+require __DIR__ . '/../app/Repositories/AdminDashboardRepository.php';
 require __DIR__ . '/../app/Services/GallerySubmissionService.php';
 require __DIR__ . '/../app/Services/DonationNotificationService.php';
 require __DIR__ . '/../app/Services/ContactInquiryService.php';
 require __DIR__ . '/../app/Services/NewsletterSubscriptionService.php';
+require __DIR__ . '/../app/Services/AdminAuthService.php';
 require __DIR__ . '/../app/Controllers/PageController.php';
+require __DIR__ . '/../app/Controllers/AdminController.php';
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
@@ -26,6 +30,9 @@ $eventRepository = null;
 $blogRepository = null;
 $galleryRepository = null;
 $pageRepository = null;
+$userRepository = null;
+$adminDashboardRepository = null;
+$connection = null;
 
 try {
     $connection = Database::connection(dirname(__DIR__));
@@ -45,11 +52,16 @@ try {
         $connection,
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
+    $userRepository = new UserRepository($connection);
+    $adminDashboardRepository = new AdminDashboardRepository($connection);
 } catch (Throwable) {
+    $connection = null;
     $eventRepository = null;
     $blogRepository = null;
     $galleryRepository = null;
     $pageRepository = null;
+    $userRepository = null;
+    $adminDashboardRepository = null;
 }
 
 $repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository, $pageRepository);
@@ -58,10 +70,12 @@ $gallerySubmissions = new GallerySubmissionService(
     dirname(__DIR__) . '/storage/uploads/gallery-submissions'
 );
 $donationNotifications = new DonationNotificationService(
-    dirname(__DIR__) . '/storage/data/donation_notifications.json'
+    dirname(__DIR__) . '/storage/data/donation_notifications.json',
+    $connection
 );
 $contactInquiries = new ContactInquiryService(
-    dirname(__DIR__) . '/storage/data/contact_inquiries.json'
+    dirname(__DIR__) . '/storage/data/contact_inquiries.json',
+    $connection
 );
 $newsletterSubscriptions = new NewsletterSubscriptionService(
     dirname(__DIR__) . '/storage/data/newsletter_subscriptions.json'
@@ -73,6 +87,14 @@ $controller = new PageController(
     $contactInquiries,
     $newsletterSubscriptions
 );
+$adminController = null;
+
+if ($userRepository instanceof UserRepository && $adminDashboardRepository instanceof AdminDashboardRepository) {
+    $adminController = new AdminController(
+        new AdminAuthService($userRepository),
+        $adminDashboardRepository
+    );
+}
 
 $path = request_path();
 
@@ -84,7 +106,9 @@ $routes = [
     '/donations' => static fn () => $controller->donations(),
     '/contact' => static fn () => $controller->contact(),
     '/blog' => static fn () => $controller->blog(),
-    '/admin' => static fn () => $controller->placeholder('admin'),
+    '/admin' => static fn () => $adminController instanceof AdminController ? $adminController->dashboard() : $controller->placeholder('admin'),
+    '/admin/login' => static fn () => $adminController instanceof AdminController ? $adminController->login() : $controller->placeholder('admin'),
+    '/admin/logout' => static fn () => $adminController instanceof AdminController ? $adminController->logout() : $controller->placeholder('admin'),
 ];
 
 if (isset($routes[$path])) {

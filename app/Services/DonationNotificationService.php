@@ -6,7 +6,10 @@ final class DonationNotificationService
 {
     private const OFFLINE_METHOD = 'temple-offline';
 
-    public function __construct(private readonly string $manifestPath)
+    public function __construct(
+        private readonly string $manifestPath,
+        private readonly ?PDO $connection = null
+    )
     {
     }
 
@@ -87,12 +90,60 @@ final class DonationNotificationService
             'status' => 'pending',
         ];
 
-        $this->appendManifest($entry);
+        if (! $this->store($entry)) {
+            return [
+                'ok' => false,
+                'errors' => ['The donation notice could not be saved. Please try again.'],
+                'old' => [
+                    'full_name' => $fullName,
+                    'payment_method' => $paymentMethod,
+                    'amount' => $amount,
+                    'reference_id' => $referenceId,
+                    'phone' => $phone,
+                    'email' => $email,
+                    'address' => $address,
+                    'message' => $message,
+                    'purpose' => $purpose,
+                ],
+            ];
+        }
 
         return [
             'ok' => true,
             'message' => 'Your donation notice has been recorded. The temple team can review and follow up from the admin panel later.',
         ];
+    }
+
+    private function store(array $entry): bool
+    {
+        if ($this->connection instanceof PDO) {
+            try {
+                $statement = $this->connection->prepare(
+                    'INSERT INTO donation_notifications
+                        (full_name, payment_method, amount, reference_id, phone, email, address, message, purpose, status)
+                     VALUES
+                        (:full_name, :payment_method, :amount, :reference_id, :phone, :email, :address, :message, :purpose, :status)'
+                );
+                $statement->execute([
+                    'full_name' => $entry['full_name'],
+                    'payment_method' => $entry['payment_method_label'],
+                    'amount' => $entry['amount'],
+                    'reference_id' => $entry['reference_id'] !== '' ? $entry['reference_id'] : null,
+                    'phone' => $entry['phone'],
+                    'email' => $entry['email'] !== '' ? $entry['email'] : null,
+                    'address' => $entry['address'],
+                    'message' => $entry['message'] !== '' ? $entry['message'] : null,
+                    'purpose' => $entry['purpose'] !== '' ? $entry['purpose'] : null,
+                    'status' => $entry['status'],
+                ]);
+
+                return true;
+            } catch (Throwable) {
+                return $this->appendManifest($entry);
+            }
+        }
+
+        return $this->appendManifest($entry);
     }
 
     private function normalizeAmount(string $amount): ?string
@@ -116,7 +167,7 @@ final class DonationNotificationService
         return rtrim(rtrim(number_format($value, 2, '.', ''), '0'), '.');
     }
 
-    private function appendManifest(array $entry): void
+    private function appendManifest(array $entry): bool
     {
         $existing = [];
 
@@ -134,6 +185,7 @@ final class DonationNotificationService
         }
 
         $existing[] = $entry;
-        file_put_contents($this->manifestPath, json_encode($existing, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        return file_put_contents($this->manifestPath, json_encode($existing, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)) !== false;
     }
 }

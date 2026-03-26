@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 final class ContactInquiryService
 {
-    public function __construct(private readonly string $manifestPath)
+    public function __construct(
+        private readonly string $manifestPath,
+        private readonly ?PDO $connection = null
+    )
     {
     }
 
@@ -55,7 +58,18 @@ final class ContactInquiryService
             'created_at' => gmdate('Y-m-d\TH:i:s\Z'),
         ];
 
-        $this->appendManifest($entry);
+        if (! $this->store($entry)) {
+            return [
+                'ok' => false,
+                'errors' => ['The contact message could not be saved. Please try again.'],
+                'old' => [
+                    'full_name' => $fullName,
+                    'email' => $email,
+                    'subject' => $subject,
+                    'message' => $message,
+                ],
+            ];
+        }
 
         return [
             'ok' => true,
@@ -63,7 +77,32 @@ final class ContactInquiryService
         ];
     }
 
-    private function appendManifest(array $entry): void
+    private function store(array $entry): bool
+    {
+        if ($this->connection instanceof PDO) {
+            try {
+                $statement = $this->connection->prepare(
+                    'INSERT INTO contact_inquiries (full_name, email, subject, message, status)
+                     VALUES (:full_name, :email, :subject, :message, :status)'
+                );
+                $statement->execute([
+                    'full_name' => $entry['full_name'],
+                    'email' => $entry['email'],
+                    'subject' => $entry['subject'],
+                    'message' => $entry['message'],
+                    'status' => $entry['status'],
+                ]);
+
+                return true;
+            } catch (Throwable) {
+                return $this->appendManifest($entry);
+            }
+        }
+
+        return $this->appendManifest($entry);
+    }
+
+    private function appendManifest(array $entry): bool
     {
         $existing = [];
 
@@ -81,6 +120,7 @@ final class ContactInquiryService
         }
 
         $existing[] = $entry;
-        file_put_contents($this->manifestPath, json_encode($existing, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        return file_put_contents($this->manifestPath, json_encode($existing, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)) !== false;
     }
 }
