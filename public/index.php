@@ -20,6 +20,7 @@ require __DIR__ . '/../app/Repositories/AdminGalleryRepository.php';
 require __DIR__ . '/../app/Repositories/AdminBlogRepository.php';
 require __DIR__ . '/../app/Repositories/AdminPageRepository.php';
 require __DIR__ . '/../app/Repositories/AdminSettingsRepository.php';
+require __DIR__ . '/../app/Repositories/AdminSubmissionRepository.php';
 require __DIR__ . '/../app/Services/GallerySubmissionService.php';
 require __DIR__ . '/../app/Services/DonationNotificationService.php';
 require __DIR__ . '/../app/Services/ContactInquiryService.php';
@@ -46,6 +47,7 @@ $adminBlogRepository = null;
 $adminPageRepository = null;
 $adminSettingsRepository = null;
 $adminAccountRepository = null;
+$adminSubmissionRepository = null;
 $connection = null;
 
 try {
@@ -99,6 +101,7 @@ try {
         $connection,
         $userRepository
     );
+    $adminSubmissionRepository = new AdminSubmissionRepository($connection);
 } catch (Throwable) {
     $connection = null;
     $eventRepository = null;
@@ -114,12 +117,14 @@ try {
     $adminPageRepository = null;
     $adminSettingsRepository = null;
     $adminAccountRepository = null;
+    $adminSubmissionRepository = null;
 }
 
 $repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository, $pageRepository, $siteSettingsRepository);
 $gallerySubmissions = new GallerySubmissionService(
     dirname(__DIR__) . '/storage/data/gallery_submissions.json',
-    dirname(__DIR__) . '/storage/uploads/gallery-submissions'
+    dirname(__DIR__) . '/storage/uploads/gallery-submissions',
+    $connection
 );
 $donationNotifications = new DonationNotificationService(
     dirname(__DIR__) . '/storage/data/donation_notifications.json',
@@ -130,7 +135,8 @@ $contactInquiries = new ContactInquiryService(
     $connection
 );
 $newsletterSubscriptions = new NewsletterSubscriptionService(
-    dirname(__DIR__) . '/storage/data/newsletter_subscriptions.json'
+    dirname(__DIR__) . '/storage/data/newsletter_subscriptions.json',
+    $connection
 );
 $controller = new PageController(
     $repository,
@@ -150,6 +156,7 @@ if (
     && $adminPageRepository instanceof AdminPageRepository
     && $adminSettingsRepository instanceof AdminSettingsRepository
     && $adminAccountRepository instanceof AdminAccountRepository
+    && $adminSubmissionRepository instanceof AdminSubmissionRepository
 ) {
     $adminController = new AdminController(
         new AdminAuthService(
@@ -162,7 +169,8 @@ if (
         $adminBlogRepository,
         $adminPageRepository,
         $adminSettingsRepository,
-        $adminAccountRepository
+        $adminAccountRepository,
+        $adminSubmissionRepository
     );
 }
 
@@ -183,6 +191,11 @@ $routes = [
     '/admin/logout' => static fn () => $adminController instanceof AdminController ? $adminController->logout() : $controller->placeholder('admin'),
     '/admin/account' => static fn () => $adminController instanceof AdminController ? $adminController->accountProfile() : $controller->placeholder('admin'),
     '/admin/account/password' => static fn () => $adminController instanceof AdminController ? $adminController->accountPassword() : $controller->placeholder('admin'),
+    '/admin/submissions' => static fn () => $adminController instanceof AdminController ? $adminController->submissionsIndex() : $controller->placeholder('admin'),
+    '/admin/submissions/contact' => static fn () => $adminController instanceof AdminController ? $adminController->submissionsContactIndex() : $controller->placeholder('admin'),
+    '/admin/submissions/donations' => static fn () => $adminController instanceof AdminController ? $adminController->submissionsDonationsIndex() : $controller->placeholder('admin'),
+    '/admin/submissions/gallery' => static fn () => $adminController instanceof AdminController ? $adminController->submissionsGalleryIndex() : $controller->placeholder('admin'),
+    '/admin/submissions/newsletter' => static fn () => $adminController instanceof AdminController ? $adminController->submissionsNewsletterIndex() : $controller->placeholder('admin'),
     '/admin/events' => static fn () => $adminController instanceof AdminController ? $adminController->eventsIndex() : $controller->placeholder('admin'),
     '/admin/events/new' => static fn () => $adminController instanceof AdminController ? $adminController->eventsCreate() : $controller->placeholder('admin'),
     '/admin/pages' => static fn () => $adminController instanceof AdminController ? $adminController->pagesIndex() : $controller->placeholder('admin'),
@@ -258,6 +271,54 @@ if ($adminController instanceof AdminController && preg_match('#^/admin/blog/(\d
     }
 
     $adminController->blogDelete($postId);
+    exit;
+}
+
+if ($adminController instanceof AdminController && preg_match('#^/admin/submissions/contact/(\d+)(/review)?$#', $path, $matches) === 1) {
+    $submissionId = (int) $matches[1];
+
+    if (($matches[2] ?? '') === '/review') {
+        $adminController->submissionsContactReview($submissionId);
+        exit;
+    }
+
+    $adminController->submissionsContactShow($submissionId);
+    exit;
+}
+
+if ($adminController instanceof AdminController && preg_match('#^/admin/submissions/donations/(\d+)(/review)?$#', $path, $matches) === 1) {
+    $submissionId = (int) $matches[1];
+
+    if (($matches[2] ?? '') === '/review') {
+        $adminController->submissionsDonationReview($submissionId);
+        exit;
+    }
+
+    $adminController->submissionsDonationShow($submissionId);
+    exit;
+}
+
+if ($adminController instanceof AdminController && preg_match('#^/admin/submissions/gallery/(\d+)(/review)?$#', $path, $matches) === 1) {
+    $submissionId = (int) $matches[1];
+
+    if (($matches[2] ?? '') === '/review') {
+        $adminController->submissionsGalleryReview($submissionId);
+        exit;
+    }
+
+    $adminController->submissionsGalleryShow($submissionId);
+    exit;
+}
+
+if ($adminController instanceof AdminController && preg_match('#^/admin/submissions/newsletter/(\d+)/(activate|unsubscribe)$#', $path, $matches) === 1) {
+    $subscriptionId = (int) $matches[1];
+
+    if ($matches[2] === 'activate') {
+        $adminController->submissionsNewsletterActivate($subscriptionId);
+        exit;
+    }
+
+    $adminController->submissionsNewsletterUnsubscribe($subscriptionId);
     exit;
 }
 

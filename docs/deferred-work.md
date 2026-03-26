@@ -19,7 +19,7 @@ This file tracks the items we intentionally postponed so they stay visible after
 
 ## Gallery
 
-- Add full admin moderation tools for user photo submissions.
+- Decide whether approved gallery submissions should automatically create Media Library records or stay as a separate reviewed queue until manually published.
 - Revisit modal polish after the admin media flow is complete.
 - Revisit the admin Media Library layout density so the page uses space more efficiently and large empty areas are reduced.
 - Clarify the Media Library filter UI so the status filters and category filters are more clearly labeled.
@@ -31,7 +31,5 @@ This file tracks the items we intentionally postponed so they stay visible after
 - Connect the admin notification settings to real SMTP delivery once the final Hostinger or Zoho credentials are available.
 - Replace the local forgot-password reset link display with real outgoing reset emails after SMTP is configured.
 - Continue building the remaining admin operations:
-  - Contact inquiry management
-  - Donation notice management
-  - Gallery submission review
-  - Newsletter subscription management
+  - Final QA across the new submission-management screens
+  - Optional export and archive tools for contact, donations, gallery submissions, and newsletter records

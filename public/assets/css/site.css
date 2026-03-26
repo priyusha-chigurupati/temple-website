@@ -6718,6 +6718,175 @@ input {
     color: #ffffff;
 }
 
+.admin-events-phase--pending {
+    background: rgba(254, 214, 91, 0.18);
+    color: #735c00;
+}
+
+.admin-events-phase--reviewed,
+.admin-events-phase--approved,
+.admin-events-phase--active {
+    background: rgba(34, 197, 94, 0.14);
+    color: #166534;
+}
+
+.admin-events-phase--rejected,
+.admin-events-phase--unsubscribed {
+    background: rgba(220, 38, 38, 0.12);
+    color: #991b1b;
+}
+
+.admin-submissions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.admin-submission-card {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1.1rem 1.05rem;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(219, 194, 176, 0.18);
+    color: inherit;
+    text-decoration: none;
+}
+
+.admin-submission-card__label {
+    color: rgba(85, 67, 54, 0.8);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.admin-submission-card strong {
+    font-family: "Noto Serif", serif;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.admin-submission-card p {
+    margin: 0;
+    color: rgba(85, 67, 54, 0.78);
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+.admin-submission-list {
+    margin-top: 0.9rem;
+    display: grid;
+    gap: 0.85rem;
+}
+
+.admin-submission-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(180px, 0.8fr) auto auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.82rem;
+    background: #ffffff;
+    border: 1px solid rgba(219, 194, 176, 0.14);
+}
+
+.admin-submission-row__main,
+.admin-submission-row__meta {
+    min-width: 0;
+}
+
+.admin-submission-row__main h3 {
+    margin: 0;
+    font-family: "Noto Serif", serif;
+    font-size: 1.04rem;
+    line-height: 1.1;
+}
+
+.admin-submission-row__main p,
+.admin-submission-row__meta span,
+.admin-submission-row__meta small {
+    display: block;
+    margin: 0.25rem 0 0;
+    color: rgba(85, 67, 54, 0.78);
+    font-size: 0.72rem;
+    line-height: 1.45;
+}
+
+.admin-submission-row__status {
+    justify-self: end;
+    text-align: right;
+}
+
+.admin-submission-row__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    justify-self: end;
+    justify-content: flex-end;
+}
+
+.admin-submission-row__actions a,
+.admin-submission-row__actions button {
+    display: inline-flex;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    color: #a04100;
+    font: inherit;
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.admin-submission-row__actions form {
+    margin: 0;
+}
+
+.admin-submission-detail__meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
+.admin-submission-files {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.admin-submission-file {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 0.8rem;
+    align-items: center;
+    padding: 0.7rem;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(219, 194, 176, 0.22);
+}
+
+.admin-submission-file img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    background: #efe7d9;
+}
+
+.admin-submission-file strong,
+.admin-submission-file span {
+    display: block;
+}
+
+.admin-submission-file span {
+    margin-top: 0.22rem;
+    color: rgba(85, 67, 54, 0.72);
+    font-size: 0.72rem;
+}
+
 .admin-gallery-categories {
     display: flex;
     flex-wrap: wrap;
@@ -7487,6 +7656,13 @@ input {
         grid-template-columns: 1fr;
     }
 
+    .admin-submission-row,
+    .admin-submissions-grid,
+    .admin-submission-detail__meta-grid,
+    .admin-submission-files {
+        grid-template-columns: 1fr;
+    }
+
     .admin-settings-row {
         grid-template-columns: 1fr;
     }
@@ -7504,8 +7680,18 @@ input {
     .admin-events-row__main,
     .admin-events-row__meta,
     .admin-events-row__status,
-    .admin-events-row__actions {
+    .admin-events-row__actions,
+    .admin-submission-row__main,
+    .admin-submission-row__meta,
+    .admin-submission-row__status,
+    .admin-submission-row__actions {
         grid-column: auto;
+    }
+
+    .admin-submission-row__status,
+    .admin-submission-row__actions {
+        justify-self: start;
+        text-align: left;
     }
 
     .admin-form-actions {

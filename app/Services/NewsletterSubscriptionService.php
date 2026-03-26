@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 final class NewsletterSubscriptionService
 {
-    public function __construct(private readonly string $manifestPath)
+    public function __construct(
+        private readonly string $manifestPath,
+        private readonly ?PDO $connection = null
+    )
     {
     }
 
@@ -39,12 +42,44 @@ final class NewsletterSubscriptionService
             'created_at' => gmdate('Y-m-d\TH:i:s\Z'),
         ];
 
-        $this->writeManifest($existing);
+        if (! $this->store($email, $source, $existing)) {
+            return [
+                'ok' => false,
+                'errors' => ['The subscription could not be saved. Please try again.'],
+                'old' => ['email' => $email],
+            ];
+        }
 
         return [
             'ok' => true,
             'message' => 'You have been subscribed to temple updates.',
         ];
+    }
+
+    private function store(string $email, string $source, array $fallbackEntries): bool
+    {
+        if ($this->connection instanceof PDO) {
+            try {
+                $statement = $this->connection->prepare(
+                    'INSERT INTO newsletter_subscriptions (email, source, status)
+                     VALUES (:email, :source, :status)
+                     ON DUPLICATE KEY UPDATE
+                        source = VALUES(source),
+                        status = VALUES(status)'
+                );
+                $statement->execute([
+                    'email' => $email,
+                    'source' => $source,
+                    'status' => 'active',
+                ]);
+
+                return true;
+            } catch (Throwable) {
+                return $this->writeManifest($fallbackEntries);
+            }
+        }
+
+        return $this->writeManifest($fallbackEntries);
     }
 
     private function readManifest(): array
@@ -59,7 +94,7 @@ final class NewsletterSubscriptionService
         return is_array($decoded) ? $decoded : [];
     }
 
-    private function writeManifest(array $entries): void
+    private function writeManifest(array $entries): bool
     {
         $directory = dirname($this->manifestPath);
 
@@ -67,6 +102,6 @@ final class NewsletterSubscriptionService
             mkdir($directory, 0775, true);
         }
 
-        file_put_contents($this->manifestPath, json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        return file_put_contents($this->manifestPath, json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)) !== false;
     }
 }

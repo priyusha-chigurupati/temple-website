@@ -12,7 +12,8 @@ final class AdminController
         private readonly AdminBlogRepository $blog,
         private readonly AdminPageRepository $pages,
         private readonly AdminSettingsRepository $settings,
-        private readonly AdminAccountRepository $account
+        private readonly AdminAccountRepository $account,
+        private readonly AdminSubmissionRepository $submissions
     )
     {
     }
@@ -146,6 +147,273 @@ final class AdminController
             'adminUser' => $user,
             'accountPasswordState' => flash_pull('admin_account_password_state', []),
         ], 'admin');
+    }
+
+    public function submissionsIndex(): void
+    {
+        $user = $this->requireAuth();
+
+        View::render('pages/admin-submissions-index', [
+            'pageTitle' => 'Submission Center',
+            'metaTitle' => 'Submission Center | AnkammaThalli Temple',
+            'metaDescription' => 'Review contact messages, donation notices, gallery submissions, and newsletter signups.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'submissions',
+            'adminUser' => $user,
+            'submissionState' => flash_pull('admin_submission_state', []),
+            'submissionCounts' => $this->submissions->overviewCounts(),
+        ], 'admin');
+    }
+
+    public function submissionsContactIndex(): void
+    {
+        $user = $this->requireAuth();
+        $listing = $this->submissions->contactListing([
+            'status' => query_value('status'),
+            'q' => query_value('q'),
+            'page' => query_value('page'),
+        ]);
+
+        View::render('pages/admin-submissions-contact-index', [
+            'pageTitle' => 'Contact Inquiries',
+            'metaTitle' => 'Contact Inquiries | AnkammaThalli Temple',
+            'metaDescription' => 'Review contact inquiries sent from the public Contact page.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'submissions',
+            'adminUser' => $user,
+            'submissionState' => flash_pull('admin_submission_state', []),
+            'contactItems' => $listing['items'],
+            'contactFilters' => $listing['filters'],
+            'contactStatus' => $listing['status'],
+            'contactSearchTerm' => $listing['search_term'],
+            'contactPagination' => $listing['pagination'],
+            'contactTotalItems' => $listing['total_items'],
+        ], 'admin');
+    }
+
+    public function submissionsContactShow(int $id): void
+    {
+        $user = $this->requireAuth();
+        $item = $this->submissions->contactFind($id);
+
+        if ($item === null) {
+            http_response_code(404);
+            $this->dashboard();
+            return;
+        }
+
+        View::render('pages/admin-submissions-contact-show', [
+            'pageTitle' => 'View Contact Inquiry',
+            'metaTitle' => 'View Contact Inquiry | AnkammaThalli Temple',
+            'metaDescription' => 'View a contact inquiry in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'submissions',
+            'adminUser' => $user,
+            'submissionState' => flash_pull('admin_submission_state', []),
+            'contactItem' => $item,
+        ], 'admin');
+    }
+
+    public function submissionsContactReview(int $id): never
+    {
+        $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || ! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            http_response_code(403);
+            exit('Invalid review request.');
+        }
+
+        $this->submissions->markContactReviewed($id);
+        flash_set('admin_submission_state', [
+            'type' => 'success',
+            'message' => 'The contact inquiry was marked as reviewed.',
+        ]);
+
+        redirect_to(route_url('/admin/submissions/contact'));
+    }
+
+    public function submissionsDonationsIndex(): void
+    {
+        $user = $this->requireAuth();
+        $listing = $this->submissions->donationListing([
+            'status' => query_value('status'),
+            'q' => query_value('q'),
+            'page' => query_value('page'),
+        ]);
+
+        View::render('pages/admin-submissions-donations-index', [
+            'pageTitle' => 'Donation Notices',
+            'metaTitle' => 'Donation Notices | AnkammaThalli Temple',
+            'metaDescription' => 'Review donation notifications sent from the public Donations page.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'submissions',
+            'adminUser' => $user,
+            'submissionState' => flash_pull('admin_submission_state', []),
+            'donationItems' => $listing['items'],
+            'donationFilters' => $listing['filters'],
+            'donationStatus' => $listing['status'],
+            'donationSearchTerm' => $listing['search_term'],
+            'donationPagination' => $listing['pagination'],
+            'donationTotalItems' => $listing['total_items'],
+        ], 'admin');
+    }
+
+    public function submissionsDonationShow(int $id): void
+    {
+        $user = $this->requireAuth();
+        $item = $this->submissions->donationFind($id);
+
+        if ($item === null) {
+            http_response_code(404);
+            $this->dashboard();
+            return;
+        }
+
+        View::render('pages/admin-submissions-donation-show', [
+            'pageTitle' => 'View Donation Notice',
+            'metaTitle' => 'View Donation Notice | AnkammaThalli Temple',
+            'metaDescription' => 'View a donation notice in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'submissions',
+            'adminUser' => $user,
+            'submissionState' => flash_pull('admin_submission_state', []),
+            'donationItem' => $item,
+        ], 'admin');
+    }
+
+    public function submissionsDonationReview(int $id): never
+    {
+        $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || ! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            http_response_code(403);
+            exit('Invalid review request.');
+        }
+
+        $this->submissions->markDonationReviewed($id);
+        flash_set('admin_submission_state', [
+            'type' => 'success',
+            'message' => 'The donation notice was marked as reviewed.',
+        ]);
+
+        redirect_to(route_url('/admin/submissions/donations'));
+    }
+
+    public function submissionsGalleryIndex(): void
+    {
+        $user = $this->requireAuth();
+        $listing = $this->submissions->galleryListing([
+            'status' => query_value('status'),
+            'q' => query_value('q'),
+            'page' => query_value('page'),
+        ]);
+
+        View::render('pages/admin-submissions-gallery-index', [
+            'pageTitle' => 'Gallery Submissions',
+            'metaTitle' => 'Gallery Submissions | AnkammaThalli Temple',
+            'metaDescription' => 'Review public photo submissions before they appear in the temple gallery.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'submissions',
+            'adminUser' => $user,
+            'submissionState' => flash_pull('admin_submission_state', []),
+            'gallerySubmissionItems' => $listing['items'],
+            'gallerySubmissionFilters' => $listing['filters'],
+            'gallerySubmissionStatus' => $listing['status'],
+            'gallerySubmissionSearchTerm' => $listing['search_term'],
+            'gallerySubmissionPagination' => $listing['pagination'],
+            'gallerySubmissionTotalItems' => $listing['total_items'],
+        ], 'admin');
+    }
+
+    public function submissionsGalleryShow(int $id): void
+    {
+        $user = $this->requireAuth();
+        $item = $this->submissions->galleryFind($id);
+
+        if ($item === null) {
+            http_response_code(404);
+            $this->dashboard();
+            return;
+        }
+
+        View::render('pages/admin-submissions-gallery-show', [
+            'pageTitle' => 'Review Gallery Submission',
+            'metaTitle' => 'Review Gallery Submission | AnkammaThalli Temple',
+            'metaDescription' => 'Review a public gallery submission in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'submissions',
+            'adminUser' => $user,
+            'submissionState' => flash_pull('admin_submission_state', []),
+            'gallerySubmissionItem' => $item,
+            'galleryReviewForm' => flash_pull('admin_gallery_review_form', [
+                'status' => (string) ($item['status'] ?? 'pending'),
+                'review_notes' => (string) ($item['review_notes'] ?? ''),
+            ]),
+        ], 'admin');
+    }
+
+    public function submissionsGalleryReview(int $id): never
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || ! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            http_response_code(403);
+            exit('Invalid review request.');
+        }
+
+        $result = $this->submissions->reviewGallery($id, (int) $user['id'], $_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_submission_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The gallery submission could not be reviewed.']),
+            ]);
+            flash_set('admin_gallery_review_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/submissions/gallery/' . $id));
+        }
+
+        flash_set('admin_submission_state', [
+            'type' => 'success',
+            'message' => 'The gallery submission review was saved successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/submissions/gallery'));
+    }
+
+    public function submissionsNewsletterIndex(): void
+    {
+        $user = $this->requireAuth();
+        $listing = $this->submissions->newsletterListing([
+            'status' => query_value('status'),
+            'q' => query_value('q'),
+            'page' => query_value('page'),
+        ]);
+
+        View::render('pages/admin-submissions-newsletter-index', [
+            'pageTitle' => 'Newsletter Subscribers',
+            'metaTitle' => 'Newsletter Subscribers | AnkammaThalli Temple',
+            'metaDescription' => 'Review newsletter subscribers collected from the public website.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'submissions',
+            'adminUser' => $user,
+            'submissionState' => flash_pull('admin_submission_state', []),
+            'newsletterItems' => $listing['items'],
+            'newsletterFilters' => $listing['filters'],
+            'newsletterStatus' => $listing['status'],
+            'newsletterSearchTerm' => $listing['search_term'],
+            'newsletterPagination' => $listing['pagination'],
+            'newsletterTotalItems' => $listing['total_items'],
+        ], 'admin');
+    }
+
+    public function submissionsNewsletterActivate(int $id): never
+    {
+        $this->handleNewsletterStatusChange($id, 'active');
+    }
+
+    public function submissionsNewsletterUnsubscribe(int $id): never
+    {
+        $this->handleNewsletterStatusChange($id, 'unsubscribed');
     }
 
     public function logout(): never
@@ -862,6 +1130,33 @@ final class AdminController
         }
 
         return $user;
+    }
+
+    private function handleNewsletterStatusChange(int $id, string $status): never
+    {
+        $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || ! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            http_response_code(403);
+            exit('Invalid newsletter status request.');
+        }
+
+        if (! $this->submissions->updateNewsletterStatus($id, $status)) {
+            flash_set('admin_submission_state', [
+                'type' => 'error',
+                'message' => 'The newsletter subscription status could not be updated.',
+            ]);
+            redirect_to(route_url('/admin/submissions/newsletter'));
+        }
+
+        flash_set('admin_submission_state', [
+            'type' => 'success',
+            'message' => $status === 'active'
+                ? 'The newsletter subscription was reactivated.'
+                : 'The newsletter subscription was marked as unsubscribed.',
+        ]);
+
+        redirect_to(route_url('/admin/submissions/newsletter'));
     }
 
     private function handleAccountProfileSave(array $user): never

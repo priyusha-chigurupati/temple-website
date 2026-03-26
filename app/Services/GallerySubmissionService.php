@@ -14,7 +14,8 @@ final class GallerySubmissionService
 
     public function __construct(
         private readonly string $manifestPath,
-        private readonly string $uploadsDirectory
+        private readonly string $uploadsDirectory,
+        private readonly ?PDO $connection = null
     ) {
     }
 
@@ -106,7 +107,7 @@ final class GallerySubmissionService
             ];
         }
 
-        $this->appendManifest([
+        $entry = [
             'id' => $submissionId,
             'name' => $name,
             'email' => $email,
@@ -114,7 +115,19 @@ final class GallerySubmissionService
             'status' => 'pending',
             'created_at' => $timestamp,
             'files' => $storedFiles,
-        ]);
+        ];
+
+        if (! $this->store($entry)) {
+            return [
+                'ok' => false,
+                'errors' => ['The submission could not be recorded after the files were uploaded. Please try again.'],
+                'old' => [
+                    'name' => $name,
+                    'email' => $email,
+                    'description' => $description,
+                ],
+            ];
+        }
 
         return [
             'ok' => true,
@@ -183,7 +196,59 @@ final class GallerySubmissionService
         return $errors;
     }
 
-    private function appendManifest(array $entry): void
+    private function store(array $entry): bool
+    {
+        if ($this->connection instanceof PDO) {
+            try {
+                $this->connection->beginTransaction();
+
+                $submission = $this->connection->prepare(
+                    'INSERT INTO gallery_submissions
+                        (submitter_name, submitter_email, description, status)
+                     VALUES
+                        (:submitter_name, :submitter_email, :description, :status)'
+                );
+                $submission->execute([
+                    'submitter_name' => $entry['name'],
+                    'submitter_email' => $entry['email'],
+                    'description' => $entry['description'] !== '' ? $entry['description'] : null,
+                    'status' => $entry['status'],
+                ]);
+
+                $submissionId = (int) $this->connection->lastInsertId();
+                $fileInsert = $this->connection->prepare(
+                    'INSERT INTO gallery_submission_files
+                        (submission_id, file_path, original_name, mime_type, size_bytes)
+                     VALUES
+                        (:submission_id, :file_path, :original_name, :mime_type, :size_bytes)'
+                );
+
+                foreach ($entry['files'] as $file) {
+                    $fileInsert->execute([
+                        'submission_id' => $submissionId,
+                        'file_path' => $file['stored_path'],
+                        'original_name' => $file['original_name'],
+                        'mime_type' => $file['mime_type'],
+                        'size_bytes' => (int) $file['size_bytes'],
+                    ]);
+                }
+
+                $this->connection->commit();
+
+                return true;
+            } catch (Throwable) {
+                if ($this->connection->inTransaction()) {
+                    $this->connection->rollBack();
+                }
+
+                return $this->appendManifest($entry);
+            }
+        }
+
+        return $this->appendManifest($entry);
+    }
+
+    private function appendManifest(array $entry): bool
     {
         $existing = [];
 
@@ -201,6 +266,7 @@ final class GallerySubmissionService
         }
 
         $existing[] = $entry;
-        file_put_contents($this->manifestPath, json_encode($existing, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        return file_put_contents($this->manifestPath, json_encode($existing, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)) !== false;
     }
 }
