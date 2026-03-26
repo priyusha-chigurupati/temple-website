@@ -9,14 +9,25 @@ final class ContentRepository
         private readonly ?EventRepository $eventRepository = null,
         private readonly ?BlogRepository $blogRepository = null,
         private readonly ?GalleryRepository $galleryRepository = null,
-        private readonly ?PageRepository $pageRepository = null
+        private readonly ?PageRepository $pageRepository = null,
+        private readonly ?SiteSettingsRepository $siteSettingsRepository = null
     )
     {
     }
 
     public function site(): array
     {
-        return $this->content['site'];
+        $site = $this->content['site'];
+
+        if ($this->siteSettingsRepository instanceof SiteSettingsRepository) {
+            $overrides = array_filter(
+                $this->siteSettingsRepository->siteOverrides(),
+                static fn (mixed $value): bool => is_string($value) ? trim($value) !== '' : $value !== null
+            );
+            $site = array_replace($site, $overrides);
+        }
+
+        return $site;
     }
 
     public function navigation(): array
@@ -26,7 +37,49 @@ final class ContentRepository
 
     public function footer(): array
     {
-        return $this->content['footer'];
+        $footer = $this->content['footer'];
+
+        if ($this->siteSettingsRepository instanceof SiteSettingsRepository) {
+            $overrides = $this->siteSettingsRepository->footerOverrides();
+
+            if (is_string($overrides['description'] ?? null) && trim((string) $overrides['description']) !== '') {
+                $footer['description'] = $overrides['description'];
+            }
+
+            if (is_array($overrides['quick_links'] ?? null) && $overrides['quick_links'] !== []) {
+                $footer['quick_links'] = $overrides['quick_links'];
+            }
+
+            if (is_array($overrides['address']['lines'] ?? null) && ($overrides['address']['lines'] ?? []) !== []) {
+                $footer['address']['lines'] = $overrides['address']['lines'];
+            }
+
+            if (is_string($overrides['address']['morning'] ?? null) && trim((string) $overrides['address']['morning']) !== '') {
+                $footer['address']['morning'] = $overrides['address']['morning'];
+            }
+
+            if (is_string($overrides['address']['evening'] ?? null) && trim((string) $overrides['address']['evening']) !== '') {
+                $footer['address']['evening'] = $overrides['address']['evening'];
+            }
+
+            if (is_string($overrides['newsletter']['title'] ?? null) && trim((string) $overrides['newsletter']['title']) !== '') {
+                $footer['newsletter']['title'] = $overrides['newsletter']['title'];
+            }
+
+            if (is_string($overrides['newsletter']['description'] ?? null) && trim((string) $overrides['newsletter']['description']) !== '') {
+                $footer['newsletter']['description'] = $overrides['newsletter']['description'];
+            }
+
+            if (is_array($overrides['social_links'] ?? null) && $overrides['social_links'] !== []) {
+                $footer['social_links'] = $overrides['social_links'];
+            }
+
+            if (is_array($overrides['legal'] ?? null) && $overrides['legal'] !== []) {
+                $footer['legal'] = $overrides['legal'];
+            }
+        }
+
+        return $footer;
     }
 
     public function home(): array

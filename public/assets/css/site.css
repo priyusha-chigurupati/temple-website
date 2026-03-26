@@ -7110,6 +7110,69 @@ input {
     color: rgba(136, 115, 100, 0.88);
 }
 
+.admin-settings-table {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.9rem;
+}
+
+.admin-settings-row {
+    display: grid;
+    grid-template-columns: minmax(240px, 1.2fr) minmax(140px, 0.55fr) auto auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.05rem;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(219, 194, 176, 0.18);
+}
+
+.admin-settings-row__main h3 {
+    margin: 0;
+    font-family: "Noto Serif", serif;
+    font-size: 1.08rem;
+    line-height: 1.08;
+}
+
+.admin-settings-row__main p,
+.admin-settings-row__meta small {
+    margin: 0.3rem 0 0;
+    color: rgba(85, 67, 54, 0.72);
+    font-size: 0.72rem;
+}
+
+.admin-settings-row__meta {
+    display: grid;
+    gap: 0.16rem;
+}
+
+.admin-settings-row__meta span {
+    color: rgba(85, 67, 54, 0.82);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.admin-settings-row__status {
+    justify-self: start;
+}
+
+.admin-settings-row__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.85rem;
+}
+
+.admin-settings-row__actions a {
+    color: #a04100;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
 @media (max-width: 1100px) {
     .admin-sidebar {
         width: 196px;
@@ -7148,6 +7211,10 @@ input {
 
     .admin-events-row {
         grid-template-columns: 84px minmax(0, 1fr);
+    }
+
+    .admin-settings-row {
+        grid-template-columns: minmax(0, 1fr) minmax(140px, auto) auto auto;
     }
 
     .admin-events-row__meta,
@@ -7397,6 +7464,19 @@ input {
 
     .admin-events-row {
         grid-template-columns: 1fr;
+    }
+
+    .admin-settings-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-settings-row__main,
+    .admin-settings-row__meta,
+    .admin-settings-row__status,
+    .admin-settings-row__actions {
+        grid-column: auto;
+        justify-self: start;
+        text-align: left;
     }
 
     .admin-events-row__image,

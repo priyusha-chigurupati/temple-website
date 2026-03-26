@@ -11,12 +11,14 @@ require __DIR__ . '/../app/Repositories/EventRepository.php';
 require __DIR__ . '/../app/Repositories/BlogRepository.php';
 require __DIR__ . '/../app/Repositories/GalleryRepository.php';
 require __DIR__ . '/../app/Repositories/PageRepository.php';
+require __DIR__ . '/../app/Repositories/SiteSettingsRepository.php';
 require __DIR__ . '/../app/Repositories/UserRepository.php';
 require __DIR__ . '/../app/Repositories/AdminDashboardRepository.php';
 require __DIR__ . '/../app/Repositories/AdminEventRepository.php';
 require __DIR__ . '/../app/Repositories/AdminGalleryRepository.php';
 require __DIR__ . '/../app/Repositories/AdminBlogRepository.php';
 require __DIR__ . '/../app/Repositories/AdminPageRepository.php';
+require __DIR__ . '/../app/Repositories/AdminSettingsRepository.php';
 require __DIR__ . '/../app/Services/GallerySubmissionService.php';
 require __DIR__ . '/../app/Services/DonationNotificationService.php';
 require __DIR__ . '/../app/Services/ContactInquiryService.php';
@@ -34,12 +36,14 @@ $eventRepository = null;
 $blogRepository = null;
 $galleryRepository = null;
 $pageRepository = null;
+$siteSettingsRepository = null;
 $userRepository = null;
 $adminDashboardRepository = null;
 $adminEventRepository = null;
 $adminGalleryRepository = null;
 $adminBlogRepository = null;
 $adminPageRepository = null;
+$adminSettingsRepository = null;
 $connection = null;
 
 try {
@@ -57,6 +61,10 @@ try {
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
     $pageRepository = new PageRepository(
+        $connection,
+        Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
+    );
+    $siteSettingsRepository = new SiteSettingsRepository(
         $connection,
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
@@ -81,21 +89,27 @@ try {
         $connection,
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
+    $adminSettingsRepository = new AdminSettingsRepository(
+        $connection,
+        Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
+    );
 } catch (Throwable) {
     $connection = null;
     $eventRepository = null;
     $blogRepository = null;
     $galleryRepository = null;
     $pageRepository = null;
+    $siteSettingsRepository = null;
     $userRepository = null;
     $adminDashboardRepository = null;
     $adminEventRepository = null;
     $adminGalleryRepository = null;
     $adminBlogRepository = null;
     $adminPageRepository = null;
+    $adminSettingsRepository = null;
 }
 
-$repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository, $pageRepository);
+$repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository, $pageRepository, $siteSettingsRepository);
 $gallerySubmissions = new GallerySubmissionService(
     dirname(__DIR__) . '/storage/data/gallery_submissions.json',
     dirname(__DIR__) . '/storage/uploads/gallery-submissions'
@@ -127,6 +141,7 @@ if (
     && $adminGalleryRepository instanceof AdminGalleryRepository
     && $adminBlogRepository instanceof AdminBlogRepository
     && $adminPageRepository instanceof AdminPageRepository
+    && $adminSettingsRepository instanceof AdminSettingsRepository
 ) {
     $adminController = new AdminController(
         new AdminAuthService($userRepository),
@@ -134,7 +149,8 @@ if (
         $adminEventRepository,
         $adminGalleryRepository,
         $adminBlogRepository,
-        $adminPageRepository
+        $adminPageRepository,
+        $adminSettingsRepository
     );
 }
 
@@ -158,6 +174,8 @@ $routes = [
     '/admin/pages/about' => static fn () => $adminController instanceof AdminController ? $adminController->pagesAbout() : $controller->placeholder('admin'),
     '/admin/pages/contact' => static fn () => $adminController instanceof AdminController ? $adminController->pagesContact() : $controller->placeholder('admin'),
     '/admin/pages/donations' => static fn () => $adminController instanceof AdminController ? $adminController->pagesDonations() : $controller->placeholder('admin'),
+    '/admin/settings' => static fn () => $adminController instanceof AdminController ? $adminController->settingsIndex() : $controller->placeholder('admin'),
+    '/admin/settings/footer' => static fn () => $adminController instanceof AdminController ? $adminController->settingsFooter() : $controller->placeholder('admin'),
     '/admin/media' => static fn () => $adminController instanceof AdminController ? $adminController->galleryIndex() : $controller->placeholder('admin'),
     '/admin/media/new' => static fn () => $adminController instanceof AdminController ? $adminController->galleryCreate() : $controller->placeholder('admin'),
     '/admin/blog' => static fn () => $adminController instanceof AdminController ? $adminController->blogIndex() : $controller->placeholder('admin'),

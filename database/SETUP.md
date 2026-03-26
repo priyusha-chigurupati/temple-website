@@ -176,6 +176,17 @@ That command seeds the current English sample Donations content into:
 - `media`
 - `media_translations`
 
+The current sample footer and shared footer-related site settings can be inserted into MySQL with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_footer_settings.php
+```
+
+That command seeds the current English footer and shared footer settings into:
+
+- `site_settings`
+- `site_setting_translations`
+
 The initial admin login can be created locally with:
 
 ```powershell

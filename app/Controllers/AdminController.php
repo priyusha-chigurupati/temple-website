@@ -10,7 +10,8 @@ final class AdminController
         private readonly AdminEventRepository $events,
         private readonly AdminGalleryRepository $gallery,
         private readonly AdminBlogRepository $blog,
-        private readonly AdminPageRepository $pages
+        private readonly AdminPageRepository $pages,
+        private readonly AdminSettingsRepository $settings
     )
     {
     }
@@ -540,6 +541,42 @@ final class AdminController
         ], 'admin');
     }
 
+    public function settingsIndex(): void
+    {
+        $user = $this->requireAuth();
+
+        View::render('pages/admin-settings-index', [
+            'pageTitle' => 'Global Settings',
+            'metaTitle' => 'Global Settings | AnkammaThalli Temple',
+            'metaDescription' => 'Manage global temple website settings in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'settings',
+            'adminUser' => $user,
+            'settingsState' => flash_pull('admin_settings_state', []),
+            'settingsItems' => $this->settings->settingsItems(),
+        ], 'admin');
+    }
+
+    public function settingsFooter(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleFooterSettingsSave();
+        }
+
+        View::render('pages/admin-settings-footer-form', [
+            'pageTitle' => 'Edit Footer Settings',
+            'metaTitle' => 'Edit Footer Settings | AnkammaThalli Temple',
+            'metaDescription' => 'Edit the global footer settings in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'settings',
+            'adminUser' => $user,
+            'settingsState' => flash_pull('admin_settings_state', []),
+            'footerForm' => flash_pull('admin_footer_form', $this->settings->footerEditor()),
+        ], 'admin');
+    }
+
     private function handleLogin(): never
     {
         if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
@@ -800,6 +837,36 @@ final class AdminController
         ]);
 
         redirect_to(route_url('/admin/pages/donations'));
+    }
+
+    private function handleFooterSettingsSave(): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_settings_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_footer_form', $this->settings->footerEditor());
+            redirect_to(route_url('/admin/settings/footer'));
+        }
+
+        $result = $this->settings->saveFooter($_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_settings_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The footer settings could not be saved.']),
+            ]);
+            flash_set('admin_footer_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/settings/footer'));
+        }
+
+        flash_set('admin_settings_state', [
+            'type' => 'success',
+            'message' => 'The footer settings were updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/settings/footer'));
     }
 
     private function emptyEventForm(): array
