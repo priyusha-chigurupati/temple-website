@@ -453,6 +453,93 @@ final class AdminController
         ], 'admin');
     }
 
+    public function pagesAbout(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleAboutPageSave();
+        }
+
+        $about = $this->pages->aboutEditor();
+
+        if ($about === null) {
+            http_response_code(404);
+            $this->dashboard();
+            return;
+        }
+
+        View::render('pages/admin-page-about-form', [
+            'pageTitle' => 'Edit About Page',
+            'metaTitle' => 'Edit About Page | AnkammaThalli Temple',
+            'metaDescription' => 'Edit the About page content in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'pages',
+            'adminUser' => $user,
+            'pageEditorMode' => 'about',
+            'pageState' => flash_pull('admin_pages_state', []),
+            'aboutForm' => flash_pull('admin_about_form', $about),
+        ], 'admin');
+    }
+
+    public function pagesContact(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleContactPageSave();
+        }
+
+        $contact = $this->pages->contactEditor();
+
+        if ($contact === null) {
+            http_response_code(404);
+            $this->dashboard();
+            return;
+        }
+
+        View::render('pages/admin-page-contact-form', [
+            'pageTitle' => 'Edit Contact Page',
+            'metaTitle' => 'Edit Contact Page | AnkammaThalli Temple',
+            'metaDescription' => 'Edit the Contact page content in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'pages',
+            'adminUser' => $user,
+            'pageEditorMode' => 'contact',
+            'pageState' => flash_pull('admin_pages_state', []),
+            'contactForm' => flash_pull('admin_contact_form', $contact),
+        ], 'admin');
+    }
+
+    public function pagesDonations(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleDonationsPageSave();
+        }
+
+        $donations = $this->pages->donationsEditor();
+
+        if ($donations === null) {
+            http_response_code(404);
+            $this->dashboard();
+            return;
+        }
+
+        View::render('pages/admin-page-donations-form', [
+            'pageTitle' => 'Edit Donations Page',
+            'metaTitle' => 'Edit Donations Page | AnkammaThalli Temple',
+            'metaDescription' => 'Edit the Donations page content in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'pages',
+            'adminUser' => $user,
+            'pageEditorMode' => 'donations',
+            'pageState' => flash_pull('admin_pages_state', []),
+            'donationsForm' => flash_pull('admin_donations_form', $donations),
+        ], 'admin');
+    }
+
     private function handleLogin(): never
     {
         if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
@@ -623,6 +710,96 @@ final class AdminController
         ]);
 
         redirect_to(route_url('/admin/pages/home'));
+    }
+
+    private function handleAboutPageSave(): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_about_form', $this->pages->aboutEditor() ?? []);
+            redirect_to(route_url('/admin/pages/about'));
+        }
+
+        $result = $this->pages->saveAbout($_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The About page could not be saved.']),
+            ]);
+            flash_set('admin_about_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/pages/about'));
+        }
+
+        flash_set('admin_pages_state', [
+            'type' => 'success',
+            'message' => 'The About page was updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/pages/about'));
+    }
+
+    private function handleContactPageSave(): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_contact_form', $this->pages->contactEditor() ?? []);
+            redirect_to(route_url('/admin/pages/contact'));
+        }
+
+        $result = $this->pages->saveContact($_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The Contact page could not be saved.']),
+            ]);
+            flash_set('admin_contact_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/pages/contact'));
+        }
+
+        flash_set('admin_pages_state', [
+            'type' => 'success',
+            'message' => 'The Contact page was updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/pages/contact'));
+    }
+
+    private function handleDonationsPageSave(): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_donations_form', $this->pages->donationsEditor() ?? []);
+            redirect_to(route_url('/admin/pages/donations'));
+        }
+
+        $result = $this->pages->saveDonations($_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The Donations page could not be saved.']),
+            ]);
+            flash_set('admin_donations_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/pages/donations'));
+        }
+
+        flash_set('admin_pages_state', [
+            'type' => 'success',
+            'message' => 'The Donations page was updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/pages/donations'));
     }
 
     private function emptyEventForm(): array
