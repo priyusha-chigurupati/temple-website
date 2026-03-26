@@ -1,0 +1,182 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 2516 >>
+stream
+BT /F2 24.00 Tf 48.00 787.89 Td (Temple Website Setup Guide) Tj ET
+BT /F2 17.00 Tf 48.00 738.89 Td (Step-by-step guide to gather the details we will need) Tj ET
+BT /F2 17.00 Tf 48.00 716.89 Td (later) Tj ET
+BT /F1 11.00 Tf 48.00 682.89 Td (This guide is written for a beginner. You do not need to do everything now.) Tj ET
+BT /F1 11.00 Tf 48.00 665.89 Td (Keep this file and PDF safe. Once the website is ready for final deployment and email setup,) Tj ET
+BT /F1 11.00 Tf 48.00 648.89 Td (follow these steps one by one and send the collected details back.) Tj ET
+BT /F2 17.00 Tf 48.00 620.89 Td (What this guide covers) Tj ET
+BT /F2 13.00 Tf 48.00 584.89 Td (What you will eventually need from your side) Tj ET
+BT /F1 11.00 Tf 48.00 556.89 Td (- Hosting details) Tj ET
+BT /F1 11.00 Tf 48.00 540.89 Td (- Email details) Tj ET
+BT /F1 11.00 Tf 48.00 524.89 Td (- Domain and DNS details) Tj ET
+BT /F1 11.00 Tf 48.00 508.89 Td (- Admin and support decisions) Tj ET
+BT /F2 13.00 Tf 48.00 483.89 Td (Hosting details) Tj ET
+BT /F1 11.00 Tf 48.00 455.89 Td (- Hostinger hPanel login) Tj ET
+BT /F1 11.00 Tf 48.00 439.89 Td (- Website domain name) Tj ET
+BT /F1 11.00 Tf 48.00 423.89 Td (- PHP version used on hosting) Tj ET
+BT /F1 11.00 Tf 48.00 407.89 Td (- Database host, database name, username, and password) Tj ET
+BT /F2 13.00 Tf 48.00 382.89 Td (Email details) Tj ET
+BT /F1 11.00 Tf 48.00 354.89 Td (- Which email service you want to use) Tj ET
+BT /F1 11.00 Tf 48.00 338.89 Td (- Zoho Mail details if you choose Zoho) Tj ET
+BT /F1 11.00 Tf 48.00 322.89 Td (- SMTP host, port, username, password, and encryption type) Tj ET
+BT /F1 11.00 Tf 48.00 306.89 Td (- Which email address should receive admin notifications) Tj ET
+BT /F2 13.00 Tf 48.00 281.89 Td (Domain and DNS details) Tj ET
+BT /F1 11.00 Tf 48.00 253.89 Td (- Where the domain is managed) Tj ET
+BT /F1 11.00 Tf 48.00 237.89 Td (- Access to DNS records) Tj ET
+BT /F1 11.00 Tf 48.00 221.89 Td (- MX, SPF, DKIM, and optional DMARC records) Tj ET
+BT /F2 13.00 Tf 48.00 196.89 Td (Admin and support decisions) Tj ET
+BT /F1 11.00 Tf 48.00 168.89 Td (- Main admin email address) Tj ET
+BT /F1 11.00 Tf 48.00 152.89 Td (- Optional no-reply email address) Tj ET
+BT /F1 11.00 Tf 48.00 136.89 Td (- Who should receive contact and donation alerts) Tj ET
+BT /F1 11.00 Tf 48.00 113.89 Td (Since you mentioned you may use Zoho with your domain, this guide is written so that) Tj ET
+BT /F1 11.00 Tf 48.00 96.89 Td (the future setup works well with Hostinger and Zoho Mail.) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Length 3330 >>
+stream
+BT /F2 17.00 Tf 48.00 787.89 Td (Phase 1: Get access to the basic accounts first) Tj ET
+BT /F1 11.00 Tf 48.00 753.89 Td (- Make sure you can log in to your Hostinger account.) Tj ET
+BT /F1 11.00 Tf 48.00 737.89 Td (- Open hPanel and confirm the website domain is visible there.) Tj ET
+BT /F1 11.00 Tf 48.00 721.89 Td (- Check whether your domain DNS is also managed inside Hostinger or somewhere else.) Tj ET
+BT /F1 11.00 Tf 48.00 705.89 Td (- Keep your Hostinger username and login email in one safe place.) Tj ET
+BT /F1 11.00 Tf 48.00 689.89 Td (- Do not share passwords in normal chat. When we need them later, use a safe method.) Tj ET
+BT /F2 13.00 Tf 48.00 664.89 Td (Collect these basics) Tj ET
+BT /F1 11.00 Tf 48.00 636.89 Td (- Domain name: your full domain, for example exampletemple.org) Tj ET
+BT /F1 11.00 Tf 48.00 620.89 Td (- Hostinger access: hPanel login and confirmation you can open the Websites area) Tj ET
+BT /F1 11.00 Tf 48.00 604.89 Td (- DNS control: whether DNS records are changed in Hostinger or another provider) Tj ET
+BT /F2 17.00 Tf 48.00 577.89 Td (Phase 2: Create the email plan before we connect real) Tj ET
+BT /F2 17.00 Tf 48.00 555.89 Td (email features) Tj ET
+BT /F1 11.00 Tf 48.00 521.89 Td (You do not have to buy or configure everything immediately. First decide which email) Tj ET
+BT /F1 11.00 Tf 48.00 506.89 Td (addresses) Tj ET
+BT /F1 11.00 Tf 48.00 489.89 Td (you want the website to use.) Tj ET
+BT /F2 13.00 Tf 48.00 463.89 Td (Recommended email addresses) Tj ET
+BT /F1 11.00 Tf 48.00 435.89 Td (- admin@yourdomain.com for admin login, alerts, and password reset) Tj ET
+BT /F1 11.00 Tf 48.00 419.89 Td (- noreply@yourdomain.com for website-generated emails) Tj ET
+BT /F1 11.00 Tf 48.00 403.89 Td (- support@yourdomain.com only if you want a separate public contact mailbox) Tj ET
+BT /F2 13.00 Tf 48.00 378.89 Td (Decisions to make) Tj ET
+BT /F1 11.00 Tf 48.00 350.89 Td (- Which one will receive contact form alerts) Tj ET
+BT /F1 11.00 Tf 48.00 334.89 Td (- Which one will receive donation notice alerts) Tj ET
+BT /F1 11.00 Tf 48.00 318.89 Td (- Should password reset emails come from noreply or admin) Tj ET
+BT /F1 11.00 Tf 48.00 295.89 Td (For this project, the most practical setup is usually admin@yourdomain.com for notifications) Tj ET
+BT /F1 11.00 Tf 48.00 280.89 Td (and admin use,) Tj ET
+BT /F1 11.00 Tf 48.00 263.89 Td (plus noreply@yourdomain.com for automated website emails.) Tj ET
+BT /F2 17.00 Tf 48.00 235.89 Td (Phase 3: If you choose Zoho Mail, follow this step-by-step) Tj ET
+BT /F2 17.00 Tf 48.00 213.89 Td (path) Tj ET
+BT /F1 11.00 Tf 48.00 179.89 Td (- Create or log in to your Zoho account.) Tj ET
+BT /F1 11.00 Tf 48.00 163.89 Td (- Choose the Zoho Mail plan you want to use.) Tj ET
+BT /F1 11.00 Tf 48.00 147.89 Td (- Add your domain inside Zoho Mail.) Tj ET
+BT /F1 11.00 Tf 48.00 131.89 Td (- Verify domain ownership by adding the record Zoho gives you.) Tj ET
+BT /F1 11.00 Tf 48.00 115.89 Td (- Create the mailboxes you want, such as admin@ and noreply@.) Tj ET
+BT /F1 11.00 Tf 48.00 99.89 Td (- Add the MX records Zoho gives you so your domain receives mail through Zoho.) Tj ET
+BT /F1 11.00 Tf 48.00 83.89 Td (- Add SPF and DKIM records for better delivery.) Tj ET
+BT /F1 11.00 Tf 48.00 67.89 Td (- Add DMARC later if you want stronger email protection.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 2851 >>
+stream
+BT /F1 11.00 Tf 48.00 787.89 Td (- Open the Zoho SMTP settings page and keep the SMTP details ready for us.) Tj ET
+BT /F2 13.00 Tf 48.00 762.89 Td (Zoho details to save) Tj ET
+BT /F1 11.00 Tf 48.00 734.89 Td (- SMTP host) Tj ET
+BT /F1 11.00 Tf 48.00 718.89 Td (- SMTP port) Tj ET
+BT /F1 11.00 Tf 48.00 702.89 Td (- Encryption type, such as TLS or SSL) Tj ET
+BT /F1 11.00 Tf 48.00 686.89 Td (- SMTP username, usually the full email address) Tj ET
+BT /F1 11.00 Tf 48.00 670.89 Td (- SMTP password or app password) Tj ET
+BT /F1 11.00 Tf 48.00 647.89 Td (If Zoho offers an app password or a safer SMTP-specific password, use that instead of your) Tj ET
+BT /F1 11.00 Tf 48.00 632.89 Td (normal mailbox password.) Tj ET
+BT /F2 17.00 Tf 48.00 604.89 Td (Phase 4: DNS records you should expect to add) Tj ET
+BT /F1 11.00 Tf 48.00 570.89 Td (These records are normally added where your domain DNS is managed. If your DNS is managed in) Tj ET
+BT /F1 11.00 Tf 48.00 555.89 Td (Hostinger,) Tj ET
+BT /F1 11.00 Tf 48.00 538.89 Td (you will add them there. If the domain points elsewhere, you will add them in that provider) Tj ET
+BT /F1 11.00 Tf 48.00 523.89 Td (instead.) Tj ET
+BT /F1 11.00 Tf 48.00 499.89 Td (- Verification record: proves to Zoho that you own the domain) Tj ET
+BT /F1 11.00 Tf 48.00 483.89 Td (- MX records: route incoming email to Zoho) Tj ET
+BT /F1 11.00 Tf 48.00 467.89 Td (- SPF record: helps prevent spam and spoofing) Tj ET
+BT /F1 11.00 Tf 48.00 451.89 Td (- DKIM record: signs outgoing mail for trust) Tj ET
+BT /F1 11.00 Tf 48.00 435.89 Td (- DMARC record: optional but recommended later for extra protection) Tj ET
+BT /F1 11.00 Tf 48.00 412.89 Td (Take screenshots or copy the exact DNS values when you add them. That makes troubleshooting) Tj ET
+BT /F1 11.00 Tf 48.00 397.89 Td (much easier later.) Tj ET
+BT /F2 17.00 Tf 48.00 369.89 Td (Phase 5: Database and hosting details to collect before) Tj ET
+BT /F2 17.00 Tf 48.00 347.89 Td (final deployment) Tj ET
+BT /F1 11.00 Tf 48.00 313.89 Td (- Open Hostinger hPanel.) Tj ET
+BT /F1 11.00 Tf 48.00 297.89 Td (- Go to the database area for your website.) Tj ET
+BT /F1 11.00 Tf 48.00 281.89 Td (- Create or identify the production MySQL database.) Tj ET
+BT /F1 11.00 Tf 48.00 265.89 Td (- Save the database host, database name, username, and password.) Tj ET
+BT /F1 11.00 Tf 48.00 249.89 Td (- Check which PHP version is active for the domain.) Tj ET
+BT /F1 11.00 Tf 48.00 233.89 Td (- Confirm the website root folder where the files will be uploaded.) Tj ET
+BT /F2 13.00 Tf 48.00 208.89 Td (Production details to collect) Tj ET
+BT /F1 11.00 Tf 48.00 180.89 Td (- DB host) Tj ET
+BT /F1 11.00 Tf 48.00 164.89 Td (- DB name) Tj ET
+BT /F1 11.00 Tf 48.00 148.89 Td (- DB username) Tj ET
+BT /F1 11.00 Tf 48.00 132.89 Td (- DB password) Tj ET
+BT /F1 11.00 Tf 48.00 116.89 Td (- PHP version) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Length 1202 >>
+stream
+BT /F2 17.00 Tf 48.00 787.89 Td (Final checklist: What to send back later when you are) Tj ET
+BT /F2 17.00 Tf 48.00 765.89 Td (ready) Tj ET
+BT /F1 11.00 Tf 48.00 731.89 Td (- Your domain name) Tj ET
+BT /F1 11.00 Tf 48.00 715.89 Td (- Hostinger hPanel access confirmation) Tj ET
+BT /F1 11.00 Tf 48.00 699.89 Td (- Where DNS is managed) Tj ET
+BT /F1 11.00 Tf 48.00 683.89 Td (- Production database host, name, user, and password) Tj ET
+BT /F1 11.00 Tf 48.00 667.89 Td (- Admin email address to use for the site) Tj ET
+BT /F1 11.00 Tf 48.00 651.89 Td (- Optional no-reply email address) Tj ET
+BT /F1 11.00 Tf 48.00 635.89 Td (- Zoho SMTP host, port, username, password or app password, and encryption type) Tj ET
+BT /F1 11.00 Tf 48.00 619.89 Td (- Confirmation that MX, SPF, and DKIM were added and verified) Tj ET
+BT /F1 11.00 Tf 48.00 603.89 Td (- Which email should receive contact, donation, and gallery submission alerts) Tj ET
+BT /F1 11.00 Tf 48.00 580.89 Td (If something in this guide feels unclear later, that is okay. Just complete whatever you) Tj ET
+BT /F1 11.00 Tf 48.00 565.89 Td (can,) Tj ET
+BT /F1 11.00 Tf 48.00 548.89 Td (and we will do the remaining setup step by step together.) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+10 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 6 0 R >>
+endobj
+11 0 obj
+<< /Type /Pages /Count 4 /Kids [ 7 0 R 8 0 R 9 0 R 10 0 R ] >>
+endobj
+12 0 obj
+<< /Type /Catalog /Pages 16 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000000154 00000 n 
+0000002721 00000 n 
+0000006102 00000 n 
+0000009004 00000 n 
+0000010257 00000 n 
+0000010400 00000 n 
+0000010543 00000 n 
+0000010686 00000 n 
+0000010830 00000 n 
+0000010909 00000 n 
+trailer
+<< /Size 13 /Root 17 0 R >>
+startxref
+10960
+%%EOF

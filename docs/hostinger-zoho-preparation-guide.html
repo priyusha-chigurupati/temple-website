@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Temple Website Setup Guide</title>
+  <style>
+    :root {
+      --bg: #fbf5ea;
+      --panel: #fffdf8;
+      --text: #2c2118;
+      --muted: #6a5648;
+      --accent: #b35600;
+      --line: #eadcc7;
+      --soft: #f5ead7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 44px 44px 56px;
+    }
+
+    .hero {
+      padding: 28px 32px;
+      background:
+        radial-gradient(circle at top left, rgba(234, 191, 113, 0.18), transparent 36%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(251, 245, 234, 0.96));
+      border: 1px solid var(--line);
+    }
+
+    .eyebrow,
+    .mini-title {
+      font-family: Arial, Helvetica, sans-serif;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 14px 0 12px;
+      font-size: 44px;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      line-height: 1.05;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+      line-height: 1.2;
+    }
+
+    p,
+    li {
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    p.lead {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .section {
+      margin-top: 28px;
+      padding: 26px 30px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .card {
+      padding: 18px 18px 16px;
+      border: 1px solid var(--line);
+      background: #fffaf1;
+    }
+
+    .card p,
+    .card li {
+      font-size: 15px;
+      margin-top: 0;
+      color: var(--muted);
+    }
+
+    .note,
+    .tip {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      color: var(--muted);
+    }
+
+    .checklist,
+    .steps {
+      margin: 12px 0 0 0;
+      padding-left: 22px;
+    }
+
+    .checklist li,
+    .steps li {
+      margin: 8px 0;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 15px;
+    }
+
+    .table th,
+    .table td {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .table th {
+      background: #fff6e6;
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page {
+        max-width: none;
+        padding: 20px 28px 28px;
+      }
+
+      .section,
+      .hero,
+      .card {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Temple Website Preparation Guide</div>
+      <h1>Step-by-Step Guide to Gather the Details We Will Need Later</h1>
+      <p class="lead">
+        This guide is written for a beginner. You do not need to do everything now.
+        Keep this PDF safe, and once the website is ready for final deployment and email setup,
+        follow these steps one by one and send the collected details back.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="mini-title">What This Guide Covers</div>
+      <h2>What you will eventually need from your side</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Hosting details</h3>
+          <ul class="checklist">
+            <li>Hostinger hPanel login</li>
+            <li>Website domain name</li>
+            <li>PHP version used on hosting</li>
+            <li>Database host, database name, username, and password</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Email details</h3>
+          <ul class="checklist">
+            <li>Which email service you want to use</li>
+            <li>Zoho Mail details if you choose Zoho</li>
+            <li>SMTP host, port, username, password, and encryption type</li>
+            <li>Which email address should receive admin notifications</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Domain and DNS details</h3>
+          <ul class="checklist">
+            <li>Where the domain is managed</li>
+            <li>Access to DNS records</li>
+            <li>MX, SPF, DKIM, and optional DMARC records</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Admin and support decisions</h3>
+          <ul class="checklist">
+            <li>Main admin email address</li>
+            <li>Optional no-reply email address</li>
+            <li>Who should receive contact and donation alerts</li>
+          </ul>
+        </article>
+      </div>
+      <div class="tip">
+        Since you mentioned you may use Zoho with your domain, this guide is written so that
+        the future setup works well with Hostinger + Zoho Mail.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="mini-title">Phase 1</div>
+      <h2>Get access to the basic accounts first</h2>
+      <ol class="steps">
+        <li>Make sure you can log in to your Hostinger account.</li>
+        <li>Open hPanel and confirm the website domain is visible there.</li>
+        <li>Check whether your domain DNS is also managed inside Hostinger or somewhere else.</li>
+        <li>Keep your Hostinger username and login email in one safe place.</li>
+        <li>Do not share passwords in normal chat. When we need them later, use a safe method.</li>
+      </ol>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>What to collect</th>
+            <th>Why we need it later</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Domain name</td>
+            <td>Your full domain, for example <span class="muted">exampletemple.org</span></td>
+            <td>Used for deployment, email setup, and future multilingual URLs</td>
+          </tr>
+          <tr>
+            <td>Hostinger access</td>
+            <td>hPanel login and confirmation you can open the Websites area</td>
+            <td>Needed for hosting, file upload, DNS, and database setup</td>
+          </tr>
+          <tr>
+            <td>DNS control</td>
+            <td>Whether DNS records are changed in Hostinger or another provider</td>
+            <td>Needed for Zoho verification and email records</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <div class="mini-title">Phase 2</div>
+      <h2>Create the email plan before we connect real email features</h2>
+      <p>
+        You do not have to buy or configure everything immediately. First decide which email addresses
+        you want the website to use.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>Recommended email addresses</h3>
+          <ul class="checklist">
+            <li><strong>admin@yourdomain.com</strong> for admin login, alerts, and password reset</li>
+            <li><strong>noreply@yourdomain.com</strong> for website-generated emails</li>
+            <li><strong>support@yourdomain.com</strong> only if you want a separate public contact mailbox</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Decisions to make</h3>
+          <ul class="checklist">
+            <li>Which one will receive contact form alerts?</li>
+            <li>Which one will receive donation notice alerts?</li>
+            <li>Should password reset emails come from <strong>noreply</strong> or <strong>admin</strong>?</li>
+          </ul>
+        </article>
+      </div>
+      <div class="note">
+        For this project, the most practical setup is usually:
+        <strong>admin@yourdomain.com</strong> for notifications and admin use,
+        plus <strong>noreply@yourdomain.com</strong> for automated website emails.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="mini-title">Phase 3</div>
+      <h2>If you choose Zoho Mail, follow this step-by-step path</h2>
+      <ol class="steps">
+        <li>Create or log in to your Zoho account.</li>
+        <li>Choose the Zoho Mail plan you want to use.</li>
+        <li>Add your domain inside Zoho Mail.</li>
+        <li>Verify domain ownership by adding the record Zoho gives you.</li>
+        <li>Create the mailboxes you want, such as <strong>admin@</strong> and <strong>noreply@</strong>.</li>
+        <li>Add the MX records Zoho gives you so your domain receives mail through Zoho.</li>
+        <li>Add SPF and DKIM records for better delivery.</li>
+        <li>Add DMARC later if you want stronger email protection.</li>
+        <li>Open the Zoho SMTP settings page and keep the SMTP details ready for us.</li>
+      </ol>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Zoho detail to save</th>
+            <th>Example</th>
+            <th>Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SMTP host</td>
+            <td>For example, a Zoho SMTP server name</td>
+            <td>Needed to send password resets and admin alerts from the website</td>
+          </tr>
+          <tr>
+            <td>SMTP port</td>
+            <td>Usually a secure mail port</td>
+            <td>Needed by the website mail configuration</td>
+          </tr>
+          <tr>
+            <td>Encryption type</td>
+            <td>TLS or SSL</td>
+            <td>Needed to connect securely</td>
+          </tr>
+          <tr>
+            <td>SMTP username</td>
+            <td>The full email address</td>
+            <td>Used for authentication</td>
+          </tr>
+          <tr>
+            <td>SMTP password or app password</td>
+            <td>Your mailbox password or dedicated app password</td>
+            <td>Used for secure email sending</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        If Zoho offers an app password or a safer SMTP-specific password, use that instead of your normal mailbox password.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="mini-title">Phase 4</div>
+      <h2>DNS records you should expect to add</h2>
+      <p>
+        These records are normally added where your domain DNS is managed. If your DNS is managed in Hostinger,
+        you will add them there. If the domain points elsewhere, you will add them in that provider instead.
+      </p>
+      <ul class="checklist">
+        <li><strong>Verification record:</strong> proves to Zoho that you own the domain</li>
+        <li><strong>MX records:</strong> route incoming email to Zoho</li>
+        <li><strong>SPF record:</strong> helps prevent spam and spoofing</li>
+        <li><strong>DKIM record:</strong> signs outgoing mail for trust</li>
+        <li><strong>DMARC record:</strong> optional but recommended later for extra protection</li>
+      </ul>
+      <div class="note">
+        Take screenshots or copy the exact DNS values when you add them. That makes troubleshooting much easier later.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="mini-title">Phase 5</div>
+      <h2>Database and hosting details to collect before final deployment</h2>
+      <ol class="steps">
+        <li>Open Hostinger hPanel.</li>
+        <li>Go to the database area for your website.</li>
+        <li>Create or identify the production MySQL database.</li>
+        <li>Save the database host, database name, username, and password.</li>
+        <li>Check which PHP version is active for the domain.</li>
+        <li>Confirm the website root folder where the files will be uploaded.</li>
+      </ol>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Production detail</th>
+            <th>Where you will find it</th>
+            <th>We will use it for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DB host</td>
+            <td>Hostinger database section</td>
+            <td>Production database connection</td>
+          </tr>
+          <tr>
+            <td>DB name</td>
+            <td>Hostinger database section</td>
+            <td>Production database connection</td>
+          </tr>
+          <tr>
+            <td>DB username</td>
+            <td>Hostinger database section</td>
+            <td>Production database connection</td>
+          </tr>
+          <tr>
+            <td>DB password</td>
+            <td>Hostinger database section</td>
+            <td>Production database connection</td>
+          </tr>
+          <tr>
+            <td>PHP version</td>
+            <td>Hostinger PHP configuration area</td>
+            <td>Environment compatibility</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <div class="mini-title">Final Checklist</div>
+      <h2>What to send back later when you are ready</h2>
+      <ul class="checklist">
+        <li>Your domain name</li>
+        <li>Hostinger hPanel access confirmation</li>
+        <li>Where DNS is managed</li>
+        <li>Production database host, name, user, and password</li>
+        <li>Admin email address to use for the site</li>
+        <li>Optional no-reply email address</li>
+        <li>Zoho SMTP host, port, username, password or app password, and encryption type</li>
+        <li>Confirmation that MX, SPF, and DKIM were added and verified</li>
+        <li>Which email should receive contact, donation, and gallery submission alerts</li>
+      </ul>
+      <div class="tip">
+        If something in this guide feels unclear later, that is okay. Just complete whatever you can, and we will do the remaining setup step by step together.
+      </div>
+    </section>
+
+    <p class="footer">
+      Prepared for the temple website project so future deployment, admin email, forgot password, and notification features can be connected cleanly with Hostinger and a possible Zoho Mail setup.
+    </p>
+  </main>
+</body>
+</html>
