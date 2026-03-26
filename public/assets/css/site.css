@@ -5954,11 +5954,12 @@ input {
 }
 
 .admin-dashboard__intro {
-    max-width: 500px;
+    max-width: none;
     margin: 0.35rem 0 0;
     color: rgba(85, 67, 54, 0.82);
-    font-size: 0.84rem;
+    font-size: 0.8rem;
     line-height: 1.55;
+    white-space: nowrap;
 }
 
 .admin-dashboard--gallery .admin-dashboard__intro {
@@ -6409,8 +6410,9 @@ input {
 .admin-events-panel__subcopy {
     margin: 0.28rem 0 0;
     color: rgba(85, 67, 54, 0.8);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     line-height: 1.5;
+    white-space: nowrap;
 }
 
 .admin-events-toolbar {
@@ -7113,6 +7115,12 @@ input {
     }
 
     .admin-dashboard--blog .admin-dashboard__intro {
+        max-width: 640px;
+        white-space: normal;
+    }
+
+    .admin-dashboard__intro,
+    .admin-events-panel__subcopy {
         max-width: 640px;
         white-space: normal;
     }
