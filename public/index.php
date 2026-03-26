@@ -10,6 +10,7 @@ require __DIR__ . '/../app/Repositories/ContentRepository.php';
 require __DIR__ . '/../app/Repositories/EventRepository.php';
 require __DIR__ . '/../app/Repositories/BlogRepository.php';
 require __DIR__ . '/../app/Repositories/GalleryRepository.php';
+require __DIR__ . '/../app/Repositories/PageRepository.php';
 require __DIR__ . '/../app/Services/GallerySubmissionService.php';
 require __DIR__ . '/../app/Services/DonationNotificationService.php';
 require __DIR__ . '/../app/Services/ContactInquiryService.php';
@@ -24,6 +25,7 @@ $content = require __DIR__ . '/../data/site.php';
 $eventRepository = null;
 $blogRepository = null;
 $galleryRepository = null;
+$pageRepository = null;
 
 try {
     $connection = Database::connection(dirname(__DIR__));
@@ -39,13 +41,18 @@ try {
         $connection,
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
+    $pageRepository = new PageRepository(
+        $connection,
+        Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
+    );
 } catch (Throwable) {
     $eventRepository = null;
     $blogRepository = null;
     $galleryRepository = null;
+    $pageRepository = null;
 }
 
-$repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository);
+$repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository, $pageRepository);
 $gallerySubmissions = new GallerySubmissionService(
     dirname(__DIR__) . '/storage/data/gallery_submissions.json',
     dirname(__DIR__) . '/storage/uploads/gallery-submissions'

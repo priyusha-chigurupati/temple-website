@@ -115,3 +115,18 @@ That command seeds the current English sample Gallery content into:
 - `gallery_item_translations`
 - `media`
 - `media_translations`
+
+The current sample About page content can be inserted into MySQL with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_about.php
+```
+
+That command seeds the current English sample About content into:
+
+- `pages`
+- `page_translations`
+- `page_sections`
+- `page_section_translations`
+- `media`
+- `media_translations`

@@ -8,7 +8,8 @@ final class ContentRepository
         private readonly array $content,
         private readonly ?EventRepository $eventRepository = null,
         private readonly ?BlogRepository $blogRepository = null,
-        private readonly ?GalleryRepository $galleryRepository = null
+        private readonly ?GalleryRepository $galleryRepository = null,
+        private readonly ?PageRepository $pageRepository = null
     )
     {
     }
@@ -44,6 +45,14 @@ final class ContentRepository
 
     public function page(string $slug): array
     {
+        if ($this->pageRepository instanceof PageRepository && $this->pageRepository->hasPublishedPage($slug)) {
+            $page = $this->pageRepository->page($slug);
+
+            if (is_array($page)) {
+                return $page;
+            }
+        }
+
         return $this->content['pages'][$slug] ?? [];
     }
 
