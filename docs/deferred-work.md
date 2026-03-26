@@ -27,6 +27,7 @@ This file tracks the items we intentionally postponed so they stay visible after
 ## Admin
 
 - Revisit sidebar user email display so the full address can be inspected more easily without harming the layout.
+- Revisit overall admin page layout density so summary cards, filters, and content blocks use space more cleanly across modules like Media Library and Blog.
 - Continue building the remaining CRUD modules:
   - Page content sections
   - Settings and media improvements

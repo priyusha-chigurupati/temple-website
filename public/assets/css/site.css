@@ -5967,6 +5967,12 @@ input {
     white-space: nowrap;
 }
 
+.admin-dashboard--blog .admin-dashboard__intro {
+    max-width: none;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
 .admin-dashboard__actions {
     display: flex;
     align-items: center;
@@ -6365,8 +6371,31 @@ input {
     line-height: 1.5;
 }
 
+.admin-dashboard--blog .admin-events-stats {
+    grid-template-columns: minmax(0, 1.45fr) minmax(360px, 1fr);
+    align-items: stretch;
+}
+
+.admin-dashboard--blog .admin-events-stat--wide {
+    min-height: 100%;
+}
+
+.admin-dashboard--blog .admin-events-stat:last-child strong {
+    max-width: none;
+    font-size: 1.08rem;
+    line-height: 1.08;
+}
+
+.admin-dashboard--blog .admin-events-stat:last-child p {
+    margin-top: 0.55rem;
+}
+
 .admin-panel--events-list {
     margin-top: 1rem;
+}
+
+.admin-panel--blog-list {
+    margin-top: 1.25rem;
 }
 
 .admin-events-panel__header {
@@ -6999,6 +7028,11 @@ input {
     }
 
     .admin-dashboard--gallery .admin-dashboard__intro {
+        max-width: 640px;
+        white-space: normal;
+    }
+
+    .admin-dashboard--blog .admin-dashboard__intro {
         max-width: 640px;
         white-space: normal;
     }
