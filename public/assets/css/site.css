@@ -5961,6 +5961,12 @@ input {
     line-height: 1.55;
 }
 
+.admin-dashboard--gallery .admin-dashboard__intro {
+    max-width: none;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
 .admin-dashboard__actions {
     display: flex;
     align-items: center;
@@ -6904,6 +6910,11 @@ input {
         justify-content: flex-start;
         justify-self: start;
         text-align: left;
+    }
+
+    .admin-dashboard--gallery .admin-dashboard__intro {
+        max-width: 640px;
+        white-space: normal;
     }
 }
 
