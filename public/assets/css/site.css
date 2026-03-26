@@ -5720,6 +5720,21 @@ input {
     font-weight: 600;
 }
 
+.admin-login__hint-link {
+    color: #a04100;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admin-login__hint-link:hover,
+.admin-login__hint-link:focus-visible {
+    text-decoration: underline;
+}
+
+.admin-login__meta--centered {
+    justify-content: center;
+}
+
 .admin-login__submit {
     margin-top: 0.25rem;
     letter-spacing: 0.12em;
@@ -6356,6 +6371,12 @@ input {
     border-color: rgba(220, 38, 38, 0.2);
     background: rgba(254, 242, 242, 0.92);
     color: #991b1b;
+}
+
+.admin-form-state a {
+    color: inherit;
+    font-weight: 700;
+    word-break: break-word;
 }
 
 .admin-events-stats {

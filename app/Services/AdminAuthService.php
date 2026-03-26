@@ -77,4 +77,19 @@ final class AdminAuthService
     {
         session_forget(self::SESSION_KEY);
     }
+
+    public function syncProfile(int $id, string $name, string $email): void
+    {
+        $auth = session_value(self::SESSION_KEY);
+
+        if (! is_array($auth) || (int) ($auth['id'] ?? 0) !== $id) {
+            return;
+        }
+
+        $auth['name'] = $name;
+        $auth['email'] = $email;
+        $auth['last_activity'] = time();
+
+        session_put(self::SESSION_KEY, $auth);
+    }
 }

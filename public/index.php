@@ -13,6 +13,7 @@ require __DIR__ . '/../app/Repositories/GalleryRepository.php';
 require __DIR__ . '/../app/Repositories/PageRepository.php';
 require __DIR__ . '/../app/Repositories/SiteSettingsRepository.php';
 require __DIR__ . '/../app/Repositories/UserRepository.php';
+require __DIR__ . '/../app/Repositories/AdminAccountRepository.php';
 require __DIR__ . '/../app/Repositories/AdminDashboardRepository.php';
 require __DIR__ . '/../app/Repositories/AdminEventRepository.php';
 require __DIR__ . '/../app/Repositories/AdminGalleryRepository.php';
@@ -44,6 +45,7 @@ $adminGalleryRepository = null;
 $adminBlogRepository = null;
 $adminPageRepository = null;
 $adminSettingsRepository = null;
+$adminAccountRepository = null;
 $connection = null;
 
 try {
@@ -93,6 +95,10 @@ try {
         $connection,
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
+    $adminAccountRepository = new AdminAccountRepository(
+        $connection,
+        $userRepository
+    );
 } catch (Throwable) {
     $connection = null;
     $eventRepository = null;
@@ -107,6 +113,7 @@ try {
     $adminBlogRepository = null;
     $adminPageRepository = null;
     $adminSettingsRepository = null;
+    $adminAccountRepository = null;
 }
 
 $repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository, $pageRepository, $siteSettingsRepository);
@@ -142,6 +149,7 @@ if (
     && $adminBlogRepository instanceof AdminBlogRepository
     && $adminPageRepository instanceof AdminPageRepository
     && $adminSettingsRepository instanceof AdminSettingsRepository
+    && $adminAccountRepository instanceof AdminAccountRepository
 ) {
     $adminController = new AdminController(
         new AdminAuthService(
@@ -153,7 +161,8 @@ if (
         $adminGalleryRepository,
         $adminBlogRepository,
         $adminPageRepository,
-        $adminSettingsRepository
+        $adminSettingsRepository,
+        $adminAccountRepository
     );
 }
 
@@ -169,7 +178,11 @@ $routes = [
     '/blog' => static fn () => $controller->blog(),
     '/admin' => static fn () => $adminController instanceof AdminController ? $adminController->dashboard() : $controller->placeholder('admin'),
     '/admin/login' => static fn () => $adminController instanceof AdminController ? $adminController->login() : $controller->placeholder('admin'),
+    '/admin/forgot-password' => static fn () => $adminController instanceof AdminController ? $adminController->forgotPassword() : $controller->placeholder('admin'),
+    '/admin/reset-password' => static fn () => $adminController instanceof AdminController ? $adminController->resetPassword() : $controller->placeholder('admin'),
     '/admin/logout' => static fn () => $adminController instanceof AdminController ? $adminController->logout() : $controller->placeholder('admin'),
+    '/admin/account' => static fn () => $adminController instanceof AdminController ? $adminController->accountProfile() : $controller->placeholder('admin'),
+    '/admin/account/password' => static fn () => $adminController instanceof AdminController ? $adminController->accountPassword() : $controller->placeholder('admin'),
     '/admin/events' => static fn () => $adminController instanceof AdminController ? $adminController->eventsIndex() : $controller->placeholder('admin'),
     '/admin/events/new' => static fn () => $adminController instanceof AdminController ? $adminController->eventsCreate() : $controller->placeholder('admin'),
     '/admin/pages' => static fn () => $adminController instanceof AdminController ? $adminController->pagesIndex() : $controller->placeholder('admin'),
@@ -182,6 +195,7 @@ $routes = [
     '/admin/settings/header' => static fn () => $adminController instanceof AdminController ? $adminController->settingsHeader() : $controller->placeholder('admin'),
     '/admin/settings/seo' => static fn () => $adminController instanceof AdminController ? $adminController->settingsSeo() : $controller->placeholder('admin'),
     '/admin/settings/footer' => static fn () => $adminController instanceof AdminController ? $adminController->settingsFooter() : $controller->placeholder('admin'),
+    '/admin/settings/notifications' => static fn () => $adminController instanceof AdminController ? $adminController->settingsNotifications() : $controller->placeholder('admin'),
     '/admin/media' => static fn () => $adminController instanceof AdminController ? $adminController->galleryIndex() : $controller->placeholder('admin'),
     '/admin/media/new' => static fn () => $adminController instanceof AdminController ? $adminController->galleryCreate() : $controller->placeholder('admin'),
     '/admin/blog' => static fn () => $adminController instanceof AdminController ? $adminController->blogIndex() : $controller->placeholder('admin'),

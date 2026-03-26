@@ -43,7 +43,7 @@ declare(strict_types=1);
                     <input type="checkbox" disabled>
                     <span>Remember me</span>
                 </label>
-                <span class="admin-login__hint">Password reset comes next.</span>
+                <a class="admin-login__hint-link" href="<?= e(route_url('/admin/forgot-password')) ?>">Forgot password?</a>
             </div>
 
             <button class="button button--gradient button--full admin-login__submit" type="submit">Sign In to Dashboard</button>

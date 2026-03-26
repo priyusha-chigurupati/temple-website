@@ -12,6 +12,7 @@ $adminNavItems = [
     ['key' => 'media', 'label' => 'Media', 'icon' => 'photo_library', 'href' => route_url('/admin/media'), 'enabled' => true],
     ['key' => 'blog', 'label' => 'Blog', 'icon' => 'edit_square', 'href' => route_url('/admin/blog'), 'enabled' => true],
     ['key' => 'settings', 'label' => 'Settings', 'icon' => 'settings', 'href' => route_url('/admin/settings'), 'enabled' => true],
+    ['key' => 'account', 'label' => 'Account', 'icon' => 'shield_person', 'href' => route_url('/admin/account'), 'enabled' => true],
 ];
 ?>
 <!DOCTYPE html>

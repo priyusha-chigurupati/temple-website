@@ -11,7 +11,8 @@ final class AdminController
         private readonly AdminGalleryRepository $gallery,
         private readonly AdminBlogRepository $blog,
         private readonly AdminPageRepository $pages,
-        private readonly AdminSettingsRepository $settings
+        private readonly AdminSettingsRepository $settings,
+        private readonly AdminAccountRepository $account
     )
     {
     }
@@ -38,6 +39,54 @@ final class AdminController
         ], 'admin');
     }
 
+    public function forgotPassword(): void
+    {
+        if ($this->auth->check()) {
+            redirect_to(route_url('/admin'));
+        }
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleForgotPassword();
+        }
+
+        View::render('pages/admin-forgot-password', [
+            'pageTitle' => 'Forgot Password',
+            'metaTitle' => 'Forgot Password | AnkammaThalli Temple',
+            'metaDescription' => 'Request an admin password reset for AnkammaThalli Temple.',
+            'adminShellMode' => 'auth',
+            'authState' => flash_pull('admin_auth_state', []),
+            'authForm' => flash_pull('admin_auth_form', ['email' => '']),
+            'resetLink' => flash_pull('admin_reset_link'),
+        ], 'admin');
+    }
+
+    public function resetPassword(): void
+    {
+        if ($this->auth->check()) {
+            redirect_to(route_url('/admin'));
+        }
+
+        $token = trim((string) query_value('token'));
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $token = trim((string) ($_POST['token'] ?? $token));
+            $this->handleResetPassword($token);
+        }
+
+        $context = $this->account->resetContext($token);
+
+        View::render('pages/admin-reset-password', [
+            'pageTitle' => 'Reset Password',
+            'metaTitle' => 'Reset Password | AnkammaThalli Temple',
+            'metaDescription' => 'Reset the admin password for AnkammaThalli Temple.',
+            'adminShellMode' => 'auth',
+            'authState' => flash_pull('admin_auth_state', []),
+            'resetForm' => flash_pull('admin_reset_form', []),
+            'resetToken' => $token,
+            'resetContext' => $context,
+        ], 'admin');
+    }
+
     public function dashboard(): void
     {
         $user = $this->requireAuth();
@@ -57,6 +106,45 @@ final class AdminController
             'upcomingEvents' => $this->dashboard->upcomingEvents(),
             'recentContactInquiries' => $this->dashboard->recentContactInquiries(),
             'recentDonationNotifications' => $this->dashboard->recentDonationNotifications(),
+        ], 'admin');
+    }
+
+    public function accountProfile(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleAccountProfileSave($user);
+        }
+
+        View::render('pages/admin-account-form', [
+            'pageTitle' => 'Admin Account',
+            'metaTitle' => 'Admin Account | AnkammaThalli Temple',
+            'metaDescription' => 'Manage the admin profile and account details.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'account',
+            'adminUser' => $user,
+            'accountState' => flash_pull('admin_account_state', []),
+            'accountForm' => flash_pull('admin_account_form', $this->account->profile((int) $user['id']) ?? []),
+        ], 'admin');
+    }
+
+    public function accountPassword(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleAccountPasswordSave($user);
+        }
+
+        View::render('pages/admin-account-password-form', [
+            'pageTitle' => 'Change Password',
+            'metaTitle' => 'Change Password | AnkammaThalli Temple',
+            'metaDescription' => 'Change the admin password and secure the temple dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'account',
+            'adminUser' => $user,
+            'accountPasswordState' => flash_pull('admin_account_password_state', []),
         ], 'admin');
     }
 
@@ -637,6 +725,26 @@ final class AdminController
         ], 'admin');
     }
 
+    public function settingsNotifications(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleNotificationsSettingsSave();
+        }
+
+        View::render('pages/admin-settings-notifications-form', [
+            'pageTitle' => 'Edit Notification Settings',
+            'metaTitle' => 'Edit Notification Settings | AnkammaThalli Temple',
+            'metaDescription' => 'Manage future mail delivery and admin notification recipients.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'settings',
+            'adminUser' => $user,
+            'settingsState' => flash_pull('admin_settings_state', []),
+            'notificationsForm' => flash_pull('admin_notifications_form', $this->settings->notificationsEditor()),
+        ], 'admin');
+    }
+
     private function handleLogin(): never
     {
         if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
@@ -674,6 +782,73 @@ final class AdminController
         redirect_to(route_url('/admin'));
     }
 
+    private function handleForgotPassword(): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_auth_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_auth_form', [
+                'email' => trim((string) ($_POST['email'] ?? '')),
+            ]);
+            redirect_to(route_url('/admin/forgot-password'));
+        }
+
+        $result = $this->account->createResetRequest((string) ($_POST['email'] ?? ''));
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_auth_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The reset request could not be completed.']),
+            ]);
+            flash_set('admin_auth_form', $result['old'] ?? ['email' => '']);
+            redirect_to(route_url('/admin/forgot-password'));
+        }
+
+        flash_set('admin_auth_state', [
+            'type' => 'success',
+            'message' => 'If that admin email exists, a password reset link is now ready for the next step.',
+        ]);
+        flash_set('admin_auth_form', ['email' => (string) ($result['email'] ?? '')]);
+
+        if (($result['reset_link'] ?? null) !== null && (Env::get('APP_ENV', 'local') ?? 'local') === 'local') {
+            flash_set('admin_reset_link', (string) $result['reset_link']);
+        }
+
+        redirect_to(route_url('/admin/forgot-password'));
+    }
+
+    private function handleResetPassword(string $token): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_auth_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_reset_form', []);
+            redirect_to(route_url('/admin/reset-password?token=' . rawurlencode($token)));
+        }
+
+        $result = $this->account->resetPassword($token, $_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_auth_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The password could not be reset.']),
+            ]);
+            flash_set('admin_reset_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/reset-password?token=' . rawurlencode($token)));
+        }
+
+        flash_set('admin_auth_state', [
+            'type' => 'success',
+            'message' => 'Your password has been reset. Please sign in with the new password.',
+        ]);
+
+        redirect_to(route_url('/admin/login'));
+    }
+
     private function requireAuth(): array
     {
         $user = $this->auth->currentUser();
@@ -687,6 +862,70 @@ final class AdminController
         }
 
         return $user;
+    }
+
+    private function handleAccountProfileSave(array $user): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_account_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_account_form', $this->account->profile((int) $user['id']) ?? []);
+            redirect_to(route_url('/admin/account'));
+        }
+
+        $result = $this->account->saveProfile((int) $user['id'], $_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_account_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The admin profile could not be updated.']),
+            ]);
+            flash_set('admin_account_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/account'));
+        }
+
+        $updated = $this->account->profile((int) $user['id']);
+
+        if (is_array($updated)) {
+            $this->auth->syncProfile((int) $user['id'], (string) $updated['name'], (string) $updated['email']);
+        }
+
+        flash_set('admin_account_state', [
+            'type' => 'success',
+            'message' => 'The admin profile was updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/account'));
+    }
+
+    private function handleAccountPasswordSave(array $user): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_account_password_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            redirect_to(route_url('/admin/account/password'));
+        }
+
+        $result = $this->account->changePassword((int) $user['id'], $_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_account_password_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The password could not be updated.']),
+            ]);
+            redirect_to(route_url('/admin/account/password'));
+        }
+
+        flash_set('admin_account_password_state', [
+            'type' => 'success',
+            'message' => 'The password was updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/account/password'));
     }
 
     private function handleEventSave(?int $id): never
@@ -1017,6 +1256,36 @@ final class AdminController
         ]);
 
         redirect_to(route_url('/admin/settings/seo'));
+    }
+
+    private function handleNotificationsSettingsSave(): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_settings_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_notifications_form', $this->settings->notificationsEditor());
+            redirect_to(route_url('/admin/settings/notifications'));
+        }
+
+        $result = $this->settings->saveNotifications($_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_settings_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The notification settings could not be saved.']),
+            ]);
+            flash_set('admin_notifications_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/settings/notifications'));
+        }
+
+        flash_set('admin_settings_state', [
+            'type' => 'success',
+            'message' => 'The notification settings were updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/settings/notifications'));
     }
 
     private function emptyEventForm(): array

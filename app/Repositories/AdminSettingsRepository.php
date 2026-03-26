@@ -48,7 +48,126 @@ final class AdminSettingsRepository
                 'fields_count' => 24,
                 'updated_label' => $this->updatedLabel(),
             ],
+            [
+                'title' => 'Notifications & Mail Delivery',
+                'description' => 'Store the admin alert emails and future SMTP details so password reset and website notifications can be connected later.',
+                'href' => route_url('/admin/settings/notifications'),
+                'status' => 'ready',
+                'fields_count' => 12,
+                'updated_label' => $this->updatedLabel(),
+            ],
         ];
+    }
+
+    public function notificationsEditor(): array
+    {
+        return [
+            'delivery_mode' => (string) $this->setting('mail.delivery_mode', 'manual'),
+            'from_name' => (string) $this->setting('mail.from_name', 'AnkammaThalli Temple'),
+            'from_email' => (string) $this->setting('mail.from_email', ''),
+            'reply_to_email' => (string) $this->setting('mail.reply_to_email', ''),
+            'smtp_host' => (string) $this->setting('mail.smtp.host', ''),
+            'smtp_port' => (string) $this->setting('mail.smtp.port', ''),
+            'smtp_encryption' => (string) $this->setting('mail.smtp.encryption', 'tls'),
+            'smtp_username' => (string) $this->setting('mail.smtp.username', ''),
+            'smtp_password' => (string) $this->setting('mail.smtp.password', ''),
+            'admin_alert_email' => (string) $this->setting('mail.alerts.admin_email', ''),
+            'contact_alert_email' => (string) $this->setting('mail.alerts.contact_email', ''),
+            'donation_alert_email' => (string) $this->setting('mail.alerts.donation_email', ''),
+            'gallery_alert_email' => (string) $this->setting('mail.alerts.gallery_email', ''),
+        ];
+    }
+
+    public function saveNotifications(array $input): array
+    {
+        $old = [
+            'delivery_mode' => trim((string) ($input['delivery_mode'] ?? 'manual')),
+            'from_name' => trim((string) ($input['from_name'] ?? '')),
+            'from_email' => trim((string) ($input['from_email'] ?? '')),
+            'reply_to_email' => trim((string) ($input['reply_to_email'] ?? '')),
+            'smtp_host' => trim((string) ($input['smtp_host'] ?? '')),
+            'smtp_port' => trim((string) ($input['smtp_port'] ?? '')),
+            'smtp_encryption' => trim((string) ($input['smtp_encryption'] ?? 'tls')),
+            'smtp_username' => trim((string) ($input['smtp_username'] ?? '')),
+            'smtp_password' => trim((string) ($input['smtp_password'] ?? '')),
+            'admin_alert_email' => trim((string) ($input['admin_alert_email'] ?? '')),
+            'contact_alert_email' => trim((string) ($input['contact_alert_email'] ?? '')),
+            'donation_alert_email' => trim((string) ($input['donation_alert_email'] ?? '')),
+            'gallery_alert_email' => trim((string) ($input['gallery_alert_email'] ?? '')),
+        ];
+
+        $errors = [];
+
+        if (! in_array($old['delivery_mode'], ['manual', 'smtp'], true)) {
+            $errors[] = 'Please choose a valid mail delivery mode.';
+        }
+
+        if ($old['from_name'] === '') {
+            $errors[] = 'Please enter the sender name.';
+        }
+
+        $emailFields = [
+            'from_email' => 'sender email',
+            'reply_to_email' => 'reply-to email',
+            'admin_alert_email' => 'admin alert email',
+            'contact_alert_email' => 'contact alert email',
+            'donation_alert_email' => 'donation alert email',
+            'gallery_alert_email' => 'gallery alert email',
+        ];
+
+        foreach ($emailFields as $field => $label) {
+            if ($old[$field] !== '' && filter_var($old[$field], FILTER_VALIDATE_EMAIL) === false) {
+                $errors[] = 'Please enter a valid ' . $label . '.';
+            }
+        }
+
+        if ($old['delivery_mode'] === 'smtp') {
+            if ($old['from_email'] === '' || $old['smtp_host'] === '' || $old['smtp_port'] === '' || $old['smtp_username'] === '') {
+                $errors[] = 'SMTP mode requires sender email, SMTP host, port, and username.';
+            }
+
+            if ($old['smtp_port'] !== '' && filter_var($old['smtp_port'], FILTER_VALIDATE_INT) === false) {
+                $errors[] = 'Please enter a valid SMTP port.';
+            }
+        }
+
+        if ($errors !== []) {
+            return [
+                'ok' => false,
+                'errors' => $errors,
+                'old' => $old,
+            ];
+        }
+
+        try {
+            $this->connection->beginTransaction();
+            $this->upsertSetting('mail.delivery_mode', $old['delivery_mode'], false, 'string');
+            $this->upsertSetting('mail.from_name', $old['from_name'], false, 'string');
+            $this->upsertSetting('mail.from_email', $old['from_email'], false, 'string');
+            $this->upsertSetting('mail.reply_to_email', $old['reply_to_email'], false, 'string');
+            $this->upsertSetting('mail.smtp.host', $old['smtp_host'], false, 'string');
+            $this->upsertSetting('mail.smtp.port', $old['smtp_port'], false, 'string');
+            $this->upsertSetting('mail.smtp.encryption', $old['smtp_encryption'], false, 'string');
+            $this->upsertSetting('mail.smtp.username', $old['smtp_username'], false, 'string');
+            $this->upsertSetting('mail.smtp.password', $old['smtp_password'], false, 'string');
+            $this->upsertSetting('mail.alerts.admin_email', $old['admin_alert_email'], false, 'string');
+            $this->upsertSetting('mail.alerts.contact_email', $old['contact_alert_email'], false, 'string');
+            $this->upsertSetting('mail.alerts.donation_email', $old['donation_alert_email'], false, 'string');
+            $this->upsertSetting('mail.alerts.gallery_email', $old['gallery_alert_email'], false, 'string');
+            $this->connection->commit();
+
+            return ['ok' => true];
+        } catch (Throwable) {
+            if ($this->connection->inTransaction()) {
+                $this->connection->rollBack();
+            }
+
+            return [
+                'ok' => false,
+                'errors' => ['The notification settings could not be saved.'],
+                'old' => $old,
+            ];
+        }
     }
 
     public function seoEditor(): array

@@ -28,6 +28,10 @@ This file tracks the items we intentionally postponed so they stay visible after
 
 - Revisit sidebar user email display so the full address can be inspected more easily without harming the layout.
 - Revisit overall admin page layout density so summary cards, filters, and content blocks use space more cleanly across modules like Media Library and Blog.
-- Continue building the remaining CRUD modules:
-  - Page content sections
-  - Settings and media improvements
+- Connect the admin notification settings to real SMTP delivery once the final Hostinger or Zoho credentials are available.
+- Replace the local forgot-password reset link display with real outgoing reset emails after SMTP is configured.
+- Continue building the remaining admin operations:
+  - Contact inquiry management
+  - Donation notice management
+  - Gallery submission review
+  - Newsletter subscription management
