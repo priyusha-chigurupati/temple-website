@@ -13,9 +13,13 @@ final class AdminSubmissionRepository
     public function overviewCounts(): array
     {
         return [
+            'contact_total' => $this->count('SELECT COUNT(*) FROM contact_inquiries'),
             'contact_pending' => $this->count("SELECT COUNT(*) FROM contact_inquiries WHERE status = 'pending'"),
+            'donation_total' => $this->count('SELECT COUNT(*) FROM donation_notifications'),
             'donation_pending' => $this->count("SELECT COUNT(*) FROM donation_notifications WHERE status = 'pending'"),
+            'gallery_total' => $this->count('SELECT COUNT(*) FROM gallery_submissions'),
             'gallery_pending' => $this->count("SELECT COUNT(*) FROM gallery_submissions WHERE status = 'pending'"),
+            'newsletter_total' => $this->count('SELECT COUNT(*) FROM newsletter_subscriptions'),
             'newsletter_active' => $this->count("SELECT COUNT(*) FROM newsletter_subscriptions WHERE status = 'active'"),
         ];
     }
