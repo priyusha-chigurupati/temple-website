@@ -8,7 +8,8 @@ final class AdminController
         private readonly AdminAuthService $auth,
         private readonly AdminDashboardRepository $dashboard,
         private readonly AdminEventRepository $events,
-        private readonly AdminGalleryRepository $gallery
+        private readonly AdminGalleryRepository $gallery,
+        private readonly AdminBlogRepository $blog
     )
     {
     }
@@ -292,6 +293,120 @@ final class AdminController
         redirect_to(route_url('/admin/media'));
     }
 
+    public function blogIndex(): void
+    {
+        $user = $this->requireAuth();
+        $items = $this->blog->all();
+        $listing = $this->blog->listing([
+            'status' => query_value('status'),
+            'category' => query_value('category'),
+            'q' => query_value('q'),
+            'page' => query_value('page'),
+        ]);
+
+        View::render('pages/admin-blog-index', [
+            'pageTitle' => 'Blog Library',
+            'metaTitle' => 'Blog Library | AnkammaThalli Temple',
+            'metaDescription' => 'Manage temple blog articles in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'blog',
+            'adminUser' => $user,
+            'blogPosts' => $listing['items'],
+            'blogState' => flash_pull('admin_blog_state', []),
+            'blogFilters' => $listing['filters'],
+            'blogCategoryFilters' => $listing['category_filters'],
+            'blogPagination' => $listing['pagination'],
+            'blogSearchTerm' => $listing['search_term'],
+            'blogSelectedStatus' => $listing['status'],
+            'blogSelectedCategory' => $listing['category'],
+            'blogTotalItems' => $listing['total_items'],
+            'blogStats' => [
+                'published' => count(array_filter($items, static fn (array $item): bool => ($item['status'] ?? '') === 'published')),
+                'draft' => count(array_filter($items, static fn (array $item): bool => ($item['status'] ?? '') === 'draft')),
+                'featured' => count(array_filter($items, static fn (array $item): bool => (int) ($item['is_featured'] ?? 0) === 1)),
+            ],
+            'latestPost' => $items[0] ?? null,
+        ], 'admin');
+    }
+
+    public function blogCreate(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleBlogSave(null);
+        }
+
+        View::render('pages/admin-blog-form', [
+            'pageTitle' => 'Add Blog Article',
+            'metaTitle' => 'Add Blog Article | AnkammaThalli Temple',
+            'metaDescription' => 'Create a new temple blog article in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'blog',
+            'adminUser' => $user,
+            'blogFormMode' => 'create',
+            'blogState' => flash_pull('admin_blog_state', []),
+            'blogForm' => flash_pull('admin_blog_form', $this->emptyBlogForm()),
+            'blogCategories' => $this->blog->categories(),
+            'blogPostId' => null,
+        ], 'admin');
+    }
+
+    public function blogEdit(int $id): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleBlogSave($id);
+        }
+
+        $post = $this->blog->find($id);
+
+        if ($post === null) {
+            http_response_code(404);
+            $this->dashboard();
+            return;
+        }
+
+        View::render('pages/admin-blog-form', [
+            'pageTitle' => 'Edit Blog Article',
+            'metaTitle' => 'Edit Blog Article | AnkammaThalli Temple',
+            'metaDescription' => 'Edit a temple blog article in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'blog',
+            'adminUser' => $user,
+            'blogFormMode' => 'edit',
+            'blogState' => flash_pull('admin_blog_state', []),
+            'blogForm' => flash_pull('admin_blog_form', $post),
+            'blogCategories' => $this->blog->categories(),
+            'blogPostId' => $id,
+        ], 'admin');
+    }
+
+    public function blogDelete(int $id): never
+    {
+        $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || ! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            http_response_code(403);
+            exit('Invalid delete request.');
+        }
+
+        if ($this->blog->delete($id)) {
+            flash_set('admin_blog_state', [
+                'type' => 'success',
+                'message' => 'The article was removed successfully.',
+            ]);
+        } else {
+            flash_set('admin_blog_state', [
+                'type' => 'error',
+                'message' => 'The article could not be removed.',
+            ]);
+        }
+
+        redirect_to(route_url('/admin/blog'));
+    }
+
     private function handleLogin(): never
     {
         if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
@@ -404,6 +519,36 @@ final class AdminController
         redirect_to(route_url('/admin/media'));
     }
 
+    private function handleBlogSave(?int $id): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_blog_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_blog_form', $this->blogFormFromPost($_POST));
+            redirect_to($id === null ? route_url('/admin/blog/new') : route_url('/admin/blog/' . $id . '/edit'));
+        }
+
+        $result = $this->blog->save($_POST, $id);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_blog_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The article could not be saved.']),
+            ]);
+            flash_set('admin_blog_form', $result['old'] ?? $this->blogFormFromPost($_POST));
+            redirect_to($id === null ? route_url('/admin/blog/new') : route_url('/admin/blog/' . $id . '/edit'));
+        }
+
+        flash_set('admin_blog_state', [
+            'type' => 'success',
+            'message' => $id === null ? 'The article was created successfully.' : 'The article was updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/blog'));
+    }
+
     private function emptyEventForm(): array
     {
         return [
@@ -463,6 +608,42 @@ final class AdminController
             'status' => trim((string) ($post['status'] ?? 'draft')),
             'is_featured' => isset($post['is_featured']) ? 1 : 0,
             'is_featured_home' => isset($post['is_featured_home']) ? 1 : 0,
+        ];
+    }
+
+    private function emptyBlogForm(): array
+    {
+        return [
+            'title' => '',
+            'slug' => '',
+            'excerpt' => '',
+            'body_long' => '',
+            'category_id' => '',
+            'image_path' => '',
+            'read_time_label' => '6 Min Read',
+            'status' => 'draft',
+            'meta_title' => '',
+            'meta_description' => '',
+            'published_at' => '',
+            'is_featured' => 0,
+        ];
+    }
+
+    private function blogFormFromPost(array $post): array
+    {
+        return [
+            'title' => trim((string) ($post['title'] ?? '')),
+            'slug' => trim((string) ($post['slug'] ?? '')),
+            'excerpt' => trim((string) ($post['excerpt'] ?? '')),
+            'body_long' => trim((string) ($post['body_long'] ?? '')),
+            'category_id' => trim((string) ($post['category_id'] ?? '')),
+            'image_path' => trim((string) ($post['image_path'] ?? '')),
+            'read_time_label' => trim((string) ($post['read_time_label'] ?? '6 Min Read')),
+            'status' => trim((string) ($post['status'] ?? 'draft')),
+            'meta_title' => trim((string) ($post['meta_title'] ?? '')),
+            'meta_description' => trim((string) ($post['meta_description'] ?? '')),
+            'published_at' => trim((string) ($post['published_at'] ?? '')),
+            'is_featured' => isset($post['is_featured']) ? 1 : 0,
         ];
     }
 }

@@ -22,12 +22,11 @@ This file tracks the items we intentionally postponed so they stay visible after
 - Add full admin moderation tools for user photo submissions.
 - Revisit modal polish after the admin media flow is complete.
 - Revisit the admin Media Library layout density so the page uses space more efficiently and large empty areas are reduced.
+- Clarify the Media Library filter UI so the status filters and category filters are more clearly labeled.
 
 ## Admin
 
 - Revisit sidebar user email display so the full address can be inspected more easily without harming the layout.
 - Continue building the remaining CRUD modules:
-  - Gallery
-  - Blog
   - Page content sections
   - Settings and media improvements

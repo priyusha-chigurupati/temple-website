@@ -10,6 +10,7 @@ $adminNavItems = [
     ['key' => 'pages', 'label' => 'Pages', 'icon' => 'description', 'href' => null, 'enabled' => false],
     ['key' => 'events', 'label' => 'Events', 'icon' => 'calendar_month', 'href' => route_url('/admin/events'), 'enabled' => true],
     ['key' => 'media', 'label' => 'Media', 'icon' => 'photo_library', 'href' => route_url('/admin/media'), 'enabled' => true],
+    ['key' => 'blog', 'label' => 'Blog', 'icon' => 'edit_square', 'href' => route_url('/admin/blog'), 'enabled' => true],
     ['key' => 'settings', 'label' => 'Settings', 'icon' => 'settings', 'href' => null, 'enabled' => false],
 ];
 ?>
