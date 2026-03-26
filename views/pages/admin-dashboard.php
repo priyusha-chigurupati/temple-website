@@ -13,7 +13,7 @@ declare(strict_types=1);
             <button class="admin-icon-button" type="button" aria-label="Notifications" title="Notifications">
                 <span class="material-symbols-outlined">notifications</span>
             </button>
-            <button class="admin-primary-action" type="button">+ Quick Action</button>
+            <a class="admin-primary-action" href="<?= e(route_url('/admin/events/new')) ?>">+ Quick Action</a>
         </div>
     </header>
 
@@ -54,7 +54,7 @@ declare(strict_types=1);
         <article class="admin-panel admin-panel--events">
             <div class="admin-panel__header admin-panel__header--inline">
                 <h2>Upcoming Events</h2>
-                <span class="admin-panel__link">View All</span>
+                <a class="admin-panel__link" href="<?= e(route_url('/admin/events')) ?>">View All</a>
             </div>
 
             <?php if (($upcomingEvents ?? []) === []): ?>
@@ -100,7 +100,7 @@ declare(strict_types=1);
                             </div>
                             <div class="admin-donation-item__content">
                                 <h3><?= e($notice['full_name'] ?? '') ?></h3>
-                                <p><?= e($notice['payment_method'] ?? '') ?> • <?= e((string) ($notice['created_at'] ?? '')) ?></p>
+                                <p><?= e($notice['payment_method'] ?? '') ?> | <?= e((string) ($notice['created_at'] ?? '')) ?></p>
                             </div>
                             <div class="admin-donation-item__amount">
                                 <strong>Rs <?= e(number_format((float) ($notice['amount'] ?? 0), 0)) ?></strong>

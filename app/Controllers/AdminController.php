@@ -6,7 +6,8 @@ final class AdminController
 {
     public function __construct(
         private readonly AdminAuthService $auth,
-        private readonly AdminDashboardRepository $dashboard
+        private readonly AdminDashboardRepository $dashboard,
+        private readonly AdminEventRepository $events
     )
     {
     }
@@ -71,6 +72,108 @@ final class AdminController
         redirect_to(route_url('/admin/login'));
     }
 
+    public function eventsIndex(): void
+    {
+        $user = $this->requireAuth();
+        $items = $this->events->all();
+        $phaseCounts = [
+            'upcoming' => count(array_filter($items, static fn (array $item): bool => ($item['phase'] ?? '') === 'upcoming')),
+            'active' => count(array_filter($items, static fn (array $item): bool => ($item['phase'] ?? '') === 'active')),
+            'completed' => count(array_filter($items, static fn (array $item): bool => ($item['phase'] ?? '') === 'completed')),
+            'draft' => count(array_filter($items, static fn (array $item): bool => ($item['status'] ?? '') === 'draft')),
+        ];
+        $nextEvent = $items[0] ?? null;
+
+        View::render('pages/admin-events-index', [
+            'pageTitle' => 'Manage Events',
+            'metaTitle' => 'Manage Events | AnkammaThalli Temple',
+            'metaDescription' => 'Manage temple events in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'events',
+            'adminUser' => $user,
+            'events' => $items,
+            'phaseCounts' => $phaseCounts,
+            'nextEvent' => $nextEvent,
+            'eventState' => flash_pull('admin_event_state', []),
+        ], 'admin');
+    }
+
+    public function eventsCreate(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleEventSave(null);
+        }
+
+        View::render('pages/admin-event-form', [
+            'pageTitle' => 'Add New Event',
+            'metaTitle' => 'Add New Event | AnkammaThalli Temple',
+            'metaDescription' => 'Create a new temple event in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'events',
+            'adminUser' => $user,
+            'eventFormMode' => 'create',
+            'eventState' => flash_pull('admin_event_state', []),
+            'eventForm' => flash_pull('admin_event_form', $this->emptyEventForm()),
+            'eventId' => null,
+        ], 'admin');
+    }
+
+    public function eventsEdit(int $id): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleEventSave($id);
+        }
+
+        $event = $this->events->find($id);
+
+        if ($event === null) {
+            http_response_code(404);
+            $this->dashboard();
+            return;
+        }
+
+        View::render('pages/admin-event-form', [
+            'pageTitle' => 'Edit Event',
+            'metaTitle' => 'Edit Event | AnkammaThalli Temple',
+            'metaDescription' => 'Edit a temple event in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'events',
+            'adminUser' => $user,
+            'eventFormMode' => 'edit',
+            'eventState' => flash_pull('admin_event_state', []),
+            'eventForm' => flash_pull('admin_event_form', $event),
+            'eventId' => $id,
+        ], 'admin');
+    }
+
+    public function eventsDelete(int $id): never
+    {
+        $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || ! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            http_response_code(403);
+            exit('Invalid delete request.');
+        }
+
+        if ($this->events->delete($id)) {
+            flash_set('admin_event_state', [
+                'type' => 'success',
+                'message' => 'The event was removed successfully.',
+            ]);
+        } else {
+            flash_set('admin_event_state', [
+                'type' => 'error',
+                'message' => 'The event could not be removed.',
+            ]);
+        }
+
+        redirect_to(route_url('/admin/events'));
+    }
+
     private function handleLogin(): never
     {
         if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
@@ -121,5 +224,69 @@ final class AdminController
         }
 
         return $user;
+    }
+
+    private function handleEventSave(?int $id): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_event_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_event_form', $this->eventFormFromPost($_POST));
+            redirect_to($id === null ? route_url('/admin/events/new') : route_url('/admin/events/' . $id . '/edit'));
+        }
+
+        $result = $this->events->save($_POST, $id);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_event_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The event could not be saved.']),
+            ]);
+            flash_set('admin_event_form', $result['old'] ?? $this->eventFormFromPost($_POST));
+            redirect_to($id === null ? route_url('/admin/events/new') : route_url('/admin/events/' . $id . '/edit'));
+        }
+
+        flash_set('admin_event_state', [
+            'type' => 'success',
+            'message' => $id === null ? 'The event was created successfully.' : 'The event was updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/events'));
+    }
+
+    private function emptyEventForm(): array
+    {
+        return [
+            'title' => '',
+            'slug' => '',
+            'starts_at' => '',
+            'ends_at' => '',
+            'schedule_label' => '',
+            'summary' => '',
+            'body_long' => '',
+            'image_path' => '',
+            'sort_order' => 0,
+            'status' => 'draft',
+            'is_featured_home' => 0,
+        ];
+    }
+
+    private function eventFormFromPost(array $post): array
+    {
+        return [
+            'title' => trim((string) ($post['title'] ?? '')),
+            'slug' => trim((string) ($post['slug'] ?? '')),
+            'starts_at' => trim((string) ($post['starts_at'] ?? '')),
+            'ends_at' => trim((string) ($post['ends_at'] ?? '')),
+            'schedule_label' => trim((string) ($post['schedule_label'] ?? '')),
+            'summary' => trim((string) ($post['summary'] ?? '')),
+            'body_long' => trim((string) ($post['body_long'] ?? '')),
+            'image_path' => trim((string) ($post['image_path'] ?? '')),
+            'sort_order' => trim((string) ($post['sort_order'] ?? '0')),
+            'status' => trim((string) ($post['status'] ?? 'draft')),
+            'is_featured_home' => isset($post['is_featured_home']) ? 1 : 0,
+        ];
     }
 }

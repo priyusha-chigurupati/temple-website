@@ -13,6 +13,7 @@ require __DIR__ . '/../app/Repositories/GalleryRepository.php';
 require __DIR__ . '/../app/Repositories/PageRepository.php';
 require __DIR__ . '/../app/Repositories/UserRepository.php';
 require __DIR__ . '/../app/Repositories/AdminDashboardRepository.php';
+require __DIR__ . '/../app/Repositories/AdminEventRepository.php';
 require __DIR__ . '/../app/Services/GallerySubmissionService.php';
 require __DIR__ . '/../app/Services/DonationNotificationService.php';
 require __DIR__ . '/../app/Services/ContactInquiryService.php';
@@ -32,6 +33,7 @@ $galleryRepository = null;
 $pageRepository = null;
 $userRepository = null;
 $adminDashboardRepository = null;
+$adminEventRepository = null;
 $connection = null;
 
 try {
@@ -57,6 +59,10 @@ try {
         $connection,
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
+    $adminEventRepository = new AdminEventRepository(
+        $connection,
+        Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
+    );
 } catch (Throwable) {
     $connection = null;
     $eventRepository = null;
@@ -65,6 +71,7 @@ try {
     $pageRepository = null;
     $userRepository = null;
     $adminDashboardRepository = null;
+    $adminEventRepository = null;
 }
 
 $repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository, $pageRepository);
@@ -92,10 +99,15 @@ $controller = new PageController(
 );
 $adminController = null;
 
-if ($userRepository instanceof UserRepository && $adminDashboardRepository instanceof AdminDashboardRepository) {
+if (
+    $userRepository instanceof UserRepository
+    && $adminDashboardRepository instanceof AdminDashboardRepository
+    && $adminEventRepository instanceof AdminEventRepository
+) {
     $adminController = new AdminController(
         new AdminAuthService($userRepository),
-        $adminDashboardRepository
+        $adminDashboardRepository,
+        $adminEventRepository
     );
 }
 
@@ -112,6 +124,8 @@ $routes = [
     '/admin' => static fn () => $adminController instanceof AdminController ? $adminController->dashboard() : $controller->placeholder('admin'),
     '/admin/login' => static fn () => $adminController instanceof AdminController ? $adminController->login() : $controller->placeholder('admin'),
     '/admin/logout' => static fn () => $adminController instanceof AdminController ? $adminController->logout() : $controller->placeholder('admin'),
+    '/admin/events' => static fn () => $adminController instanceof AdminController ? $adminController->eventsIndex() : $controller->placeholder('admin'),
+    '/admin/events/new' => static fn () => $adminController instanceof AdminController ? $adminController->eventsCreate() : $controller->placeholder('admin'),
 ];
 
 if (isset($routes[$path])) {
@@ -135,6 +149,18 @@ if (str_starts_with($path, '/blog/')) {
         $controller->blogDetail($slug);
         exit;
     }
+}
+
+if ($adminController instanceof AdminController && preg_match('#^/admin/events/(\d+)/(edit|delete)$#', $path, $matches) === 1) {
+    $eventId = (int) $matches[1];
+
+    if ($matches[2] === 'edit') {
+        $adminController->eventsEdit($eventId);
+        exit;
+    }
+
+    $adminController->eventsDelete($eventId);
+    exit;
 }
 
 http_response_code(404);
