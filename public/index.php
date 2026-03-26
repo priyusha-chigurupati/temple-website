@@ -144,7 +144,10 @@ if (
     && $adminSettingsRepository instanceof AdminSettingsRepository
 ) {
     $adminController = new AdminController(
-        new AdminAuthService($userRepository),
+        new AdminAuthService(
+            $userRepository,
+            max(60, (int) (Env::get('ADMIN_SESSION_TIMEOUT', '1800') ?? '1800'))
+        ),
         $adminDashboardRepository,
         $adminEventRepository,
         $adminGalleryRepository,
