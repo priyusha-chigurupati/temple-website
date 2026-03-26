@@ -5536,10 +5536,10 @@ input {
 }
 
 .admin-auth-shell {
-    min-height: calc(100vh - 88px);
+    min-height: calc(100vh - 72px);
     display: grid;
     place-items: center;
-    padding: 2.5rem 1.5rem 2rem;
+    padding: 1.35rem 1.25rem 1rem;
     position: relative;
     overflow: hidden;
 }
@@ -5558,9 +5558,9 @@ input {
 .admin-login {
     position: relative;
     z-index: 1;
-    width: min(100%, 420px);
+    width: min(100%, 640px);
     display: grid;
-    gap: 1.65rem;
+    gap: 0.95rem;
 }
 
 .admin-login__brand {
@@ -5570,23 +5570,24 @@ input {
 .admin-login__brand h1 {
     margin: 0;
     font-family: "Noto Serif", serif;
-    font-size: clamp(2.1rem, 5vw, 3rem);
-    line-height: 1;
+    font-size: clamp(1.95rem, 4vw, 2.65rem);
+    line-height: 0.95;
+    white-space: nowrap;
 }
 
 .admin-login__brand p {
-    margin: 0.55rem 0 0;
+    margin: 0.35rem 0 0;
     color: rgba(73, 53, 35, 0.72);
-    font-size: 0.7rem;
+    font-size: 0.64rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
 }
 
 .admin-login__divider {
     width: 48px;
     height: 1px;
-    margin: 1rem auto 0;
+    margin: 0.8rem auto 0;
     background: linear-gradient(90deg, transparent, #e9c349, transparent);
 }
 
@@ -5595,7 +5596,10 @@ input {
     border: 1px solid rgba(136, 115, 100, 0.12);
     background: rgba(255, 255, 255, 0.94);
     box-shadow: 0 14px 40px rgba(53, 16, 0, 0.08);
-    padding: 1.9rem 1.9rem 1.6rem;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 1.2rem;
 }
 
 .admin-login__panel-accent {
@@ -5610,14 +5614,14 @@ input {
 .admin-login__header h2 {
     margin: 0;
     font-family: "Noto Serif", serif;
-    font-size: 1.9rem;
+    font-size: 1.6rem;
 }
 
 .admin-login__header p {
-    margin: 0.45rem 0 0;
+    margin: 0.3rem 0 0;
     color: rgba(85, 67, 54, 0.88);
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 0.88rem;
+    line-height: 1.58;
 }
 
 .admin-status {
@@ -5638,9 +5642,9 @@ input {
 }
 
 .admin-form {
-    margin-top: 1.5rem;
+    margin-top: 1.1rem;
     display: grid;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
 .admin-form__field {
@@ -5650,7 +5654,7 @@ input {
 
 .admin-form__field > span {
     color: rgba(85, 67, 54, 0.88);
-    font-size: 0.74rem;
+    font-size: 0.7rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -5673,7 +5677,7 @@ input {
     width: 100%;
     border: 1px solid rgba(219, 194, 176, 0.48);
     background: #fbf3e4;
-    padding: 0.95rem 1rem 0.95rem 2.6rem;
+    padding: 0.82rem 0.95rem 0.82rem 2.45rem;
     font: inherit;
     color: #1e1b13;
 }
@@ -5690,7 +5694,7 @@ input {
     justify-content: space-between;
     gap: 0.75rem;
     color: rgba(85, 67, 54, 0.84);
-    font-size: 0.9rem;
+    font-size: 0.82rem;
 }
 
 .admin-login__remember {
@@ -5715,13 +5719,13 @@ input {
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
-    margin-top: 1.45rem;
-    padding-top: 1.3rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
     border-top: 1px solid rgba(219, 194, 176, 0.22);
     color: rgba(85, 67, 54, 0.72);
-    font-size: 0.7rem;
+    font-size: 0.64rem;
     font-weight: 800;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
 }
 
@@ -5734,7 +5738,7 @@ input {
     align-items: center;
     gap: 0.45rem;
     color: rgba(85, 67, 54, 0.88);
-    font-size: 0.92rem;
+    font-size: 0.82rem;
     text-decoration: none;
 }
 
@@ -5743,7 +5747,7 @@ input {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1.2rem 1.6rem;
+    padding: 0.9rem 1.3rem;
     border-top: 1px solid rgba(219, 194, 176, 0.22);
     background: #fbf3e4;
 }
@@ -5751,12 +5755,12 @@ input {
 .admin-auth-footer strong {
     display: block;
     font-family: "Noto Serif", serif;
-    font-size: 1.45rem;
+    font-size: 1.15rem;
 }
 
 .admin-auth-footer span {
     color: rgba(85, 67, 54, 0.76);
-    font-size: 0.82rem;
+    font-size: 0.74rem;
 }
 
 .admin-auth-footer > div:last-child {
@@ -5774,33 +5778,33 @@ input {
 }
 
 .admin-sidebar {
-    width: 220px;
+    width: 196px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     background: #fbf3e4;
     border-right: 1px solid rgba(219, 194, 176, 0.18);
-    padding: 1.6rem 0;
+    padding: 1.2rem 0;
 }
 
 .admin-sidebar__brand {
-    padding: 0 1.4rem 1.5rem;
+    padding: 0 1.15rem 1.1rem;
 }
 
 .admin-sidebar__title {
     display: block;
     font-family: "Noto Serif", serif;
-    font-size: 1.85rem;
+    font-size: 1.25rem;
     line-height: 1.05;
 }
 
 .admin-sidebar__subtitle {
     display: block;
-    margin-top: 0.35rem;
+    margin-top: 0.25rem;
     color: #a04100;
-    font-size: 0.68rem;
+    font-size: 0.6rem;
     font-weight: 800;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
 }
 
@@ -5814,9 +5818,9 @@ input {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.85rem 0.95rem;
+    padding: 0.72rem 0.82rem;
     color: rgba(85, 67, 54, 0.9);
-    font-size: 0.92rem;
+    font-size: 0.84rem;
     font-weight: 600;
     text-decoration: none;
 }
@@ -5845,12 +5849,12 @@ input {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.85rem 0.95rem;
+    padding: 0.72rem 0.82rem;
     border: 0;
     background: transparent;
     color: #b3261e;
     font: inherit;
-    font-size: 0.92rem;
+    font-size: 0.84rem;
     font-weight: 600;
     cursor: pointer;
     text-align: left;
@@ -5892,7 +5896,7 @@ input {
 .admin-main {
     flex: 1;
     min-width: 0;
-    padding: 2rem 2.1rem 1.5rem;
+    padding: 1.35rem 1.55rem 1.2rem;
 }
 
 .admin-dashboard {
@@ -5903,13 +5907,13 @@ input {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .admin-dashboard__crumbs {
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.35rem;
     color: #a04100;
-    font-size: 0.66rem;
+    font-size: 0.6rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -5918,22 +5922,24 @@ input {
 .admin-dashboard__topbar h1 {
     margin: 0;
     font-family: "Noto Serif", serif;
-    font-size: clamp(2.35rem, 4vw, 3.4rem);
+    font-size: clamp(1.95rem, 3vw, 2.75rem);
     line-height: 0.95;
+    white-space: nowrap;
 }
 
 .admin-dashboard__intro {
-    max-width: 540px;
-    margin: 0.45rem 0 0;
+    max-width: 500px;
+    margin: 0.35rem 0 0;
     color: rgba(85, 67, 54, 0.82);
-    font-size: 0.95rem;
-    line-height: 1.65;
+    font-size: 0.84rem;
+    line-height: 1.55;
 }
 
 .admin-dashboard__actions {
     display: flex;
     align-items: center;
-    gap: 0.9rem;
+    gap: 0.55rem;
+    padding-top: 0.1rem;
 }
 
 .admin-icon-button,
@@ -5944,8 +5950,8 @@ input {
 }
 
 .admin-icon-button {
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
     display: grid;
     place-items: center;
     background: transparent;
@@ -5955,8 +5961,8 @@ input {
 .admin-primary-action {
     background: #a04100;
     color: #ffffff;
-    padding: 0.85rem 1.2rem;
-    font-size: 0.78rem;
+    padding: 0.78rem 1rem;
+    font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -5966,8 +5972,8 @@ input {
 .admin-overview-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.15rem;
-    margin-top: 1.9rem;
+    gap: 0.95rem;
+    margin-top: 1.4rem;
 }
 
 .admin-overview-card,
@@ -5978,8 +5984,8 @@ input {
 }
 
 .admin-overview-card {
-    min-height: 152px;
-    padding: 1.2rem 1.3rem;
+    min-height: 134px;
+    padding: 1rem 1.05rem;
 }
 
 .admin-overview-card__icon {
@@ -5997,9 +6003,9 @@ input {
 }
 
 .admin-overview-card__meta {
-    margin-top: 0.85rem;
+    margin-top: 0.7rem;
     color: rgba(136, 115, 100, 0.9);
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -6007,17 +6013,17 @@ input {
 
 .admin-overview-card strong {
     display: block;
-    margin-top: 0.7rem;
+    margin-top: 0.55rem;
     font-family: "Noto Serif", serif;
-    font-size: 1.95rem;
+    font-size: 1.55rem;
     line-height: 1;
 }
 
 .admin-overview-card p {
-    margin: 0.5rem 0 0;
+    margin: 0.38rem 0 0;
     color: rgba(85, 67, 54, 0.82);
-    font-size: 0.84rem;
-    line-height: 1.6;
+    font-size: 0.76rem;
+    line-height: 1.45;
 }
 
 .admin-overview-card--highlight {
@@ -6046,19 +6052,19 @@ input {
 .admin-dashboard__content {
     display: grid;
     grid-template-columns: 1.08fr 1fr;
-    gap: 1.35rem;
-    margin-top: 2rem;
+    gap: 1rem;
+    margin-top: 1.35rem;
 }
 
 .admin-panel {
-    padding: 1.25rem;
+    padding: 1rem;
 }
 
 .admin-panel__header h2,
 .admin-summary-card h2 {
     margin: 0;
     font-family: "Noto Serif", serif;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1;
 }
 
@@ -6071,39 +6077,40 @@ input {
 
 .admin-panel__link {
     color: #a04100;
-    font-size: 0.78rem;
+    font-size: 0.68rem;
     font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    text-align: right;
 }
 
 .admin-panel__empty {
-    margin: 1.1rem 0 0;
+    margin: 0.85rem 0 0;
     color: rgba(85, 67, 54, 0.8);
-    font-size: 0.94rem;
-    line-height: 1.7;
+    font-size: 0.82rem;
+    line-height: 1.55;
 }
 
 .admin-event-list,
 .admin-donation-list {
-    margin-top: 1rem;
+    margin-top: 0.8rem;
     display: grid;
-    gap: 0.8rem;
+    gap: 0.7rem;
 }
 
 .admin-event-item,
 .admin-donation-item {
     display: flex;
     align-items: center;
-    gap: 0.9rem;
-    padding: 0.8rem 0.9rem;
+    gap: 0.75rem;
+    padding: 0.72rem 0.78rem;
     background: #ffffff;
     border: 1px solid rgba(219, 194, 176, 0.12);
 }
 
 .admin-event-item__image {
-    width: 78px;
-    height: 58px;
+    width: 72px;
+    height: 54px;
     flex-shrink: 0;
     overflow: hidden;
     background: #efe7d9;
@@ -6130,15 +6137,15 @@ input {
 .admin-event-item__content h3,
 .admin-donation-item__content h3 {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 0.98rem;
     font-weight: 700;
 }
 
 .admin-event-item__content p,
 .admin-donation-item__content p {
-    margin: 0.28rem 0 0;
+    margin: 0.22rem 0 0;
     color: rgba(136, 115, 100, 0.92);
-    font-size: 0.74rem;
+    font-size: 0.66rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -6146,10 +6153,10 @@ input {
 
 .admin-event-item__badge span {
     display: inline-flex;
-    padding: 0.35rem 0.7rem;
+    padding: 0.32rem 0.58rem;
     background: rgba(254, 214, 91, 0.18);
     color: #735c00;
-    font-size: 0.64rem;
+    font-size: 0.58rem;
     font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -6173,12 +6180,12 @@ input {
 .admin-donation-item__amount strong {
     display: block;
     color: #a04100;
-    font-size: 1rem;
+    font-size: 0.92rem;
 }
 
 .admin-donation-item__amount span {
     color: rgba(85, 67, 54, 0.74);
-    font-size: 0.7rem;
+    font-size: 0.62rem;
     font-weight: 700;
     text-transform: capitalize;
 }
@@ -6186,18 +6193,18 @@ input {
 .admin-dashboard__summary {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.35rem;
-    margin-top: 1.35rem;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .admin-summary-card {
-    padding: 1.1rem 1.2rem;
+    padding: 0.95rem 1rem;
 }
 
 .admin-summary-card p {
-    margin: 0.6rem 0 0;
+    margin: 0.5rem 0 0;
     color: rgba(85, 67, 54, 0.84);
-    font-size: 0.92rem;
+    font-size: 0.8rem;
 }
 
 .admin-main__footer {
@@ -6205,11 +6212,11 @@ input {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    margin-top: 2.4rem;
-    padding-top: 1.2rem;
+    margin-top: 1.4rem;
+    padding-top: 0.9rem;
     border-top: 1px solid rgba(219, 194, 176, 0.18);
     color: rgba(136, 115, 100, 0.92);
-    font-size: 0.66rem;
+    font-size: 0.58rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -6235,7 +6242,7 @@ input {
     }
 
     .admin-main {
-        padding: 1.7rem 1.5rem 1.3rem;
+        padding: 1.2rem 1.2rem 1rem;
     }
 
     .admin-overview-grid,
@@ -6278,15 +6285,20 @@ input {
         flex-direction: column;
         align-items: flex-start;
     }
+
+    .admin-dashboard__topbar h1,
+    .admin-login__brand h1 {
+        white-space: normal;
+    }
 }
 
 @media (max-width: 640px) {
     .admin-auth-shell {
-        padding: 1.5rem 1rem;
+        padding: 1rem 0.85rem;
     }
 
     .admin-login__panel {
-        padding: 1.5rem 1.2rem 1.3rem;
+        padding: 1.25rem 1rem 1rem;
     }
 
     .admin-auth-footer {
@@ -6299,7 +6311,7 @@ input {
     }
 
     .admin-main {
-        padding: 1.2rem 1rem;
+        padding: 1rem 0.85rem;
     }
 
     .admin-sidebar__nav,
