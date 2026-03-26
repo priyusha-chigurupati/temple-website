@@ -25,6 +25,7 @@ final class AdminController
             'pageTitle' => 'Admin Login',
             'metaTitle' => 'Admin Login | AnkammaThalli Temple',
             'metaDescription' => 'Secure admin login for AnkammaThalli Temple.',
+            'adminShellMode' => 'auth',
             'authState' => flash_pull('admin_auth_state', []),
             'authForm' => flash_pull('admin_auth_form', [
                 'email' => '',
@@ -40,9 +41,15 @@ final class AdminController
             'pageTitle' => 'Admin Dashboard',
             'metaTitle' => 'Admin Dashboard | AnkammaThalli Temple',
             'metaDescription' => 'Admin dashboard for AnkammaThalli Temple.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'dashboard',
             'adminUser' => $user,
             'contentCounts' => $this->dashboard->contentCounts(),
+            'totalContentCount' => $this->dashboard->totalContentCount(),
             'submissionCounts' => $this->dashboard->submissionCounts(),
+            'donationSummary' => $this->dashboard->donationSummary(),
+            'nextEventStatus' => $this->dashboard->nextEventStatus(),
+            'upcomingEvents' => $this->dashboard->upcomingEvents(),
             'recentContactInquiries' => $this->dashboard->recentContactInquiries(),
             'recentDonationNotifications' => $this->dashboard->recentDonationNotifications(),
         ], 'admin');

@@ -53,7 +53,10 @@ try {
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
     $userRepository = new UserRepository($connection);
-    $adminDashboardRepository = new AdminDashboardRepository($connection);
+    $adminDashboardRepository = new AdminDashboardRepository(
+        $connection,
+        Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
+    );
 } catch (Throwable) {
     $connection = null;
     $eventRepository = null;
