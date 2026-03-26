@@ -7,7 +7,8 @@ final class AdminController
     public function __construct(
         private readonly AdminAuthService $auth,
         private readonly AdminDashboardRepository $dashboard,
-        private readonly AdminEventRepository $events
+        private readonly AdminEventRepository $events,
+        private readonly AdminGalleryRepository $gallery
     )
     {
     }
@@ -184,6 +185,113 @@ final class AdminController
         redirect_to(route_url('/admin/events'));
     }
 
+    public function galleryIndex(): void
+    {
+        $user = $this->requireAuth();
+        $listing = $this->gallery->listing([
+            'status' => query_value('status'),
+            'category' => query_value('category'),
+            'q' => query_value('q'),
+            'page' => query_value('page'),
+        ]);
+
+        View::render('pages/admin-gallery-index', [
+            'pageTitle' => 'Media Library',
+            'metaTitle' => 'Media Library | AnkammaThalli Temple',
+            'metaDescription' => 'Manage temple gallery media in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'media',
+            'adminUser' => $user,
+            'galleryItems' => $listing['items'],
+            'galleryFilters' => $listing['filters'],
+            'galleryCategoryFilters' => $listing['category_filters'],
+            'galleryPagination' => $listing['pagination'],
+            'gallerySearchTerm' => $listing['search_term'],
+            'gallerySelectedStatus' => $listing['status'],
+            'gallerySelectedCategory' => $listing['category'],
+            'galleryTotalItems' => $listing['total_items'],
+            'galleryState' => flash_pull('admin_gallery_state', []),
+        ], 'admin');
+    }
+
+    public function galleryCreate(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleGallerySave(null);
+        }
+
+        View::render('pages/admin-gallery-form', [
+            'pageTitle' => 'Add Media Item',
+            'metaTitle' => 'Add Media Item | AnkammaThalli Temple',
+            'metaDescription' => 'Create a new gallery item in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'media',
+            'adminUser' => $user,
+            'galleryFormMode' => 'create',
+            'galleryState' => flash_pull('admin_gallery_state', []),
+            'galleryForm' => flash_pull('admin_gallery_form', $this->emptyGalleryForm()),
+            'galleryCategories' => $this->gallery->categories(),
+            'galleryItemId' => null,
+        ], 'admin');
+    }
+
+    public function galleryEdit(int $id): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleGallerySave($id);
+        }
+
+        $item = $this->gallery->find($id);
+
+        if ($item === null) {
+            http_response_code(404);
+            $this->dashboard();
+            return;
+        }
+
+        View::render('pages/admin-gallery-form', [
+            'pageTitle' => 'Edit Media Item',
+            'metaTitle' => 'Edit Media Item | AnkammaThalli Temple',
+            'metaDescription' => 'Edit a gallery item in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'media',
+            'adminUser' => $user,
+            'galleryFormMode' => 'edit',
+            'galleryState' => flash_pull('admin_gallery_state', []),
+            'galleryForm' => flash_pull('admin_gallery_form', $item),
+            'galleryCategories' => $this->gallery->categories(),
+            'galleryItemId' => $id,
+        ], 'admin');
+    }
+
+    public function galleryDelete(int $id): never
+    {
+        $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || ! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            http_response_code(403);
+            exit('Invalid delete request.');
+        }
+
+        if ($this->gallery->delete($id)) {
+            flash_set('admin_gallery_state', [
+                'type' => 'success',
+                'message' => 'The gallery item was removed successfully.',
+            ]);
+        } else {
+            flash_set('admin_gallery_state', [
+                'type' => 'error',
+                'message' => 'The gallery item could not be removed.',
+            ]);
+        }
+
+        redirect_to(route_url('/admin/media'));
+    }
+
     private function handleLogin(): never
     {
         if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
@@ -266,6 +374,36 @@ final class AdminController
         redirect_to(route_url('/admin/events'));
     }
 
+    private function handleGallerySave(?int $id): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_gallery_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_gallery_form', $this->galleryFormFromPost($_POST));
+            redirect_to($id === null ? route_url('/admin/media/new') : route_url('/admin/media/' . $id . '/edit'));
+        }
+
+        $result = $this->gallery->save($_POST, $id);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_gallery_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The gallery item could not be saved.']),
+            ]);
+            flash_set('admin_gallery_form', $result['old'] ?? $this->galleryFormFromPost($_POST));
+            redirect_to($id === null ? route_url('/admin/media/new') : route_url('/admin/media/' . $id . '/edit'));
+        }
+
+        flash_set('admin_gallery_state', [
+            'type' => 'success',
+            'message' => $id === null ? 'The gallery item was created successfully.' : 'The gallery item was updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/media'));
+    }
+
     private function emptyEventForm(): array
     {
         return [
@@ -296,6 +434,34 @@ final class AdminController
             'image_path' => trim((string) ($post['image_path'] ?? '')),
             'sort_order' => trim((string) ($post['sort_order'] ?? '0')),
             'status' => trim((string) ($post['status'] ?? 'draft')),
+            'is_featured_home' => isset($post['is_featured_home']) ? 1 : 0,
+        ];
+    }
+
+    private function emptyGalleryForm(): array
+    {
+        return [
+            'title' => '',
+            'caption' => '',
+            'category_id' => '',
+            'image_path' => '',
+            'sort_order' => 0,
+            'status' => 'draft',
+            'is_featured' => 0,
+            'is_featured_home' => 0,
+        ];
+    }
+
+    private function galleryFormFromPost(array $post): array
+    {
+        return [
+            'title' => trim((string) ($post['title'] ?? '')),
+            'caption' => trim((string) ($post['caption'] ?? '')),
+            'category_id' => trim((string) ($post['category_id'] ?? '')),
+            'image_path' => trim((string) ($post['image_path'] ?? '')),
+            'sort_order' => trim((string) ($post['sort_order'] ?? '0')),
+            'status' => trim((string) ($post['status'] ?? 'draft')),
+            'is_featured' => isset($post['is_featured']) ? 1 : 0,
             'is_featured_home' => isset($post['is_featured_home']) ? 1 : 0,
         ];
     }

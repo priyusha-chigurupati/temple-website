@@ -14,6 +14,7 @@ require __DIR__ . '/../app/Repositories/PageRepository.php';
 require __DIR__ . '/../app/Repositories/UserRepository.php';
 require __DIR__ . '/../app/Repositories/AdminDashboardRepository.php';
 require __DIR__ . '/../app/Repositories/AdminEventRepository.php';
+require __DIR__ . '/../app/Repositories/AdminGalleryRepository.php';
 require __DIR__ . '/../app/Services/GallerySubmissionService.php';
 require __DIR__ . '/../app/Services/DonationNotificationService.php';
 require __DIR__ . '/../app/Services/ContactInquiryService.php';
@@ -34,6 +35,7 @@ $pageRepository = null;
 $userRepository = null;
 $adminDashboardRepository = null;
 $adminEventRepository = null;
+$adminGalleryRepository = null;
 $connection = null;
 
 try {
@@ -63,6 +65,10 @@ try {
         $connection,
         Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
     );
+    $adminGalleryRepository = new AdminGalleryRepository(
+        $connection,
+        Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
+    );
 } catch (Throwable) {
     $connection = null;
     $eventRepository = null;
@@ -72,6 +78,7 @@ try {
     $userRepository = null;
     $adminDashboardRepository = null;
     $adminEventRepository = null;
+    $adminGalleryRepository = null;
 }
 
 $repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository, $pageRepository);
@@ -103,11 +110,13 @@ if (
     $userRepository instanceof UserRepository
     && $adminDashboardRepository instanceof AdminDashboardRepository
     && $adminEventRepository instanceof AdminEventRepository
+    && $adminGalleryRepository instanceof AdminGalleryRepository
 ) {
     $adminController = new AdminController(
         new AdminAuthService($userRepository),
         $adminDashboardRepository,
-        $adminEventRepository
+        $adminEventRepository,
+        $adminGalleryRepository
     );
 }
 
@@ -126,6 +135,8 @@ $routes = [
     '/admin/logout' => static fn () => $adminController instanceof AdminController ? $adminController->logout() : $controller->placeholder('admin'),
     '/admin/events' => static fn () => $adminController instanceof AdminController ? $adminController->eventsIndex() : $controller->placeholder('admin'),
     '/admin/events/new' => static fn () => $adminController instanceof AdminController ? $adminController->eventsCreate() : $controller->placeholder('admin'),
+    '/admin/media' => static fn () => $adminController instanceof AdminController ? $adminController->galleryIndex() : $controller->placeholder('admin'),
+    '/admin/media/new' => static fn () => $adminController instanceof AdminController ? $adminController->galleryCreate() : $controller->placeholder('admin'),
 ];
 
 if (isset($routes[$path])) {
@@ -160,6 +171,18 @@ if ($adminController instanceof AdminController && preg_match('#^/admin/events/(
     }
 
     $adminController->eventsDelete($eventId);
+    exit;
+}
+
+if ($adminController instanceof AdminController && preg_match('#^/admin/media/(\d+)/(edit|delete)$#', $path, $matches) === 1) {
+    $itemId = (int) $matches[1];
+
+    if ($matches[2] === 'edit') {
+        $adminController->galleryEdit($itemId);
+        exit;
+    }
+
+    $adminController->galleryDelete($itemId);
     exit;
 }
 
