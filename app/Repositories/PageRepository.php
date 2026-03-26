@@ -60,6 +60,7 @@ final class PageRepository
 
         return match ($slug) {
             'about' => $this->aboutPage($page, $sections),
+            'home' => $this->homePage($page, $sections),
             default => null,
         };
     }
@@ -158,6 +159,65 @@ final class PageRepository
                 'items' => array_values($valuesBody['items'] ?? []),
             ],
             'facts' => array_values($factsBody['items'] ?? []),
+        ];
+    }
+
+    private function homePage(array $page, array $sections): array
+    {
+        $hero = $sections['hero'] ?? [];
+        $about = $sections['about_preview'] ?? [];
+        $events = $sections['events_preview'] ?? [];
+        $gallery = $sections['gallery_preview'] ?? [];
+        $donations = $sections['donation_preview'] ?? [];
+
+        $heroSettings = is_array($hero['settings'] ?? null) ? $hero['settings'] : [];
+        $aboutBody = is_array($about['body_json'] ?? null) ? $about['body_json'] : [];
+        $aboutSettings = is_array($about['settings'] ?? null) ? $about['settings'] : [];
+        $eventsSettings = is_array($events['settings'] ?? null) ? $events['settings'] : [];
+        $gallerySettings = is_array($gallery['settings'] ?? null) ? $gallery['settings'] : [];
+        $donationsBody = is_array($donations['body_json'] ?? null) ? $donations['body_json'] : [];
+        $donationsSettings = is_array($donations['settings'] ?? null) ? $donations['settings'] : [];
+
+        return [
+            'meta' => [
+                'title' => $page['meta_title'] ?? (($page['title'] ?? 'Home') . ' | AnkammaThalli Temple'),
+                'description' => $page['meta_description'] ?? '',
+            ],
+            'hero' => [
+                'eyebrow' => (string) ($hero['eyebrow'] ?? ''),
+                'title_prefix' => (string) ($heroSettings['title_prefix'] ?? ''),
+                'title_highlight' => (string) ($hero['heading'] ?? ''),
+                'title_suffix' => (string) ($heroSettings['title_suffix'] ?? ''),
+                'description' => (string) ($hero['body_long'] ?? ''),
+                'primary_cta' => $heroSettings['primary_cta'] ?? ['label' => 'Support the Temple', 'href' => '/donations'],
+                'secondary_cta' => $heroSettings['secondary_cta'] ?? ['label' => 'View Timings', 'href' => '/contact'],
+                'background_image' => $this->mediaPathFromSetting($heroSettings['background_image_id'] ?? null, (string) ($heroSettings['background_image'] ?? '')),
+                'feature_image' => (string) ($hero['image_path'] ?? ''),
+            ],
+            'about_section' => [
+                'title' => (string) ($about['heading'] ?? ''),
+                'description' => array_values($aboutBody['paragraphs'] ?? []),
+                'cta' => $aboutSettings['cta'] ?? ['label' => 'Read our full story', 'href' => '/about'],
+                'image' => (string) ($about['image_path'] ?? ''),
+            ],
+            'events_section' => [
+                'eyebrow' => (string) ($events['eyebrow'] ?? ''),
+                'title' => (string) ($events['heading'] ?? ''),
+                'cta' => $eventsSettings['cta'] ?? ['label' => 'View All Calendar', 'href' => '/events'],
+                'items' => [],
+            ],
+            'gallery_section' => [
+                'title' => (string) ($gallery['heading'] ?? ''),
+                'cta' => $gallerySettings['cta'] ?? ['label' => 'Explore Gallery', 'href' => '/gallery'],
+                'items' => [],
+            ],
+            'donation_section' => [
+                'title' => (string) ($donations['heading'] ?? ''),
+                'description' => (string) ($donations['body_long'] ?? ''),
+                'cards' => array_values($donationsBody['cards'] ?? []),
+                'quick_options' => array_values($donationsBody['quick_options'] ?? []),
+                'cta' => $donationsSettings['cta'] ?? ['label' => 'Complete Donation', 'href' => '/donations'],
+            ],
         ];
     }
 

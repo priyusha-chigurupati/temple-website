@@ -130,3 +130,18 @@ That command seeds the current English sample About content into:
 - `page_section_translations`
 - `media`
 - `media_translations`
+
+The current sample Home page content can be inserted into MySQL with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_home.php
+```
+
+That command seeds the current English sample Home content into:
+
+- `pages`
+- `page_translations`
+- `page_sections`
+- `page_section_translations`
+- `media`
+- `media_translations`
