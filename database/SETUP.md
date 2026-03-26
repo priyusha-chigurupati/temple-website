@@ -145,3 +145,18 @@ That command seeds the current English sample Home content into:
 - `page_section_translations`
 - `media`
 - `media_translations`
+
+The current sample Contact page content can be inserted into MySQL with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_contact.php
+```
+
+That command seeds the current English sample Contact content into:
+
+- `pages`
+- `page_translations`
+- `page_sections`
+- `page_section_translations`
+- `media`
+- `media_translations`

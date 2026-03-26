@@ -60,6 +60,7 @@ final class PageRepository
 
         return match ($slug) {
             'about' => $this->aboutPage($page, $sections),
+            'contact' => $this->contactPage($page, $sections),
             'home' => $this->homePage($page, $sections),
             default => null,
         };
@@ -217,6 +218,51 @@ final class PageRepository
                 'cards' => array_values($donationsBody['cards'] ?? []),
                 'quick_options' => array_values($donationsBody['quick_options'] ?? []),
                 'cta' => $donationsSettings['cta'] ?? ['label' => 'Complete Donation', 'href' => '/donations'],
+            ],
+        ];
+    }
+
+    private function contactPage(array $page, array $sections): array
+    {
+        $hero = $sections['hero'] ?? [];
+        $info = $sections['info'] ?? [];
+        $form = $sections['form'] ?? [];
+        $map = $sections['map'] ?? [];
+
+        $infoBody = is_array($info['body_json'] ?? null) ? $info['body_json'] : [];
+        $formBody = is_array($form['body_json'] ?? null) ? $form['body_json'] : [];
+        $mapSettings = is_array($map['settings'] ?? null) ? $map['settings'] : [];
+
+        return [
+            'meta' => [
+                'title' => $page['meta_title'] ?? (($page['title'] ?? 'Contact') . ' | AnkammaThalli Temple'),
+                'description' => $page['meta_description'] ?? '',
+            ],
+            'hero' => [
+                'title' => (string) ($hero['heading'] ?? ''),
+                'description' => (string) ($hero['body_long'] ?? ''),
+                'image' => (string) ($hero['image_path'] ?? ''),
+            ],
+            'info' => [
+                'eyebrow' => (string) ($info['eyebrow'] ?? ''),
+                'title' => (string) ($info['heading'] ?? ''),
+                'items' => array_values($infoBody['items'] ?? []),
+                'social_title' => (string) ($infoBody['social_title'] ?? ''),
+                'social_links' => array_values($infoBody['social_links'] ?? []),
+            ],
+            'form' => [
+                'title' => (string) ($form['heading'] ?? ''),
+                'description' => (string) ($form['body_long'] ?? ''),
+                'fields' => array_values($formBody['fields'] ?? []),
+                'button' => (string) ($formBody['button'] ?? 'Submit Message'),
+            ],
+            'map' => [
+                'eyebrow' => (string) ($map['eyebrow'] ?? ''),
+                'title' => (string) ($map['heading'] ?? ''),
+                'cta' => (string) ($mapSettings['cta'] ?? ''),
+                'href' => (string) ($mapSettings['href'] ?? ''),
+                'image' => (string) ($map['image_path'] ?? ''),
+                'marker' => (string) ($mapSettings['marker'] ?? ''),
             ],
         ];
     }
