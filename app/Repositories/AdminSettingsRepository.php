@@ -25,6 +25,22 @@ final class AdminSettingsRepository
                 'updated_label' => $this->updatedLabel(),
             ],
             [
+                'title' => 'Header & Navigation',
+                'description' => 'Manage the public header button and primary navigation labels and links.',
+                'href' => route_url('/admin/settings/header'),
+                'status' => 'ready',
+                'fields_count' => 16,
+                'updated_label' => $this->updatedLabel(),
+            ],
+            [
+                'title' => 'SEO & Metadata',
+                'description' => 'Manage the site title suffix and default meta description used across the public website.',
+                'href' => route_url('/admin/settings/seo'),
+                'status' => 'ready',
+                'fields_count' => 2,
+                'updated_label' => $this->updatedLabel(),
+            ],
+            [
                 'title' => 'Footer & Global Footer Content',
                 'description' => 'Manage the public footer description, links, timings, newsletter copy, and social links.',
                 'href' => route_url('/admin/settings/footer'),
@@ -33,6 +49,131 @@ final class AdminSettingsRepository
                 'updated_label' => $this->updatedLabel(),
             ],
         ];
+    }
+
+    public function seoEditor(): array
+    {
+        return [
+            'title_suffix' => (string) $this->setting('seo.title_suffix', 'AnkammaThalli Temple'),
+            'default_description' => (string) $this->setting('seo.default_description', 'Explore temple heritage, sacred events, gallery archives, and ways to support the sanctuary.'),
+        ];
+    }
+
+    public function saveSeo(array $input): array
+    {
+        $old = [
+            'title_suffix' => trim((string) ($input['title_suffix'] ?? '')),
+            'default_description' => trim((string) ($input['default_description'] ?? '')),
+        ];
+
+        $errors = [];
+
+        if ($old['title_suffix'] === '') {
+            $errors[] = 'Please enter the SEO title suffix.';
+        }
+
+        if ($old['default_description'] === '') {
+            $errors[] = 'Please enter the default meta description.';
+        }
+
+        if ($errors !== []) {
+            return [
+                'ok' => false,
+                'errors' => $errors,
+                'old' => $old,
+            ];
+        }
+
+        try {
+            $this->connection->beginTransaction();
+
+            $this->upsertSetting('seo.title_suffix', $old['title_suffix'], true, 'string');
+            $this->upsertSetting('seo.default_description', $old['default_description'], true, 'text');
+
+            $this->connection->commit();
+
+            return ['ok' => true];
+        } catch (Throwable) {
+            if ($this->connection->inTransaction()) {
+                $this->connection->rollBack();
+            }
+
+            return [
+                'ok' => false,
+                'errors' => ['The SEO settings could not be saved.'],
+                'old' => $old,
+            ];
+        }
+    }
+
+    public function headerEditor(): array
+    {
+        return [
+            'primary_cta_label' => (string) $this->setting('header.primary_cta.label', 'Donate Now'),
+            'primary_cta_href' => (string) $this->setting('header.primary_cta.href', '/donations'),
+            'navigation_items' => $this->normalizeLinks($this->setting('header.navigation_items', []), 7, '/'),
+        ];
+    }
+
+    public function saveHeader(array $input): array
+    {
+        $navigationItems = [];
+
+        for ($index = 1; $index <= 7; $index++) {
+            $navigationItems[] = [
+                'label' => trim((string) ($input['navigation_item_' . $index . '_label'] ?? '')),
+                'href' => trim((string) ($input['navigation_item_' . $index . '_href'] ?? '')),
+            ];
+        }
+
+        $old = [
+            'primary_cta_label' => trim((string) ($input['primary_cta_label'] ?? '')),
+            'primary_cta_href' => trim((string) ($input['primary_cta_href'] ?? '')),
+            'navigation_items' => $navigationItems,
+        ];
+
+        $errors = [];
+
+        if ($old['primary_cta_label'] === '' || $old['primary_cta_href'] === '') {
+            $errors[] = 'Please complete the header primary button label and href.';
+        }
+
+        foreach ($old['navigation_items'] as $item) {
+            if (($item['label'] ?? '') === '' || ($item['href'] ?? '') === '') {
+                $errors[] = 'Please complete all navigation item labels and href values.';
+                break;
+            }
+        }
+
+        if ($errors !== []) {
+            return [
+                'ok' => false,
+                'errors' => $errors,
+                'old' => $old,
+            ];
+        }
+
+        try {
+            $this->connection->beginTransaction();
+
+            $this->upsertSetting('header.primary_cta.label', $old['primary_cta_label'], true, 'string');
+            $this->upsertSetting('header.primary_cta.href', $old['primary_cta_href'], false, 'string');
+            $this->upsertSetting('header.navigation_items', $old['navigation_items'], true, 'json');
+
+            $this->connection->commit();
+
+            return ['ok' => true];
+        } catch (Throwable) {
+            if ($this->connection->inTransaction()) {
+                $this->connection->rollBack();
+            }
+
+            return [
+                'ok' => false,
+                'errors' => ['The header settings could not be saved.'],
+                'old' => $old,
+            ];
+        }
     }
 
     public function generalEditor(): array

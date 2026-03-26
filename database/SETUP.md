@@ -187,6 +187,28 @@ That command seeds the current English site name, tagline, and shared contact re
 - `site_settings`
 - `site_setting_translations`
 
+The current sample header button and navigation settings can be inserted into MySQL with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_header_settings.php
+```
+
+That command seeds the current English header CTA and navigation items into:
+
+- `site_settings`
+- `site_setting_translations`
+
+The current sample SEO defaults can be inserted into MySQL with:
+
+```powershell
+C:\xampp\php\php.exe .\scripts\seed_seo_settings.php
+```
+
+That command seeds the current English SEO title suffix and default description into:
+
+- `site_settings`
+- `site_setting_translations`
+
 The current sample footer and shared footer-related site settings can be inserted into MySQL with:
 
 ```powershell

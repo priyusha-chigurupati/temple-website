@@ -1,5 +1,11 @@
 <?php
 declare(strict_types=1);
+
+$headerSettings = is_array($headerSettings ?? null) ? $headerSettings : [];
+$headerPrimaryCta = is_array($headerSettings['primary_cta'] ?? null) ? $headerSettings['primary_cta'] : [
+    'label' => 'Donate Now',
+    'href' => '/donations',
+];
 ?>
 <header class="site-header">
     <div class="container site-header__inner">
@@ -31,7 +37,7 @@ declare(strict_types=1);
             </ul>
         </nav>
         <div class="site-header__actions">
-            <a class="button button--primary button--small" href="<?= e(route_url('/donations')) ?>">Donate Now</a>
+            <a class="button button--primary button--small" href="<?= e(route_url((string) ($headerPrimaryCta['href'] ?? '/donations'))) ?>"><?= e((string) ($headerPrimaryCta['label'] ?? 'Donate Now')) ?></a>
         </div>
     </div>
 </header>

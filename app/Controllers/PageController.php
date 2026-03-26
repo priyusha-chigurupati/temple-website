@@ -144,9 +144,11 @@ final class PageController
     public function notFound(): void
     {
         $site = $this->content->site();
+        $seo = $this->content->seo();
 
         View::render('pages/placeholder', [
             'site' => $site,
+            'headerSettings' => $this->content->header(),
             'navigation' => $this->content->navigation(),
             'footer' => $this->content->footer(),
             'page' => [
@@ -159,23 +161,25 @@ final class PageController
                 ],
             ],
             'activePage' => '',
-            'metaTitle' => '404 | ' . $site['name'],
-            'metaDescription' => 'The requested page could not be found.',
+            'metaTitle' => '404 | ' . $seo['title_suffix'],
+            'metaDescription' => $seo['default_description'],
         ]);
     }
 
     private function renderPage(string $activePage, string $view, array $page): void
     {
         $site = $this->content->site();
+        $seo = $this->content->seo();
 
         View::render($view, [
             'site' => $site,
+            'headerSettings' => $this->content->header(),
             'navigation' => $this->content->navigation(),
             'footer' => $this->content->footer(),
             'page' => $page,
             'activePage' => $activePage,
-            'metaTitle' => $page['meta']['title'] ?? ($site['name'] . ' | Coming Soon'),
-            'metaDescription' => $page['meta']['description'] ?? 'This page is queued for implementation in a later milestone.',
+            'metaTitle' => $page['meta']['title'] ?? ($seo['title_suffix'] . ' | Coming Soon'),
+            'metaDescription' => $page['meta']['description'] ?? $seo['default_description'],
         ]);
     }
 

@@ -32,7 +32,82 @@ final class ContentRepository
 
     public function navigation(): array
     {
-        return $this->content['navigation'];
+        $navigation = $this->content['navigation'];
+
+        if ($this->siteSettingsRepository instanceof SiteSettingsRepository) {
+            $overrides = $this->siteSettingsRepository->navigationOverrides();
+
+            if (is_array($overrides) && $overrides !== []) {
+                $navigation = array_values(array_filter(array_map(
+                    static function (mixed $item): ?array {
+                        if (! is_array($item)) {
+                            return null;
+                        }
+
+                        $label = trim((string) ($item['label'] ?? ''));
+                        $href = trim((string) ($item['href'] ?? ''));
+
+                        if ($label === '' || $href === '') {
+                            return null;
+                        }
+
+                        return [
+                            'label' => $label,
+                            'href' => $href,
+                        ];
+                    },
+                    $overrides
+                )));
+            }
+        }
+
+        return $navigation;
+    }
+
+    public function header(): array
+    {
+        $header = [
+            'primary_cta' => [
+                'label' => 'Donate Now',
+                'href' => '/donations',
+            ],
+        ];
+
+        if ($this->siteSettingsRepository instanceof SiteSettingsRepository) {
+            $overrides = $this->siteSettingsRepository->headerOverrides();
+
+            if (is_string($overrides['primary_cta']['label'] ?? null) && trim((string) $overrides['primary_cta']['label']) !== '') {
+                $header['primary_cta']['label'] = $overrides['primary_cta']['label'];
+            }
+
+            if (is_string($overrides['primary_cta']['href'] ?? null) && trim((string) $overrides['primary_cta']['href']) !== '') {
+                $header['primary_cta']['href'] = $overrides['primary_cta']['href'];
+            }
+        }
+
+        return $header;
+    }
+
+    public function seo(): array
+    {
+        $seo = [
+            'title_suffix' => $this->site()['name'],
+            'default_description' => 'Explore temple heritage, sacred events, gallery archives, and ways to support the sanctuary.',
+        ];
+
+        if ($this->siteSettingsRepository instanceof SiteSettingsRepository) {
+            $overrides = $this->siteSettingsRepository->seoOverrides();
+
+            if (is_string($overrides['title_suffix'] ?? null) && trim((string) ($overrides['title_suffix'] ?? '')) !== '') {
+                $seo['title_suffix'] = $overrides['title_suffix'];
+            }
+
+            if (is_string($overrides['default_description'] ?? null) && trim((string) ($overrides['default_description'] ?? '')) !== '') {
+                $seo['default_description'] = $overrides['default_description'];
+            }
+        }
+
+        return $seo;
     }
 
     public function footer(): array

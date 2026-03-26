@@ -40,6 +40,29 @@ final class SiteSettingsRepository
         ];
     }
 
+    public function navigationOverrides(): array
+    {
+        return $this->setting('header.navigation_items', []);
+    }
+
+    public function headerOverrides(): array
+    {
+        return [
+            'primary_cta' => [
+                'label' => $this->setting('header.primary_cta.label'),
+                'href' => $this->setting('header.primary_cta.href'),
+            ],
+        ];
+    }
+
+    public function seoOverrides(): array
+    {
+        return [
+            'title_suffix' => $this->setting('seo.title_suffix'),
+            'default_description' => $this->setting('seo.default_description'),
+        ];
+    }
+
     private function setting(string $key, mixed $default = null): mixed
     {
         $statement = $this->connection->prepare(

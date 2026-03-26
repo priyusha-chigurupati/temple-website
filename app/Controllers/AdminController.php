@@ -597,6 +597,46 @@ final class AdminController
         ], 'admin');
     }
 
+    public function settingsHeader(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleHeaderSettingsSave();
+        }
+
+        View::render('pages/admin-settings-header-form', [
+            'pageTitle' => 'Edit Header Settings',
+            'metaTitle' => 'Edit Header Settings | AnkammaThalli Temple',
+            'metaDescription' => 'Edit the global header settings in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'settings',
+            'adminUser' => $user,
+            'settingsState' => flash_pull('admin_settings_state', []),
+            'headerForm' => flash_pull('admin_header_form', $this->settings->headerEditor()),
+        ], 'admin');
+    }
+
+    public function settingsSeo(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleSeoSettingsSave();
+        }
+
+        View::render('pages/admin-settings-seo-form', [
+            'pageTitle' => 'Edit SEO Settings',
+            'metaTitle' => 'Edit SEO Settings | AnkammaThalli Temple',
+            'metaDescription' => 'Edit the global SEO defaults in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'settings',
+            'adminUser' => $user,
+            'settingsState' => flash_pull('admin_settings_state', []),
+            'seoForm' => flash_pull('admin_seo_form', $this->settings->seoEditor()),
+        ], 'admin');
+    }
+
     private function handleLogin(): never
     {
         if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
@@ -917,6 +957,66 @@ final class AdminController
         ]);
 
         redirect_to(route_url('/admin/settings/general'));
+    }
+
+    private function handleHeaderSettingsSave(): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_settings_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_header_form', $this->settings->headerEditor());
+            redirect_to(route_url('/admin/settings/header'));
+        }
+
+        $result = $this->settings->saveHeader($_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_settings_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The header settings could not be saved.']),
+            ]);
+            flash_set('admin_header_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/settings/header'));
+        }
+
+        flash_set('admin_settings_state', [
+            'type' => 'success',
+            'message' => 'The header settings were updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/settings/header'));
+    }
+
+    private function handleSeoSettingsSave(): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_settings_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_seo_form', $this->settings->seoEditor());
+            redirect_to(route_url('/admin/settings/seo'));
+        }
+
+        $result = $this->settings->saveSeo($_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_settings_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The SEO settings could not be saved.']),
+            ]);
+            flash_set('admin_seo_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/settings/seo'));
+        }
+
+        flash_set('admin_settings_state', [
+            'type' => 'success',
+            'message' => 'The SEO settings were updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/settings/seo'));
     }
 
     private function emptyEventForm(): array
