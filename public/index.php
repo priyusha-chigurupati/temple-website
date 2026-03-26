@@ -175,6 +175,7 @@ $routes = [
     '/admin/pages/contact' => static fn () => $adminController instanceof AdminController ? $adminController->pagesContact() : $controller->placeholder('admin'),
     '/admin/pages/donations' => static fn () => $adminController instanceof AdminController ? $adminController->pagesDonations() : $controller->placeholder('admin'),
     '/admin/settings' => static fn () => $adminController instanceof AdminController ? $adminController->settingsIndex() : $controller->placeholder('admin'),
+    '/admin/settings/general' => static fn () => $adminController instanceof AdminController ? $adminController->settingsGeneral() : $controller->placeholder('admin'),
     '/admin/settings/footer' => static fn () => $adminController instanceof AdminController ? $adminController->settingsFooter() : $controller->placeholder('admin'),
     '/admin/media' => static fn () => $adminController instanceof AdminController ? $adminController->galleryIndex() : $controller->placeholder('admin'),
     '/admin/media/new' => static fn () => $adminController instanceof AdminController ? $adminController->galleryCreate() : $controller->placeholder('admin'),

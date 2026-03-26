@@ -577,6 +577,26 @@ final class AdminController
         ], 'admin');
     }
 
+    public function settingsGeneral(): void
+    {
+        $user = $this->requireAuth();
+
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->handleGeneralSettingsSave();
+        }
+
+        View::render('pages/admin-settings-general-form', [
+            'pageTitle' => 'Edit General Settings',
+            'metaTitle' => 'Edit General Settings | AnkammaThalli Temple',
+            'metaDescription' => 'Edit the global site settings in the admin dashboard.',
+            'adminShellMode' => 'dashboard',
+            'adminPage' => 'settings',
+            'adminUser' => $user,
+            'settingsState' => flash_pull('admin_settings_state', []),
+            'generalForm' => flash_pull('admin_general_form', $this->settings->generalEditor()),
+        ], 'admin');
+    }
+
     private function handleLogin(): never
     {
         if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
@@ -867,6 +887,36 @@ final class AdminController
         ]);
 
         redirect_to(route_url('/admin/settings/footer'));
+    }
+
+    private function handleGeneralSettingsSave(): never
+    {
+        if (! csrf_is_valid($_POST['_csrf'] ?? null)) {
+            flash_set('admin_settings_state', [
+                'type' => 'error',
+                'message' => 'Your session expired. Please try again.',
+            ]);
+            flash_set('admin_general_form', $this->settings->generalEditor());
+            redirect_to(route_url('/admin/settings/general'));
+        }
+
+        $result = $this->settings->saveGeneral($_POST);
+
+        if (! ($result['ok'] ?? false)) {
+            flash_set('admin_settings_state', [
+                'type' => 'error',
+                'message' => implode(' ', $result['errors'] ?? ['The general settings could not be saved.']),
+            ]);
+            flash_set('admin_general_form', $result['old'] ?? []);
+            redirect_to(route_url('/admin/settings/general'));
+        }
+
+        flash_set('admin_settings_state', [
+            'type' => 'success',
+            'message' => 'The general settings were updated successfully.',
+        ]);
+
+        redirect_to(route_url('/admin/settings/general'));
     }
 
     private function emptyEventForm(): array

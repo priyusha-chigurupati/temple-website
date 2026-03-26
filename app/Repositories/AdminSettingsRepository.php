@@ -17,6 +17,14 @@ final class AdminSettingsRepository
     {
         return [
             [
+                'title' => 'General Site Settings',
+                'description' => 'Manage core site identity, contact references, locale defaults, and shared site-level settings.',
+                'href' => route_url('/admin/settings/general'),
+                'status' => 'ready',
+                'fields_count' => 8,
+                'updated_label' => $this->updatedLabel(),
+            ],
+            [
                 'title' => 'Footer & Global Footer Content',
                 'description' => 'Manage the public footer description, links, timings, newsletter copy, and social links.',
                 'href' => route_url('/admin/settings/footer'),
@@ -25,6 +33,91 @@ final class AdminSettingsRepository
                 'updated_label' => $this->updatedLabel(),
             ],
         ];
+    }
+
+    public function generalEditor(): array
+    {
+        return [
+            'site_name' => (string) $this->setting('site.name', 'AnkammaThalli Temple'),
+            'tagline' => (string) $this->setting('site.tagline', ''),
+            'contact_phone' => (string) $this->setting('site.contact.phone', ''),
+            'contact_email' => (string) $this->setting('site.contact.email', ''),
+            'contact_address' => (string) $this->setting('site.contact.address', ''),
+            'map_url' => (string) $this->setting('site.contact.map_url', ''),
+            'default_locale' => (string) $this->setting('site.default_locale', 'en'),
+            'supported_locales' => (string) $this->setting('site.supported_locales', 'en,te'),
+        ];
+    }
+
+    public function saveGeneral(array $input): array
+    {
+        $old = [
+            'site_name' => trim((string) ($input['site_name'] ?? '')),
+            'tagline' => trim((string) ($input['tagline'] ?? '')),
+            'contact_phone' => trim((string) ($input['contact_phone'] ?? '')),
+            'contact_email' => trim((string) ($input['contact_email'] ?? '')),
+            'contact_address' => trim((string) ($input['contact_address'] ?? '')),
+            'map_url' => trim((string) ($input['map_url'] ?? '')),
+            'default_locale' => trim((string) ($input['default_locale'] ?? 'en')),
+            'supported_locales' => trim((string) ($input['supported_locales'] ?? 'en,te')),
+        ];
+
+        $errors = [];
+
+        if ($old['site_name'] === '') {
+            $errors[] = 'Please enter the site name.';
+        }
+
+        if ($old['default_locale'] === '') {
+            $errors[] = 'Please enter the default locale code.';
+        }
+
+        if ($old['supported_locales'] === '') {
+            $errors[] = 'Please enter at least one supported locale.';
+        }
+
+        if ($old['contact_email'] !== '' && filter_var($old['contact_email'], FILTER_VALIDATE_EMAIL) === false) {
+            $errors[] = 'Please enter a valid contact email address.';
+        }
+
+        if ($old['map_url'] !== '' && filter_var($old['map_url'], FILTER_VALIDATE_URL) === false) {
+            $errors[] = 'Please enter a valid map URL.';
+        }
+
+        if ($errors !== []) {
+            return [
+                'ok' => false,
+                'errors' => $errors,
+                'old' => $old,
+            ];
+        }
+
+        try {
+            $this->connection->beginTransaction();
+
+            $this->upsertSetting('site.name', $old['site_name'], true, 'string');
+            $this->upsertSetting('site.tagline', $old['tagline'], true, 'string');
+            $this->upsertSetting('site.contact.phone', $old['contact_phone'], false, 'string');
+            $this->upsertSetting('site.contact.email', $old['contact_email'], false, 'string');
+            $this->upsertSetting('site.contact.address', $old['contact_address'], true, 'text');
+            $this->upsertSetting('site.contact.map_url', $old['map_url'], false, 'string');
+            $this->upsertSetting('site.default_locale', $old['default_locale'], false, 'string');
+            $this->upsertSetting('site.supported_locales', $old['supported_locales'], false, 'string');
+
+            $this->connection->commit();
+
+            return ['ok' => true];
+        } catch (Throwable) {
+            if ($this->connection->inTransaction()) {
+                $this->connection->rollBack();
+            }
+
+            return [
+                'ok' => false,
+                'errors' => ['The general settings could not be saved.'],
+                'old' => $old,
+            ];
+        }
     }
 
     public function footerEditor(): array
