@@ -5,6 +5,11 @@ $eventState = is_array($eventState ?? null) ? $eventState : [];
 $events = is_array($events ?? null) ? $events : [];
 $phaseCounts = is_array($phaseCounts ?? null) ? $phaseCounts : [];
 $nextEvent = is_array($nextEvent ?? null) ? $nextEvent : null;
+$eventFilters = is_array($eventFilters ?? null) ? $eventFilters : [];
+$eventPagination = is_array($eventPagination ?? null) ? $eventPagination : [];
+$eventSearchTerm = (string) ($eventSearchTerm ?? '');
+$eventSelectedPhase = (string) ($eventSelectedPhase ?? 'all');
+$eventTotalItems = (int) ($eventTotalItems ?? count($events));
 ?>
 <section class="admin-dashboard admin-dashboard--events">
     <header class="admin-dashboard__topbar">
@@ -60,7 +65,25 @@ $nextEvent = is_array($nextEvent ?? null) ? $nextEvent : null;
                 <h2>Event Listing</h2>
                 <p class="admin-events-panel__subcopy">All event records below are connected to the public Events page.</p>
             </div>
-            <span class="admin-panel__link"><?= e((string) count($events)) ?> records</span>
+            <span class="admin-panel__link"><?= e((string) $eventTotalItems) ?> records</span>
+        </div>
+
+        <div class="admin-events-toolbar">
+            <div class="admin-events-toolbar__filters">
+                <?php foreach ($eventFilters as $filter): ?>
+                    <a class="admin-events-filter<?= ! empty($filter['active']) ? ' admin-events-filter--active' : '' ?>" href="<?= e($filter['href'] ?? route_url('/admin/events')) ?>">
+                        <?= e($filter['label'] ?? '') ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+
+            <form class="admin-events-search" action="<?= e(route_url('/admin/events')) ?>" method="get">
+                <?php if ($eventSelectedPhase !== 'all'): ?>
+                    <input name="phase" type="hidden" value="<?= e($eventSelectedPhase) ?>">
+                <?php endif; ?>
+                <input name="q" type="search" value="<?= e($eventSearchTerm) ?>" placeholder="Search events...">
+                <button type="submit">Search</button>
+            </form>
         </div>
 
         <?php if ($events === []): ?>
@@ -106,6 +129,24 @@ $nextEvent = is_array($nextEvent ?? null) ? $nextEvent : null;
                         </div>
                     </article>
                 <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (($eventPagination['pages'] ?? []) !== [] && count($eventPagination['pages']) > 1): ?>
+            <div class="admin-events-pagination">
+                <?php if (($eventPagination['previous']['href'] ?? null) !== null): ?>
+                    <a class="admin-events-pagination__arrow" href="<?= e($eventPagination['previous']['href']) ?>">Previous</a>
+                <?php endif; ?>
+
+                <?php foreach ($eventPagination['pages'] as $pageNumber): ?>
+                    <a class="admin-events-pagination__page<?= ! empty($pageNumber['active']) ? ' admin-events-pagination__page--active' : '' ?>" href="<?= e($pageNumber['href'] ?? route_url('/admin/events')) ?>">
+                        <?= e($pageNumber['label'] ?? '') ?>
+                    </a>
+                <?php endforeach; ?>
+
+                <?php if (($eventPagination['next']['href'] ?? null) !== null): ?>
+                    <a class="admin-events-pagination__arrow" href="<?= e($eventPagination['next']['href']) ?>">Next</a>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     </section>

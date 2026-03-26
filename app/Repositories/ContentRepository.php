@@ -108,13 +108,16 @@ final class ContentRepository
         $page = $this->page('events');
 
         $page['upcoming_section_id'] = 'upcoming-events';
+        $page['completed_section_id'] = 'past-events';
         $page['full_calendar_href'] = route_url('/events') . '#upcoming-events';
         if ($this->eventRepository instanceof EventRepository && $this->eventRepository->hasPublishedEvents()) {
             $page['ongoing'] = $this->eventRepository->ongoing();
             $page['upcoming'] = $this->eventRepository->upcoming();
+            $page['completed'] = $this->eventRepository->completed();
         } else {
             $page['ongoing'] = $this->normalizeEvents($page['ongoing'] ?? [], 'ongoing');
             $page['upcoming'] = $this->normalizeEvents($page['upcoming'] ?? [], 'upcoming');
+            $page['completed'] = [];
         }
         $page['sponsor_cta']['primary_href'] = route_url('/donations');
         $page['sponsor_cta']['secondary_href'] = route_url('/contact');

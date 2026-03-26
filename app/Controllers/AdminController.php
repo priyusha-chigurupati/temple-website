@@ -76,6 +76,11 @@ final class AdminController
     {
         $user = $this->requireAuth();
         $items = $this->events->all();
+        $listing = $this->events->listing([
+            'phase' => query_value('phase'),
+            'q' => query_value('q'),
+            'page' => query_value('page'),
+        ]);
         $phaseCounts = [
             'upcoming' => count(array_filter($items, static fn (array $item): bool => ($item['phase'] ?? '') === 'upcoming')),
             'active' => count(array_filter($items, static fn (array $item): bool => ($item['phase'] ?? '') === 'active')),
@@ -91,10 +96,15 @@ final class AdminController
             'adminShellMode' => 'dashboard',
             'adminPage' => 'events',
             'adminUser' => $user,
-            'events' => $items,
+            'events' => $listing['items'],
             'phaseCounts' => $phaseCounts,
             'nextEvent' => $nextEvent,
             'eventState' => flash_pull('admin_event_state', []),
+            'eventFilters' => $listing['filters'],
+            'eventSearchTerm' => $listing['search_term'],
+            'eventPagination' => $listing['pagination'],
+            'eventSelectedPhase' => $listing['phase'],
+            'eventTotalItems' => $listing['total_items'],
         ], 'admin');
     }
 

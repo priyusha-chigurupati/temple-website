@@ -45,7 +45,10 @@ final class EventRepository
             WHERE e.status = 'published'
               AND e.starts_at IS NOT NULL
               AND e.starts_at <= NOW()
-              AND (e.ends_at IS NULL OR e.ends_at >= NOW())
+              AND (
+                  (e.ends_at IS NOT NULL AND e.ends_at >= NOW())
+                  OR (e.ends_at IS NULL AND DATE(e.starts_at) = CURRENT_DATE())
+              )
             ORDER BY e.sort_order ASC, e.starts_at ASC, e.id ASC"
         );
         $statement->execute(['locale_id' => $this->localeId()]);
@@ -81,6 +84,39 @@ final class EventRepository
         $statement->execute(['locale_id' => $this->localeId()]);
 
         return $this->normalizeUpcoming($statement->fetchAll());
+    }
+
+    public function completed(): array
+    {
+        $statement = $this->connection->prepare(
+            "SELECT
+                e.id,
+                e.slug,
+                e.starts_at,
+                e.ends_at,
+                e.sort_order,
+                et.title,
+                et.summary,
+                et.body_long,
+                et.schedule_label,
+                m.file_path AS image_path
+            FROM events e
+            INNER JOIN event_translations et
+                ON et.event_id = e.id
+               AND et.locale_id = :locale_id
+            LEFT JOIN media m
+                ON m.id = e.image_id
+            WHERE e.status = 'published'
+              AND e.starts_at IS NOT NULL
+              AND (
+                  (e.ends_at IS NOT NULL AND e.ends_at < NOW())
+                  OR (e.ends_at IS NULL AND DATE(e.starts_at) < CURRENT_DATE())
+              )
+            ORDER BY COALESCE(e.ends_at, e.starts_at) DESC, e.id DESC"
+        );
+        $statement->execute(['locale_id' => $this->localeId()]);
+
+        return $this->normalizeCompleted($statement->fetchAll());
     }
 
     public function findBySlug(string $slug): ?array
@@ -121,7 +157,11 @@ final class EventRepository
         $status = $this->statusFor($event);
         $schedule = $this->scheduleLabel($event);
         $body = $this->bodyParagraphs($event);
-        $statusLabel = $status === 'ongoing' ? 'Ongoing Event' : 'Upcoming Event';
+        $statusLabel = match ($status) {
+            'ongoing' => 'Ongoing Event',
+            'completed' => 'Completed Event',
+            default => 'Upcoming Event',
+        };
 
         return [
             'meta' => [
@@ -132,7 +172,11 @@ final class EventRepository
             'title' => $event['title'] ?? 'Temple Event',
             'description' => $event['summary'] ?? '',
             'image' => $event['image_path'] ?? 'assets/images/placeholders/events-ongoing-lamps.svg',
-            'schedule_label' => $status === 'ongoing' ? 'Currently observed' : 'Scheduled for',
+            'schedule_label' => match ($status) {
+                'ongoing' => 'Currently observed',
+                'completed' => 'Observed on',
+                default => 'Scheduled for',
+            },
             'schedule' => $schedule,
             'status_badge' => strtoupper($statusLabel),
             'back_href' => route_url('/events'),
@@ -212,14 +256,49 @@ final class EventRepository
         }, $rows);
     }
 
+    private function normalizeCompleted(array $rows): array
+    {
+        return array_map(function (array $row): array {
+            $startsAt = $this->dateTimeValue($row['starts_at'] ?? null);
+
+            return [
+                'day' => $startsAt?->format('d') ?? '',
+                'month' => $startsAt?->format('F') ?? '',
+                'title' => $row['title'] ?? '',
+                'description' => $row['summary'] ?? '',
+                'cta' => 'Event Details',
+                'href' => route_url('/events/' . ($row['slug'] ?? 'event')),
+                'image' => $row['image_path'] ?? 'assets/images/placeholders/events-upcoming-vishu.svg',
+                'status' => 'completed',
+                'slug' => $row['slug'] ?? 'event',
+            ];
+        }, $rows);
+    }
+
     private function statusFor(array $row): string
     {
         $startsAt = $this->dateTimeValue($row['starts_at'] ?? null);
         $endsAt = $this->dateTimeValue($row['ends_at'] ?? null);
         $now = new DateTimeImmutable('now');
+        $today = $now->format('Y-m-d');
+        $startsOn = $startsAt?->format('Y-m-d');
 
-        if ($startsAt instanceof DateTimeImmutable && $startsAt <= $now && ($endsAt === null || $endsAt >= $now)) {
+        if ($endsAt instanceof DateTimeImmutable && $endsAt < $now) {
+            return 'completed';
+        }
+
+        if ($startsAt instanceof DateTimeImmutable && $startsAt <= $now && ($endsAt instanceof DateTimeImmutable && $endsAt >= $now)) {
             return 'ongoing';
+        }
+
+        if ($startsAt instanceof DateTimeImmutable && $endsAt === null) {
+            if ($startsOn === $today && $startsAt <= $now) {
+                return 'ongoing';
+            }
+
+            if ($startsOn !== null && $startsOn < $today) {
+                return 'completed';
+            }
         }
 
         return 'upcoming';

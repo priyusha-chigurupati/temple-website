@@ -77,6 +77,38 @@ declare(strict_types=1);
         </div>
     </section>
 
+    <?php if (($page['completed'] ?? []) !== []): ?>
+        <section class="events-upcoming events-upcoming--archive" id="<?= e($page['completed_section_id']) ?>">
+            <div class="container">
+                <div class="events-upcoming__head">
+                    <div>
+                        <h2>Past Celebrations</h2>
+                        <p>An archive of recent temple observances and completed festivals</p>
+                    </div>
+                </div>
+
+                <div class="events-upcoming__grid">
+                    <?php foreach ($page['completed'] as $item): ?>
+                        <article class="events-upcoming-card events-upcoming-card--completed">
+                            <div class="events-upcoming-card__image">
+                                <img src="<?= e(asset($item['image'])) ?>" alt="<?= e($item['title']) ?> placeholder artwork">
+                                <div class="events-upcoming-card__date">
+                                    <strong><?= e($item['day']) ?></strong>
+                                    <span><?= e($item['month']) ?></span>
+                                </div>
+                            </div>
+                            <div class="events-upcoming-card__body">
+                                <h3><?= e($item['title']) ?></h3>
+                                <p><?= e($item['description']) ?></p>
+                                <a class="button button--outline button--full" href="<?= e($item['href']) ?>"><?= e($item['cta']) ?></a>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+    <?php endif; ?>
+
     <section class="events-sponsor">
         <div class="container events-sponsor__inner">
             <h2><?= e($page['sponsor_cta']['title']) ?></h2>

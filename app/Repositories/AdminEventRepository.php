@@ -45,6 +45,55 @@ final class AdminEventRepository
         return array_map(fn (array $row): array => $this->mapRow($row), $statement->fetchAll() ?: []);
     }
 
+    public function listing(array $filters = []): array
+    {
+        $phase = strtolower(trim((string) ($filters['phase'] ?? 'all')));
+        $searchTerm = trim((string) ($filters['q'] ?? ''));
+        $requestedPage = max(1, (int) ($filters['page'] ?? 1));
+        $allowedPhases = ['all', 'active', 'upcoming', 'completed', 'draft'];
+
+        if (! in_array($phase, $allowedPhases, true)) {
+            $phase = 'all';
+        }
+
+        $items = $this->all();
+
+        if ($phase !== 'all') {
+            $items = array_values(array_filter($items, static fn (array $item): bool => ($item['phase'] ?? '') === $phase));
+        }
+
+        if ($searchTerm !== '') {
+            $needle = strtolower($searchTerm);
+            $items = array_values(array_filter($items, static function (array $item) use ($needle): bool {
+                $haystack = strtolower(implode(' ', [
+                    $item['title'] ?? '',
+                    $item['summary'] ?? '',
+                    $item['slug'] ?? '',
+                    $item['schedule_label'] ?? '',
+                    $item['date_label'] ?? '',
+                ]));
+
+                return str_contains($haystack, $needle);
+            }));
+        }
+
+        $perPage = 5;
+        $totalItems = count($items);
+        $totalPages = max(1, (int) ceil($totalItems / $perPage));
+        $currentPage = min($requestedPage, $totalPages);
+        $offset = ($currentPage - 1) * $perPage;
+
+        return [
+            'items' => array_slice($items, $offset, $perPage),
+            'phase' => $phase,
+            'search_term' => $searchTerm,
+            'current_page' => $currentPage,
+            'total_items' => $totalItems,
+            'pagination' => $this->pagination($currentPage, $totalPages, $phase, $searchTerm),
+            'filters' => $this->filters($phase, $searchTerm),
+        ];
+    }
+
     public function find(int $id): ?array
     {
         $statement = $this->connection->prepare(
@@ -342,17 +391,7 @@ final class AdminEventRepository
     {
         $startsAt = $this->dateTimeValue($row['starts_at'] ?? null);
         $endsAt = $this->dateTimeValue($row['ends_at'] ?? null);
-        $now = new DateTimeImmutable('now');
-
-        $phase = 'upcoming';
-
-        if ($startsAt instanceof DateTimeImmutable && $startsAt <= $now && ($endsAt === null || $endsAt >= $now)) {
-            $phase = 'active';
-        } elseif ($endsAt instanceof DateTimeImmutable && $endsAt < $now) {
-            $phase = 'completed';
-        } elseif (($row['status'] ?? '') === 'draft') {
-            $phase = 'draft';
-        }
+        $phase = $this->phaseFor($startsAt, $endsAt, (string) ($row['status'] ?? 'draft'));
 
         return [
             'id' => (int) ($row['id'] ?? 0),
@@ -401,6 +440,102 @@ final class AdminEventRepository
     private function normalizeDateTime(string $value): string
     {
         return (new DateTimeImmutable($value))->format('Y-m-d H:i:s');
+    }
+
+    private function phaseFor(?DateTimeImmutable $startsAt, ?DateTimeImmutable $endsAt, string $status): string
+    {
+        if ($status === 'draft') {
+            return 'draft';
+        }
+
+        if ($startsAt === null) {
+            return 'upcoming';
+        }
+
+        $now = new DateTimeImmutable('now');
+        $today = $now->format('Y-m-d');
+        $startsOn = $startsAt->format('Y-m-d');
+
+        if ($endsAt instanceof DateTimeImmutable) {
+            if ($endsAt < $now) {
+                return 'completed';
+            }
+
+            if ($startsAt <= $now && $endsAt >= $now) {
+                return 'active';
+            }
+        } else {
+            if ($startsAt <= $now && $startsOn === $today) {
+                return 'active';
+            }
+
+            if ($startsAt < $now && $startsOn < $today) {
+                return 'completed';
+            }
+        }
+
+        return 'upcoming';
+    }
+
+    private function filters(string $selectedPhase, string $searchTerm): array
+    {
+        $items = [
+            'all' => 'All Events',
+            'upcoming' => 'Upcoming',
+            'active' => 'Active',
+            'completed' => 'Completed',
+            'draft' => 'Drafts',
+        ];
+
+        $filters = [];
+
+        foreach ($items as $slug => $label) {
+            $filters[] = [
+                'label' => $label,
+                'href' => route_url_with_query('/admin/events', [
+                    'phase' => $slug === 'all' ? null : $slug,
+                    'q' => $searchTerm === '' ? null : $searchTerm,
+                ]),
+                'active' => $slug === $selectedPhase,
+            ];
+        }
+
+        return $filters;
+    }
+
+    private function pagination(int $currentPage, int $totalPages, string $phase, string $searchTerm): array
+    {
+        $pages = [];
+
+        for ($page = 1; $page <= $totalPages; $page++) {
+            $pages[] = [
+                'label' => (string) $page,
+                'href' => route_url_with_query('/admin/events', [
+                    'phase' => $phase === 'all' ? null : $phase,
+                    'q' => $searchTerm === '' ? null : $searchTerm,
+                    'page' => $page === 1 ? null : (string) $page,
+                ]),
+                'active' => $page === $currentPage,
+            ];
+        }
+
+        return [
+            'previous' => [
+                'href' => $currentPage > 1 ? route_url_with_query('/admin/events', [
+                    'phase' => $phase === 'all' ? null : $phase,
+                    'q' => $searchTerm === '' ? null : $searchTerm,
+                    'page' => $currentPage - 1 === 1 ? null : (string) ($currentPage - 1),
+                ]) : null,
+            ],
+            'pages' => $pages,
+            'next' => [
+                'href' => $currentPage < $totalPages ? route_url_with_query('/admin/events', [
+                    'phase' => $phase === 'all' ? null : $phase,
+                    'q' => $searchTerm === '' ? null : $searchTerm,
+                    'page' => (string) ($currentPage + 1),
+                ]) : null,
+            ],
+        ];
     }
 
     private function slugify(string $value): string
