@@ -55,12 +55,12 @@ $adminNavItems = [
                     <button
                         class="admin-mobile-toggle"
                         type="button"
+                        aria-label="Toggle admin navigation"
                         aria-expanded="false"
                         aria-controls="admin-navigation-panel"
                         data-admin-nav-toggle
                     >
                         <span class="material-symbols-outlined" aria-hidden="true">menu</span>
-                        <span>Menu</span>
                     </button>
                 </div>
 
@@ -113,5 +113,6 @@ $adminNavItems = [
             </main>
         </div>
     <?php endif; ?>
+    <script src="<?= e(asset('assets/js/site.js')) ?>" defer></script>
 </body>
 </html>

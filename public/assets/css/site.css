@@ -5837,21 +5837,33 @@ input {
 .admin-mobile-toggle {
     display: none;
     align-items: center;
-    gap: 0.38rem;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
     border: 1px solid rgba(219, 194, 176, 0.32);
     background: rgba(255, 255, 255, 0.94);
     color: #7a3000;
-    font: inherit;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.7rem 0.9rem;
+    border-radius: 12px;
+    padding: 0;
     cursor: pointer;
+    box-shadow: 0 10px 24px rgba(160, 65, 0, 0.08);
+    transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
 
 .admin-mobile-toggle .material-symbols-outlined {
-    font-size: 1rem;
+    font-size: 1.15rem;
+}
+
+.admin-mobile-toggle:hover,
+.admin-mobile-toggle:focus-visible {
+    background: #fffaf4;
+    box-shadow: 0 14px 28px rgba(160, 65, 0, 0.12);
+    transform: translateY(-1px);
+}
+
+.admin-mobile-toggle:focus-visible {
+    outline: 2px solid rgba(160, 65, 0, 0.28);
+    outline-offset: 2px;
 }
 
 .admin-sidebar__link {
@@ -7195,6 +7207,12 @@ input {
 
     .admin-sidebar.is-open .admin-sidebar__panel {
         display: block;
+    }
+
+    .admin-sidebar.is-open .admin-mobile-toggle {
+        background: rgba(255, 151, 98, 0.14);
+        color: #8a3600;
+        box-shadow: 0 12px 26px rgba(160, 65, 0, 0.12);
     }
 
     .admin-sidebar__nav {
