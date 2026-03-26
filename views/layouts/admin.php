@@ -46,42 +46,56 @@ $adminNavItems = [
         </footer>
     <?php else: ?>
         <div class="admin-app-shell">
-            <aside class="admin-sidebar">
-                <div class="admin-sidebar__brand">
-                    <span class="admin-sidebar__title">AnkammaThalli</span>
-                    <span class="admin-sidebar__subtitle">Admin Portal</span>
+            <aside class="admin-sidebar" data-admin-sidebar>
+                <div class="admin-sidebar__top">
+                    <div class="admin-sidebar__brand">
+                        <span class="admin-sidebar__title">AnkammaThalli</span>
+                        <span class="admin-sidebar__subtitle">Admin Portal</span>
+                    </div>
+                    <button
+                        class="admin-mobile-toggle"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls="admin-navigation-panel"
+                        data-admin-nav-toggle
+                    >
+                        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+                        <span>Menu</span>
+                    </button>
                 </div>
 
-                <nav class="admin-sidebar__nav" aria-label="Admin navigation">
-                    <?php foreach ($adminNavItems as $item): ?>
-                        <?php $isActive = $item['key'] === $adminPage; ?>
-                        <?php if ($item['enabled'] && is_string($item['href'])): ?>
-                            <a class="admin-sidebar__link<?= $isActive ? ' admin-sidebar__link--active' : '' ?>" href="<?= e($item['href']) ?>">
-                                <span class="material-symbols-outlined"><?= e($item['icon']) ?></span>
-                                <span><?= e($item['label']) ?></span>
-                            </a>
-                        <?php else: ?>
-                            <span class="admin-sidebar__link admin-sidebar__link--disabled<?= $isActive ? ' admin-sidebar__link--active' : '' ?>">
-                                <span class="material-symbols-outlined"><?= e($item['icon']) ?></span>
-                                <span><?= e($item['label']) ?></span>
-                            </span>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </nav>
+                <div class="admin-sidebar__panel" id="admin-navigation-panel">
+                    <nav class="admin-sidebar__nav" aria-label="Admin navigation">
+                        <?php foreach ($adminNavItems as $item): ?>
+                            <?php $isActive = $item['key'] === $adminPage; ?>
+                            <?php if ($item['enabled'] && is_string($item['href'])): ?>
+                                <a class="admin-sidebar__link<?= $isActive ? ' admin-sidebar__link--active' : '' ?>" href="<?= e($item['href']) ?>">
+                                    <span class="material-symbols-outlined"><?= e($item['icon']) ?></span>
+                                    <span><?= e($item['label']) ?></span>
+                                </a>
+                            <?php else: ?>
+                                <span class="admin-sidebar__link admin-sidebar__link--disabled<?= $isActive ? ' admin-sidebar__link--active' : '' ?>">
+                                    <span class="material-symbols-outlined"><?= e($item['icon']) ?></span>
+                                    <span><?= e($item['label']) ?></span>
+                                </span>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </nav>
 
-                <form class="admin-sidebar__logout-form" action="<?= e(route_url('/admin/logout')) ?>" method="post">
-                    <?= csrf_input() ?>
-                    <button class="admin-sidebar__logout" type="submit">
-                        <span class="material-symbols-outlined">logout</span>
-                        <span>Logout</span>
-                    </button>
-                </form>
+                    <form class="admin-sidebar__logout-form" action="<?= e(route_url('/admin/logout')) ?>" method="post">
+                        <?= csrf_input() ?>
+                        <button class="admin-sidebar__logout" type="submit">
+                            <span class="material-symbols-outlined">logout</span>
+                            <span>Logout</span>
+                        </button>
+                    </form>
 
-                <div class="admin-sidebar__user">
-                    <div class="admin-sidebar__avatar"><?= e(strtoupper(substr((string) ($adminUser['name'] ?? 'A'), 0, 1))) ?></div>
-                    <div>
-                        <strong><?= e($adminUser['name'] ?? 'Admin User') ?></strong>
-                        <span><?= e($adminUser['email'] ?? 'admin@ankammathalli.local') ?></span>
+                    <div class="admin-sidebar__user">
+                        <div class="admin-sidebar__avatar"><?= e(strtoupper(substr((string) ($adminUser['name'] ?? 'A'), 0, 1))) ?></div>
+                        <div>
+                            <strong><?= e($adminUser['name'] ?? 'Admin User') ?></strong>
+                            <span><?= e($adminUser['email'] ?? 'admin@ankammathalli.local') ?></span>
+                        </div>
                     </div>
                 </div>
             </aside>

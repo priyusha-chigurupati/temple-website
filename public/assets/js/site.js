@@ -26,6 +26,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const adminSidebar = document.querySelector('[data-admin-sidebar]');
+  const adminNavToggle = document.querySelector('[data-admin-nav-toggle]');
+
+  if (adminSidebar && adminNavToggle) {
+    const setAdminNavState = (isOpen) => {
+      adminSidebar.classList.toggle('is-open', isOpen);
+      adminNavToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      body.classList.toggle('admin-nav-open', isOpen);
+    };
+
+    adminNavToggle.addEventListener('click', () => {
+      const isOpen = adminNavToggle.getAttribute('aria-expanded') === 'true';
+      setAdminNavState(!isOpen);
+    });
+
+    adminSidebar.querySelectorAll('.admin-sidebar__link[href]').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 820) {
+          setAdminNavState(false);
+        }
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 820) {
+        setAdminNavState(false);
+      }
+    });
+  }
+
   const setModalState = (modal, isOpen) => {
     if (!modal) {
       return;
