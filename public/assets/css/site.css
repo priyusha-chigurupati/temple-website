@@ -6435,7 +6435,9 @@ input {
 }
 
 .admin-events-row__status {
+    min-width: 112px;
     text-align: right;
+    justify-self: end;
 }
 
 .admin-events-phase {
@@ -6472,17 +6474,22 @@ input {
     display: flex;
     align-items: center;
     gap: 0.65rem;
+    min-width: 176px;
     justify-content: flex-end;
+    justify-self: end;
 }
 
 .admin-events-row__actions a,
 .admin-events-row__actions button {
+    display: inline-flex;
+    align-items: center;
     border: 0;
     background: transparent;
     color: #a04100;
     font: inherit;
     font-size: 0.72rem;
     font-weight: 800;
+    line-height: 1;
     letter-spacing: 0.08em;
     text-decoration: none;
     text-transform: uppercase;
@@ -6491,6 +6498,8 @@ input {
 
 .admin-events-row__actions form {
     margin: 0;
+    display: inline-flex;
+    align-items: center;
 }
 
 .admin-events-form {
@@ -6634,6 +6643,7 @@ input {
     .admin-events-row__actions {
         grid-column: 2;
         justify-content: flex-start;
+        justify-self: start;
         text-align: left;
     }
 }
