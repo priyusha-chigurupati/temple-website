@@ -5873,6 +5873,8 @@ input {
 .admin-sidebar__avatar {
     width: 32px;
     height: 32px;
+    min-width: 32px;
+    flex-shrink: 0;
     display: grid;
     place-items: center;
     background: #a04100;
@@ -5881,9 +5883,17 @@ input {
     font-weight: 800;
 }
 
+.admin-sidebar__user > div:last-child {
+    min-width: 0;
+}
+
 .admin-sidebar__user strong {
     display: block;
     font-size: 0.8rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .admin-sidebar__user span {
@@ -5891,6 +5901,10 @@ input {
     margin-top: 0.12rem;
     color: rgba(85, 67, 54, 0.72);
     font-size: 0.68rem;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .admin-main {
