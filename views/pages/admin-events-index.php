@@ -76,15 +76,15 @@ $eventTotalItems = (int) ($eventTotalItems ?? count($events));
                     </a>
                 <?php endforeach; ?>
             </div>
-
-            <form class="admin-events-search" action="<?= e(route_url('/admin/events')) ?>" method="get">
-                <?php if ($eventSelectedPhase !== 'all'): ?>
-                    <input name="phase" type="hidden" value="<?= e($eventSelectedPhase) ?>">
-                <?php endif; ?>
-                <input name="q" type="search" value="<?= e($eventSearchTerm) ?>" placeholder="Search events...">
-                <button type="submit">Search</button>
-            </form>
         </div>
+
+        <form class="admin-events-search admin-events-search--standalone" action="<?= e(route_url('/admin/events')) ?>" method="get">
+            <?php if ($eventSelectedPhase !== 'all'): ?>
+                <input name="phase" type="hidden" value="<?= e($eventSelectedPhase) ?>">
+            <?php endif; ?>
+            <input name="q" type="search" value="<?= e($eventSearchTerm) ?>" placeholder="Search events...">
+            <button type="submit">Search</button>
+        </form>
 
         <?php if ($events === []): ?>
             <p class="admin-panel__empty">No events have been added yet. Use the button above to create the first one.</p>

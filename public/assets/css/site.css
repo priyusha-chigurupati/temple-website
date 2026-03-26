@@ -6421,14 +6421,19 @@ input {
     min-height: 100%;
 }
 
-.admin-dashboard--blog .admin-events-stat:last-child strong {
+.admin-dashboard--blog .admin-events-stat--blog-latest strong {
     max-width: none;
     font-size: 1.08rem;
     line-height: 1.08;
+    overflow-wrap: normal;
+    word-break: normal;
 }
 
-.admin-dashboard--blog .admin-events-stat:last-child p {
+.admin-dashboard--blog .admin-events-stat--blog-latest p {
     margin-top: 0.55rem;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
 }
 
 .admin-panel--events-list {
@@ -6518,6 +6523,11 @@ input {
     letter-spacing: 0.1em;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.admin-events-search--standalone {
+    margin-top: 0.85rem;
+    justify-content: flex-end;
 }
 
 .admin-events-table {
@@ -7342,6 +7352,10 @@ input {
         width: 100%;
     }
 
+    .admin-events-search--standalone {
+        margin-top: 0.7rem;
+    }
+
     .admin-events-search input {
         min-width: 0;
         flex: 1;
@@ -7412,5 +7426,19 @@ input {
     .admin-gallery-card__head {
         flex-direction: column;
         gap: 0.7rem;
+    }
+
+    .admin-dashboard--blog .admin-events-stat--blog-latest {
+        grid-column: 1 / -1;
+    }
+
+    .admin-dashboard--blog .admin-events-stat--blog-latest strong {
+        font-size: 0.98rem;
+        line-height: 1.14;
+    }
+
+    .admin-dashboard--blog .admin-events-stat--blog-latest p {
+        font-size: 0.72rem;
+        line-height: 1.45;
     }
 }

@@ -45,11 +45,6 @@ $galleryTotalItems = (int) ($galleryTotalItems ?? count($galleryItems));
                     </a>
                 <?php endforeach; ?>
             </div>
-
-            <form class="admin-events-search" action="<?= e(route_url('/admin/media')) ?>" method="get">
-                <input name="q" type="search" value="<?= e($gallerySearchTerm) ?>" placeholder="Search gallery...">
-                <button type="submit">Search</button>
-            </form>
         </div>
 
         <?php if ($galleryCategoryFilters !== []): ?>
@@ -61,6 +56,11 @@ $galleryTotalItems = (int) ($galleryTotalItems ?? count($galleryItems));
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
+
+        <form class="admin-events-search admin-events-search--standalone" action="<?= e(route_url('/admin/media')) ?>" method="get">
+            <input name="q" type="search" value="<?= e($gallerySearchTerm) ?>" placeholder="Search gallery...">
+            <button type="submit">Search</button>
+        </form>
 
         <?php if ($galleryItems === []): ?>
             <p class="admin-panel__empty">No gallery items match the current view yet.</p>

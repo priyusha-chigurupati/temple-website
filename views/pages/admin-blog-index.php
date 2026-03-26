@@ -46,7 +46,7 @@ $blogTotalItems = (int) ($blogTotalItems ?? count($blogPosts));
             </div>
         </article>
 
-        <article class="admin-events-stat">
+        <article class="admin-events-stat admin-events-stat--blog-latest">
             <span class="admin-events-stat__label">Latest Article</span>
             <strong><?= e($latestPost['title'] ?? 'No articles yet') ?></strong>
             <p><?= e($latestPost['date_label'] ?? 'Publishing schedule pending') ?></p>
@@ -70,11 +70,6 @@ $blogTotalItems = (int) ($blogTotalItems ?? count($blogPosts));
                     </a>
                 <?php endforeach; ?>
             </div>
-
-            <form class="admin-events-search" action="<?= e(route_url('/admin/blog')) ?>" method="get">
-                <input name="q" type="search" value="<?= e($blogSearchTerm) ?>" placeholder="Search articles...">
-                <button type="submit">Search</button>
-            </form>
         </div>
 
         <?php if ($blogCategoryFilters !== []): ?>
@@ -86,6 +81,11 @@ $blogTotalItems = (int) ($blogTotalItems ?? count($blogPosts));
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
+
+        <form class="admin-events-search admin-events-search--standalone" action="<?= e(route_url('/admin/blog')) ?>" method="get">
+            <input name="q" type="search" value="<?= e($blogSearchTerm) ?>" placeholder="Search articles...">
+            <button type="submit">Search</button>
+        </form>
 
         <?php if ($blogPosts === []): ?>
             <p class="admin-panel__empty">No articles match the current view yet.</p>
