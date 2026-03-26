@@ -27,6 +27,9 @@ $buildUrl = static function (int $page) use ($basePath, $newsletterStatus, $news
             <h1>Newsletter Subscribers</h1>
             <p class="admin-dashboard__intro">Review the subscriber list collected from the public site and manage subscription status.</p>
         </div>
+        <div class="admin-dashboard__actions">
+            <a class="admin-secondary-action" href="<?= e(route_url('/admin/submissions')) ?>">Back to Submission Center</a>
+        </div>
     </header>
 
     <?php if (($submissionState['message'] ?? '') !== ''): ?>

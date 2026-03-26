@@ -27,6 +27,9 @@ $buildUrl = static function (int $page) use ($basePath, $gallerySubmissionStatus
             <h1>Gallery Submissions</h1>
             <p class="admin-dashboard__intro">Review public photo submissions and decide whether to approve or reject them for later publishing.</p>
         </div>
+        <div class="admin-dashboard__actions">
+            <a class="admin-secondary-action" href="<?= e(route_url('/admin/submissions')) ?>">Back to Submission Center</a>
+        </div>
     </header>
 
     <?php if (($submissionState['message'] ?? '') !== ''): ?>

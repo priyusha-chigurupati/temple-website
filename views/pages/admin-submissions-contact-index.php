@@ -27,6 +27,9 @@ $buildUrl = static function (int $page) use ($basePath, $contactStatus, $contact
             <h1>Contact Inquiries</h1>
             <p class="admin-dashboard__intro">Review and acknowledge messages submitted through the public Contact page.</p>
         </div>
+        <div class="admin-dashboard__actions">
+            <a class="admin-secondary-action" href="<?= e(route_url('/admin/submissions')) ?>">Back to Submission Center</a>
+        </div>
     </header>
 
     <?php if (($submissionState['message'] ?? '') !== ''): ?>
