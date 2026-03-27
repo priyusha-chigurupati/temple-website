@@ -27,7 +27,7 @@ $form = is_array($donationsForm['form'] ?? null) ? $donationsForm['form'] : [];
         </div>
     <?php endif; ?>
 
-    <form class="admin-events-form" action="<?= e(route_url('/admin/pages/donations')) ?>" method="post">
+    <form class="admin-events-form" action="<?= e(route_url('/admin/pages/donations')) ?>" method="post" enctype="multipart/form-data">
         <?= csrf_input() ?>
 
         <div class="admin-page-editor">
@@ -84,9 +84,19 @@ $form = is_array($donationsForm['form'] ?? null) ? $donationsForm['form'] : [];
                         <label for="hero-impact-title">Impact Title</label>
                         <input id="hero-impact-title" name="hero_impact_title" type="text" value="<?= e((string) ($hero['impact_title'] ?? '')) ?>">
                     </div>
-                    <div class="admin-field">
-                        <label for="hero-image">Hero Image Path</label>
-                        <input id="hero-image" name="hero_image" type="text" value="<?= e((string) ($hero['hero_image'] ?? '')) ?>" required>
+                    <div>
+                        <?php
+                        $mediaFieldName = 'hero_image';
+                        $mediaFieldId = 'donations-hero-image';
+                        $mediaFieldLabel = 'Hero Image';
+                        $mediaCurrentPath = (string) ($hero['hero_image'] ?? '');
+                        $mediaSelectName = 'hero_image_media_id';
+                        $mediaUploadName = 'hero_image_upload';
+                        $mediaRequired = true;
+                        $mediaHelp = 'Upload or select the hero artwork used on the Donations page.';
+                        $mediaPreviewAlt = 'Donations hero image preview';
+                        require __DIR__ . '/../partials/admin-media-field.php';
+                        ?>
                     </div>
                 </div>
                 <div class="admin-field">

@@ -13,7 +13,9 @@ final class AdminController
         private readonly AdminPageRepository $pages,
         private readonly AdminSettingsRepository $settings,
         private readonly AdminAccountRepository $account,
-        private readonly AdminSubmissionRepository $submissions
+        private readonly AdminSubmissionRepository $submissions,
+        private readonly AdminMediaRepository $media,
+        private readonly AdminMediaUploadService $mediaUploads
     )
     {
     }
@@ -487,6 +489,7 @@ final class AdminController
             'eventState' => flash_pull('admin_event_state', []),
             'eventForm' => flash_pull('admin_event_form', $this->emptyEventForm()),
             'eventId' => null,
+            'adminMediaOptions' => $this->mediaOptions(),
         ], 'admin');
     }
 
@@ -517,6 +520,7 @@ final class AdminController
             'eventState' => flash_pull('admin_event_state', []),
             'eventForm' => flash_pull('admin_event_form', $event),
             'eventId' => $id,
+            'adminMediaOptions' => $this->mediaOptions(),
         ], 'admin');
     }
 
@@ -593,6 +597,7 @@ final class AdminController
             'galleryForm' => flash_pull('admin_gallery_form', $this->emptyGalleryForm()),
             'galleryCategories' => $this->gallery->categories(),
             'galleryItemId' => null,
+            'adminMediaOptions' => $this->mediaOptions(),
         ], 'admin');
     }
 
@@ -624,6 +629,7 @@ final class AdminController
             'galleryForm' => flash_pull('admin_gallery_form', $item),
             'galleryCategories' => $this->gallery->categories(),
             'galleryItemId' => $id,
+            'adminMediaOptions' => $this->mediaOptions(),
         ], 'admin');
     }
 
@@ -707,6 +713,7 @@ final class AdminController
             'blogForm' => flash_pull('admin_blog_form', $this->emptyBlogForm()),
             'blogCategories' => $this->blog->categories(),
             'blogPostId' => null,
+            'adminMediaOptions' => $this->mediaOptions(),
         ], 'admin');
     }
 
@@ -738,6 +745,7 @@ final class AdminController
             'blogForm' => flash_pull('admin_blog_form', $post),
             'blogCategories' => $this->blog->categories(),
             'blogPostId' => $id,
+            'adminMediaOptions' => $this->mediaOptions(),
         ], 'admin');
     }
 
@@ -807,6 +815,7 @@ final class AdminController
             'pageEditorMode' => 'home',
             'pageState' => flash_pull('admin_pages_state', []),
             'homeForm' => flash_pull('admin_home_form', $home),
+            'adminMediaOptions' => $this->mediaOptions(),
         ], 'admin');
     }
 
@@ -836,6 +845,7 @@ final class AdminController
             'pageEditorMode' => 'about',
             'pageState' => flash_pull('admin_pages_state', []),
             'aboutForm' => flash_pull('admin_about_form', $about),
+            'adminMediaOptions' => $this->mediaOptions(),
         ], 'admin');
     }
 
@@ -865,6 +875,7 @@ final class AdminController
             'pageEditorMode' => 'contact',
             'pageState' => flash_pull('admin_pages_state', []),
             'contactForm' => flash_pull('admin_contact_form', $contact),
+            'adminMediaOptions' => $this->mediaOptions(),
         ], 'admin');
     }
 
@@ -894,6 +905,7 @@ final class AdminController
             'pageEditorMode' => 'donations',
             'pageState' => flash_pull('admin_pages_state', []),
             'donationsForm' => flash_pull('admin_donations_form', $donations),
+            'adminMediaOptions' => $this->mediaOptions(),
         ], 'admin');
     }
 
@@ -1234,7 +1246,24 @@ final class AdminController
             redirect_to($id === null ? route_url('/admin/events/new') : route_url('/admin/events/' . $id . '/edit'));
         }
 
-        $result = $this->events->save($_POST, $id);
+        $prepared = $this->resolveMediaFields($_POST, $_FILES, [[
+            'path_key' => 'image_path',
+            'select_key' => 'image_media_id',
+            'upload_key' => 'image_upload',
+            'collection' => 'events',
+            'title_field' => 'title',
+        ]]);
+
+        if ($prepared['errors'] !== []) {
+            flash_set('admin_event_state', [
+                'type' => 'error',
+                'message' => implode(' ', $prepared['errors']),
+            ]);
+            flash_set('admin_event_form', $this->eventFormFromPost($prepared['post']));
+            redirect_to($id === null ? route_url('/admin/events/new') : route_url('/admin/events/' . $id . '/edit'));
+        }
+
+        $result = $this->events->save($prepared['post'], $id);
 
         if (! ($result['ok'] ?? false)) {
             flash_set('admin_event_state', [
@@ -1264,7 +1293,24 @@ final class AdminController
             redirect_to($id === null ? route_url('/admin/media/new') : route_url('/admin/media/' . $id . '/edit'));
         }
 
-        $result = $this->gallery->save($_POST, $id);
+        $prepared = $this->resolveMediaFields($_POST, $_FILES, [[
+            'path_key' => 'image_path',
+            'select_key' => 'image_media_id',
+            'upload_key' => 'image_upload',
+            'collection' => 'gallery',
+            'title_field' => 'title',
+        ]]);
+
+        if ($prepared['errors'] !== []) {
+            flash_set('admin_gallery_state', [
+                'type' => 'error',
+                'message' => implode(' ', $prepared['errors']),
+            ]);
+            flash_set('admin_gallery_form', $this->galleryFormFromPost($prepared['post']));
+            redirect_to($id === null ? route_url('/admin/media/new') : route_url('/admin/media/' . $id . '/edit'));
+        }
+
+        $result = $this->gallery->save($prepared['post'], $id);
 
         if (! ($result['ok'] ?? false)) {
             flash_set('admin_gallery_state', [
@@ -1294,7 +1340,24 @@ final class AdminController
             redirect_to($id === null ? route_url('/admin/blog/new') : route_url('/admin/blog/' . $id . '/edit'));
         }
 
-        $result = $this->blog->save($_POST, $id);
+        $prepared = $this->resolveMediaFields($_POST, $_FILES, [[
+            'path_key' => 'image_path',
+            'select_key' => 'image_media_id',
+            'upload_key' => 'image_upload',
+            'collection' => 'blog',
+            'title_field' => 'title',
+        ]]);
+
+        if ($prepared['errors'] !== []) {
+            flash_set('admin_blog_state', [
+                'type' => 'error',
+                'message' => implode(' ', $prepared['errors']),
+            ]);
+            flash_set('admin_blog_form', $this->blogFormFromPost($prepared['post']));
+            redirect_to($id === null ? route_url('/admin/blog/new') : route_url('/admin/blog/' . $id . '/edit'));
+        }
+
+        $result = $this->blog->save($prepared['post'], $id);
 
         if (! ($result['ok'] ?? false)) {
             flash_set('admin_blog_state', [
@@ -1324,7 +1387,40 @@ final class AdminController
             redirect_to(route_url('/admin/pages/home'));
         }
 
-        $result = $this->pages->saveHome($_POST);
+        $prepared = $this->resolveMediaFields($_POST, $_FILES, [
+            [
+                'path_key' => 'hero_feature_image',
+                'select_key' => 'hero_feature_image_media_id',
+                'upload_key' => 'hero_feature_image_upload',
+                'collection' => 'pages/home',
+                'title' => 'Home Hero Feature Artwork',
+            ],
+            [
+                'path_key' => 'hero_background_image',
+                'select_key' => 'hero_background_image_media_id',
+                'upload_key' => 'hero_background_image_upload',
+                'collection' => 'pages/home',
+                'title' => 'Home Hero Background Artwork',
+            ],
+            [
+                'path_key' => 'about_image',
+                'select_key' => 'about_image_media_id',
+                'upload_key' => 'about_image_upload',
+                'collection' => 'pages/home',
+                'title' => 'Home About Preview Artwork',
+            ],
+        ]);
+
+        if ($prepared['errors'] !== []) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => implode(' ', $prepared['errors']),
+            ]);
+            flash_set('admin_home_form', $this->pages->homeEditor() ?? []);
+            redirect_to(route_url('/admin/pages/home'));
+        }
+
+        $result = $this->pages->saveHome($prepared['post']);
 
         if (! ($result['ok'] ?? false)) {
             flash_set('admin_pages_state', [
@@ -1354,7 +1450,47 @@ final class AdminController
             redirect_to(route_url('/admin/pages/about'));
         }
 
-        $result = $this->pages->saveAbout($_POST);
+        $prepared = $this->resolveMediaFields($_POST, $_FILES, [
+            [
+                'path_key' => 'hero_image',
+                'select_key' => 'hero_image_media_id',
+                'upload_key' => 'hero_image_upload',
+                'collection' => 'pages/about',
+                'title' => 'About Hero Artwork',
+            ],
+            [
+                'path_key' => 'history_main_image',
+                'select_key' => 'history_main_image_media_id',
+                'upload_key' => 'history_main_image_upload',
+                'collection' => 'pages/about',
+                'title' => 'About History Main Artwork',
+            ],
+            [
+                'path_key' => 'history_secondary_image',
+                'select_key' => 'history_secondary_image_media_id',
+                'upload_key' => 'history_secondary_image_upload',
+                'collection' => 'pages/about',
+                'title' => 'About History Secondary Artwork',
+            ],
+            [
+                'path_key' => 'values_feature_image',
+                'select_key' => 'values_feature_image_media_id',
+                'upload_key' => 'values_feature_image_upload',
+                'collection' => 'pages/about',
+                'title' => 'About Values Feature Artwork',
+            ],
+        ]);
+
+        if ($prepared['errors'] !== []) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => implode(' ', $prepared['errors']),
+            ]);
+            flash_set('admin_about_form', $this->pages->aboutEditor() ?? []);
+            redirect_to(route_url('/admin/pages/about'));
+        }
+
+        $result = $this->pages->saveAbout($prepared['post']);
 
         if (! ($result['ok'] ?? false)) {
             flash_set('admin_pages_state', [
@@ -1384,7 +1520,33 @@ final class AdminController
             redirect_to(route_url('/admin/pages/contact'));
         }
 
-        $result = $this->pages->saveContact($_POST);
+        $prepared = $this->resolveMediaFields($_POST, $_FILES, [
+            [
+                'path_key' => 'hero_image',
+                'select_key' => 'hero_image_media_id',
+                'upload_key' => 'hero_image_upload',
+                'collection' => 'pages/contact',
+                'title' => 'Contact Hero Artwork',
+            ],
+            [
+                'path_key' => 'map_image',
+                'select_key' => 'map_image_media_id',
+                'upload_key' => 'map_image_upload',
+                'collection' => 'pages/contact',
+                'title' => 'Contact Map Artwork',
+            ],
+        ]);
+
+        if ($prepared['errors'] !== []) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => implode(' ', $prepared['errors']),
+            ]);
+            flash_set('admin_contact_form', $this->pages->contactEditor() ?? []);
+            redirect_to(route_url('/admin/pages/contact'));
+        }
+
+        $result = $this->pages->saveContact($prepared['post']);
 
         if (! ($result['ok'] ?? false)) {
             flash_set('admin_pages_state', [
@@ -1414,7 +1576,24 @@ final class AdminController
             redirect_to(route_url('/admin/pages/donations'));
         }
 
-        $result = $this->pages->saveDonations($_POST);
+        $prepared = $this->resolveMediaFields($_POST, $_FILES, [[
+            'path_key' => 'hero_image',
+            'select_key' => 'hero_image_media_id',
+            'upload_key' => 'hero_image_upload',
+            'collection' => 'pages/donations',
+            'title' => 'Donations Hero Artwork',
+        ]]);
+
+        if ($prepared['errors'] !== []) {
+            flash_set('admin_pages_state', [
+                'type' => 'error',
+                'message' => implode(' ', $prepared['errors']),
+            ]);
+            flash_set('admin_donations_form', $this->pages->donationsEditor() ?? []);
+            redirect_to(route_url('/admin/pages/donations'));
+        }
+
+        $result = $this->pages->saveDonations($prepared['post']);
 
         if (! ($result['ok'] ?? false)) {
             flash_set('admin_pages_state', [
@@ -1581,6 +1760,77 @@ final class AdminController
         ]);
 
         redirect_to(route_url('/admin/settings/notifications'));
+    }
+
+    private function mediaOptions(): array
+    {
+        return $this->media->recentOptions();
+    }
+
+    /**
+     * @param array<int, array<string, string>> $definitions
+     * @return array{post: array<string, mixed>, errors: array<int, string>}
+     */
+    private function resolveMediaFields(array $post, array $files, array $definitions): array
+    {
+        $resolved = $post;
+        $errors = [];
+
+        foreach ($definitions as $definition) {
+            $pathKey = (string) ($definition['path_key'] ?? '');
+            $selectKey = (string) ($definition['select_key'] ?? '');
+            $uploadKey = (string) ($definition['upload_key'] ?? '');
+
+            if ($pathKey === '') {
+                continue;
+            }
+
+            $currentPath = trim((string) ($resolved[$pathKey] ?? ''));
+
+            if ($selectKey !== '') {
+                $selectedMediaId = (int) ($resolved[$selectKey] ?? 0);
+                if ($selectedMediaId > 0) {
+                    $selectedPath = $this->media->pathForId($selectedMediaId);
+                    if ($selectedPath !== null) {
+                        $currentPath = $selectedPath;
+                    }
+                }
+            }
+
+            if ($uploadKey !== '' && $this->hasUploadedFile($files[$uploadKey] ?? null)) {
+                $title = trim((string) ($definition['title'] ?? ''));
+                if ($title === '') {
+                    $titleField = (string) ($definition['title_field'] ?? '');
+                    $title = trim((string) ($resolved[$titleField] ?? ''));
+                }
+
+                $upload = $this->mediaUploads->store(
+                    is_array($files[$uploadKey]) ? $files[$uploadKey] : [],
+                    (string) ($definition['collection'] ?? 'general'),
+                    $title !== '' ? $title : 'Temple Media'
+                );
+
+                if (! ($upload['ok'] ?? false)) {
+                    $errors[] = (string) ($upload['error'] ?? 'The image upload failed.');
+                } else {
+                    $currentPath = (string) ($upload['file_path'] ?? $currentPath);
+                }
+            }
+
+            $resolved[$pathKey] = $currentPath;
+        }
+
+        return [
+            'post' => $resolved,
+            'errors' => $errors,
+        ];
+    }
+
+    private function hasUploadedFile(mixed $file): bool
+    {
+        return is_array($file)
+            && (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE
+            && trim((string) ($file['tmp_name'] ?? '')) !== '';
     }
 
     private function emptyEventForm(): array

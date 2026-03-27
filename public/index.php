@@ -21,11 +21,13 @@ require __DIR__ . '/../app/Repositories/AdminBlogRepository.php';
 require __DIR__ . '/../app/Repositories/AdminPageRepository.php';
 require __DIR__ . '/../app/Repositories/AdminSettingsRepository.php';
 require __DIR__ . '/../app/Repositories/AdminSubmissionRepository.php';
+require __DIR__ . '/../app/Repositories/AdminMediaRepository.php';
 require __DIR__ . '/../app/Services/GallerySubmissionService.php';
 require __DIR__ . '/../app/Services/DonationNotificationService.php';
 require __DIR__ . '/../app/Services/ContactInquiryService.php';
 require __DIR__ . '/../app/Services/NewsletterSubscriptionService.php';
 require __DIR__ . '/../app/Services/AdminAuthService.php';
+require __DIR__ . '/../app/Services/AdminMediaUploadService.php';
 require __DIR__ . '/../app/Controllers/PageController.php';
 require __DIR__ . '/../app/Controllers/AdminController.php';
 
@@ -48,6 +50,7 @@ $adminPageRepository = null;
 $adminSettingsRepository = null;
 $adminAccountRepository = null;
 $adminSubmissionRepository = null;
+$adminMediaRepository = null;
 $connection = null;
 
 try {
@@ -102,6 +105,10 @@ try {
         $userRepository
     );
     $adminSubmissionRepository = new AdminSubmissionRepository($connection);
+    $adminMediaRepository = new AdminMediaRepository(
+        $connection,
+        Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
+    );
 } catch (Throwable) {
     $connection = null;
     $eventRepository = null;
@@ -118,6 +125,7 @@ try {
     $adminSettingsRepository = null;
     $adminAccountRepository = null;
     $adminSubmissionRepository = null;
+    $adminMediaRepository = null;
 }
 
 $repository = new ContentRepository($content, $eventRepository, $blogRepository, $galleryRepository, $pageRepository, $siteSettingsRepository);
@@ -157,6 +165,7 @@ if (
     && $adminSettingsRepository instanceof AdminSettingsRepository
     && $adminAccountRepository instanceof AdminAccountRepository
     && $adminSubmissionRepository instanceof AdminSubmissionRepository
+    && $adminMediaRepository instanceof AdminMediaRepository
 ) {
     $adminController = new AdminController(
         new AdminAuthService(
@@ -170,7 +179,13 @@ if (
         $adminPageRepository,
         $adminSettingsRepository,
         $adminAccountRepository,
-        $adminSubmissionRepository
+        $adminSubmissionRepository,
+        $adminMediaRepository,
+        new AdminMediaUploadService(
+            $connection,
+            __DIR__,
+            Env::get('APP_DEFAULT_LOCALE', 'en') ?? 'en'
+        )
     );
 }
 

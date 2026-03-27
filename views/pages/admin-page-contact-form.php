@@ -27,7 +27,7 @@ $map = is_array($contactForm['map'] ?? null) ? $contactForm['map'] : [];
         </div>
     <?php endif; ?>
 
-    <form class="admin-events-form" action="<?= e(route_url('/admin/pages/contact')) ?>" method="post">
+    <form class="admin-events-form" action="<?= e(route_url('/admin/pages/contact')) ?>" method="post" enctype="multipart/form-data">
         <?= csrf_input() ?>
 
         <div class="admin-page-editor">
@@ -66,9 +66,19 @@ $map = is_array($contactForm['map'] ?? null) ? $contactForm['map'] : [];
                         <label for="hero-title">Title</label>
                         <input id="hero-title" name="hero_title" type="text" value="<?= e((string) ($hero['title'] ?? '')) ?>" required>
                     </div>
-                    <div class="admin-field">
-                        <label for="hero-image">Hero Image Path</label>
-                        <input id="hero-image" name="hero_image" type="text" value="<?= e((string) ($hero['image'] ?? '')) ?>" required>
+                    <div>
+                        <?php
+                        $mediaFieldName = 'hero_image';
+                        $mediaFieldId = 'contact-hero-image';
+                        $mediaFieldLabel = 'Hero Image';
+                        $mediaCurrentPath = (string) ($hero['image'] ?? '');
+                        $mediaSelectName = 'hero_image_media_id';
+                        $mediaUploadName = 'hero_image_upload';
+                        $mediaRequired = true;
+                        $mediaHelp = 'Upload or select the Contact page hero image.';
+                        $mediaPreviewAlt = 'Contact hero image preview';
+                        require __DIR__ . '/../partials/admin-media-field.php';
+                        ?>
                     </div>
                 </div>
                 <div class="admin-field">
@@ -270,9 +280,19 @@ $map = is_array($contactForm['map'] ?? null) ? $contactForm['map'] : [];
                     </div>
                 </div>
                 <div class="admin-form-panel__two-up">
-                    <div class="admin-field">
-                        <label for="map-image">Map Image Path</label>
-                        <input id="map-image" name="map_image" type="text" value="<?= e((string) ($map['image'] ?? '')) ?>" required>
+                    <div>
+                        <?php
+                        $mediaFieldName = 'map_image';
+                        $mediaFieldId = 'contact-map-image';
+                        $mediaFieldLabel = 'Map Image';
+                        $mediaCurrentPath = (string) ($map['image'] ?? '');
+                        $mediaSelectName = 'map_image_media_id';
+                        $mediaUploadName = 'map_image_upload';
+                        $mediaRequired = true;
+                        $mediaHelp = 'Upload or choose the artwork used for the Contact map section.';
+                        $mediaPreviewAlt = 'Contact map image preview';
+                        require __DIR__ . '/../partials/admin-media-field.php';
+                        ?>
                     </div>
                     <div class="admin-field">
                         <label for="map-marker">Marker Label</label>

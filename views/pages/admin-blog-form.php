@@ -29,7 +29,7 @@ $formAction = $blogFormMode === 'edit' && $blogPostId !== null
         </div>
     <?php endif; ?>
 
-    <form class="admin-events-form" action="<?= e($formAction) ?>" method="post">
+    <form class="admin-events-form" action="<?= e($formAction) ?>" method="post" enctype="multipart/form-data">
         <?= csrf_input() ?>
 
         <div class="admin-events-form__grid">
@@ -72,10 +72,18 @@ $formAction = $blogFormMode === 'edit' && $blogPostId !== null
                         </select>
                     </div>
 
-                    <div class="admin-field">
-                        <label for="blog-image-path">Featured Image Path</label>
-                        <input id="blog-image-path" name="image_path" type="text" value="<?= e((string) ($blogForm['image_path'] ?? '')) ?>" placeholder="assets/images/placeholders/blog-post-deepam.svg" required>
-                    </div>
+                    <?php
+                    $mediaFieldName = 'image_path';
+                    $mediaFieldId = 'blog-image';
+                    $mediaFieldLabel = 'Featured Image';
+                    $mediaCurrentPath = (string) ($blogForm['image_path'] ?? '');
+                    $mediaSelectName = 'image_media_id';
+                    $mediaUploadName = 'image_upload';
+                    $mediaRequired = true;
+                    $mediaHelp = 'Upload a new featured image or reuse one from the media library. Leaving both untouched keeps the current image.';
+                    $mediaPreviewAlt = (string) (($blogForm['title'] ?? 'Blog') . ' featured image preview');
+                    require __DIR__ . '/../partials/admin-media-field.php';
+                    ?>
 
                     <div class="admin-form-panel__two-up">
                         <div class="admin-field">

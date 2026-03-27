@@ -29,7 +29,7 @@ $donation = is_array($homeForm['donation_preview'] ?? null) ? $homeForm['donatio
         </div>
     <?php endif; ?>
 
-    <form class="admin-events-form" action="<?= e(route_url('/admin/pages/home')) ?>" method="post">
+    <form class="admin-events-form" action="<?= e(route_url('/admin/pages/home')) ?>" method="post" enctype="multipart/form-data">
         <?= csrf_input() ?>
 
         <div class="admin-page-editor">
@@ -72,9 +72,19 @@ $donation = is_array($homeForm['donation_preview'] ?? null) ? $homeForm['donatio
                         <label for="hero-eyebrow">Eyebrow</label>
                         <input id="hero-eyebrow" name="hero_eyebrow" type="text" value="<?= e((string) ($hero['eyebrow'] ?? '')) ?>">
                     </div>
-                    <div class="admin-field">
-                        <label for="hero-feature-image">Feature Image Path</label>
-                        <input id="hero-feature-image" name="hero_feature_image" type="text" value="<?= e((string) ($hero['feature_image'] ?? '')) ?>" required>
+                    <div>
+                        <?php
+                        $mediaFieldName = 'hero_feature_image';
+                        $mediaFieldId = 'hero-feature-image';
+                        $mediaFieldLabel = 'Feature Image';
+                        $mediaCurrentPath = (string) ($hero['feature_image'] ?? '');
+                        $mediaSelectName = 'hero_feature_image_media_id';
+                        $mediaUploadName = 'hero_feature_image_upload';
+                        $mediaRequired = true;
+                        $mediaHelp = 'Upload a new hero feature image or reuse an existing media item.';
+                        $mediaPreviewAlt = 'Home hero feature image preview';
+                        require __DIR__ . '/../partials/admin-media-field.php';
+                        ?>
                     </div>
                 </div>
 
@@ -98,10 +108,18 @@ $donation = is_array($homeForm['donation_preview'] ?? null) ? $homeForm['donatio
                     <textarea id="hero-description" name="hero_description" rows="4"><?= e((string) ($hero['description'] ?? '')) ?></textarea>
                 </div>
 
-                <div class="admin-field">
-                    <label for="hero-background-image">Background Image Path</label>
-                    <input id="hero-background-image" name="hero_background_image" type="text" value="<?= e((string) ($hero['background_image'] ?? '')) ?>">
-                </div>
+                <?php
+                $mediaFieldName = 'hero_background_image';
+                $mediaFieldId = 'hero-background-image';
+                $mediaFieldLabel = 'Background Image';
+                $mediaCurrentPath = (string) ($hero['background_image'] ?? '');
+                $mediaSelectName = 'hero_background_image_media_id';
+                $mediaUploadName = 'hero_background_image_upload';
+                $mediaRequired = false;
+                $mediaHelp = 'Optional decorative background image for the Home hero.';
+                $mediaPreviewAlt = 'Home hero background image preview';
+                require __DIR__ . '/../partials/admin-media-field.php';
+                ?>
 
                 <div class="admin-form-panel__two-up">
                     <div class="admin-field">
@@ -139,9 +157,19 @@ $donation = is_array($homeForm['donation_preview'] ?? null) ? $homeForm['donatio
                         <label for="about-title">Section Title</label>
                         <input id="about-title" name="about_title" type="text" value="<?= e((string) ($about['title'] ?? '')) ?>" required>
                     </div>
-                    <div class="admin-field">
-                        <label for="about-image">Image Path</label>
-                        <input id="about-image" name="about_image" type="text" value="<?= e((string) ($about['image'] ?? '')) ?>" required>
+                    <div>
+                        <?php
+                        $mediaFieldName = 'about_image';
+                        $mediaFieldId = 'about-image';
+                        $mediaFieldLabel = 'About Preview Image';
+                        $mediaCurrentPath = (string) ($about['image'] ?? '');
+                        $mediaSelectName = 'about_image_media_id';
+                        $mediaUploadName = 'about_image_upload';
+                        $mediaRequired = true;
+                        $mediaHelp = 'Select or upload the image used in the Home About preview.';
+                        $mediaPreviewAlt = 'Home about preview image';
+                        require __DIR__ . '/../partials/admin-media-field.php';
+                        ?>
                     </div>
                 </div>
 

@@ -28,7 +28,7 @@ $formAction = $eventFormMode === 'edit' && $eventId !== null
         </div>
     <?php endif; ?>
 
-    <form class="admin-events-form" action="<?= e($formAction) ?>" method="post">
+    <form class="admin-events-form" action="<?= e($formAction) ?>" method="post" enctype="multipart/form-data">
         <?= csrf_input() ?>
 
         <div class="admin-events-form__grid">
@@ -103,11 +103,18 @@ $formAction = $eventFormMode === 'edit' && $eventId !== null
                 <section class="admin-form-panel">
                     <h2>Image Asset</h2>
 
-                    <div class="admin-field">
-                        <label for="event-image-path">Image Path</label>
-                        <input id="event-image-path" name="image_path" type="text" value="<?= e((string) ($eventForm['image_path'] ?? '')) ?>" placeholder="assets/images/placeholders/event-hero.svg">
-                        <small>Use an existing uploaded asset path for now. Media uploads can be added next.</small>
-                    </div>
+                    <?php
+                    $mediaFieldName = 'image_path';
+                    $mediaFieldId = 'event-image';
+                    $mediaFieldLabel = 'Event Image';
+                    $mediaCurrentPath = (string) ($eventForm['image_path'] ?? '');
+                    $mediaSelectName = 'image_media_id';
+                    $mediaUploadName = 'image_upload';
+                    $mediaRequired = false;
+                    $mediaHelp = 'Select an existing event image or upload a new one. Leaving both untouched keeps the current image.';
+                    $mediaPreviewAlt = (string) (($eventForm['title'] ?? 'Event') . ' image preview');
+                    require __DIR__ . '/../partials/admin-media-field.php';
+                    ?>
                 </section>
             </div>
         </div>

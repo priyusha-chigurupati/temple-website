@@ -29,7 +29,7 @@ $facts = is_array($aboutForm['facts'] ?? null) ? $aboutForm['facts'] : [];
         </div>
     <?php endif; ?>
 
-    <form class="admin-events-form" action="<?= e(route_url('/admin/pages/about')) ?>" method="post">
+    <form class="admin-events-form" action="<?= e(route_url('/admin/pages/about')) ?>" method="post" enctype="multipart/form-data">
         <?= csrf_input() ?>
 
         <div class="admin-page-editor">
@@ -68,9 +68,19 @@ $facts = is_array($aboutForm['facts'] ?? null) ? $aboutForm['facts'] : [];
                         <label for="hero-eyebrow">Eyebrow</label>
                         <input id="hero-eyebrow" name="hero_eyebrow" type="text" value="<?= e((string) ($hero['eyebrow'] ?? '')) ?>">
                     </div>
-                    <div class="admin-field">
-                        <label for="hero-image">Hero Image Path</label>
-                        <input id="hero-image" name="hero_image" type="text" value="<?= e((string) ($hero['image'] ?? '')) ?>" required>
+                    <div>
+                        <?php
+                        $mediaFieldName = 'hero_image';
+                        $mediaFieldId = 'about-hero-image';
+                        $mediaFieldLabel = 'Hero Image';
+                        $mediaCurrentPath = (string) ($hero['image'] ?? '');
+                        $mediaSelectName = 'hero_image_media_id';
+                        $mediaUploadName = 'hero_image_upload';
+                        $mediaRequired = true;
+                        $mediaHelp = 'Upload or choose the main About hero artwork.';
+                        $mediaPreviewAlt = 'About hero image preview';
+                        require __DIR__ . '/../partials/admin-media-field.php';
+                        ?>
                     </div>
                 </div>
                 <div class="admin-form-panel__two-up">
@@ -112,13 +122,33 @@ $facts = is_array($aboutForm['facts'] ?? null) ? $aboutForm['facts'] : [];
                     <textarea id="history-quote" name="history_quote" rows="3"><?= e((string) ($history['quote'] ?? '')) ?></textarea>
                 </div>
                 <div class="admin-form-panel__two-up">
-                    <div class="admin-field">
-                        <label for="history-main-image">Main Image Path</label>
-                        <input id="history-main-image" name="history_main_image" type="text" value="<?= e((string) ($history['main_image'] ?? '')) ?>" required>
+                    <div>
+                        <?php
+                        $mediaFieldName = 'history_main_image';
+                        $mediaFieldId = 'history-main-image';
+                        $mediaFieldLabel = 'Main Image';
+                        $mediaCurrentPath = (string) ($history['main_image'] ?? '');
+                        $mediaSelectName = 'history_main_image_media_id';
+                        $mediaUploadName = 'history_main_image_upload';
+                        $mediaRequired = true;
+                        $mediaHelp = 'Primary image for the About history section.';
+                        $mediaPreviewAlt = 'About history main image preview';
+                        require __DIR__ . '/../partials/admin-media-field.php';
+                        ?>
                     </div>
-                    <div class="admin-field">
-                        <label for="history-secondary-image">Secondary Image Path</label>
-                        <input id="history-secondary-image" name="history_secondary_image" type="text" value="<?= e((string) ($history['secondary_image'] ?? '')) ?>">
+                    <div>
+                        <?php
+                        $mediaFieldName = 'history_secondary_image';
+                        $mediaFieldId = 'history-secondary-image';
+                        $mediaFieldLabel = 'Secondary Image';
+                        $mediaCurrentPath = (string) ($history['secondary_image'] ?? '');
+                        $mediaSelectName = 'history_secondary_image_media_id';
+                        $mediaUploadName = 'history_secondary_image_upload';
+                        $mediaRequired = false;
+                        $mediaHelp = 'Optional supporting image shown below the history panel.';
+                        $mediaPreviewAlt = 'About history secondary image preview';
+                        require __DIR__ . '/../partials/admin-media-field.php';
+                        ?>
                     </div>
                 </div>
                 <div class="admin-form-panel__two-up">
@@ -184,9 +214,19 @@ $facts = is_array($aboutForm['facts'] ?? null) ? $aboutForm['facts'] : [];
                         <label for="values-intro-title">Intro Title</label>
                         <input id="values-intro-title" name="values_intro_title" type="text" value="<?= e((string) ($values['intro_title'] ?? '')) ?>">
                     </div>
-                    <div class="admin-field">
-                        <label for="values-feature-image">Feature Image Path</label>
-                        <input id="values-feature-image" name="values_feature_image" type="text" value="<?= e((string) ($values['feature_image'] ?? '')) ?>">
+                    <div>
+                        <?php
+                        $mediaFieldName = 'values_feature_image';
+                        $mediaFieldId = 'values-feature-image';
+                        $mediaFieldLabel = 'Feature Image';
+                        $mediaCurrentPath = (string) ($values['feature_image'] ?? '');
+                        $mediaSelectName = 'values_feature_image_media_id';
+                        $mediaUploadName = 'values_feature_image_upload';
+                        $mediaRequired = false;
+                        $mediaHelp = 'Optional image used in the About values section.';
+                        $mediaPreviewAlt = 'About values feature image preview';
+                        require __DIR__ . '/../partials/admin-media-field.php';
+                        ?>
                     </div>
                 </div>
                 <div class="admin-field">

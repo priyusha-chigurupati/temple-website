@@ -29,7 +29,7 @@ $formAction = $galleryFormMode === 'edit' && $galleryItemId !== null
         </div>
     <?php endif; ?>
 
-    <form class="admin-events-form" action="<?= e($formAction) ?>" method="post">
+    <form class="admin-events-form" action="<?= e($formAction) ?>" method="post" enctype="multipart/form-data">
         <?= csrf_input() ?>
 
         <div class="admin-events-form__grid">
@@ -44,11 +44,18 @@ $formAction = $galleryFormMode === 'edit' && $galleryItemId !== null
                     <textarea id="gallery-caption" name="caption" rows="5"><?= e((string) ($galleryForm['caption'] ?? '')) ?></textarea>
                 </div>
 
-                <div class="admin-field">
-                    <label for="gallery-image-path">Image Path</label>
-                    <input id="gallery-image-path" name="image_path" type="text" value="<?= e((string) ($galleryForm['image_path'] ?? '')) ?>" placeholder="assets/images/placeholders/gallery-gopuram.svg" required>
-                    <small>Use an existing media path for now. Direct uploads can be added later through the media workflow.</small>
-                </div>
+                <?php
+                $mediaFieldName = 'image_path';
+                $mediaFieldId = 'gallery-image';
+                $mediaFieldLabel = 'Gallery Image';
+                $mediaCurrentPath = (string) ($galleryForm['image_path'] ?? '');
+                $mediaSelectName = 'image_media_id';
+                $mediaUploadName = 'image_upload';
+                $mediaRequired = true;
+                $mediaHelp = 'Upload a new gallery image or reuse one from the media library. If this is an existing item, leaving both untouched keeps the current image.';
+                $mediaPreviewAlt = (string) (($galleryForm['title'] ?? 'Gallery') . ' image preview');
+                require __DIR__ . '/../partials/admin-media-field.php';
+                ?>
             </section>
 
             <div class="admin-events-form__sidebar">
