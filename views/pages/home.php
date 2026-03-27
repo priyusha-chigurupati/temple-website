@@ -9,7 +9,9 @@ declare(strict_types=1);
 
 <section class="hero">
     <div class="hero__backdrop">
-        <img src="<?= e(asset($hero['background_image'])) ?>" alt="" role="presentation">
+        <?php if (($hero['background_image'] ?? '') !== ''): ?>
+            <img src="<?= e(asset($hero['background_image'])) ?>" alt="" role="presentation">
+        <?php endif; ?>
     </div>
     <div class="container hero__grid">
         <div class="hero__copy">
